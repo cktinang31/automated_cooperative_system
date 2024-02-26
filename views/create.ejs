@@ -1,0 +1,26 @@
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+    
+    <%- include('./partials/nav.ejs') %>
+        
+    <div class="create">
+        <h2>Create Tutorial</h2>
+        <form action="#" method="post">
+            <label for="name">Title</label>
+            <input type="text" id="name" name="name" placeholder="Enter tutorial title" required>
+    
+            <label for="link">Link URL</label>
+            <input type="url" id="link" name="link" placeholder="Enter URL (e.g., https://example.com)" required>
+    
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="2" required placeholder="Briefly describe the tutorial"></textarea>
+    
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+</html>
