@@ -10,13 +10,6 @@ body{
     max-width: 100%;
 }
 
-.logo{
-    .logo {
-        width: auto; /* maintain aspect ratio */
-        height: auto; /* maintain aspect ratio */
-    }
-    
-}
 
 h1, h2, h3, a, ul{
     margin: 0;
