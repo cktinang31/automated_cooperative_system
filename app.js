@@ -66,7 +66,7 @@ app.post('/mem_application', async (req, res) => {
 
 
 app.get('/login', (req, res) => {
-    res.render('login', { title: 'Login'});
+    res.render('login', { title: 'Sign In / Up Form'});
 });
 
 // 404 page
