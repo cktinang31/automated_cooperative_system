@@ -13,17 +13,17 @@
         <div class="form-container sign-up-container">
             <form action="#">
                 <h1>Create Account</h1>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" placeholder="Name" required />
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
                 <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
             <form action="#">
                 <h1>Sign In</h1>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
                 <a href="#">Forgot Password?</a>
                 <button>Sign In</button>
             </form>
@@ -49,6 +49,29 @@
      </div>
 
      <script src="scripts.js"></script>
+
+     <script>
+        function checkPasswordStrength(password) {
+            var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+            if (strongRegex.test(password)) {
+                document.getElementById("password-strength").innerHTML = "Strong password";
+            } else {
+                document.getElementById("password-strength").innerHTML = "Password should be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.sign-up-container form');
+        const emailInput = form.querySelector('input[type="email"]');
+
+        form.addEventListener('submit', function (event) {
+            if (!emailInput.validity.valid) {
+                event.preventDefault(); 
+                alert('Please enter a valid email address.');
+            }
+        });
+    });
+    </script>
 
      <footer>
         Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024

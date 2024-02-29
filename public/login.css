@@ -25,7 +25,7 @@ h1 {
 
 h2{
     text-align: center;
-    padding-bottom: 40px;
+    padding-bottom: 70px;
 }
 
 p{
@@ -45,6 +45,11 @@ a{
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
+    transition: background-color 0.5s, transform 80ms ease-in-out;
+}
+
+a:hover{
+    text-decoration: underline;
 }
 
 button{
@@ -82,7 +87,9 @@ button.ghost{
 }
 
 button.ghost:hover{
-    background-color: #a8833e;
+    color: #ffffff;
+    border: #373F41;
+    background-color: #373F41;
 }
 
 form{
@@ -111,7 +118,7 @@ input{
 
 .container{
     background-color: #ffffff;
-    border-radius: 45px;
+    border-radius: 35px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;

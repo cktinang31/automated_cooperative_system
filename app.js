@@ -49,7 +49,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login', { title: 'Login'});
+    res.render('login', { title: 'Sign In / Up Form'});
 });
 
 // 404 page
