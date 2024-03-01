@@ -1,5 +1,5 @@
 const express = require('express');
-const { Client } = require('pg');
+const { Pool } = require('pg');
 const morgan = require('morgan');
  
 //express app
@@ -7,7 +7,7 @@ const app = express();
 // const port = 3000;
  
 // postgre database
-const client = new Client({
+const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'Cooperativedb',
@@ -15,7 +15,7 @@ const client = new Client({
     port: 5432,
 })
  
-client.connect()
+pool.connect()
 .then(() => {
     console.log('Connected to PostgreSQL database');
     app.listen(3000, () => {

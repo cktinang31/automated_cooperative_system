@@ -109,3 +109,43 @@ h3{
 .content{
     margin-left: 20px;
 }
+#myBox1{
+    background-color: lightgoldenrodyellow;
+    width: 850px;
+    height: 480px;
+    font-size: 4.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+#myBox2{
+    background-color: lightgoldenrodyellow;
+    width: 850px;
+    height: 480px;
+    font-size: 4.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+#myBox3{
+    background-color: lightgoldenrodyellow;
+    width: 850px;
+    height: 480px;
+    font-size: 4.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+#myBox4{
+    background-color: lightgoldenrodyellow;
+    width: 850px;
+    height: 480px;
+    font-size: 4.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
