@@ -1,12 +1,28 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const Application = require('./model')
+const {Pool,Client} = require ('pg')
+const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
+const {Application, User} = require('./models')
+const { Sequelize } = require('sequelize');
 
  
 //express app
 const app = express();
 
+
+const pool = new Pool({
+  connectionString:connectionString
+})
+
+pool.connect()
+
+.then(() => {
+  console.log('Connected to PostgreSQL database');
+ 
+})
+
+.catch(err => console.error('Error connecting to PostgreSQL database', err));
 
 
 
@@ -43,26 +59,67 @@ app.get('/application', (req, res) => {
 }); 
 
 app.post('/mem_application', async (req, res) => {
-    const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
-    try {
-      // Create a new user using the User model
+  const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
+  try {
+
+
+    const existingName = await Application.findOne({ fname, mname, lname });
+
+    if (existingName) {
+        return res.status(400).send('An application with this name already exists.');
+    }
+      const existingApplication = await Application.findOne({ $or: [{ email }, { contact }] });
+
+      if (existingApplication) {
+          return res.status(400).send('An application with this email or contact already exists.');
+      }
+
+
       const newApplication = await Application.create({
-        fname,
-        mname,
-        lname,
-        date_of_birth,
-        place_of_birth,
-        address,
-        email,
-        contact,
+          fname,
+          mname,
+          lname,
+          date_of_birth,
+          place_of_birth,
+          address,
+          email,
+          contact,
       });
+
       console.log('New Application:', newApplication);
-      res.send('Application submitted successfully. Please  wait for approval');
-    } catch (error) {
+      res.send('Application submitted successfully. Please wait for approval');
+  } catch (error) {
       console.error('Error submitting the application:', error);
       res.status(500).send('Error submitting the application');
+  }
+});
+
+
+app.post('/user_reg', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    console.log('Request Body:', req.body); // Log request body for debugging
+
+    const existingUser = await User.findOne({ where: { [Sequelize.Op.or]: [{ name }, { email }] } });
+
+    if (existingUser) {
+      return res.status(400).send('A user with this name/email is already registered in the system.');
     }
-  });
+
+    // Create a new user if no existing user found
+    const newUser = await User.create({
+      name,
+      email,
+      password,
+    });
+
+    console.log('New User:', newUser);
+    res.send('Registered successfully. You can now log in Ka-Coop!');
+  } catch (error) {
+    console.error('Error registering:', error);
+    res.status(500).send('Error registering.');
+  }
+})
 
 
 app.get('/login', (req, res) => {
