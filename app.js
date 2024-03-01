@@ -1,11 +1,11 @@
 const express = require('express');
 const { Client } = require('pg');
 const morgan = require('morgan');
- 
+
 //express app
 const app = express();
 // const port = 3000;
- 
+
 // postgre database
 const client = new Client({
     user: 'postgres',
@@ -14,7 +14,7 @@ const client = new Client({
     password: 'Ctugk3nd3s',
     port: 5432,
 })
- 
+
 client.connect()
 .then(() => {
     console.log('Connected to PostgreSQL database');
