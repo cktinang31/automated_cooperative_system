@@ -11,8 +11,8 @@ pool.connect()
 
 .then(() => {
     console.log('Connected to PostgreSQL database');
-   
- })
+
+})
 
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
 
@@ -22,7 +22,7 @@ pool.connect()
 const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
-  });
+});
 
 
 //application table
