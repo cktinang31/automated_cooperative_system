@@ -107,43 +107,70 @@ h3{
     margin-left: 20px;
 }
 
-#myBox1{
-    background-color: lightgoldenrodyellow;
-    width: 850px;
-    height: 480px;
-    font-size: 4.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    text-align: center;
+.container{
+    background:whitesmoke;
+    padding:15px 9%;
+    padding-bottom: 100px;
 }
-#myBox2{
-    background-color: lightgoldenrodyellow;
-    width: 850px;
-    height: 480px;
-    font-size: 4.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+
+    .container .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(700px, 100fr));
+    gap:15px;
+    }
+
+    .container .box-container .Mission{
+    box-shadow:0 15px 10px rgba(0,0,0,.2);
+    border-radius: 20px;
+    background:#fff;
     text-align: center;
-}
-#myBox3{
-    background-color: lightgoldenrodyellow;
-    width: 850px;
-    height: 480px;
-    font-size: 4.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-#myBox4{
-    background-color: lightgoldenrodyellow;
-    width: 850px;
-    height: 480px;
-    font-size: 4.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
+    padding: 30px 20px;
+    height: 400px;
+    font-size: 50px;
+     } 
+     .container .box-container .Mission:hover{
+        box-shadow:0 15px 10px rgba(0,0,0,.3);
+        transform: scale(1.02);
+     }
+
+     .container .box-container .boxM{
+        box-shadow:0 15px 10px rgba(0,0,0,.2);
+        border-radius: 20px;
+        background:#F9A602;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .container .box-container .boxM:hover{
+        box-shadow:0 15px 10px rgba(0,0,0,.3);
+        transform: scale(1.02);
+     }
+
+    .container .box-container .Vision{
+        box-shadow:0 15px 10px rgba(0,0,0,.2);
+        border-radius: 20px;
+        background:#fff;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 50px;
+     }
+
+     .container .box-container .Vision:hover{
+        box-shadow:0 15px 10px rgba(0,0,0,.3);
+        transform: scale(1.02);
+     }
+     
+     .container .box-container .boxV{
+        box-shadow:0 15px 10px rgba(0,0,0,.2);
+        border-radius: 20px;
+        background:#373F41;
+        text-align: center;
+        padding: 30px 20px;
+        height: 400px;
+    }
+
+         .container .box-container .boxV:hover{
+            box-shadow:0 15px 10px rgba(0,0,0,.3);
+            transform: scale(1.02);
+    }
+    
