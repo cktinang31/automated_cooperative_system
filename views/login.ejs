@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,11 +12,12 @@
      <h2>Sign In/Sign Up</h2>
      <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="/user_reg" method="POST">
+            <form action="/user_reg" method="POST" onsubmit="return validatePassword()">
                 <h1>Create Account</h1>
                 <input type="text" id="name" name="name" placeholder="Name" required />
                 <input type="email" id="email" name="email" placeholder="Email" required />
-                <input type="password" id="password" name="password" placeholder="Password" required />
+                <input type="password" id="password" name="password" placeholder="Password" required onkeyup="checkPasswordStrength(this.value)" />
+                <span id="password-strength"></span>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
@@ -60,20 +62,31 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.sign-up-container form');
-        const emailInput = form.querySelector('input[type="email"]');
-
-        form.addEventListener('submit', function (event) {
-            if (!emailInput.validity.valid) {
-                event.preventDefault(); 
-                alert('Please enter a valid email address.');
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+            if (strongRegex.test(password)) {
+                return true;
+            } else {
+                alert("Password should be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
+                return false;
             }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('.sign-up-container form');
+            const emailInput = form.querySelector('input[type="email"]');
+            
+            form.addEventListener('submit', function (event) {
+                if (!emailInput.validity.valid) {
+                    event.preventDefault(); 
+                    alert('Please enter a valid email address.');
+                }
+            });
         });
-    });
     </script>
 
-     <footer>
+    <footer>
         Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
     </footer>
 

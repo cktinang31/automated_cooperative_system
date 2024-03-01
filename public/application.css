@@ -11,7 +11,8 @@ body{
 
 .container {
     display: flex;
-    max-width: 100%;
+    flex-wrap: wrap;
+    max-width: 90%;
     margin: 0 auto;
 }
 
@@ -28,58 +29,74 @@ body{
 }
 
 .column2 {
-    flex: 50%;
-    background-color: #ffff;
-    border-radius: 45px;
+    margin-right: 4%;
+    flex: 30%;
+    background-color: #373f41;
+    border-radius: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    height: 800px;
+    height: 100%;
 }
 
 .formtitle{
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
-    line-height: 60px;
+    line-height: 50px;
     text-align: center;
     word-wrap: break-word;
-    color: #373F41;
+    color: #ffffff;
 }
 
 form {
-    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 70%;
     margin: auto;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+label { 
+    font-size: 12px;
+    color: #ffffff;
+    text-transform: uppercase;
 }
 
-input[type="text"],
-input[type="tel"],
-input[type="date"] {
+input {
+    font-size: smaller;
+    display: flex;
+    flex-wrap: nowrap;
+    outline: none;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 10px 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    margin: 15px 0;
+    border-radius: 10px;
 }
 
-::placeholder{
-    font-style:italic;
-    font-size: 20px;
+input:hover{
+    color: #373F41;
+    font-weight: bold;
+    box-shadow: 2px 2px #F9A602;
 }
 
-input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
+button {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 20%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #F9A602;
+    color: #373F41;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 45px;
     cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.5s, transform 80ms ease-in-out;
 }
 
-input[type="submit"]:hover {
-    background-color: #0056b3;
+button:hover {
+    background-color: #a8833e; 
 }

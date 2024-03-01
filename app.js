@@ -24,8 +24,6 @@ pool.connect()
 
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
 
-
-
 // register view engine
 app.set('view engine', 'ejs');
 
@@ -35,6 +33,7 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -61,19 +60,7 @@ app.get('/application', (req, res) => {
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
-
-
-    const existingName = await Application.findOne({ fname, mname, lname });
-
-    if (existingName) {
-        return res.status(400).send('An application with this name already exists.');
-    }
-      const existingApplication = await Application.findOne({ $or: [{ email }, { contact }] });
-
-      if (existingApplication) {
-          return res.status(400).send('An application with this email or contact already exists.');
-      }
-
+    
 
       const newApplication = await Application.create({
           fname,
