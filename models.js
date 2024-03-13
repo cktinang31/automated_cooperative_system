@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
@@ -54,7 +55,11 @@ const  User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    fname: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    lname: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
@@ -66,11 +71,13 @@ const  User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     }
+    
 })
 
 
 Application.sync();
 User.sync();
+
 
 // Application.sync()
 //   .then(() => {

@@ -5,6 +5,7 @@ const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
 const {Application, User} = require('./models')
 const { Sequelize } = require('sequelize');
+const bcrypt = require ('bcrypt')
 
  
 //express app
@@ -61,20 +62,6 @@ app.get('/application', (req, res) => {
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
-
-
-    const existingName = await Application.findOne({ fname, mname, lname });
-
-    if (existingName) {
-        return res.status(400).send('An application with this name already exists.');
-    }
-      const existingApplication = await Application.findOne({ $or: [{ email }, { contact }] });
-
-      if (existingApplication) {
-          return res.status(400).send('An application with this email or contact already exists.');
-      }
-
-
       const newApplication = await Application.create({
           fname,
           mname,
@@ -97,20 +84,25 @@ app.post('/mem_application', async (req, res) => {
 
 app.post('/user_reg', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { fname, lname, email, password } = req.body;
     console.log('Request Body:', req.body); // Log request body for debugging
 
-    const existingUser = await User.findOne({ where: { [Sequelize.Op.or]: [{ name }, { email }] } });
+    // Check if a user with the provided email already exists
+    const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
-      return res.status(400).send('A user with this name/email is already registered in the system.');
+      return res.status(400).send('A user with this email is already registered in the system.');
     }
 
-    // Create a new user if no existing user found
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds parameter
+
+    // Create a new user with the hashed password
     const newUser = await User.create({
-      name,
+      fname,
+      lname,
       email,
-      password,
+      password: hashedPassword, // Store the hashed password in the database
     });
 
     console.log('New User:', newUser);
@@ -119,7 +111,42 @@ app.post('/user_reg', async (req, res) => {
     console.error('Error registering:', error);
     res.status(500).send('Error registering.');
   }
-})
+});
+
+app.post('/user_login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log('Login Request Body:', req.body); // Log request body for debugging
+
+    // Find the user by email
+    const user = await User.findOne({ where: { email } });
+
+    // If no user found with the provided email
+    if (!user) {
+      return res.status(404).send('User not found. Please register first.');
+    }
+
+    // Log the retrieved hashed password
+    console.log('Retrieved Hashed Password:', user.password);
+
+    // Compare the provided password with the hashed password stored in the database
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    // Log whether the password matches or not
+    console.log('Password Match:', passwordMatch);
+
+    if (!passwordMatch) {
+      console.error('Password does not match' ); // Log error when password doesn't match
+      return res.status(401).send('Incorrect password.');
+    }
+
+    // If everything is okay, send a success response
+    res.send('Login successful. Welcome back, ' + user.name + '!');
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).send('Error logging in.');
+  }
+});
 
 
 app.get('/login', (req, res) => {
