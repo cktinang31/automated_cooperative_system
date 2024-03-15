@@ -192,8 +192,16 @@ h3{
 .container .box-container .boxV {
     background: #373F41;
 }
+.containerImages {
+    background:whitesmoke;
+}
+.savings{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+}
 
-.piggy {
-    position: absolute;
-    align-items: center;
+.containerS {
+    display: flex;
+    background-color: whitesmoke;
 }
