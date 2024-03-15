@@ -1,14 +1,30 @@
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>404 Error | <%=title %></title>
+        <link rel="stylesheet" href="/404.css">
+    </head>
 <%- include('./partials/head.ejs') %>
 <body>
     
     <%- include('./partials/nav.ejs') %>
+
+    <div><i class="bi bi-emoji-dizzy"></i></div>
+
+    <div class="error">
+        404 Error
+    </div>    
         
     <div class="not-found-content">
         OOPS, page not found :((
     </div>
 
-    <%- include('./partials/footer.ejs') %>
+    <div class="message">
+        <p>
+            Sorry, we couldn't find the page you were looking for. The requested URL was not found on this server.
+        </p>
+    </div>
 
 </body>
 </html>
