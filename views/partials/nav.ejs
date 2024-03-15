@@ -1,13 +1,22 @@
 <nav>
-    <div class="site-title">
-        <h1>AUTOMATED COOPERATIVE</h1>
+    <div class="navbar">
+        <img src="logo.png" alt="" class="logo">
+        <h1></h1>
+
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>LOGIN</li>
+        </ul>
+
+        <div class="search-container">
+            <form action="/search" method="get">
+              <input type="text" class="search-box" name="q" placeholder="Search...">
+              <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+            </form>
+          </div>
+
+        
     </div>
-    <ul>
-        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
-        <li><a href="/service"><i class="fas fa-cogs"></i> Services</a></li>
-        <li><a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
-        <li><a href="/login" class="login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-    </ul>
-    
 </nav>
