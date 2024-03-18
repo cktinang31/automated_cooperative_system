@@ -58,6 +58,10 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 }); 
 
+app.get('/transaction_history', (req, res) => {
+  res.render('transaction_history', { title: 'Transaction History'});
+}); 
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
