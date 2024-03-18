@@ -192,16 +192,55 @@ h3{
 .container .box-container .boxV {
     background: #373F41;
 }
-.containerImages {
-    background:whitesmoke;
-}
-.savings{
-    position:absolute;
-    top: 0px;
-    left: 0px;
-}
 
 .containerS {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
     background-color: whitesmoke;
+    border-radius: 20px;
 }
+.containerS div{
+    height: 150px;
+    width: 220px;
+    background-color:gainsboro;
+    margin: 80px;
+    text-align: center;
+    border: solid;
+    border-width: 3px;
+    border-color:#777;
+    border-radius: 10px;
+}
+.containerS div1{
+    justify-content: center;
+
+}
+
+.containerA {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+}
+.containerA div{
+    height: 450px;
+    width: 1500px;
+    background-color:rgb(238, 199, 102);
+    margin: 50px;
+    text-align: center;
+    border: solid;
+    border-width: 3px;
+    border-color:#777;
+    border-radius: 10px;
+}
+.button{
+    
+    padding: 10px 20px;
+    border-radius: 20px;
+    background:#F9A602;
+    margin-top: 340px;
+}
+
