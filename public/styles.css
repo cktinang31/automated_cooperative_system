@@ -203,6 +203,7 @@ h3{
     background-color: whitesmoke;
     border-radius: 20px;
 }
+
 .containerS div{
     height: 150px;
     width: 220px;
@@ -214,9 +215,9 @@ h3{
     border-color:#777;
     border-radius: 5px;
 }
+
 .containerS div1{
     justify-content: center;
-
 }
 
 .containerA {
@@ -227,6 +228,7 @@ h3{
     background-color: whitesmoke;
     border-radius: 20px;
 }
+
 .containerA div{
     height: 450px;
     width: 1500px;
@@ -238,11 +240,11 @@ h3{
     border-color:#777;
     border-radius: 5px;
 }
+
 .button{
-    
     padding: 10px 20px;
     border-radius: 20px;
+    border: 1px solid black;
     background:#F9A602;
     margin-top: 340px;
 }
-
