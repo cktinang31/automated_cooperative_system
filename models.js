@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
+const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {  
     host: 'localhost',
     dialect: 'postgres',
 });
@@ -66,11 +66,46 @@ const  User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     }
-})
+});
 
+const User = require('./User');
 
-Application.sync();
-User.sync();
+const Savings = sequelize.define('Savings', {  
+    savings_id: {    
+        type: DataTypes.INTEGER,     
+        primaryKey: true,     
+        autoIncrement: true  
+    },   
+    user_id: {     
+        type: DataTypes.INTEGER,     
+        allowNull: false,     
+        references: {       
+        model: 'User', 
+        key: 'user_id'    }  
+    },   
+    amount: {     
+        type: DataTypes.FLOAT,     
+        allowNull: false 
+    },   
+    interest: {     
+        type: DataTypes.FLOAT,     
+        allowNull: false  
+    },  
+    loan_id: {     
+        type: DataTypes.INTEGER  
+
+    },   
+    timestamp: {     
+        type: DataTypes.DATE,     
+        defaultValue: Sequelize.NOW  } }, 
+        {});
+
+        Savings.belongsTo(User, { foreignKey: 'user_id' });
+                
+
+// Application.sync();
+// User.sync();
+//Savings.sync();
 
 // Application.sync()
 //   .then(() => {
@@ -88,9 +123,19 @@ User.sync();
 //     console.error('Error syncing User model:', error);
 //   });
 
+// Savings.sync()
+//   .then(() => {
+//     console.log('Savings model synced successfully');
+//   })
+//   .catch(error => {
+//     console.error('Error syncing Savings model:', error);
+//   });
+
+
 module.exports = {
     Application,
     User,
+    Savings,
 }
 
 
