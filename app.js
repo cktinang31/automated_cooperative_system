@@ -53,10 +53,13 @@ app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
 
-
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
-}); 
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login'});
+});
 
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
