@@ -5,7 +5,7 @@
 body {
     background-color: whitesmoke;
     max-width: 100%;
-    margin: 150px auto;
+    margin: 135px auto;
     padding: 0 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     max-width: 100%;
@@ -42,6 +42,7 @@ h4 {
 }
 
 nav {
+    max-width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -104,6 +105,14 @@ nav a {
     color: black;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+.background1 {
+    position: relative;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-size: cover;
+    background-position: center;
 }
 
 h2 {
