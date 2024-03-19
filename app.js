@@ -57,6 +57,10 @@ app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
 
+app.get('/memberhome', (req, res) => {
+  res.render('memberhome', { title: 'Home'});
+});
+
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
