@@ -49,6 +49,10 @@ app.get('/service', (req, res) => {
     res.render('service', { title: 'Services'});
 });
 
+app.get('/product', (req, res) => {
+  res.render('product', { title: 'Products'});
+});
+
 app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });

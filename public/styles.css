@@ -1,61 +1,55 @@
 @import url('https://fonts.google.com/specimen/Poppins?query=poppins');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap');
 
-
-body{
+body {
+    background-color: whitesmoke;
     max-width: 100%;
-    margin: 50px auto;
+    margin: 150px auto;
     padding: 0 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     max-width: 100%;
 }
 
-
-h1, h2, a, ul{
+h1,
+h2,
+a,
+ul {
     margin: 0;
     padding: 0;
     text-decoration: none;
     color: #222;
 }
 
-h3{
+h3 {
     margin: 0;
     padding: 0;
     text-decoration: none;
-    color: #F9A602;
+    color: #f9a602;
 }
 
-h4{
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    color: #fff;
-}
-
-h5{
+h4 {
     margin: 0;
     padding: 0;
     text-decoration: none;
     color: #fff;
 }
 
-h6{
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    color: #F9A602;
+.nav-yellow {
+    height: 10px;
+    background-color: #f9a602 !important;
+    width: 1000%;
 }
 
-nav{
+nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 60px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     width: 100%;
-    background-color: #373F41;
+    background-color: #373f41;
     position: fixed;
-    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     z-index: 8;
     top: 0;
     left: 0;
@@ -67,87 +61,65 @@ nav a {
     text-decoration: none;
 }
 
-nav a:hover {
-    color: #373f41d3; 
-    transition: all ease 0.5s;
-}
-
-nav a:hover::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px; 
-    width: 100%;
-    height: 2px; 
-    background-color: #373F41; 
-    transition: all ease 0.5s;
-}
-
-nav ul{
+nav ul {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    color: #ffffff;
 }
 
-nav li{
+nav ul li a {
+    color: #ffffff;
+    font-weight: 200;
+    padding: 3px 20px;
+}
+
+nav ul li a:hover {
+    color: #f9a602; 
+}
+
+nav li {
     margin-right: 80px;
     list-style-type: none;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-nav h1{
+nav h1 {
+    font-family: "Miniver", cursive;
     position: relative;
-    margin-left: 25px;
+    margin-left: 150px;
     margin-top: 30px;
     font-size: 3.5em;
     color: transparent;
-    -webkit-text-stroke: 1px #F9A602;
+    -webkit-text-stroke: 1px #ffffff;
 }
 
-nav h1::before{
-    content: "Automated Cooperative";
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    overflow: hidden;
-    color: #F9A602;
-    border-right: 3px solid #F9A602;
-    transition: 2s ease-in-out;
+nav h1 span {
+    color: #f9a602;
 }
 
-nav h1:hover::before{
-    width: 100%;
-    filter: drop-shadow(0 0 25px #f9a702e1);
-}
-
-nav p, nav a{
+nav p,
+nav a {
     font-size: 1.3em;
     color: black;
     font-weight: 600;
     margin-bottom: 20px;
 }
 
-footer{
-    color: #777;
-    text-align: center;
-    margin: 80px auto 20px;
-}
-
-h2{
+h2 {
     margin-bottom: 40px;
 }
 
-h3{
+h3 {
     text-decoration: capitalize;
 }
 
-.content{
+.content {
     margin-left: 20px;
 }
 
 .container {
     border-radius: 10px;
-    background: whitesmoke;
     padding: 15px 9%;
     padding-bottom: 100px;
 }
@@ -163,7 +135,7 @@ h3{
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 15px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     background: #fff;
     text-align: center;
@@ -174,11 +146,11 @@ h3{
 }
 
 .container .box-container .Mission,
-.container .box-container .Vision{
+.container .box-container .Vision {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 15px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     background: #fff;
     text-align: center;
@@ -192,16 +164,16 @@ h3{
 .container .box-container .Vision:hover,
 .container .box-container .boxM:hover,
 .container .box-container .boxV:hover {
-    box-shadow: 0 15px 10px rgba(0, 0, 0, .3);
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.3);
     transform: scale(1.02);
 }
 
 .container .box-container .boxM {
-    background: #F9A602;
+    background: #f9a602;
 }
 
 .container .box-container .boxV {
-    background: #373F41;
+    background: #373f41;
 }
 
 .containerS {
@@ -209,23 +181,22 @@ h3{
     justify-content: center;
     align-items: center;
     min-height: 250px;
-    background-color: whitesmoke;
     border-radius: 20px;
 }
 
-.containerS div{
+.containerS div {
     height: 150px;
     width: 220px;
-    background-color:gainsboro;
+    background-color: gainsboro;
     margin: 80px;
     text-align: center;
     border: solid;
     border-width: 3px;
-    border-color:#777;
+    border-color: #777;
     border-radius: 5px;
 }
 
-.containerS div1{
+.containerS div1 {
     justify-content: center;
 }
 
@@ -234,26 +205,21 @@ h3{
     justify-content: center;
     align-items: center;
     min-height: 250px;
-    background-color: whitesmoke;
     border-radius: 20px;
 }
 
-.containerA div{
+.containerA div {
     height: 450px;
     width: 1500px;
-    background-color:rgb(238, 199, 102);
+    background-color: rgb(238, 199, 102);
     margin: 50px;
     text-align: center;
     border: solid;
     border-width: 3px;
-    border-color:#777;
-    border-radius: 5px;
 }
 
-.button{
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: 1px solid black;
-    background:#F9A602;
-    margin-top: 340px;
+footer {
+    color: #777;
+    text-align: center;
+    margin: 80px auto 20px;
 }
