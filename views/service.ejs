@@ -3,16 +3,19 @@
 <body>
 
     <%- include('./partials/nav.ejs') %>
-
-    <div class="container">
-        <h1>Services</h1>
+        <h1>CTU-AC Cooperative Members can avail these services:</h1>
         <ul>
-            <li><a href="/service/web-design">Web Design</a></li>
-            <li><a href="/service/web-development">Web Development</a></li>
-            <li><a href="/service/seo">SEO</a></li>
-            <li><a href="/service/digital-marketing">Digital Marketing</a></li>
-            <li><a href="/service/graphic-design">Graphic Design</a></li>
-        </ul>
+            <div class="containerS">
+        
+                <div class = "div 1"><img src="piggy.png" class="responsive" id="div 1"><p>Savings</p></div>
+                <div class = "div 2"><img src="loans.png" class="responsive" id="div 2"><p>Loans</p></div>
+                <div class = "div 3"><img src="shares.png" class="responsive" id="div 3"><p>Shares</p></div>
+            </div>
+
+            <div class="containerA">
+                <div class = "div 4"<p>Announcements</p><button class="button">Apply for Membership</button></div>
+                
+            </ul>
     </div>
 
     <%- include('./partials/footer.ejs') %>
