@@ -42,6 +42,10 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 }); 
 
+app.get('/systemadmin', (req, res) => {
+    res.render('systemadmin', { title: 'Admin'});
+}); 
+
 app.post('/mem_application', async (req, res) => {
     const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
     try {
