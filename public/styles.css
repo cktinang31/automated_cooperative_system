@@ -1,7 +1,8 @@
 @import url('https://fonts.google.com/specimen/Poppins?query=poppins');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 
 body{
-    background-color: #F9A602;
     max-width: 100%;
     margin: 50px auto;
     padding: 0 20px;
@@ -9,19 +10,40 @@ body{
     max-width: 100%;
 }
 
-.logo{
-    .logo {
-        width: auto; /* maintain aspect ratio */
-        height: auto; /* maintain aspect ratio */
-    }
-    
-}
 
-h1, h2, h3, a, ul{
+h1, h2, a, ul{
     margin: 0;
     padding: 0;
     text-decoration: none;
     color: #222;
+}
+
+h3{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #F9A602;
+}
+
+h4{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #fff;
+}
+
+h5{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #fff;
+}
+
+h6{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #F9A602;
 }
 
 nav{
@@ -71,6 +93,7 @@ nav li{
 nav h1{
     margin-left: 200px;
     font-size: 3em;
+    font-family: Great Vibes;
     color: #373F41;
 }
 
@@ -86,10 +109,13 @@ nav p, nav a{
     margin-right: 0;
     list-style-type: none;
     margin-bottom: 15px;
+    transition: all 0.3s ease;
 }
 
-.login:hover{
+.login:hover {
     color: black;
+    text-shadow: 0 0 5px #534a4a;
+    box-shadow: 0 0 0 rgba(61, 53, 53, 0.5);
 }
 
 footer{
@@ -108,4 +134,117 @@ h3{
 
 .content{
     margin-left: 20px;
+}
+
+.container {
+    border-radius: 10px;
+    background: whitesmoke;
+    padding: 15px 9%;
+    padding-bottom: 100px;
+}
+
+.container .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(700px, 100fr));
+    gap: 15px;
+}
+
+.container .box-container .boxM,
+.container .box-container .boxV {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, .2);
+    border-radius: 20px;
+    background: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    height: 400px;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.container .box-container .Mission,
+.container .box-container .Vision{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, .2);
+    border-radius: 20px;
+    background: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    height: 400px;
+    font-size: 50px;
+    transition: all 0.3s ease;
+}
+
+.container .box-container .Mission:hover,
+.container .box-container .Vision:hover,
+.container .box-container .boxM:hover,
+.container .box-container .boxV:hover {
+    box-shadow: 0 15px 10px rgba(0, 0, 0, .3);
+    transform: scale(1.02);
+}
+
+.container .box-container .boxM {
+    background: #F9A602;
+}
+
+.container .box-container .boxV {
+    background: #373F41;
+}
+
+.containerS {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+}
+
+.containerS div{
+    height: 150px;
+    width: 220px;
+    background-color:gainsboro;
+    margin: 80px;
+    text-align: center;
+    border: solid;
+    border-width: 3px;
+    border-color:#777;
+    border-radius: 5px;
+}
+
+.containerS div1{
+    justify-content: center;
+}
+
+.containerA {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+}
+
+.containerA div{
+    height: 450px;
+    width: 1500px;
+    background-color:rgb(238, 199, 102);
+    margin: 50px;
+    text-align: center;
+    border: solid;
+    border-width: 3px;
+    border-color:#777;
+    border-radius: 5px;
+}
+
+.button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+    background:#F9A602;
+    margin-top: 340px;
 }
