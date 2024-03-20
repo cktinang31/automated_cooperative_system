@@ -1,31 +1,9 @@
-const {Pool,Client} = require ('pg')
-const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
 const { Sequelize, DataTypes } = require('sequelize');
-
-
-const pool = new Pool({
-    connectionString:connectionString
-})
-
-pool.connect()
-
-.then(() => {
-    console.log('Connected to PostgreSQL database');
-   
- })
-
-.catch(err => console.error('Error connecting to PostgreSQL database', err));
-
-
-
-
 const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
   });
 
-
-//application table
 
 const Application = sequelize.define('Application', {
     application_id: {
@@ -68,13 +46,51 @@ const Application = sequelize.define('Application', {
     }
 },{timestamps: false,});
 
-(async () => {
-      try {
-        await sequelize.sync();
-        console.log('Database synchronized');
-      } catch (error) {
-        console.error('Error synchronizing database:', error);
-      }
-    })();
 
-module.exports = Application;
+const  User = sequelize.define('User', {
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    }
+})
+
+
+Application.sync();
+User.sync();
+
+// Application.sync()
+//   .then(() => {
+//     console.log('Application model synced successfully');
+//   })
+//   .catch(error => {
+//     console.error('Error syncing Application model:', error);
+//   });
+
+// User.sync()
+//   .then(() => {
+//     console.log('User model synced successfully');
+//   })
+//   .catch(error => {
+//     console.error('Error syncing User model:', error);
+//   });
+
+module.exports = {
+    Application,
+    User,
+}
+
+
