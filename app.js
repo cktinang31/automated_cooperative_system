@@ -52,6 +52,10 @@ app.get('/login', (req, res) => {
     res.render('login', { title: 'Login'});
 });
 
+app.get('/announcement', (req, res) => {
+    res.render('announcement', { title: 'Announcement'});
+});
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
