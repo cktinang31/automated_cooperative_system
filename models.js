@@ -68,7 +68,6 @@ const  User = sequelize.define('User', {
     }
 });
 
-const User = require('./User');
 
 const Savings = sequelize.define('Savings', {  
     savings_id: {    
@@ -78,10 +77,7 @@ const Savings = sequelize.define('Savings', {
     },   
     user_id: {     
         type: DataTypes.INTEGER,     
-        allowNull: false,     
-        references: {       
-        model: 'User', 
-        key: 'user_id'    }  
+        allowNull: false 
     },   
     amount: {     
         type: DataTypes.FLOAT,     
@@ -93,16 +89,76 @@ const Savings = sequelize.define('Savings', {
     },  
     loan_id: {     
         type: DataTypes.INTEGER  
-
     },   
     timestamp: {     
         type: DataTypes.DATE,     
-        defaultValue: Sequelize.NOW  } }, 
-        {});
+        defaultValue: Sequelize.NOW  
+    } 
+});
 
-        Savings.belongsTo(User, { foreignKey: 'user_id' });
+
+Savings.belongsTo(User, {
+    foreignKey: 'user_id', 
+    onDelete: 'CASCADE' 
+});
+
+(async () => {
+    try {
+        await sequelize.sync({ force: true });
+        console.log("Tables synced successfully");
+    } catch (error) {
+        console.error("Error syncing tables:", error);
+    } finally {
+        sequelize.close();
+    }
+})();
+
+const CBU = sequelize.define('CBU', {  
+    user_id: {    
+        type: DataTypes.INTEGER,     
+        primaryKey: true,     
+        autoIncrement: true  
+    },   
+    cbu_id: {     
+        type: DataTypes.INTEGER,     
+        allowNull: false 
+    },   
+    amount: {     
+        type: DataTypes.FLOAT,     
+        allowNull: false 
+    },   
+    interest: {     
+        type: DataTypes.FLOAT,     
+        allowNull: false  
+    },  
+    loan_id: {     
+        type: DataTypes.INTEGER  
+    },   
+    timestamp: {     
+        type: DataTypes.DATE,     
+        defaultValue: Sequelize.NOW  
+    } 
+});
+
+CBU.belongsTo(User, {
+    foreignKey: 'user_id', 
+    onDelete: 'CASCADE' 
+});
+
+
+(async () => {
+    try {
+        await sequelize.sync({ force: true });
+        console.log("Tables synced successfully");
+    } catch (error) {
+        console.error("Error syncing tables:", error);
+    } finally {
+        sequelize.close();
+    }
+})();
+
+
                 
-
 // Application.sync();
 // User.sync();
 //Savings.sync();
@@ -131,11 +187,20 @@ const Savings = sequelize.define('Savings', {
 //     console.error('Error syncing Savings model:', error);
 //   });
 
+// CBU.sync()
+//   .then(() => {
+//     console.log('CBU model synced successfully');
+//   })
+//   .catch(error => {
+//     console.error('Error syncing CBU model:', error);
+//   });
+
 
 module.exports = {
     Application,
     User,
     Savings,
+    CBU,
 }
 
 
