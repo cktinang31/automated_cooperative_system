@@ -49,6 +49,10 @@ app.get('/service', (req, res) => {
     res.render('service', { title: 'Services'});
 });
 
+app.get('/product', (req, res) => {
+  res.render('product', { title: 'Products'});
+});
+
 app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
@@ -59,6 +63,14 @@ app.get('/memberhome', (req, res) => {
 
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login'});
+});
+
+app.get('/systemadmin', (req, res) => {
+    res.render('systemadmin', { title: 'Admin'});
 }); 
 
 app.post('/mem_application', async (req, res) => {

@@ -1,0 +1,28 @@
+@import url('https://fonts.google.com/specimen/Poppins?query=poppins');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f5f7;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100vh;
+    margin: -20px 0 50px;
+}
+
+h1 {
+    color: #ffffff;
+    font-weight: bold;
+    padding-bottom: 40px;
+}
+
+h2{
+    text-align: center;
+    padding-bottom: 70px;
+}
