@@ -57,6 +57,10 @@ app.get('/memberhome', (req, res) => {
   res.render('memberhome', { title: 'Home'});
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: 'My Profile'});
+});
+
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 }); 
