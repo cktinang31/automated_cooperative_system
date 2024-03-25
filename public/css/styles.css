@@ -5,8 +5,8 @@
 body {
     background-color: whitesmoke;
     max-width: 100%;
-    margin: 135px auto;
-    padding: 0 20px;
+    margin: 89px auto;
+    padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     max-width: 100%;
 }
@@ -46,11 +46,10 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-bottom: 20px;
     width: 100%;
     background-color: #373f41;
+    border-bottom: 1px solid #f9a602;
     position: fixed;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     z-index: 8;
     top: 0;
     left: 0;
@@ -72,7 +71,8 @@ nav ul {
 nav ul li a {
     color: #ffffff;
     font-weight: 200;
-    padding: 3px 20px;
+    font-size: medium;
+    padding: 2px 24px;
 }
 
 nav ul li a:hover {
@@ -80,7 +80,7 @@ nav ul li a:hover {
 }
 
 nav li {
-    margin-right: 80px;
+    margin-right: 50px;
     list-style-type: none;
     margin-bottom: 20px;
 }
@@ -89,7 +89,6 @@ nav h1 {
     font-family: "Miniver", cursive;
     position: relative;
     margin-left: 150px;
-    margin-top: 30px;
     font-size: 3.5em;
     color: transparent;
     -webkit-text-stroke: 1px #ffffff;
@@ -108,11 +107,41 @@ nav a {
 }
 
 .background1 {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    max-height: 100%;
     position: relative;
-    width: 100vw !important;
-    height: 100vh !important;
-    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
     background-position: center;
+    background-attachment: fixed;
+
+}
+
+.button-link {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: #f9a602;
+    color: #fff;
+    padding: 12px 28px;
+    text-align: center;
+    text-decoration: none;
+    font-size: clamp(14px, 3vw, 16px);
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s; /* Added opacity transition */
+}
+
+.button-link:hover {
+    background-color: #ff9800;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
