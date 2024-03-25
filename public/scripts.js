@@ -9,3 +9,14 @@ signupButton.addEventListener("click", () => {
 signinButton.addEventListener("click", () => {
     container.classList.remove("right-panel-active");
 });
+
+function toggleSidebar() {
+    var sidebarContainer = document.getElementById("sidebarContainer");
+    sidebarContainer.classList.toggle("active");
+
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+
+    var sidebarMenu = document.getElementById("sidebarMenu");
+    sidebarMenu.classList.toggle("active");
+}
