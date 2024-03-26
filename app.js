@@ -25,8 +25,6 @@ pool.connect()
 
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
 
-
-
 // register view engine
 app.set('view engine', 'ejs');
 
@@ -162,6 +160,6 @@ app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3001, () => {
+app.listen(3000, () => {
     console.log('Server running on port 3001');
 });
