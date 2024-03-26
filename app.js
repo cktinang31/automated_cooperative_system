@@ -6,7 +6,7 @@ const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Coope
 const {Application, User} = require('./models')
 const { Sequelize } = require('sequelize');
 
- 
+
 //express app
 const app = express();
 
@@ -19,7 +19,7 @@ pool.connect()
 
 .then(() => {
   console.log('Connected to PostgreSQL database');
- 
+
 })
 
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
@@ -29,7 +29,7 @@ pool.connect()
 // register view engine
 app.set('view engine', 'ejs');
 
-// midddlware & static files
+// middleware & static files
 app.use(express.static('public'));
 
 app.use(morgan('dev'));
@@ -49,17 +49,10 @@ app.get('/service', (req, res) => {
     res.render('service', { title: 'Services'});
 });
 
-app.get('/product', (req, res) => {
-  res.render('product', { title: 'Products'});
-});
-
 app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
 
-app.get('/memberhome', (req, res) => {
-  res.render('memberhome', { title: 'Home'});
-});
 
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
@@ -71,10 +64,6 @@ app.get('/login', (req, res) => {
 
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
-}); 
-
-app.get('/transaction_history', (req, res) => {
-  res.render('transaction_history', { title: 'Transaction History'});
 }); 
 
 app.post('/mem_application', async (req, res) => {
@@ -145,11 +134,15 @@ app.get('/login', (req, res) => {
     res.render('login', { title: 'Sign In / Up Form'});
 });
 
+app.get('/announcement', (req, res) => {
+  res.render('announcement', { title: 'Member Homepage'});
+});
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+app.listen(3001, () => {
+    console.log('Server running on port 3001');
 });
