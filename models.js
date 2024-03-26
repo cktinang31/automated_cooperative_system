@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {  
+const bcrypt = require('bcrypt');
+const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
     port: 5432,
@@ -55,7 +56,11 @@ const  User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    fname: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    lname: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
@@ -67,7 +72,8 @@ const  User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     }
-});
+    
+})
 
 
 const Savings = sequelize.define('Savings', {  
@@ -436,6 +442,7 @@ Transaction.sync();
 CBUTransaction.sync();
 History.sync();
 Chat.sync();
+
 
 // Application.sync()
 //   .then(() => {
