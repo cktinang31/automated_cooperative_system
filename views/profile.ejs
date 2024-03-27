@@ -1,0 +1,35 @@
+<html lang="en">
+<%- include('./partials/main.ejs') %>
+
+    
+<div class="profile-container">
+        <div class="profile-image">
+            <label for="upload" class="upload-icon">
+                <input type="file" id="upload" accept="image/*">
+                <i class="fas fa-camera"></i>
+                <img id="profile-pic" src="defaultuser.png" alt="choose file">
+            </label>
+        </div>
+        
+        <div class="profile">
+            <h1>Mary Ann Ambos</h1>
+            <p>Email: <span id="email">maryann@gmail.com</span></p>
+            <p>Contact: <span id="contact">09123456789</span></p>
+            <p>Student</p>
+        </div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('upload').addEventListener('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('profile-pic').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+    
