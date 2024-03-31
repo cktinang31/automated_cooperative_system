@@ -1,88 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CTU-AC Cooperative System</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="announcement.css">
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-      <div class="member">Member <i class="fas fa-home"></i>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Announcement<%=title %></title>
+        <link rel="stylesheet" href="/css/announcement.css">
+    </head>
+    <body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
     </div>
-  </header>
+    </div>
+    <div class="member-title">
+        <h1>Member</h1>
+    </div>
+    <div class="home-icon">
+        <a href="/">
+            <img src="/svg/icons8-home.svg" alt="Home Icon">
+        </a>
+</nav>
 
-  <div class="sidebar-icon">
-    <a href="#" onclick="toggleSidebar()">
-        <img src="menu.svg" alt="Sidebar Icon">
-    </a>
-</div>
+<%- include('./partials/sidebar.ejs') %>
 
-<div id="sidebarContainer" class="container">
-    <div id="sidebar" class="sidebar">
-        <div class="user-icon">
-            <a href="">
-                <img src="usericon.png" alt="User Icon">
-            </a>
-            <div class="user-details">
-                <span class="user-name">Mary Ann Ambos</span>
-                <div>
-                <span class="user-email">maryann@gmail.com</span>
-                </div>
+<div class="main-content">
+    <div class="content-wrapper">
+        <div class="announcement-section">
+            <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
+            <h1>Announcement</h1>
+        </div>
+        
+        <div class="announcement-content">
+            <i class="custom-announcement-icon"></i>
+            <h3>Cooperative Advisory</h3>
+            <div class="content-text">
+                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting Friday, March 01, 2024, at 10:00 AM and ends on Saturday, March 02, 2024, at 3:00 PM.</p>
+                <p>Please feel free to comment down your concerns. Thank you for your patience and understanding.</p> 
+                <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
             </div>
         </div>
-        
-        
-    <ul class="sidebar-menu" id="sidebarMenu">
-        <div>
-            <img src="usericon.png" alt=" Icon"><a href="/profile"></i>My Profile</a>
-        </div>
-
-        <div>
-            <img src="fundsicon.png" alt=" Icon"><a href="/funds">Funds</a>
-        </div>
-
-        <div>
-            <img src="loanicon.png" alt=" Icon"><a href="/loan">Loan</a>
-        </div>
-
-        <div>
-            <img src="icons8-payment-history-50.png" alt=" Icon"><a href="/transaction-history">Transaction History</a>
-        </div>
-
-        <div>
-            <img src="chaticon.png" alt=" Icon"><a href="/inquire">Inquire</a>
-        </div>
-    </ul>
-
-    
-    <div id="sidebarContent" class="sidebar-content">
     </div>
-</div>
-
-<script src="scripts.js"></script>
-</body>
-</html>
-
-
-
-  <class="main-content">
-    <div class="content-wrapper">
-      <div class="announcement-section">
-        <h1><i class="public/noun-megaphone-6635472.png"></i> Announcement</h1>
-      </div>
-      <div class="announcement-content">
-        <i class="custom-announcement-icon"></i>
-        <h3>Cooperative Advisory</h3>
-        <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment
-          is temporarily unavailable starting Friday, March 01, 2024, at 10:00 AM and ends on Saturday, 
-            March 02, 2024, at 3:00 PM.</p>
-        <p>Please feel free to comment down your concerns. Thank you for your patience and understanding.</p>
-      </div>
-    </div>
-  </main>
-</body>
-</html>
+    </body>
+    </html>
