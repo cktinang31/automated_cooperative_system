@@ -66,6 +66,7 @@ nav ul {
     justify-content: space-between;
     align-items: flex-end;
     color: #ffffff;
+    margin-bottom: 10px;
 }
 
 nav ul li a {
@@ -73,10 +74,36 @@ nav ul li a {
     font-weight: 200;
     font-size: medium;
     padding: 2px 24px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #f9a602; 
+    color: #ffb951; 
+    text-decoration: underline;
+}
+
+.login {
+    display: inline-block;
+    padding: 8px 20px; 
+    background-color: #f9a602; 
+    color: #373f41;
+    border: none;
+    top: 27px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login:hover {
+    color: #373f41;
+    background-color: #ffb951;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: none;
+    text-decoration: none;
 }
 
 nav li {
@@ -88,7 +115,7 @@ nav li {
 nav h1 {
     font-family: "Miniver", cursive;
     position: relative;
-    margin-left: 150px;
+    margin-left: 50px;
     font-size: 3.5em;
     color: transparent;
     -webkit-text-stroke: 1px #ffffff;
@@ -136,7 +163,7 @@ nav a {
     border: none;
     border-radius: 25px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s; /* Added opacity transition */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
 }
 
 .button-link:hover {
