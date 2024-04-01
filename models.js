@@ -431,6 +431,81 @@ const Chat = sequelize.define('Chat', {
 //     }
 // })();
 
+const Content = sequelize.define('Content', {
+    user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+    content_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+    content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+    },
+    timestamp: {
+    type: DataTypes.DATE,
+    allowNull: false
+    }
+});
+
+Content.belongsTo(User, {
+    foreignKey: 'user_id', 
+    onDelete: 'CASCADE' 
+});
+
+// (async () => {
+//     try {
+//         const schema = await sequelize.getQueryInterface().describeTable('History');
+//         console.log(schema);
+//     } catch (error) {
+//         console.error("Error getting table schema:", error);
+//     } finally {
+//         await sequelize.close();
+//     }
+// })();
+
+const Comment = sequelize.define('Comment', {
+    user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+    content_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+    comment_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+    },
+    comment: {
+    type: DataTypes.TEXT,
+    allowNull: false
+    },
+    timestamp: {
+    type: DataTypes.DATE,
+    allowNull: false
+    }
+});
+
+Comment.belongsTo(User, {
+    foreignKey: 'user_id', 
+    onDelete: 'CASCADE' 
+});
+
+// (async () => {
+//     try {
+//         const schema = await sequelize.getQueryInterface().describeTable('History');
+//         console.log(schema);
+//     } catch (error) {
+//         console.error("Error getting table schema:", error);
+//     } finally {
+//         await sequelize.close();
+//     }
+// })();
+
                 
 Application.sync();
 User.sync();
@@ -442,6 +517,8 @@ Transaction.sync();
 CBUTransaction.sync();
 History.sync();
 Chat.sync();
+Content.sync();
+Comment.sync();
 
 
 // Application.sync()
@@ -470,7 +547,8 @@ module.exports = {
     CBUTransaction,
     History,
     Chat,
-    
+    Content,
+    Comment,
 }
 
 
