@@ -88,7 +88,7 @@ nav ul li a:hover {
     background-color: #f9a602; 
     color: #373f41;
     border: none;
-    top: 25px;
+    top: 30px;
     border-radius: 50px;
     text-decoration: none;
     font-family: 'Poppins';
@@ -247,6 +247,13 @@ h3 {
     align-items: center;
     min-height: 250px;
     border-radius: 20px;
+}
+
+h5{
+    color: #373f41;
+    font-size: 2.25em;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .containerS div {
