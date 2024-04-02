@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
@@ -6,10 +8,39 @@ const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Coope
 const {Application, User, Content} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-
+const isAuthenticated = (req, res, next) => {
+  console.log('Checking authentication status...');
+  try {
+    console.log('Session ID:', req.sessionID);
+    console.log('Session:', req.session);
+    console.log('Authenticated:', req.isAuthenticated());
+    
+    if (req.isAuthenticated()) {
+      console.log('User is authenticated.');
+      return next(); // Proceed to the next middleware or route handler
+    } else {
+      console.log('User is not authenticated. Redirecting to login page.');
+      return res.redirect('/login'); // Redirect to the login page
+    }
+  } catch (error) {
+    console.error('Error in isAuthenticated middleware:', error);
+    res.status(500).send('Internal server error');
+  }
+};
 //express app
 const app = express();
+
+const secretKey = crypto.randomBytes(64).toString('hex');
+
+app.use(session({
+  secret: secretKey, 
+  resave: false,
+  saveUninitialized: false
+}));
+
 
 
 const pool = new Pool({
@@ -25,10 +56,14 @@ pool.connect()
 
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
 
+
 // register view engine
 app.set('view engine', 'ejs');
 
 // middleware & static files
+
+ 
+
 app.use(express.static('public'));
 
 app.use(morgan('dev'));
@@ -36,7 +71,52 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(
+  { usernameField: 'email' }, // Specify the field name for the username/email
+  async (email, password, done) => {
+    try {
+      // Find the user by email
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return done(null, false, { message: 'User not found' });
+      }
+
+      // Compare password
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (!passwordMatch) {
+        return done(null, false, { message: 'Incorrect password' });
+      }
+
+      // If user and password are correct, return the user
+      return done(null, user);
+    } catch (error) {
+      return done(error);
+    }
+  }
+));
+
+// Serialize user to store in session
+passport.serializeUser((user, done) => {
+  done(null, user.user_id);
+});
+
+// Deserialize user from session
+passport.deserializeUser(async (user_id, done) => {
+  try {
+    const user = await User.findByPk(user_id);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
+});
+
+
 app.get('/', (req, res) => {
+    const sessionData = req.session;
     res.render('index', { title: 'Home'});
 });
 
@@ -52,6 +132,32 @@ app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
 
+
+app.get('/x', (req, res) => {
+  res.render('x', { title: 'Back-end Testing'});
+});
+
+
+
+app.post('/post_announcement', async (req, res) => {
+  try {
+    const { content_title, content } = req.body;
+    console.log('Request Body:', req.body); 
+
+  
+    const newContent = await Content.create({
+      content_title,
+      content,
+      timestamp: new Date() 
+    });
+
+    console.log('Announcement:', newContent);
+    res.send('Announcement Posted');
+  } catch (error) {
+    console.error('Error creating announcement:', error);
+    res.status(500).send('Error creating announcement.');
+  }
+});
 
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
@@ -111,73 +217,7 @@ app.post('/user_reg', async (req, res) => {
   }
 });
 
-app.post('/user_login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log('Login Request Body:', req.body); // Log request body for debugging
-
-    // Find the user by email
-    const user = await User.findOne({ where: { email } });
-
-    // If no user found with the provided email
-    if (!user) {
-      return res.status(404).send('User not found. Please register first.');
-    }
-
-    // Log the retrieved hashed password
-    console.log('Retrieved Hashed Password:', user.password);
-
-    // Compare the provided password with the hashed password stored in the database
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    // Log whether the password matches or not
-    console.log('Password Match:', passwordMatch);
-
-    if (!passwordMatch) {
-      console.error('Password does not match' ); // Log error when password doesn't match
-      return res.status(401).send('Incorrect password.');
-    }
-
-    // If everything is okay, send a success response
-    res.send('Login successful. Welcome back, ' + user.name + '!');
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).send('Error logging in.');
-  }
-});
-
-app.get('/x', (req, res) => {
-  res.render('x', { title: 'Back-end Testing'});
-});
-
-
-app.post('/post_announcement', async (req, res) => {
-  try {
-    const { content_title, content } = req.body;
-    console.log('Request Body:', req.body); 
-
-  
-    const newContent = await Content.create({
-      content_title,
-      content,
-      timestamp: new Date() 
-    });
-
-    console.log('Announcement:', newContent);
-    res.send('Announcement Posted');
-  } catch (error) {
-    console.error('Error creating announcement:', error);
-    res.status(500).send('Error creating announcement.');
-  }
-});
-
-
-
-app.get('/login', (req, res) => {
-    res.render('login', { title: 'Sign In / Up Form'});
-});
-
-app.get('/announcement', async (req, res) => {
+app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll(); 
     res.render('announcement', { contents });
@@ -185,7 +225,48 @@ app.get('/announcement', async (req, res) => {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
   }
-})
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
+});
+
+
+app.post('/user_login', passport.authenticate('local', {
+  successRedirect: '/announcement',
+  failureRedirect: '/login',
+  failureFlash: true
+}), async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log('Login Request Body:', req.body); 
+    // Find the user by email
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).send('User not found. Please register first.');
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      req.session.isLoggedIn = true; 
+      req.session.user = user; 
+      return res.redirect('/announcement'); 
+    } else {
+      console.error('Password does not match'); 
+      return res.status(401).send('Incorrect password.');
+    }
+
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).send('Error logging in.');
+  }
+});
+
+
+
+
 
 
 // 404 page
