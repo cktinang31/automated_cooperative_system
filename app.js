@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
-const {Application, User} = require('./models')
+const {Application, User, Content} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 
@@ -146,14 +146,47 @@ app.post('/user_login', async (req, res) => {
   }
 });
 
+app.get('/x', (req, res) => {
+  res.render('x', { title: 'Back-end Testing'});
+});
+
+
+app.post('/post_announcement', async (req, res) => {
+  try {
+    const { content_title, content } = req.body;
+    console.log('Request Body:', req.body); 
+
+  
+    const newContent = await Content.create({
+      content_title,
+      content,
+      timestamp: new Date() 
+    });
+
+    console.log('Announcement:', newContent);
+    res.send('Announcement Posted');
+  } catch (error) {
+    console.error('Error creating announcement:', error);
+    res.status(500).send('Error creating announcement.');
+  }
+});
+
+
 
 app.get('/login', (req, res) => {
     res.render('login', { title: 'Sign In / Up Form'});
 });
 
-app.get('/announcement', (req, res) => {
-  res.render('announcement', { title: 'Member Homepage'});
-});
+app.get('/announcement', async (req, res) => {
+  try {
+    const contents = await Content.findAll(); 
+    res.render('announcement', { contents });
+  } catch (error) {
+    console.error('Error fetching contents:', error);
+    res.status(500).send('Error fetching contents.');
+  }
+})
+
 
 // 404 page
 app.use((req, res) => {
