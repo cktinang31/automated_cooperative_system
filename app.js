@@ -124,8 +124,7 @@ passport.use(new LocalStrategy(
 
 
 app.get('/', (req, res) => {
-    const sessionData = req.session;
-    res.render('index', { title: 'Home'});
+    res.render('index', { title: 'Landing'});
 });
 
 app.get('/about', (req, res) => {
