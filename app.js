@@ -57,6 +57,10 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
 
+app.get('/deposit', (req, res) => {
+  res.render('deposit', { title: 'Deposit'});
+});
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
@@ -161,5 +165,5 @@ app.use((req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Server running on port 3001');
+    console.log('Server running on port 3000');
 });

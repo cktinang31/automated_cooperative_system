@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home<%=title %></title>
+    <link rel="stylesheet" href="/css/deposit.css">
+</head>
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="member-title">
+        <h1>Member</h1>
+    </div>
+    <div class="home-icon">
+        <a href="/">
+            <img src="/svg/icons8-home.svg" alt="Home Icon">
+        </a>
+    </div>
+</nav>
+
+<%- include('./partials/sidebar.ejs') %>
+
+<div class="container1">
+    <div class="button-deposit">
+    <button class="deposit-button">
+        <span class="button-title">Deposit</span>
+        <span class="button-amount">${deposit}</span>
+    </button>
+</div>
+<div class="button-balance">
+    <button class="balance-button">
+        <span class="button-title">Balance</span>
+        <span class="button-amount">${balance}</span>
+    </button>
+</div>
+<div class="button-withdraw">
+    <button class="withdraw-button">
+        <span class="button-title">Withdraw</span>
+        <span class="button-amount">${withdraw}</span>
+    </button>
+</div>
+</div>
+<div class="additional-container">
+    <!-- Add your content for the additional container here -->
+</div>
+</body>
+</html>

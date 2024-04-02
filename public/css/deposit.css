@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: #373F41;
+    color: #FFA900;
+    padding: 20px 20px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.member-title{
+    padding-left: 1300px;
+}
+
+.title h1,
+.member-title {
+    margin: 0; 
+}
+
+nav ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0; 
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px; 
+}
+
+nav ul li:first-child {
+    margin-left: 0; 
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none; 
+}
+        
+.home-icon {
+    display: flex;
+    align-items: center;
+}
+
+.home-icon img {
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.sidebar-icon {
+    margin-left: auto; 
+}
+
+.sidebar-icon img {
+    width: 30px; 
+    height: auto;
+    position: absolute;
+    margin-left: 14px;
+    margin-top: 11px;
+}
+
+.sidebar-menu {
+    margin-left: 20px;
+}
+
+.sidebar-menu.active {
+    display: block; 
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 300; 
+    background-color: #D9D9D9;
+    padding: 20px;
+    height: 93vh;
+    display: none; 
+}
+
+.sidebar.active {
+    display: block; 
+}
+
+.sidebar-content {
+    flex: 1;
+    padding: 20px; 
+    order: -1; 
+    display: none;
+}
+
+.sidebar-content.active {
+    display: block; 
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%; 
+        border-right: none; 
+        border-bottom: 1px solid #ccc; 
+        padding: 10px; 
+    }
+
+    .sidebar-content {
+        padding: 10px; 
+    }
+}
+
+
+.sidebar-menu.active {
+    display: block; 
+}
+
+.user-icon img {
+    width: 72px;
+    height: fit-content;
+    margin-block-start: 33px;
+    margin-left: 89px;
+}
+
+.user-details {
+    text-align: center; 
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+
+.user-name {
+    font-weight: bold; 
+}
+
+.user-email {
+    font-size: 14px;
+    color: #777;
+}
+
+.sidebar-menu div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.sidebar-menu div::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 5px;
+    height: 70%;
+    width: 4px; 
+    background-color: transparent; 
+    transition: background-color 0.3s ease; 
+}
+
+.sidebar-menu div:hover::before {
+    background-color: #333;
+}
+
+.sidebar-menu div img {
+    width: 24px;
+    height: 24px; 
+    margin-right: 10px; 
+}
+
+.sidebar-menu div a {
+    text-decoration: none;
+    color: #333; 
+    font-size: 16px;
+    font-weight: bold;
+}
+.deposit-button,
+.balance-button,
+.withdraw-button {
+    width: 275px;
+    height: 128px;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 192px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.button-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 50px;
+    text-align: left;
+}
+
+.button-amount {
+    font-family: 'Poppins', sans-serif;
+    font-size: 31px;
+    font-weight: 400;
+    line-height: 46.5px;
+    text-align: left;
+}
+
+.deposit-button {
+    background-color: #D9D9D9;
+    color: #000000;
+    left: 500px;
+}
+
+.balance-button {
+    background-color: #D9D9D9;
+    color: #000000;
+    left: 800px;
+}
+
+.withdraw-button {
+    background-color: #D9D9D9;
+    color: #000000;
+    left: 1100px;
+}
+.additional-container {
+    display: flex;
+    position: relative;
+    top: 285px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw; 
+    height: 60vh;
+    gap: 0px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    background: #D9D9D9;
+    border: 1px solid #373F41;
+}
