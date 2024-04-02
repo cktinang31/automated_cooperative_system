@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Announcement<%=title %></title>
+        <title>Announcement</title>
         <link rel="stylesheet" href="/css/announcement.css">
     </head>
     
@@ -34,13 +34,19 @@
         
         <div class="announcement-content">
             <i class="custom-announcement-icon"></i>
-            <h3>Cooperative Advisory</h3>
             <div class="content-text">
-                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting Friday, March 01, 2024, at 10:00 AM and ends on Saturday, March 02, 2024, at 3:00 PM.</p>
-                <p>Please feel free to comment down your concerns. Thank you for your patience and understanding.</p> 
-                <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
+              <% if (contents.length > 0) { %>
+                <% contents.forEach(content => { %>
+                  <h3 class="title"><%= content.content_title %></h3>
+                  <p class="content"><%= content.content %></p>
+                <% }) %>
+              <% } else { %>
+                <p>There are no announcements to display...</p>
+              <% } %>
+              <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
             </div>
         </div>
-    </div>
-    </body>
-    </html>
+          
+</div>
+</body>
+</html>

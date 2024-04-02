@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>x | <%=title %></title>
+        <link rel="stylesheet" href="/css/404.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <form action="/post_announcement" method="POST">
+                <h1>Create Announcement</h1>
+                <input type="text" id="content_title" name="content_title" placeholder="Post Announcement" required />
+                <input type="text" id="content" name="content" placeholder="Post Announcement" required />
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </body>
+</html>

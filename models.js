@@ -431,29 +431,33 @@ const Chat = sequelize.define('Chat', {
 //     }
 // })();
 
+
 const Content = sequelize.define('Content', {
-    user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-    },
     content_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    content_title: {
+        type: DataTypes.TEXT,
+        allowNull:false,
     },
     content: {
-    type: DataTypes.TEXT,
-    allowNull: false
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     timestamp: {
-    type: DataTypes.DATE,
-    allowNull: false
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
     }
 });
 
-Content.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
-});
+// Content.belongsTo(User, {
+//     foreignKey: 'user_id', 
+//     onDelete: 'CASCADE' 
+// });
 
 // (async () => {
 //     try {

@@ -88,7 +88,7 @@ nav ul li a:hover {
     background-color: #f9a602; 
     color: #373f41;
     border: none;
-    top: 27px;
+    top: 28px;
     border-radius: 50px;
     text-decoration: none;
     font-family: 'Poppins';
@@ -181,64 +181,6 @@ h3 {
 
 .content {
     margin-left: 20px;
-}
-
-.container {
-    border-radius: 10px;
-    padding: 15px 9%;
-    padding-bottom: 100px;
-}
-
-.container .box-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(700px, 100fr));
-    gap: 15px;
-}
-
-.container .box-container .boxM,
-.container .box-container .boxV {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    background: #fff;
-    text-align: center;
-    padding: 30px 20px;
-    height: 400px;
-    font-size: 20px;
-    transition: all 0.3s ease;
-}
-
-.container .box-container .Mission,
-.container .box-container .Vision {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    background: #fff;
-    text-align: center;
-    padding: 30px 20px;
-    height: 400px;
-    font-size: 50px;
-    transition: all 0.3s ease;
-}
-
-.container .box-container .Mission:hover,
-.container .box-container .Vision:hover,
-.container .box-container .boxM:hover,
-.container .box-container .boxV:hover {
-    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.3);
-    transform: scale(1.02);
-}
-
-.container .box-container .boxM {
-    background: #f9a602;
-}
-
-.container .box-container .boxV {
-    background: #373f41;
 }
 
 .containerS {
