@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {  
+const bcrypt = require('bcrypt');
+const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
     port: 5432,
@@ -55,7 +56,11 @@ const  User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    fname: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    lname: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
@@ -67,7 +72,8 @@ const  User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     }
-});
+    
+})
 
 
 const Savings = sequelize.define('Savings', {  
@@ -425,6 +431,85 @@ const Chat = sequelize.define('Chat', {
 //     }
 // })();
 
+
+const Content = sequelize.define('Content', {
+    content_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    content_title: {
+        type: DataTypes.TEXT,
+        allowNull:false,
+    },
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    timestamp: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
+    }
+});
+
+// Content.belongsTo(User, {
+//     foreignKey: 'user_id', 
+//     onDelete: 'CASCADE' 
+// });
+
+// (async () => {
+//     try {
+//         const schema = await sequelize.getQueryInterface().describeTable('History');
+//         console.log(schema);
+//     } catch (error) {
+//         console.error("Error getting table schema:", error);
+//     } finally {
+//         await sequelize.close();
+//     }
+// })();
+
+const Comment = sequelize.define('Comment', {
+    user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+    content_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+    comment_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+    },
+    comment: {
+    type: DataTypes.TEXT,
+    allowNull: false
+    },
+    timestamp: {
+    type: DataTypes.DATE,
+    allowNull: false
+    }
+});
+
+Comment.belongsTo(User, {
+    foreignKey: 'user_id', 
+    onDelete: 'CASCADE' 
+});
+
+// (async () => {
+//     try {
+//         const schema = await sequelize.getQueryInterface().describeTable('History');
+//         console.log(schema);
+//     } catch (error) {
+//         console.error("Error getting table schema:", error);
+//     } finally {
+//         await sequelize.close();
+//     }
+// })();
+
                 
 Application.sync();
 User.sync();
@@ -436,6 +521,9 @@ Transaction.sync();
 CBUTransaction.sync();
 History.sync();
 Chat.sync();
+Content.sync();
+Comment.sync();
+
 
 // Application.sync()
 //   .then(() => {
@@ -463,7 +551,8 @@ module.exports = {
     CBUTransaction,
     History,
     Chat,
-    
+    Content,
+    Comment,
 }
 
 
