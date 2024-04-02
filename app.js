@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
-const {Application, User, Content} = require('./models')
+const {Application, User, Content, Loan_application} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
@@ -20,10 +20,10 @@ const isAuthenticated = (req, res, next) => {
     
     if (req.isAuthenticated()) {
       console.log('User is authenticated.');
-      return next(); // Proceed to the next middleware or route handler
+      return next(); 
     } else {
       console.log('User is not authenticated. Redirecting to login page.');
-      return res.redirect('/login'); // Redirect to the login page
+      return res.redirect('/login'); 
     }
   } catch (error) {
     console.error('Error in isAuthenticated middleware:', error);
@@ -73,6 +73,28 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
+// Serialize user to store in session
+passport.serializeUser((user, done) => {
+  done(null, user.user_id);
+});
+
+// Deserialize user from session
+passport.deserializeUser(async (user_id, done) => {
+  try {
+    const user = await User.findByPk(user_id);
+    if (!user) {
+      console.error('User not found in database');
+      return done(null, false);
+    }
+    console.log('Deserialized User:', user); 
+    done(null, user);
+  } catch (error) {
+    console.error('Error in deserialization:', error);
+    done(error);
+  }
+});
+
+
 passport.use(new LocalStrategy(
   { usernameField: 'email' }, // Specify the field name for the username/email
   async (email, password, done) => {
@@ -99,20 +121,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-// Serialize user to store in session
-passport.serializeUser((user, done) => {
-  done(null, user.user_id);
-});
-
-// Deserialize user from session
-passport.deserializeUser(async (user_id, done) => {
-  try {
-    const user = await User.findByPk(user_id);
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
 
 
 app.get('/', (req, res) => {
@@ -133,31 +141,6 @@ app.get('/contact', (req, res) => {
 });
 
 
-app.get('/x', (req, res) => {
-  res.render('x', { title: 'Back-end Testing'});
-});
-
-
-
-app.post('/post_announcement', async (req, res) => {
-  try {
-    const { content_title, content } = req.body;
-    console.log('Request Body:', req.body); 
-
-  
-    const newContent = await Content.create({
-      content_title,
-      content,
-      timestamp: new Date() 
-    });
-
-    console.log('Announcement:', newContent);
-    res.send('Announcement Posted');
-  } catch (error) {
-    console.error('Error creating announcement:', error);
-    res.status(500).send('Error creating announcement.');
-  }
-});
 
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
@@ -217,6 +200,78 @@ app.post('/user_reg', async (req, res) => {
   }
 });
 
+app.get('/x', isAuthenticated, async (req, res) => {
+  const user = req.user; 
+  res.render('x', { title: 'Back-end Testing', user});
+});
+
+
+
+app.post('/post_announcement', async (req, res) => {
+  try {
+    const { content_title, content } = req.body;
+    // console.log('Request Body:', req.body); 
+
+  
+    const newContent = await Content.create({
+      content_title,
+      content,
+      timestamp: new Date() 
+    });
+
+    console.log('Announcement:', newContent);
+    res.send('Announcement Posted');
+  } catch (error) {
+    console.error('Error creating announcement:', error);
+    res.status(500).send('Error creating announcement.');
+  }
+});
+
+app.post('/apply_loan', isAuthenticated, async (req, res) => {
+  try {
+    const { application_id, loan_type, amount, loan_term, interest } = req.body;
+    console.log('Request Body:', req.body);
+    const user_id = req.user ? req.user.id : null;
+    console.log('User ID:', user_id);
+
+    // Check if user_id is null
+    if (!user_id) {
+      console.error('User ID is null');
+      return res.status(401).send('User ID is null');
+    }
+
+    // Calculate loan term in months
+    const loanTermInMonths = parseInt(loan_term.split(' ')[0]);
+    
+    // Calculate monthly interest rate
+    const monthlyInterestRate = interest / 12;
+    
+    // Calculate monthly payment using formula for loan amortization
+    const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTermInMonths)) /
+        (Math.pow(1 + monthlyInterestRate, loanTermInMonths) - 1);
+
+    const newLoan_application = await Loan_application.create({
+      user_id,
+      application_id,
+      loan_type,
+      amount,
+      loan_term,
+      interest,
+      monthly_payments: monthlyPayment.toFixed(2), // Set monthly payment
+      number_of_payments: loanTermInMonths, // Set number of payments
+      timestamp: new Date()
+    });
+
+    console.log('Loan Application:', newLoan_application);
+    res.send('Loan Application Submitted');
+  } catch (error) {
+    console.error('Error submitting the application:', error);
+    res.status(500).send('Error submitting the application.');
+  }
+});
+
+
+
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll(); 
@@ -252,6 +307,7 @@ app.post('/user_login', passport.authenticate('local', {
     if (passwordMatch) {
       req.session.isLoggedIn = true; 
       req.session.user = user; 
+      console.log('User Object:', req.user);
       return res.redirect('/announcement'); 
     } else {
       console.error('Password does not match'); 
