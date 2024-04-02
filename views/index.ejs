@@ -1,8 +1,26 @@
 <html lang="en">
-<%- include('./partials/head.ejs') %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>App | <%=title %></title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
 <body>
-
-    <%- include('./partials/nav.ejs') %>
+    <nav>
+        <div class="site-title">
+            <div class="navbar-inner sticky-menu">
+                <div class="nav-yellow"></div>
+            </div>
+            <h1>KAC<span>OO</span>P</h1>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#service">Services</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a class="login" href="/login">LOGIN</a></li>
+        </ul>
+    </nav>
 
     <div>
         <img class="background1" src="/images/back.jpg" alt="background1" />
@@ -13,13 +31,39 @@
         
     </div>
 
-    <%- include('./about.ejs') %>
+    <section id="about">
+        <div class="about-us">
+            
+        </div>
+    </section>
 
-    <%- include('./service.ejs') %>
+    <section id="service">
+        <h1>CTU-AC Cooperative Members can avail these services:</h1>
+    <ul>
+        <div class="containerS">
+            <div class="div1"><img src="/images/piggy.png" class="responsive" id="div1"><p>Savings</p></div>
+            <div class="div2"><img src="/images/loans.png" class="responsive" id="div2"><p>Loans</p></div>
+            <div class="div3"><img src="/images/shares.png" class="responsive" id="div3"><p>Shares</p></div>
+        </div>
+
+        <div class="containerA">
+            <div class="div4"><p>Announcements</p><button class="button">Apply for Membership</button></div>
+        </div>
+    </ul>
+    </section>
     
-    <%- include('./contact.ejs') %>
+    <section id="contact">
+        <div class="container">
+            <h1>Contact</h1>
+            <p><strong>Email:</strong> <a href="mailto:kristineannecardosa32@gmail.com">kristineannecardosa32@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+639504149321">+63 950 414 9321</a></p>
+            <p><strong>Address:</strong> <a href="https://www.google.com/maps/place/Cebu+Technological+University+-+Ginatilan+Extension/@9.5670511,123.3124116,66m/data=!3m1!1e3!4m6!3m5!1s0x33ab9d6241f12b33:0xcec07d3be5e9cdce!8m2!3d9.5662271!4d123.3140803!16s%2Fg%2F11h1dgq5vh?entry=ttu" target="_blank">Kayam, San Roque, Ginatilan, Cebu, Philippines</a></p>
+        </div>
+    </section>
 
-    <%- include('./partials/footer.ejs') %>
+    <footer>
+        Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
+    </footer>
 
 </body>
 </html>
