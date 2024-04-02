@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Home'});
+    res.render('index', { title: 'Landing'});
 });
 
 app.get('/about', (req, res) => {
