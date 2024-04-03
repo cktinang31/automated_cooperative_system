@@ -219,7 +219,6 @@ app.post('/post_announcement', async (req, res) => {
     const { content_title, content } = req.body;
     // console.log('Request Body:', req.body); 
 
-  
     const newContent = await Content.create({
       content_title,
       content,
@@ -236,46 +235,44 @@ app.post('/post_announcement', async (req, res) => {
 
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {
-    const { application_id, loan_type, amount, loan_term, interest } = req.body;
+    const { loan_type, amount, loan_term, interest } = req.body;
     console.log('Request Body:', req.body);
-    const user_id = req.user ? req.user.id : null;
-    console.log('User ID:', user_id);
 
-    // Check if user_id is null
+    const user_id = req.session.passport.user;
+    
     if (!user_id) {
-      console.error('User ID is null');
-      return res.status(401).send('User ID is null');
+      console.error('User ID is null or undefined');
+      return res.status(401).send('User ID is null or undefined');
     }
 
-    // Calculate loan term in months
-    const loanTermInMonths = parseInt(loan_term.split(' ')[0]);
-    
-    // Calculate monthly interest rate
     const monthlyInterestRate = interest / 12;
-    
-    // Calculate monthly payment using formula for loan amortization
-    const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTermInMonths)) /
-        (Math.pow(1 + monthlyInterestRate, loanTermInMonths) - 1);
+
+    const number_of_payments = parseInt(loan_term.split(' ')[0]);
+
+    const monthly_payment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, number_of_payments)) /
+        (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
 
     const newLoan_application = await Loan_application.create({
       user_id,
-      application_id,
       loan_type,
       amount,
       loan_term,
       interest,
-      monthly_payments: monthlyPayment.toFixed(2), // Set monthly payment
-      number_of_payments: loanTermInMonths, // Set number of payments
+      monthly_payment: monthly_payment.toFixed(2), 
+      number_of_payments,
+      application_status: 'pending',
       timestamp: new Date()
     });
 
-    console.log('Loan Application:', newLoan_application);
+    console.log('Loan Application Submitted:', newLoan_application);
     res.send('Loan Application Submitted');
   } catch (error) {
     console.error('Error submitting the application:', error);
-    res.status(500).send('Error submitting the application.');
+    return res.status(500).send('Error submitting the application.');
   }
 });
+
+
 
 
 
