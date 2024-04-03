@@ -52,44 +52,20 @@ nav ul {
     justify-content: space-between;
     align-items: flex-end;
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 }
 
 nav ul li a {
     color: #ffffff;
     font-weight: 200;
     font-size: medium;
-    padding: 2px 24px;
+    padding: 2px 25px;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 nav ul li a:hover {
     color: #ffb951; 
     text-decoration: underline;
-}
-
-.login {
-    display: inline-block;
-    padding: 8px 20px; 
-    background-color: #f9a602; 
-    color: #373f41;
-    border: none;
-    top: 28px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-family: 'Poppins';
-    font-size: 16px;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.login:hover {
-    color: #373f41;
-    background-color: #ffb951;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    border: none;
-    text-decoration: none;
 }
 
 nav li {
@@ -117,6 +93,30 @@ nav a {
     color: black;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+.login {
+    display: inline-block;
+    padding: 8px 20px; 
+    background-color: #f9a602; 
+    color: #373f41;
+    border: none;
+    top: 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login:hover {
+    color: #373f41;
+    background-color: #ffb951;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: none;
+    text-decoration: none;
 }
 
 .background1 {
@@ -259,17 +259,23 @@ h3::after{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 30px;
+    margin-left: 10%;
 }
 
 .service{
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
     text-align: center;
-    padding: 40px 80px;
+    padding: 40px 30px;
     border-radius: 5px;
-    border: 1px solid #373f41;
     font-size: 24px;
     cursor: pointer;
-    background: transparent;
+    background: #dbdbdb;
     transition: transform 0.5s, background 0.5s;
+}
+
+.service:hover{
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .3);
+    transform: scale(1.05);
 }
 
 .service i{
@@ -279,30 +285,29 @@ h3::after{
 }
 
 .service h4{
-    color: #ffb951;
+    color: #ff9800;
     font-weight: 600;
     margin-bottom: 10px;
     font-family: 'Poppins' sans-serif;
 }
 
-.service h5{
-    color: #373f41;
+.service h5 {
+    font-weight: 400;
     font-style: italic;
-    font-weight: 500;
 }
 
-.service h5:hover{
+.service .btn{
+    margin-top: 10px;
+    display: inline-block;
     color: #ffffff;
+    background: #777;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 8px 25px;
 }
 
-.service:hover{
-    background: #373f41;
-    color: #ffffff;
-    transform: scale(1.05);
-}
-
-.service:hover i{
-    color: #ffffff;
+.service .btn:hover{
+    letter-spacing: 1px;
 }
 
 footer {
