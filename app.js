@@ -217,7 +217,7 @@ app.get('/x', isAuthenticated, async (req, res) => {
 app.post('/post_announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
-    // console.log('Request Body:', req.body);
+  
  
  
     const newContent = await Content.create({
@@ -289,7 +289,9 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
- 
+
+
+
  
 app.post('/user_login', passport.authenticate('local', {
   successRedirect: '/announcement',
