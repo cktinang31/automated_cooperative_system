@@ -163,7 +163,7 @@ nav a {
 }
 
 .mv-container .mv-block {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -265,7 +265,7 @@ h3::after{
 .service{
     box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
     text-align: center;
-    padding: 40px 30px;
+    padding: 40px 15px;
     border-radius: 5px;
     font-size: 24px;
     cursor: pointer;
@@ -286,14 +286,19 @@ h3::after{
 
 .service h4{
     color: #ff9800;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 36;
+    margin-bottom: 50px;
     font-family: 'Poppins' sans-serif;
 }
 
-.service h5 {
+.service h5{
     font-weight: 400;
     font-style: italic;
+}
+
+.service h6{
+
 }
 
 .service .btn{
