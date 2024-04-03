@@ -325,11 +325,6 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
  
- 
- 
- 
- 
- 
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
@@ -337,4 +332,4 @@ app.use((req, res) => {
  
 app.listen(3000, () => {
     console.log('Server running on port 3000');
-});
+});q
