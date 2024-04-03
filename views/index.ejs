@@ -1,8 +1,26 @@
 <html lang="en">
-<%- include('./partials/head.ejs') %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KaCoop | <%=title %></title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
 <body>
-
-    <%- include('./partials/nav.ejs') %>
+    <nav>
+        <div class="site-title">
+            <div class="navbar-inner sticky-menu">
+                <div class="nav-yellow"></div>
+            </div>
+            <h1>KAC<span>OO</span>P</h1>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#service">Services</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a class="login" href="/login">LOGIN</a></li>
+        </ul>
+    </nav>
 
     <div>
         <img class="background1" src="/images/back.jpg" alt="background1" />
@@ -13,15 +31,60 @@
         
     </div>
 
-    <%- include('./about.ejs') %>
+    <section id="about">
+        <h3>About Us</h3>
+        <div class="mv-container">
+            <div class="mv-block">
+                <div class="image">
+                    <img src="/images/mission.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>Our Mission</h2>
+                    <p>Is to harness the power of automation to improve the lives of everyone in our community. We aspire to develop systems that facilitate seamless collaboration among people, ensuring smooth and efficient operations. Through inclusivity and collective effort, we envision a future where all individuals can flourish and prosper.</p>
+                </div>
+            </div>
 
-    <%- include('./product.ejs') %>
+            <div class="mv-block">
+                <div class="image">
+                    <img src="/images/vision.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>Our Vision</h2>
+                    <p>Is to build a community where everyone works together hand in hand. We strive to create a place where cooperation and support are at the heart of everything we do. By joining forces, we aim to empower each other, achieve shared goals, and cultivate a bright future filled with opportunity and success for all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <%- include('./service.ejs') %>
+    <section id="service">
+        <h3>Services</h3>
+        <div class="container">
+            <div class="row">
+                <div class="service">
+                    <i class="bi bi-piggy-bank"></i>
+                    <h4>SAVINGS</h4>
+                    <h5>"Save today, secure tomorrow – for the road to financial freedom begins with disciplined savings."</h5>
+                </div>
+                <div class="service">
+                    <i class="bi bi-cash-coin"></i>
+                    <h4>LOANS</h4>
+                    <h5>"Seize the moment with a loan – turning today's ambitions into tomorrow's achievements."</h5>
+                </div>
+                <div class="service">
+                    <i class="bi bi-coin"></i>
+                    <h4>SHARES</h4>
+                    <h5>"Through shares, we unite in the pursuit of prosperity and progress."</h5>
+                </div>
+            </div>
+        </div>
+    </section>
     
-    <%- include('./contact.ejs') %>
+    <section id="contact">
+    </section>
 
-    <%- include('./partials/footer.ejs') %>
+    <footer>
+        Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
+    </footer>
 
 </body>
 </html>

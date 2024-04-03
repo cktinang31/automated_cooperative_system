@@ -213,45 +213,57 @@ Loan.belongsTo(User, {
 // })();
 
 const Loan_application = sequelize.define('Loan_application', {
-    application_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    },
     user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    application_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
     },
     application_status: {
-    type: DataTypes.STRING,
-    allowNull: false,
+        type: DataTypes.ENUM('pending', 'approve', 'decline'),
+        allowNull: false,
     },
     loan_type: {
-    type: DataTypes.STRING,
-    allowNull: false,
+        type: DataTypes.ENUM('regular', 'medical', 'emergency'),
+        allowNull: false,
     },
     amount: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+        type: DataTypes.FLOAT,
+        allowNull: false,
     },
     loan_term: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+        type: DataTypes.ENUM('6 months', '12 months', '18 months', '24 months'),
+        allowNull: false,
     },
     interest: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    monthly_payment: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    number_of_payments:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     timestamp: {
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW,
-    },
-});
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.NOW,
+    }
+}, 
+    
+);
 
 Loan_application.belongsTo(User, {
     foreignKey: 'user_id', 
     onDelete: 'CASCADE' 
 });
+
 
 // (async () => {
 //     try {
@@ -433,30 +445,33 @@ const Chat = sequelize.define('Chat', {
 //     }
 // })();
 
+
 const Content = sequelize.define('Content', {
     content_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
     },
-    user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
+    content_title: {
+        type: DataTypes.TEXT,
+        allowNull:false,
     },
     content: {
-    type: DataTypes.TEXT,
-    allowNull: false
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     timestamp: {
-    type: DataTypes.DATE,
-    allowNull: false
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
     }
 });
 
-Content.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
-});
+// Content.belongsTo(User, {
+//     foreignKey: 'user_id', 
+//     onDelete: 'CASCADE' 
+// });
 
 // (async () => {
 //     try {
