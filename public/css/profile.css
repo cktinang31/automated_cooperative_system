@@ -85,6 +85,9 @@ body {
 .edit-profile {
     margin-left: -840px;
     margin-top: 238px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
 }
 
 .edit-profile form {
@@ -122,8 +125,8 @@ body {
 
 .edit-profile button[type="submit"] {
     padding: 8px 15px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: rgb(55, 63, 65);;
+    color: rgb(255, 169, 0);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -132,4 +135,12 @@ body {
 
 .edit-profile button[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+.input-group button:hover {
+    background-color: #0056b3;
+}
+
+.update-button {
+    align-self: flex-end;
 }
