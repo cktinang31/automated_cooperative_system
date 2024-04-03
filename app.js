@@ -10,7 +10,7 @@ const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
- 
+const multer = require('multer');
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -152,7 +152,31 @@ app.get('/login', (req, res) => {
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 });
+
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: 'Profile'});
+});
  
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login'});
+});
+
+app.get('/systemadmin', (req, res) => {
+    res.render('systemadmin', { title: 'Admin'});
+}); 
+
+app.get('/transaction', (req, res) => {
+  res.render('transaction', { title: 'Transaction'});
+}); 
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
+});
+
+app.get('/mainhome', (req, res) => {
+  res.render('mainhome', { title: 'Main Home'});
+});
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
@@ -324,6 +348,55 @@ app.post('/user_login', passport.authenticate('local', {
     res.status(500).send('Error logging in.');
   }
 });
+
+// Profile page
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+const upload = multer({ dest: 'uploads/' });
+
+
+app.get('/profile', async (req, res) => {
+  try {
+
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching user data' });
+  }
+});
+
+
+app.post('/profile/update', upload.single('profilePicture'), async (req, res) => {
+  try {
+    const { fullName, email } = req.body;
+
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+
+    user.fullName = fullName;
+    user.email = email;
+
+    
+    if (req.file) {
+      user.profilePicture = req.file.buffer;
+    }
+
+    await user.save();
+
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating profile' });
+  }
+});
+
  
 // 404 page
 app.use((req, res) => {
