@@ -157,6 +157,26 @@ app.get('/profile', (req, res) => {
   res.render('profile', { title: 'Profile'});
 });
  
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login'});
+});
+
+app.get('/systemadmin', (req, res) => {
+    res.render('systemadmin', { title: 'Admin'});
+}); 
+
+app.get('/transaction', (req, res) => {
+  res.render('transaction', { title: 'Transaction'});
+}); 
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
+});
+
+app.get('/mainhome', (req, res) => {
+  res.render('mainhome', { title: 'Main Home'});
+});
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
