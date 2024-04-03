@@ -1,8 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
 <%- include('./partials/main.ejs') %>
-
 <body>    
 <div class="profile-container">
+    <div class="profile-section">
         <div class="profile-image">
             <label for="upload" class="upload-icon">
                 <input type="file" id="upload" accept="image/*">
@@ -11,25 +19,74 @@
             </label>
         </div>
         
-        <div class="profile">
+        <div class="profile-info">
             <h1>Mary Ann Ambos</h1>
-            <p>Email: <span id="email">maryann@gmail.com</span></p>
-            <p>Contact: <span id="contact">09123456789</span></p>
+            <span id="email">maryann@gmail.com</span>
             <p>Student</p>
         </div>
     </div>
+</div>
+
+<div class="profile-section">
+    <div class="edit-profile">
+        <form id="edit-profile-form">
+            <label for="full-name">Full Name:</label> <input type="text" id="full-name" name="full-name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="contact-no">Contact No.:</label>
+            <div class="contact-container">
+                <input type="tel" id="contact-no" name="contact-no" required>
+                <button type="submit">Update</button>
+            </div>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Change Password</button>
+        </form>
+    </div>
+</div>
     
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script>
-        document.getElementById('upload').addEventListener('change', function() {
-            var file = this.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById('profile-pic').src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
-</body>    
+<script>
+    document.getElementById('upload').addEventListener('change', function() {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('profile-pic').src = event.target.result;
+                localStorage.setItem('profilePicture', event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    window.onload = function() {
+        var profilePicture = localStorage.getItem('profilePicture');
+        if (profilePicture) {
+            document.getElementById('profile-pic').src = profilePicture;
+        }
+    };
+
+    // Fetch user data from the server (replace this with your actual backend logic)
+const userData = {
+    fullName: "Mary Ann Ambos",
+    email: "maryann@gmail.com",
+    contactNo: "1234567890",
+    // Add other user data as needed
+};
+
+// Function to populate the form with user data
+function populateForm(userData) {
+    document.getElementById("full-name").value = userData.fullName;
+    document.getElementById("email").value = userData.email;
+    document.getElementById("contact-no").value = userData.contactNo;
+    // Populate other form fields as needed
+}
+
+// Call the function to populate the form with user data
+populateForm(userData);
+
+</script>
+</body>
+</html>

@@ -52,8 +52,12 @@ app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
 
-app.get('/memberhome', (req, res) => {
-  res.render('memberhome', { title: 'Home'});
+app.get('/partials/main', (req, res) => {
+  res.render('partials/main', { title: 'Main'});
+});
+
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: 'Profile'});
 });
 
 app.get('/application', (req, res) => {
