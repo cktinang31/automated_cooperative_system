@@ -113,12 +113,12 @@ Savings.belongsTo(User, {
 
 
 const CBU = sequelize.define('CBU', {
-    user_id: {
+    cbu_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     },
-    cbu_id: {
+    user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     },
@@ -156,6 +156,11 @@ CBU.belongsTo(User, {
 // })();
 
 const Loan = sequelize.define('Loan', {
+    loan_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    },
     user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -163,11 +168,6 @@ const Loan = sequelize.define('Loan', {
     application_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    },
-    loan_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
     },
     loan_status: {
     type: DataTypes.STRING,
@@ -277,18 +277,18 @@ Loan_application.belongsTo(User, {
 // })();
 
 const Transaction = sequelize.define('Transaction', {
-    user_id: {
+    transaction_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
     },
     savings_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     },
-    transaction_id: {
+    user_id: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
     },
     transaction_type: {
     type: DataTypes.ENUM('deposit', 'withdraw'),
@@ -321,18 +321,18 @@ Transaction.belongsTo(User, {
 // })();
 
 const CBUTransaction = sequelize.define('CBUTransaction', {
-    user_id: {
+    cbu_transaction_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
     },
     cbu_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     },
-    cbu_transaction_id: {
+    user_id: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
     },
     transaction_type: {
     type: DataTypes.ENUM('deposit', 'withdraw'),
@@ -365,9 +365,11 @@ CBUTransaction.belongsTo(User, {
 // })();
 
 const History = sequelize.define('History', {
-    user_id: {
+    history_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
     },
     application_id: {
     type: DataTypes.INTEGER,
@@ -376,8 +378,6 @@ const History = sequelize.define('History', {
     transaction_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
     },
     cbu_transaction_id: {
     type: DataTypes.INTEGER,
@@ -386,8 +386,9 @@ const History = sequelize.define('History', {
     loan_id: {
     type: DataTypes.INTEGER,
     },
-    history_id: {
+    user_id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     },
     timestamp: {
     type: DataTypes.DATE,
@@ -408,15 +409,15 @@ const History = sequelize.define('History', {
 // })();
 
 const Chat = sequelize.define('Chat', {
-    user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    },
     chat_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
+    },
+    user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
     },
     recipient: {
     type: DataTypes.STRING,
@@ -484,18 +485,18 @@ const Content = sequelize.define('Content', {
 // })();
 
 const Comment = sequelize.define('Comment', {
-    user_id: {
+    comment_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    primaryKey: true,
+    autoIncrement: true
     },
     content_id: {
     type: DataTypes.INTEGER,
     allowNull: false
     },
-    comment_id: {
+    user_id: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+    allowNull: false
     },
     comment: {
     type: DataTypes.TEXT,
