@@ -132,11 +132,13 @@ app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
 
+app.get('/apply_loan', (req, res) => {
+  res.render('apply_loan', { title: 'Apply_loan'});
+});
 
 app.get('/x', (req, res) => {
   res.render('x', { title: 'Back-end Testing'});
 });
-
 
 
 app.post('/post_announcement', async (req, res) => {
@@ -274,6 +276,6 @@ app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3001, () => {
+app.listen(8080, () => {
     console.log('Server running on port 3001');
 });
