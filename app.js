@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const flash = require('connect-flash');
 const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -40,7 +41,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
- 
+
+app.use(flash());
  
  
 const pool = new Pool({
@@ -94,32 +96,34 @@ passport.deserializeUser(async (user_id, done) => {
   }
 });
  
- 
-passport.use(new LocalStrategy(
-  { usernameField: 'email' }, // Specify the field name for the username/email
-  async (email, password, done) => {
-    try {
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  failureFlash: true // Enable flash messages for authentication failures
+},
+async (email, password, done) => {
+  try {
       // Find the user by email
       const user = await User.findOne({ where: { email } });
- 
+
       if (!user) {
-        return done(null, false, { message: 'User not found' });
+          return done(null, false, { message: 'User not found' });
       }
- 
+
       // Compare password
       const passwordMatch = await bcrypt.compare(password, user.password);
- 
+
       if (!passwordMatch) {
-        return done(null, false, { message: 'Incorrect password' });
+          return done(null, false, { message: 'Incorrect password' });
       }
- 
+
       // If user and password are correct, return the user
       return done(null, user);
-    } catch (error) {
+  } catch (error) {
       return done(error);
-    }
   }
-));
+}));
+
  
  
  
@@ -145,10 +149,7 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login'});
-});
- 
+
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 });
@@ -156,10 +157,7 @@ app.get('/systemadmin', (req, res) => {
 app.get('/profile', (req, res) => {
   res.render('profile', { title: 'Profile'});
 });
- 
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login'});
-});
+
 
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
@@ -169,9 +167,6 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction'});
 }); 
 
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
-});
 
 app.get('/mainhome', (req, res) => {
   res.render('mainhome', { title: 'Main Home'});
@@ -327,7 +322,9 @@ app.post('/user_login', passport.authenticate('local', {
     console.log('Login Request Body:', req.body);
     // Find the user by email
     const user = await User.findOne({ where: { email } });
+    
  
+    
     if (!user) {
       return res.status(404).send('User not found. Please register first.');
     }
@@ -356,18 +353,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const upload = multer({ dest: 'uploads/' });
 
 
-app.get('/profile', async (req, res) => {
-  try {
-
-    const user = await User.findByPk(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error fetching user data' });
-  }
+app.get('/profile', isAuthenticated, async (req, res)  => {
+  
 });
 
 
