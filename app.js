@@ -70,9 +70,9 @@ app.use(express.static('public'));
  
 app.use(morgan('dev'));
  
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
- 
+app.use(bodyParser.urlencoded({ extended: true }));
+const upload = multer({ dest: 'uploads/' });
 app.use(passport.initialize());
 app.use(passport.session());
 // Serialize user to store in session
@@ -154,9 +154,6 @@ app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 });
 
-app.get('/profile', (req, res) => {
-  res.render('profile', { title: 'Profile'});
-});
 
 
 app.get('/systemadmin', (req, res) => {
@@ -293,8 +290,6 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
 
 
 
-
-
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
@@ -305,56 +300,12 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
   }
 });
  
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
-});
 
-
-
- 
-app.post('/user_login', passport.authenticate('local', {
-  successRedirect: '/announcement',
-  failureRedirect: '/login',
-  failureFlash: true
-}), async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log('Login Request Body:', req.body);
-    // Find the user by email
-    const user = await User.findOne({ where: { email } });
-    
- 
-    
-    if (!user) {
-      return res.status(404).send('User not found. Please register first.');
-    }
- 
-    const passwordMatch = await bcrypt.compare(password, user.password);
- 
-    if (passwordMatch) {
-      req.session.isLoggedIn = true;
-      req.session.user = user;
-      console.log('User Object:', req.user);
-      return res.redirect('/announcement');
-    } else {
-      console.error('Password does not match');
-      return res.status(401).send('Incorrect password.');
-    }
- 
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).send('Error logging in.');
-  }
-});
-
-// Profile page
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-const upload = multer({ dest: 'uploads/' });
 
 
 app.get('/profile', isAuthenticated, async (req, res)  => {
-  
+  const user = req.user;
+  res.render('profile', { title: 'Profile', user });
 });
 
 
@@ -382,6 +333,51 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error updating profile' });
+  }
+});
+
+
+// ibutang sa ubos ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
+});
+
+
+
+ 
+app.post('/user_login', passport.authenticate('local', {
+  successRedirect: '/announcement',
+  failureRedirect: '/login',
+  failureFlash: true
+}), async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log('Login Request Body:', req.body);
+    // Find the user by email
+    const user = await User.findOne({ where: { email } });
+
+ 
+
+    if (!user) {
+      return res.status(404).send('User not found. Please register first.');
+    }
+ 
+    const passwordMatch = await bcrypt.compare(password, user.password);
+ 
+    if (passwordMatch) {
+      req.session.isLoggedIn = true;
+      req.session.user = user;
+      console.log('User Object:', req.user);
+      return res.redirect('/announcement');
+    } else {
+      console.error('Password does not match');
+      return res.status(401).send('Incorrect password.');
+    }
+ 
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).send('Error logging in.');
   }
 });
 
