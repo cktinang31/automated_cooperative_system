@@ -337,7 +337,7 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
 });
 
 
-// ibutang sa ubos ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
+// ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
