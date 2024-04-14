@@ -121,8 +121,6 @@ passport.use(new LocalStrategy(
   }
 ));
  
- 
- 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Landing'});
 });
@@ -138,8 +136,6 @@ app.get('/service', (req, res) => {
 app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
- 
- 
  
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
@@ -171,10 +167,6 @@ app.get('/transaction', (req, res) => {
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
-});
-
-app.get('/mainhome', (req, res) => {
-  res.render('mainhome', { title: 'Main Home'});
 });
 
 app.post('/mem_application', async (req, res) => {
@@ -296,10 +288,6 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
     return res.status(500).send('Error submitting the application.');
   }
 });
- 
- 
- 
- 
  
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
