@@ -239,7 +239,7 @@ h3 {
     padding-top: 100px;
     color: #373f41;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-weight: 600;
     font-size: 38px;
     position: relative;
@@ -262,6 +262,7 @@ h3::after {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 30px;
     margin-left: 10%;
+    margin-top: 100px;
 }
 
 .service {
@@ -421,7 +422,7 @@ h3::after {
     border: 1px solid #777;
     border-radius: 5px;
     resize: none;
-    min-height: 200px;
+    min-height: 220px;
     margin-bottom: 10px;
 }
 
@@ -433,6 +434,7 @@ h3::after {
     max-width: 120px;
     font-weight: 500;
     cursor: pointer;
+    padding: 10px 10px;
 }
 
 .inputBox::placeholder {
@@ -457,8 +459,8 @@ h3::after {
 .info .infoBox div span {
     min-width: 40px;
     height: 40px;
-    color: #ffffff;
-    background: #777;
+    color: #373f41;
+    background: #ffb951;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -489,7 +491,23 @@ h3::after {
 }
 
 .sci li a {
+    color: #777;
+    font-size: 1.5em;
     color: #dbdbdb;
+}
+
+.sci li a:hover {
+    color: #777;
+}
+
+.map {
+    padding: 0;
+}
+
+.map iframe {
+    width: 100%;
+    height: 100%;
+
 }
 
 footer {
