@@ -71,9 +71,13 @@ const  User = sequelize.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+    profilePicture: {
+        type: Sequelize.BLOB('long'),
+        allowNull: true,
+      },
+    });
     
-})
 
 
 const Savings = sequelize.define('Savings', {  

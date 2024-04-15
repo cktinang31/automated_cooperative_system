@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.profile-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 50px;
+    margin-left: 110px;
+}
+
+.profile-image {
+    position: relative;
+    margin-right: 20px;
+}
+
+.upload-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 24px;
+    color: #007bff;
+}
+
+.upload-icon input[type="file"] {
+    display: none;
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-left: -140px;
+}
+
+.profile-image:hover img {
+    transform: scale(1.1);
+}
+
+.profile {
+    text-align: left;
+    width: 50%; /* Adjusted width */
+}
+
+.profile h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile p {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.profile p:last-child {
+    margin-bottom: 20px;
+}
+
+.profile p span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.profile-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    margin-left: 138px;
+}
+
+.edit-profile {
+    margin-left: -840px;
+    margin-top: 238px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.edit-profile form {
+    display: flex;
+    flex-direction: column;
+    width: 234%;
+}
+
+.edit-profile label {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 10px;
+}
+
+.edit-profile label span {
+    flex: 0 0 auto;
+    margin-right: 10px; 
+}
+
+.edit-profile input[type="text"],
+.edit-profile input[type="email"],
+.edit-profile input[type="tel"],
+.edit-profile input[type="password"] {
+    flex: 1; 
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-profile .contact-container {
+    display: flex;
+    align-items: center;
+}
+
+.edit-profile button[type="submit"] {
+    padding: 8px 15px;
+    background-color: rgb(55, 63, 65);;
+    color: rgb(255, 169, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-profile button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.input-group button:hover {
+    background-color: #0056b3;
+}
+
+.update-button {
+    align-self: flex-end;
+}
