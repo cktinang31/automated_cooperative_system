@@ -165,6 +165,10 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction'});
 }); 
 
+app.get('/sidebar', (req, res) => {
+  res.render('sidebar', { title: 'sidebar'});
+});
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
