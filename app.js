@@ -234,14 +234,14 @@ app.post('/post_announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
   
- 
- 
+
+
     const newContent = await Content.create({
       content_title,
       content,
       timestamp: new Date()
     });
- 
+
     console.log('Announcement:', newContent);
     res.send('Announcement Posted');
   } catch (error) {
@@ -249,14 +249,24 @@ app.post('/post_announcement', async (req, res) => {
     res.status(500).send('Error creating announcement.');
   }
 });
- 
+
+app.get('/create_announcement', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('create_announcement', { title: 'Create_announcement', user});
+});
+
+app.get('/applyloan', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('applyloan', { title: 'Apply Loan', user});
+});
+
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {
     const { loan_type, amount, loan_term, interest } = req.body;
     console.log('Request Body:', req.body);
- 
+
     const user_id = req.session.passport.user;
-   
+  
     if (!user_id) {
       console.error('User ID is null or undefined');
       return res.status(401).send('User ID is null or undefined');
@@ -300,7 +310,6 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
   }
 });
  
-
 
 
 app.get('/profile', isAuthenticated, async (req, res)  => {
