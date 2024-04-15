@@ -78,7 +78,7 @@ nav ul li a {
 }
 
 .sidebar {
-    width: 300; 
+    width: 300px; 
     background-color: #D9D9D9;
     padding: 20px;
     height: 93vh;
@@ -176,123 +176,50 @@ nav ul li a {
     text-decoration: none;
     color: #333; 
     font-size: 16px;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 body {
     overflow: hidden;
 }
 
-h2 {
-    text-align: left;
-    margin-top: 150px; 
-    margin-left: 100px; 
-}
-
-
-
-#apply-for-loan-form {
+.announcement-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 40vh;
-    margin: 0;
 }
 
+.element-class {
+    overflow: hidden;
+}
 
-    .apply-for-loan-wrapper {
-        text-align: left; 
-        padding-top: 30px; 
-    }
+.announcement-section {
+    padding-top: 80px;
+}
 
-    .apply-for-loan-wrapper img {
-        width: 150px; 
-        height: auto; 
-        margin-bottom: 10px; 
-    }
-
-.form-group {
-    margin-bottom: 25px;
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-label {
-    display: block; 
+.button-group {
+    text-align: center;
+}
+.announcement-section {
+    margin-top: 0; 
+    padding-top: 10; 
 }
 
-button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.content-wrapper {
+    align-items: flex-start; 
 }
 
-button[type="submit"]:hover {
-    background-color: #45a049;
+.announcement-title {
+    margin-bottom: 20px; /* Add some margin below the title */
 }
 
-/* apply_loan.css */
-
-/* Add this CSS to increase text size */
-body {
-    font-size: 16px; /* You can adjust this value as needed */
-}
-
-.apply-for-loan-wrapper h2 {
-    font-size: 35px; /* Increase heading size */
-}
-
-.form-group label,
-#loan-type option,
-#loan-terms option,
-#interest-rate,
-#payment-per-collection {
-    font-size: 30px; 
-}
-
-input[type="number"] {
-    font-size: 30px;
-}
-
-select {
-    font-size: 30px; 
-}
-
-button {
-    font-size: 30px; 
-}
-
-/* apply_loan.css */
-
-/* Add this CSS to style the payment per collection box */
-.box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 5px;
-}
-
-.box span {
-    display: inline-block;
-    font-size: 16px; /* Adjust as needed */
-}
-
-/* apply_loan.css */
-
-/* I-add ni nga CSS aron mahimo nga ma-align ang form group sa right side */
-.right-align {
-    text-align: right;
-    /* Ma-adjust ang width kon kinahanglanon */
-    width: 100%; /* O bisan unsang sukad nga maayong fit sa imong layout */
-}
-
-/* Idugang kini nga CSS aron ma-style ang select box sa right-align form group */
-.right-align select {
-    width: 100%; /* Ang width sa select box pareha sa parent form group */
-    /* Pwede pa kini ma-adjust kon kinahanglanon */
-}

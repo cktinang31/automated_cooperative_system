@@ -250,6 +250,11 @@ app.post('/post_announcement', async (req, res) => {
   }
 });
 
+app.get('/create_announcement', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('create_announcement', { title: 'Create_announcement', user});
+});
+
 app.get('/applyloan', isAuthenticated, async (req, res) => {
   const user = req.user;
   res.render('applyloan', { title: 'Apply Loan', user});
