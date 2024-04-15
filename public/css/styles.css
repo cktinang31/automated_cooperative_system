@@ -239,7 +239,7 @@ h3 {
     padding-top: 100px;
     color: #373f41;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     font-weight: 600;
     font-size: 38px;
     position: relative;
@@ -408,7 +408,7 @@ h3::after {
 
 .inputBox input {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1em;
     outline: none;
     border: 1px solid #777;
     border-radius: 5px;
@@ -433,6 +433,63 @@ h3::after {
     max-width: 120px;
     font-weight: 500;
     cursor: pointer;
+}
+
+.inputBox::placeholder {
+    color: #777;
+}
+
+/* info */
+.info {
+    background: #373f41;
+}
+
+.info h5 {
+    color: #dbdbdb;
+}
+
+.info .infoBox div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info .infoBox div span {
+    min-width: 40px;
+    height: 40px;
+    color: #ffffff;
+    background: #777;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.info .infoBox div p {
+    color: #dbdbdb;
+    font-size: 1.1em;
+}
+
+.info .infoBox div a {
+    color: #dbdbdb;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.sci {
+   margin-top: 40px;
+   display: flex; 
+}
+
+.sci li {
+    list-style: none;
+    margin-right: 15px;
+}
+
+.sci li a {
+    color: #dbdbdb;
 }
 
 footer {
