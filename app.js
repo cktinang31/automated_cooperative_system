@@ -12,6 +12,7 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
+const user = require('user');
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -240,14 +241,14 @@ app.post('/post_announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
   
- 
- 
+
+
     const newContent = await Content.create({
       content_title,
       content,
       timestamp: new Date()
     });
- 
+
     console.log('Announcement:', newContent);
     res.send('Announcement Posted');
   } catch (error) {
@@ -256,36 +257,23 @@ app.post('/post_announcement', async (req, res) => {
   }
 });
 
-app.post('/sav', async (req, res) => {
-  try {
-    const { amount } = req.body;
-  
- 
- 
-    const newSavings = await Savings.create({
-      amount,
-      timestamp: new Date()
-    });
- 
-    console.log('Savings:', newSavings);
-    res.send('Savings Saved');
-  } catch (error) {
-    console.error('Error submitting savings:', error);
-    res.status(500).send('Error submitting savings.');
-  }
+app.get('/create_announcement', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('create_announcement', { title: 'Create_announcement', user});
 });
 
+app.get('/applyloan', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('applyloan', { title: 'Apply Loan', user});
+});
 
-
-
- 
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {
     const { loan_type, amount, loan_term, interest } = req.body;
     console.log('Request Body:', req.body);
- 
+
     const user_id = req.session.passport.user;
-   
+  
     if (!user_id) {
       console.error('User ID is null or undefined');
       return res.status(401).send('User ID is null or undefined');
@@ -329,7 +317,6 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
   }
 });
  
-
 
 
 app.get('/profile', isAuthenticated, async (req, res)  => {
@@ -410,7 +397,23 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
 
- 
+// Route handler for displaying user profile
+app.get('/profile', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Fetch user details from the database
+    const userDetails = await User.findOne({ where: { email: user.email } });
+
+    res.render('profile', { title: 'Profile', user: userDetails });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details.');
+  }
+});
+
+
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
