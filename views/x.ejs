@@ -18,9 +18,74 @@
                 document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
             }
         </script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              const applicationIds = document.querySelectorAll(".application_id");
+              applicationIds.forEach(id => {
+                id.addEventListener("click", function() {
+                  // Hide details for all applications
+                  const allDetails = document.querySelectorAll(".details");
+                  allDetails.forEach(detail => {
+                    detail.style.display = "none";
+                  });
+          
+                  // Show details for the clicked application
+                  const details = this.nextElementSibling;
+                  details.style.display = "block";
+                });
+              });
+            });
+        </script>
     </head>
     <body>
         <div class="form-container">
+
+          <form action="loan_request">
+            <table>
+              <thead>
+                <tr>
+                  <th>Application ID</th>
+                  <th>User ID</th>
+                  <th>Loan Type</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                  <th>Interest</th>
+                  <th>Monthly Payment</th>
+                  <th>Number of Payments</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (loan_applications.length > 0) { %>
+                  <% loan_applications.forEach(loan_application => { %>
+                    <tr>
+                      <td><%= loan_application.application_id %></td>
+                      <td><%= loan_application.user_id %></td>
+                      <td><%= loan_application.loan_type %></td>
+                      <td><%= loan_application.application_status %></td>
+                      <td><%= loan_application.amount %></td>
+                      <td><%= loan_application.interest %></td>
+                      <td><%= loan_application.monthly_payment %></td>
+                      <td><%= loan_application.number_of_payments %></td>
+                      <td>
+                        <button>Approved</button>
+                        <button>Decline</button>
+                      </td>
+                    </tr>
+                  <% }) %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="8">No loan requests at the moment...</td>
+                  </tr>
+                <% } %>   
+              </tbody>
+            </table>
+            </form>
+          </div>
+              
+
+
             <form action="/post_announcement" method="POST">
                 <h1>Create Announcement</h1>
                 <input type="text" id="content_title" name="content_title" placeholder="Post Announcement" required />
@@ -62,5 +127,15 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+
+      </div>
+              
+
+
+
+      </div>
+       
+
+        
     </body>
 </html>

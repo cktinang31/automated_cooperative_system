@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
-const {Application, User, Content, Loan_application} = require('./models')
+const {Application, User, Content, Loan_application, Savings} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
@@ -225,7 +225,13 @@ app.post('/user_reg', async (req, res) => {
  
 app.get('/x', isAuthenticated, async (req, res) => {
   const user = req.user;
-  res.render('x', { title: 'Back-end Testing', user});
+  try {
+    const loan_applications = await Loan_application.findAll();
+    res.render('x', { loan_applications, title: 'Back-end Testing', user });
+  } catch (error) {
+    console.error('Error fetching requests:', error);
+    res.status(500).send('Error fetching requests.');
+  }
 });
  
  
@@ -249,6 +255,29 @@ app.post('/post_announcement', async (req, res) => {
     res.status(500).send('Error creating announcement.');
   }
 });
+
+app.post('/sav', async (req, res) => {
+  try {
+    const { amount } = req.body;
+  
+ 
+ 
+    const newSavings = await Savings.create({
+      amount,
+      timestamp: new Date()
+    });
+ 
+    console.log('Savings:', newSavings);
+    res.send('Savings Saved');
+  } catch (error) {
+    console.error('Error submitting savings:', error);
+    res.status(500).send('Error submitting savings.');
+  }
+});
+
+
+
+
  
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {

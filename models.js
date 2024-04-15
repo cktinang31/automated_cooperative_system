@@ -88,15 +88,15 @@ const Savings = sequelize.define('Savings', {
     },   
     user_id: {     
         type: DataTypes.INTEGER,     
-        allowNull: false 
+        allowNull: true 
     },   
     amount: {     
         type: DataTypes.FLOAT,     
-        allowNull: false 
+        allowNull: false
     },   
     interest: {     
         type: DataTypes.FLOAT,     
-        allowNull: false  
+        allowNull: true  
     },  
     loan_id: {     
         type: DataTypes.INTEGER  
