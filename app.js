@@ -12,6 +12,7 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
+const user = require('user');
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -390,7 +391,23 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
 
- 
+// Route handler for displaying user profile
+app.get('/profile', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Fetch user details from the database
+    const userDetails = await User.findOne({ where: { email: user.email } });
+
+    res.render('profile', { title: 'Profile', user: userDetails });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details.');
+  }
+});
+
+
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
