@@ -165,8 +165,8 @@ app.get('/transaction', (req, res) => {
 }); 
 
 
-app.get('/mainhome', (req, res) => {
-  res.render('mainhome', { title: 'Main Home'});
+app.get('/partials/main', (req, res) => {
+  res.render('partials/main', { title: 'Main'});
 });
 
 app.post('/mem_application', async (req, res) => {
