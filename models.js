@@ -276,8 +276,8 @@ Loan_application.belongsTo(User, {
 //     }
 // })();
 
-const Transaction = sequelize.define('Transaction', {
-    transaction_id: {
+const Savings_Transaction = sequelize.define('Savings_Transaction', {
+    savings_transaction_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -304,7 +304,7 @@ const Transaction = sequelize.define('Transaction', {
     },
 });
 
-Transaction.belongsTo(User, {
+Savings_Transaction.belongsTo(User, {
     foreignKey: 'user_id', 
     onDelete: 'CASCADE' 
 });
@@ -531,7 +531,7 @@ Savings.sync();
 CBU.sync();
 Loan.sync();                              
 Loan_application.sync();
-Transaction.sync();
+Savings_Transaction.sync();
 CBUTransaction.sync();
 History.sync();
 Chat.sync();
@@ -561,7 +561,7 @@ module.exports = {
     CBU,
     Loan,
     Loan_application,
-    Transaction,
+    Savings_Transaction,
     CBUTransaction,
     History,
     Chat,

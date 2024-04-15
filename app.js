@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
-const {Application, User, Content, Loan_application} = require('./models')
+const {Application, User, Content, Loan_application,Savings_Transaction, Savings} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
@@ -37,7 +37,7 @@ const secretKey = crypto.randomBytes(64).toString('hex');
 
 app.use(session({
   secret: secretKey, 
-  resave: false,
+  re_save: false,
   saveUninitialized: false
 }));
 
@@ -62,7 +62,7 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 
- 
+
 
 app.use(express.static('public'));
 
@@ -145,12 +145,18 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
 
+// taladro backend testing (ayaw hilabti)
+app.get('/savings', (req, res) => {
+  res.render('savings', { title: 'Taladro Backend Testing'});
+});
+
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
 });
 
-app.get('/systemadmin', (req, res) => {
-    res.render('systemadmin', { title: 'Admin'});
+app.get('/system_admin', (req, res) => {
+    res.render('system_admin', { title: 'Admin'});
 }); 
 
 app.post('/mem_application', async (req, res) => {
