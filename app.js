@@ -146,19 +146,20 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
-
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 });
-
-
 
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 }); 
 
+app.get('/inquire', (req, res) => {
+  res.render('inquire', { title: 'Inquire'});
+}); 
+
 app.get('/transaction', (req, res) => {
-  res.render('transaction', { title: 'Transaction'});
+  res.render('transaction', { title: 'Transaction History'});
 }); 
 
 app.get('/sidebar', (req, res) => {
