@@ -36,18 +36,17 @@
         <div class="announcement-content">
             <i class="custom-announcement-icon"></i>
             <div class="content-text">
-              <% if (contents.length > 0) { %>
+            <% if (contents.length > 0) { %>
                 <% contents.forEach(content => { %>
-                  <h3 class="title"><%= content.content_title %></h3>
-                  <p class="content"><%= content.content %></p>
+                <h3 class="title"><%= content.content_title %></h3>
+                <p class="content"><%= content.content %></p>
                 <% }) %>
-              <% } else { %>
+            <% } else { %>
                 <p>There are no announcements to display...</p>
-              <% } %>
-              <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
+            <% } %>
+            <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
             </div>
         </div>
-         
 </div>
 </body>
 </html>
