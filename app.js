@@ -250,6 +250,11 @@ app.post('/post_announcement', async (req, res) => {
   }
 });
 
+app.get('/applyloan', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('applyloan', { title: 'Apply Loan', user});
+});
+
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {
     const { loan_type, amount, loan_term, interest } = req.body;
