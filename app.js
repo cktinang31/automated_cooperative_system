@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const flash = require('connect-flash');
 const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -42,7 +43,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
- 
+
+app.use(flash());
  
  
 const pool = new Pool({
@@ -70,9 +72,9 @@ app.use(express.static('public'));
  
 app.use(morgan('dev'));
  
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
- 
+app.use(bodyParser.urlencoded({ extended: true }));
+const upload = multer({ dest: 'uploads/' });
 app.use(passport.initialize());
 app.use(passport.session());
 // Serialize user to store in session
@@ -96,32 +98,34 @@ passport.deserializeUser(async (user_id, done) => {
   }
 });
  
- 
-passport.use(new LocalStrategy(
-  { usernameField: 'email' }, // Specify the field name for the username/email
-  async (email, password, done) => {
-    try {
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  failureFlash: true // Enable flash messages for authentication failures
+},
+async (email, password, done) => {
+  try {
       // Find the user by email
       const user = await User.findOne({ where: { email } });
- 
+
       if (!user) {
-        return done(null, false, { message: 'User not found' });
+          return done(null, false, { message: 'User not found' });
       }
- 
+
       // Compare password
       const passwordMatch = await bcrypt.compare(password, user.password);
- 
+
       if (!passwordMatch) {
-        return done(null, false, { message: 'Incorrect password' });
+          return done(null, false, { message: 'Incorrect password' });
       }
- 
+
       // If user and password are correct, return the user
       return done(null, user);
-    } catch (error) {
+  } catch (error) {
       return done(error);
-    }
   }
-));
+}));
+
  
  
  
@@ -147,21 +151,12 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login'});
-});
- 
+
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 });
 
-app.get('/profile', (req, res) => {
-  res.render('profile', { title: 'Profile'});
-});
- 
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login'});
-});
+
 
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
@@ -171,9 +166,6 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction'});
 }); 
 
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
-});
 
 app.get('/mainhome', (req, res) => {
   res.render('mainhome', { title: 'Main Home'});
@@ -243,7 +235,7 @@ app.get('/x', isAuthenticated, async (req, res) => {
 app.post('/post_announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
-    // console.log('Request Body:', req.body);
+  
  
  
     const newContent = await Content.create({
@@ -271,26 +263,25 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
       console.error('User ID is null or undefined');
       return res.status(401).send('User ID is null or undefined');
     }
- 
+
     const monthlyInterestRate = interest / 12;
- 
+
     const number_of_payments = parseInt(loan_term.split(' ')[0]);
- 
+
     const monthly_payment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, number_of_payments)) /
         (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
- 
+
     const newLoan_application = await Loan_application.create({
       user_id,
       loan_type,
       amount,
       loan_term,
       interest,
-      monthly_payment: monthly_payment.toFixed(2),
+      monthly_payment: monthly_payment.toFixed(2), 
       number_of_payments,
       application_status: 'pending',
       timestamp: new Date()
     });
- 
     console.log('Loan Application Submitted:', newLoan_application);
     res.send('Loan Application Submitted');
   } catch (error) {
@@ -298,11 +289,9 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
     return res.status(500).send('Error submitting the application.');
   }
 });
- 
- 
- 
- 
- 
+
+
+
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
@@ -313,10 +302,51 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
   }
 });
  
+
+
+
+app.get('/profile', isAuthenticated, async (req, res)  => {
+  const user = req.user;
+  res.render('profile', { title: 'Profile', user });
+});
+
+
+app.post('/profile/update', upload.single('profilePicture'), async (req, res) => {
+  try {
+    const { fullName, email } = req.body;
+
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+
+    user.fullName = fullName;
+    user.email = email;
+
+    
+    if (req.file) {
+      user.profilePicture = req.file.buffer;
+    }
+
+    await user.save();
+
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating profile' });
+  }
+});
+
+
+// ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
- 
+
+
+
  
 app.post('/user_login', passport.authenticate('local', {
   successRedirect: '/announcement',
@@ -328,7 +358,9 @@ app.post('/user_login', passport.authenticate('local', {
     console.log('Login Request Body:', req.body);
     // Find the user by email
     const user = await User.findOne({ where: { email } });
+
  
+
     if (!user) {
       return res.status(404).send('User not found. Please register first.');
     }
@@ -339,43 +371,6 @@ app.post('/user_login', passport.authenticate('local', {
       req.session.isLoggedIn = true;
       req.session.user = user;
       console.log('User Object:', req.user);
-      return res.redirect('/announcement');
-    } else {
-      console.error('Password does not match');
-      return res.status(401).send('Incorrect password.');
-    }
- 
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).send('Error logging in.');
-  }
-});
-
-// Route handler for user login
-app.post('/user_login', passport.authenticate('local', {
-  successRedirect: '/announcement',
-  failureRedirect: '/login',
-  failureFlash: true
-}), async (req, res) => {
-  try {
-    // Your existing code...
-
-    if (passwordMatch) {
-      req.session.isLoggedIn = true;
-      req.session.user = user;
-
-      // Check if user details already exist in the database
-      const existingUser = await User.findOne({ where: { email } });
-      if (!existingUser) {
-        // Save user details to the database
-        await User.create({
-          fname: user.fname,
-          lname: user.lname,
-          email: user.email,
-          // Add other fields as needed
-        });
-      }
-
       return res.redirect('/announcement');
     } else {
       console.error('Password does not match');
