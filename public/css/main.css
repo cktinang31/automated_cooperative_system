@@ -144,37 +144,63 @@ nav ul li a {
     color: #777;
 }
 
-.sidebar-menu div {
+.sidebar-menu li {
     position: relative;
     display: flex;
     align-items: center;
     padding: 10px 0;
 }
 
-.sidebar-menu div::before {
+.sidebar-menu li::before {
     content: '';
     position: absolute;
     left: -15px;
     top: 5px;
     height: 70%;
-    width: 4px; 
-    background-color: transparent; 
-    transition: background-color 0.3s ease; 
+    width: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
-.sidebar-menu div:hover::before {
+.sidebar-menu li:hover::before {
     background-color: #333;
 }
 
-.sidebar-menu div img {
+.sidebar-menu li img {
     width: 24px;
-    height: 24px; 
-    margin-right: 10px; 
+    height: 24px;
+    margin-right: 10px;
 }
+
 
 .sidebar-menu div a {
     text-decoration: none;
     color: #333; 
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+}
+
+.sidebar-menu li a:hover {
+    color: #555;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.sidebar-menu li img {
+    width: 20px; /* Adjust the width as needed */
+    margin-right: 10px; /* Adjust the spacing between icon and text */
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #333; /* Adjust text color as needed */
 }
