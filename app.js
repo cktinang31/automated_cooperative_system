@@ -351,10 +351,60 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
 
-// Profile page
+// Route handler for user login
+app.post('/user_login', passport.authenticate('local', {
+  successRedirect: '/announcement',
+  failureRedirect: '/login',
+  failureFlash: true
+}), async (req, res) => {
+  try {
+    // Your existing code...
 
+    if (passwordMatch) {
+      req.session.isLoggedIn = true;
+      req.session.user = user;
 
+      // Check if user details already exist in the database
+      const existingUser = await User.findOne({ where: { email } });
+      if (!existingUser) {
+        // Save user details to the database
+        await User.create({
+          fname: user.fname,
+          lname: user.lname,
+          email: user.email,
+          // Add other fields as needed
+        });
+      }
+
+      return res.redirect('/announcement');
+    } else {
+      console.error('Password does not match');
+      return res.status(401).send('Incorrect password.');
+    }
  
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).send('Error logging in.');
+  }
+});
+
+// Route handler for displaying user profile
+app.get('/profile', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Fetch user details from the database
+    const userDetails = await User.findOne({ where: { email: user.email } });
+
+    res.render('profile', { title: 'Profile', user: userDetails });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details.');
+  }
+});
+
+
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
