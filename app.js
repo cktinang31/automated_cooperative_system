@@ -12,7 +12,6 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
-const flash = require('flash');
 const user = require('user');
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
