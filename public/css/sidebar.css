@@ -24,7 +24,7 @@
     width: 100%;
     height: 70px;
     position: fixed;
-    z-index: 8;
+    z-index: 9;
     top: 0;
     left: 0;
 }
@@ -226,4 +226,34 @@
 
 .sidebar ul li.active a span { 
     transform: translateY(-50%) rotate(-180deg);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #a5a5a5;
+}
+
+.user .bi {
+    font-size: 2rem;
+    margin-right: 10px;
+    margin-top: 100px;
+}
+
+.user-details {
+    margin-left: 5px;
+}
+
+.user-details p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3233; 
+}
+
+.user-details span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    color: #373F41; 
 }

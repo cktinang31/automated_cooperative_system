@@ -21,6 +21,13 @@
     </div>
 
     <div class="sidebar">
+        <div class="user">
+            <i class="bi bi-person-circle"></i>
+            <div class="user-details">
+                <p>Kristine Anne Cardosa</p>
+                <span>kristineanne@gmail.com</span>
+            </div>
+        </div>
         <ul>
             <li><a href="#"><i class="bi bi-person-fill"></i>My Profile</a></li>
             <li>
@@ -48,11 +55,12 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+    $(document).ready(function(){
         $('.btn').click(function(){
             $(this).toggleClass("click");
             $('.sidebar').toggleClass("show");
         });
-       $(document).ready(function(){
+
         $('.fund-btn').click(function(e){
             e.preventDefault();
             $('.fund-show').toggleClass("show");
@@ -66,6 +74,6 @@
         });
     });
     </script>
-    
+
 </body>
 </html>
