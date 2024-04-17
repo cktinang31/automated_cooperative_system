@@ -67,7 +67,7 @@
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
-    transition: left 0.4s ease;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
 }
 
 .btn:hover {
