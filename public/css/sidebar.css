@@ -15,44 +15,63 @@
 
 .navbar {
     background-color: #373F41;
-    color: #FFA900;
-    padding: 20px 20px; 
+    color: #ffa900;
+    max-width: 100%;
     display: flex;
-    justify-content: space-between; 
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    z-index: 8;
+    top: 0;
+    left: 0;
 }
 
-.member-title {
-    padding-left: 1300px;
+.site-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 20px);
+    padding: 0 10px; 
 }
 
-.title h1,
-.member-title {
-    margin: 0; 
+.site-title h1 {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 36px;
+    font-weight: 800;
 }
 
-.home-icon {
+.site-title span {
     display: flex;
     align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    font-style: italic;
 }
 
-.home-icon img {
-    width: 20px;
-    height: auto;
-    margin-right: 5px;
+.site-title span i {
+    margin-left: 20px; 
+    margin-right: 0;
 }
 
 .btn {
     position: absolute;
-    top: 95px;
-    left: 45px;
+    top: 75px;
+    left: 0;
     height: 35px;
     width: 35px;
     text-align: center;
-    background: #4a5355;
     border-radius: 3px;
     cursor: pointer;
     transition: left 0.4s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .btn.click {
@@ -60,13 +79,15 @@
 }
 
 .btn span {
-    color: #ffffff;
+    color: #373F41;
     font-size: 25px;
     line-height: 35px;
 }
 
 .btn.click span:before {
     content: '\f00d';
+    color: red;
+    font-size: 18px;
 }
 
 .sidebar {
@@ -104,16 +125,12 @@
     border-bottom: 1px solid #a5a5a5;
 }
 
-.sidebar ul li:last-child {
-    border-bottom: 1px solid #2f3638;
-}
-
 .sidebar ul li a {
     position: relative;
     color: #373F41;
     text-decoration: none;
     font-size: 18px;
-    padding-left: 40px;
+    padding-left: 20px;
     font-weight: 500;
     display: block;
     width: 100%;
@@ -145,6 +162,46 @@
     font-size: 17px;
     color: #4a5355;
     padding-left: 80px;
+}
+
+.sidebar i {
+    margin-right: 10px;
+}
+
+.bi-person-fill {
+    color: #007bff;
+}
+
+.fa-money-bill-wave {
+    color: #28a745; 
+}
+
+.fa-piggy-bank {
+    color: #ffc107; 
+}
+
+.fa-wallet {
+    color: #dc3545; 
+}
+
+.fa-hand-holding-usd {
+    color: #17a2b8; 
+}
+
+.fa-file-signature {
+    color: #6610f2;
+}
+
+.fa-file-invoice-dollar {
+    color: #6c757d;
+}
+
+.fa-history {
+    color: #fd7e14; 
+}
+
+.fa-search {
+    color: #6f42c1; 
 }
 
 .sidebar ul li.active ul li a{
