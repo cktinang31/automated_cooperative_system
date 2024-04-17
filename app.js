@@ -163,8 +163,8 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
 
-app.get('/deposit', (req, res) => {
-  res.render('deposit', { title: 'Deposit'});
+app.get('/savingsdeposit', (req, res) => {
+  res.render('savingsdeposit', { title: 'Savingsdeposit'});
 });
 
 app.post('/mem_application', async (req, res) => {
