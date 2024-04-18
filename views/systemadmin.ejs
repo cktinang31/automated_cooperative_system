@@ -7,7 +7,6 @@
     </head>
     <body>
 
-        <!-- <%- include('./partials/nav.ejs') %> -->
 
         <div class="container">
             <div class="header"> 
@@ -16,6 +15,35 @@
 
             </div>
             
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.user_id %></td>
+                            <td><%= user.fname %> <%= user.lname %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.role %></td>
+                        </tr>
+                    <% }) %>
+                    <% if (users.length === 0) { %>
+                        <tr>
+                            <td colspan="4">No users found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            
+            
+            
+           
           
 
         </div>

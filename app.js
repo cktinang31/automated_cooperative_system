@@ -193,7 +193,7 @@ app.post('/user_reg', async (req, res) => {
  
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds parameter
- 
+    
     // Create a new user with the hashed password
     const newUser = await User.create({
       fname,
@@ -388,6 +388,32 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
   }
 });
 
+app.get('/profile', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Fetch user details from the database
+    const userDetails = await User.findOne({ where: { email: user.email } });
+
+    res.render('profile', { title: 'Profile', user: userDetails });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details.');
+  }
+});
+
+
+app.get('/systemadmin', isAuthenticated, async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.render('systemadmin', { users, title: 'System Admin', user });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).send('Error fetching users.');
+  }
+});
+
+
 // ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
 
 app.get('/login', (req, res) => {
@@ -395,7 +421,6 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/user_login', passport.authenticate('local', {
-  successRedirect: '/announcement',
   failureRedirect: '/login',
   failureFlash: true
 }), async (req, res) => {
@@ -415,7 +440,17 @@ app.post('/user_login', passport.authenticate('local', {
       req.session.isLoggedIn = true;
       req.session.user = user;
       console.log('User Object:', req.user);
-      return res.redirect('/announcement');
+      
+      switch (user.role) {
+        case 'admin':
+          return res.redirect('/systemadmin');
+        // case 'regular':
+        //   return res.redirect('/regular_dashboard');
+        // case 'manager':
+        //   return res.redirect('/manager_dashboard');
+        default:
+         return res.redirect('/announcement');
+      }
     } else {
       console.error('Password does not match');
       return res.status(401).send('Incorrect password.');
@@ -424,21 +459,6 @@ app.post('/user_login', passport.authenticate('local', {
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).send('Error logging in.');
-  }
-});
-
-// Route handler for displaying user profile
-app.get('/profile', isAuthenticated, async (req, res) => {
-  try {
-    const user = req.user;
-
-    // Fetch user details from the database
-    const userDetails = await User.findOne({ where: { email: user.email } });
-
-    res.render('profile', { title: 'Profile', user: userDetails });
-  } catch (error) {
-    console.error('Error fetching user details:', error);
-    res.status(500).send('Error fetching user details.');
   }
 });
 

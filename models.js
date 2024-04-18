@@ -67,6 +67,7 @@ const  User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     password: {
         type: DataTypes.STRING,
@@ -75,9 +76,22 @@ const  User = sequelize.define('User', {
     profilePicture: {
         type: Sequelize.BLOB('long'),
         allowNull: true,
-      },
+    },
+
+    role: {
+        type: DataTypes.ENUM('admin', 'regular', 'manager', 'teller', 'collector', 'director'),
+        allownull: true,
+    }
     });
     
+User.beforeCreate(async (user) => {
+    const count = await User.count();
+        user.user_id = 624197 + count;
+        if (user.user_id === 624197) {
+            user.role = 'admin';
+        }
+    
+    });
 
 
 const Savings = sequelize.define('Savings', {  
