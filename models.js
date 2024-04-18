@@ -201,7 +201,7 @@ const Loan = sequelize.define('Loan', {
 
 
 Loan.belongsTo(User, {
-    foreignKey: 'user_id', 
+    foreignKey: 'user_id',
     onDelete: 'CASCADE' 
 });
 

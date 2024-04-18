@@ -316,7 +316,65 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching contents.');
   }
 });
- 
+
+
+// app.post ('approved_loan', isAuthenticated, async (req, res) => {
+//   try{
+//     const Loan = await Loan.create ({
+//       user_id: Loan_application.user_id,
+//       loan_type: Loan_application.loan_type,
+//       amount: Loan_application.amount,
+//       interest: Loan_application.interest,
+//       monthly_payment: Loan_application.monthly_payment,
+//       number_of_payments: Loan_application.number_of_payments,
+//       status: 'active'
+   
+//     })
+//   }
+// });
+
+app.post('update_loan_application', isAuthenticated, async (req,res) => {
+  try {
+    const { application_id,
+      application_status,
+      user_id,
+      loan_type,
+      amount,
+      interest,
+      monthly_payment,
+      number_of_payments,
+       } = req.body;
+
+    const updatedLoanApplication = await Loan_application.findOneAndUpdate(
+      { application_id },
+      { user_id },
+      { loan_type },
+      { amount },
+      { interest }, 
+      { monthly_payment },
+      { number_of_payments },
+      { application_status},
+      { new: true }
+    );
+
+    if (!updatedLoanApplication) {
+      return res.status(404).send('Loan application not found');
+    }
+
+    
+    if (application_status === 'approved') {
+
+      
+      return res.redirect('/loan_success');
+    } else {
+      // Handle decline scenario, if needed
+      return res.send('Loan application declined');
+    }
+  } catch (error) {
+    console.error('Error updating loan status:', error);
+    return res.status(500).send('Error updating loan status');
+  }
+})
 
 
 app.get('/profile', isAuthenticated, async (req, res)  => {
