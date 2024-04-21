@@ -194,6 +194,7 @@ body {
     justify-content: center;
 }
 
+
 .element-class {
     overflow: hidden;
 }
@@ -274,15 +275,6 @@ label {
     margin-bottom: 5px;
 }
 
-
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-
 .button-group {
     display: flex;
     justify-content: center;
@@ -307,7 +299,6 @@ button {
 
 .button-group button[type="submit"] {
     background-color: #FFA900;
-    color: black; 
     border: none; 
     padding: 10px 20px; 
     cursor: pointer; 
@@ -315,21 +306,9 @@ button {
 }
 
 
-.button-group button[type="submit"]:hover {
-    background-color: #FFA900;
-}
-
-
 .announcement-section {
     border-radius: px; 
     overflow: hidden; 
-}
-
-
-
-
-.button-group button[type="submit"]:hover {
-    background-color: #FFA900; 
 }
 
 .announcement-section {
@@ -347,29 +326,6 @@ button {
 
 
 
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-
-#create-announcement-form {
-    width: 850px; 
-}
-
-
 .form-group {
     margin-bottom: 20px;
 }
@@ -383,9 +339,9 @@ label {
 
 input[type="text"],
 textarea {
-    width: 100%;
+    width: 125%;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: px;
     box-sizing: border-box;
 }
 
@@ -396,3 +352,36 @@ textarea {
     height: 100vh;
 }
 
+
+.content-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    height: 100vh; 
+    padding: 50px;
+}
+
+.announcement-section {
+    text-align: left;
+    max-width: 900px; 
+    padding: 20px;
+    margin-bottom: 100px;
+}
+
+
+.announcement-section {
+    text-align: left;
+    max-width: 300%; 
+    padding: 20px;
+    margin: 0 auto; 
+}
+
+.announcement-section {
+    width: 100%; 
+    height: auto; 
+}
+
+.announcement-section {
+    width: 800px; 
+    height: 500px;
+}
