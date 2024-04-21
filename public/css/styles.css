@@ -76,15 +76,10 @@ nav li {
 }
 
 nav h1 {
-    font-family: "Miniver", cursive;
+    font-family: "Poppins";
     position: relative;
     margin-left: 50px;
     font-size: 3.5em;
-    color: transparent;
-    -webkit-text-stroke: 1px #ffffff;
-}
-
-nav h1 span {
     color: #f9a602;
 }
 
@@ -427,7 +422,7 @@ h3::after {
 }
 
 .inputBox input[type="submit"] {
-    background: #ffb951;
+    background: #f9a702e1;
     color: #222;
     border: none;
     font-size: 1.1em;
@@ -435,6 +430,11 @@ h3::after {
     font-weight: 500;
     cursor: pointer;
     padding: 10px 10px;
+    transition: background-color 0.5s, transform 80ms ease-in-out;
+}
+
+.inputBox input[type="submit"]:hover {
+    background: #ffbc04;
 }
 
 .inputBox::placeholder {
