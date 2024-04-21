@@ -141,13 +141,8 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
-app.get('/systemadmin', (req, res) => {
-    res.render('systemadmin', { title: 'Admin'});
-});
 
-app.get('/systemadmin', (req, res) => {
-    res.render('systemadmin', { title: 'Admin'});
-}); 
+
 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
@@ -298,7 +293,7 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
-    res.render('announcement', { contents });
+    res.render('announcement', { contents, title: 'Announcement', user});
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
@@ -397,16 +392,13 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
 });
 
 app.get('/profile', isAuthenticated, async (req, res) => {
+  const user = req.user;
   try {
-    const user = req.user;
-
-    // Fetch user details from the database
-    const userDetails = await User.findOne({ where: { email: user.email } });
-
-    res.render('profile', { title: 'Profile', user: userDetails });
+    const users = await User.findAll();
+    res.render('systemadmin', { users, title: 'Back-end Testing', user });
   } catch (error) {
-    console.error('Error fetching user details:', error);
-    res.status(500).send('Error fetching user details.');
+    console.error('Error fetching requests:', error);
+    res.status(500).send('Error fetching requests.');
   }
 });
 
@@ -414,12 +406,53 @@ app.get('/profile', isAuthenticated, async (req, res) => {
 app.get('/systemadmin', isAuthenticated, async (req, res) => {
   try {
     const users = await User.findAll();
-    res.render('systemadmin', { users, title: 'System Admin', user });
+    res.render('systemadmin', { users: users, title: 'System Admin', user: req.user });
   } catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).send('Error fetching users.');
   }
 });
+
+
+
+
+app.post('update_user', isAuthenticated, async (req,res) => {
+  try {
+    const { 
+      user_id,
+      fname,
+      lname,
+      email,
+      role,
+       } = req.body;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { user_id },
+      { fname },
+      { lname },
+      { email }, 
+      { role },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send('User not found');
+    }
+
+    
+    if (application_status === 'approved') {
+
+      
+      return res.redirect('/loan_success');
+    } else {
+      // Handle decline scenario, if needed
+      return res.send('Loan application declined');
+    }
+  } catch (error) {
+    console.error('Error updating loan status:', error);
+    return res.status(500).send('Error updating loan status');
+  }
+})
 
 
 // ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
