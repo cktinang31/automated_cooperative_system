@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App | <%=title %></title>
-    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -13,19 +13,20 @@
         <div class="form-container sign-up-container">
             <form action="/user_reg" method="POST">
                 <h1>Create Account</h1>
-                <input type="text" id="name" name="name" placeholder="Name" required />
+                <input type="text" id="fname" name="fname" placeholder="First Name" required />
+                <input type="text" id="lname" name="lname" placeholder="Last Name" required />
                 <input type="email" id="email" name="email" placeholder="Email" required />
                 <input type="password" id="password" name="password" placeholder="Password" required />
                 <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="">
+            <form action="/user_login" method="POST">
                 <h1>Sign In</h1>
-                <input type="email" placeholder="Email" required />
-                <input type="password" placeholder="Password" required />
+                <input type="email" id="email" name="email" placeholder="Email" required />
+                <input type="password" id="password" name="password" placeholder="Password" required />
                 <a href="#">Forgot Password?</a>
-                <button>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -47,32 +48,9 @@
             </div>
         </div>
      </div>
-
-     <script src="scripts.js"></script>
-
-     <script>
-        function checkPasswordStrength(password) {
-            var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-            if (strongRegex.test(password)) {
-                document.getElementById("password-strength").innerHTML = "Strong password";
-            } else {
-                document.getElementById("password-strength").innerHTML = "Password should be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character";
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.sign-up-container form');
-        const emailInput = form.querySelector('input[type="email"]');
-
-        form.addEventListener('submit', function (event) {
-            if (!emailInput.validity.valid) {
-                event.preventDefault(); 
-                alert('Please enter a valid email address.');
-            }
-        });
-    });
-    </script>
-
+     
+     <script src="/js/scripts.js"></script>
+     
      <footer>
         Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
     </footer>

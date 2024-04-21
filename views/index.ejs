@@ -1,10 +1,173 @@
 <html lang="en">
-<%- include('./partials/head.ejs') %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KaCoop | <%=title %></title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
 <body>
+    <nav>
+        <div class="site-title">
+            <div class="navbar-inner sticky-menu">
+                <div class="nav-yellow"></div>
+            </div>
+            <h1>KACooP</h1>
+        </div>
+        <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="#about">ABOUT US</a></li>
+            <li><a href="#service">SERVICES</a></li>
+            <li><a href="#contact">CONTACT US</a></li>
+            <li><a class="login" href="/login">LOGIN</a></li>
+        </ul>
+    </nav>
+    
+    <div>
+        <img class="background1" src="/images/back.jpg" alt="background1" />
+        
+        <div class="application-button">
+            <a href="/application" class="button-link">Apply for Membership</a>
+        </div>
+    </div>
 
-    <%- include('./partials/nav.ejs') %>
+    <section id="about">
+        <h3>About Us</h3>
+        <div class="mv-container">
+            <div class="mv-block">
+                <div class="image">
+                    <img src="/images/mission.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>Our Mission</h2>
+                    <p>Is to harness the power of automation to improve the lives of everyone in our community. We aspire to develop systems that facilitate seamless collaboration among people, ensuring smooth and efficient operations. Through inclusivity and collective effort, we envision a future where all individuals can flourish and prosper.</p>
+                </div>
+            </div>
 
-    <%- include('./partials/footer.ejs') %>
+            <div class="mv-block">
+                <div class="image">
+                    <img src="/images/vision.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>Our Vision</h2>
+                    <p>Is to build a community where everyone works together hand in hand. We strive to create a place where cooperation and support are at the heart of everything we do. By joining forces, we aim to empower each other, achieve shared goals, and cultivate a bright future filled with opportunity and success for all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="service">
+        <h3>Services</h3>
+        <div class="container">
+            <div class="row">
+                <div class="service">
+                    <i class="bi bi-piggy-bank"></i>
+                    <h4>SAVINGS</h4>
+                    <h5>"Save today, secure tomorrow – for the road to financial freedom begins with disciplined savings."</h5>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+                <div class="service">
+                    <i class="bi bi-cash-coin"></i>
+                    <h4>LOANS</h4>
+                    <h5>"Seize the moment with a loan – turning today's ambitions into tomorrow's achievements."</h5>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+                <div class="service">
+                    <i class="bi bi-coin"></i>
+                    <h4>SHARES</h4>
+                    <h5>
+                        "Each share in our cooperative embodies unity, prosperity, and our shared path to a brighter future."</h5>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h3>Contact Us</h3>
+        <div class="contactUs">
+            <div class="title">
+                <h4>Whether you have questions, in need of assistance, or just want to chat, We are here for you. Feel free to drop us a message via email, or connect with us on social media. We're always eager to hear from you!</h4>
+            </div>
+            <div class="box">
+                <!-- Form -->
+                <div class="contact form">
+                    <h5>Send a Message</h5>
+                    <form>
+                        <div class="formBox">
+                            <div class="row50">
+                                <div class="inputBox">
+                                    <span>First Name</span>
+                                    <input type="text" placeholder="Kristine">
+                                </div>
+                                <div class="inputBox">
+                                    <span>Last Name</span>
+                                    <input type="text" placeholder="Cardosa">
+                                </div>
+                            </div>
+
+                            <div class="row50">
+                                <div class="inputBox">
+                                    <span>Email</span>
+                                    <input type="text" placeholder="kristinecardosa@gmail.com">
+                                </div>
+                                <div class="inputBox">
+                                    <span>Mobile</span>
+                                    <input type="text" placeholder="+63 912 345 6789">
+                                </div>
+                            </div>
+
+                            <div class="row100">
+                                <div class="inputBox">
+                                    <span>Message</span>
+                                    <textarea placeholder="Write your message here..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row100">
+                                <div class="inputBox">
+                                    <input type="submit" value="Send">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- info Box -->
+                <div class="contact info">
+                    <h5>Contact Info</h5>
+                    <div class="infoBox">
+                        <div>
+                            <span><i class="bi bi-geo-alt-fill"></i></span>
+                            <p>San Roque, Ginatilan, Cebu <br>PHILIPPINES</p>
+                        </div>
+                        <div>
+                            <span><i class="bi bi-envelope-fill"></i></span>
+                            <a href="mailto:ctuginatilan@gmail.com">ctuginatilan@gmail.com</a>
+                        </div>
+                        <div>
+                            <span><i class="bi bi-telephone-fill"></i></span>
+                            <a href="tel:+639123456789">+63 912 345 6789</a>
+                        </div>
+                        <!-- Social Media Links -->
+                        <ul class="sci">
+                        <li><a href=""><i class="bi bi-facebook"></i></a></li>
+                        <li><a href=""><i class="bi bi-linkedin"></i></a></li>
+                        <li><a href=""><i class="bi bi-twitter-x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="contact map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31475.375967047785!2d123.31859871368049!3d9.558842884830813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33ab9c497540657f%3A0xaf0be47278db2770!2sSan%20Roque%2C%20Ginatilan%2C%20Cebu%2C%20Philippines!5e0!3m2!1sen!2snl!4v1713177073079!5m2!1sen!2snl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
+    </footer>
 
 </body>
 </html>
