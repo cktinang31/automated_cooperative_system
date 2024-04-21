@@ -149,12 +149,20 @@ app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 }); 
 
-app.get('/transaction', (req, res) => {
-  res.render('transaction', { title: 'Transaction'});
+app.get('/inquire', (req, res) => {
+  res.render('inquire', { title: 'Inquire'});
 }); 
 
-app.get('/mainhome', (req, res) => {
-  res.render('mainhome', { title: 'Main Home'});
+app.get('/transaction', (req, res) => {
+  res.render('transaction', { title: 'Transaction History'});
+}); 
+
+app.get('/sidebar', (req, res) => {
+  res.render('sidebar', { title: 'sidebar'});
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
 });
 
 app.post('/mem_application', async (req, res) => {
@@ -286,7 +294,7 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
     return res.status(500).send('Error submitting the application.');
   }
 });
-
+ 
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
