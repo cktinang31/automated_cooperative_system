@@ -181,6 +181,12 @@ nav ul li a {
 
 body {
     overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+
+.announcement-section h1 {
+    font-weight: normal; 
 }
 
 .announcement-section {
@@ -188,12 +194,13 @@ body {
     justify-content: center;
 }
 
+
 .element-class {
     overflow: hidden;
 }
 
 .announcement-section {
-    padding-top: 80px;
+    padding-top: 50px;
 }
 
 .content-wrapper {
@@ -212,7 +219,7 @@ body {
 }
 .announcement-section {
     margin-top: 0; 
-    padding-top: 10; 
+    padding-top: 30; 
 }
 
 .content-wrapper {
@@ -220,6 +227,161 @@ body {
 }
 
 .announcement-title {
-    margin-bottom: 20px; /* Add some margin below the title */
+    margin-bottom: 50px; 
 }
 
+.announcement-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+#create-announcement-form {
+    width: 80%; 
+    max-width: 900px; 
+}
+
+
+.announcement-section {
+    margin-bottom: 35px; 
+}
+
+
+.announcement-section h1 {
+    margin-bottom: 50px; 
+}
+
+
+.announcement-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.announcement-section {
+    margin: 75px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+}
+
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+
+.announcement-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.button-group {
+    text-align: center; 
+}
+
+.button-group button[type="submit"] {
+    background-color: #FFA900;
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+
+
+.announcement-section {
+    border-radius: px; 
+    overflow: hidden; 
+}
+
+.announcement-section {
+    border-radius: 10px; 
+    overflow: hidden;  
+}
+
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+input[type="text"],
+textarea {
+    width: 125%;
+    padding: 10px;
+    border-radius: px;
+    box-sizing: border-box;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.content-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    height: 100vh; 
+    padding: 50px;
+}
+
+.announcement-section {
+    text-align: left;
+    max-width: 900px; 
+    padding: 20px;
+    margin-bottom: 100px;
+}
+
+
+.announcement-section {
+    text-align: left;
+    max-width: 300%; 
+    padding: 20px;
+    margin: 0 auto; 
+}
+
+.announcement-section {
+    width: 100%; 
+    height: auto; 
+}
+
+.announcement-section {
+    width: 800px; 
+    height: 500px;
+}
