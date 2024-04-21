@@ -12,6 +12,8 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
+const user = require('user');
+
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -44,7 +46,6 @@ app.use(session({
 
 app.use(flash());
  
- 
 const pool = new Pool({
   connectionString:connectionString
 })
@@ -64,12 +65,8 @@ app.set('view engine', 'ejs');
  
 // middleware & static files
  
- 
- 
 app.use(express.static('public'));
- 
 app.use(morgan('dev'));
- 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const upload = multer({ dest: 'uploads/' });
@@ -123,9 +120,6 @@ async (email, password, done) => {
       return done(error);
   }
 }));
-
- 
- 
  
 app.get('/', (req, res) => {
     res.render('index', { title: 'Landing'});
@@ -143,30 +137,32 @@ app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us'});
 });
  
- 
- 
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
-
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 });
 
-
-
 app.get('/systemadmin', (req, res) => {
     res.render('systemadmin', { title: 'Admin'});
 }); 
 
-app.get('/transaction', (req, res) => {
-  res.render('transaction', { title: 'Transaction'});
+app.get('/inquire', (req, res) => {
+  res.render('inquire', { title: 'Inquire'});
 }); 
 
+app.get('/transaction', (req, res) => {
+  res.render('transaction', { title: 'Transaction History'});
+}); 
 
-app.get('/mainhome', (req, res) => {
-  res.render('mainhome', { title: 'Main Home'});
+app.get('/sidebar', (req, res) => {
+  res.render('sidebar', { title: 'sidebar'});
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
 });
 
 app.post('/mem_application', async (req, res) => {
@@ -190,7 +186,6 @@ app.post('/mem_application', async (req, res) => {
       res.status(500).send('Error submitting the application');
   }
 });
- 
  
 app.post('/user_reg', async (req, res) => {
   try {
@@ -228,13 +223,9 @@ app.get('/x', isAuthenticated, async (req, res) => {
   res.render('x', { title: 'Back-end Testing', user});
 });
  
- 
- 
 app.post('/post_announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
-  
-
 
     const newContent = await Content.create({
       content_title,
@@ -297,9 +288,7 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
     return res.status(500).send('Error submitting the application.');
   }
 });
-
-
-
+ 
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
@@ -309,14 +298,11 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching contents.');
   }
 });
- 
-
 
 app.get('/profile', isAuthenticated, async (req, res)  => {
   const user = req.user;
   res.render('profile', { title: 'Profile', user });
 });
-
 
 app.post('/profile/update', upload.single('profilePicture'), async (req, res) => {
   try {
@@ -326,7 +312,6 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
 
     user.fullName = fullName;
     user.email = email;
@@ -345,16 +330,12 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
   }
 });
 
-
 // ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-
-
- 
 app.post('/user_login', passport.authenticate('local', {
   successRedirect: '/announcement',
   failureRedirect: '/login',
@@ -365,8 +346,6 @@ app.post('/user_login', passport.authenticate('local', {
     console.log('Login Request Body:', req.body);
     // Find the user by email
     const user = await User.findOne({ where: { email } });
-
- 
 
     if (!user) {
       return res.status(404).send('User not found. Please register first.');
@@ -390,7 +369,21 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
 
- 
+// Route handler for displaying user profile
+app.get('/profile', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Fetch user details from the database
+    const userDetails = await User.findOne({ where: { email: user.email } });
+
+    res.render('profile', { title: 'Profile', user: userDetails });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details.');
+  }
+});
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
