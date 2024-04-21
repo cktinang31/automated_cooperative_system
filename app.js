@@ -33,6 +33,7 @@ const isAuthenticated = (req, res, next) => {
     res.status(500).send('Internal server error');
   }
 };
+
 //express app
 const app = express();
  
@@ -58,7 +59,6 @@ pool.connect()
 })
  
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
- 
  
 // register view engine
 app.set('view engine', 'ejs');
@@ -159,10 +159,6 @@ app.get('/transaction', (req, res) => {
 
 app.get('/sidebar', (req, res) => {
   res.render('sidebar', { title: 'sidebar'});
-});
-
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
 });
 
 app.get('/profile', (req, res) => {
@@ -345,7 +341,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/user_login', passport.authenticate('local', {
-  successRedirect: '/announcement',
+  successRedirect: '/sidebar',
   failureRedirect: '/login',
   failureFlash: true
 }), async (req, res) => {
