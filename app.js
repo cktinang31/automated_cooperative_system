@@ -33,6 +33,7 @@ const isAuthenticated = (req, res, next) => {
     res.status(500).send('Internal server error');
   }
 };
+
 //express app
 const app = express();
  
@@ -149,8 +150,12 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction History'});
 });
  
-app.get('/sidebar', (req, res) => {
-  res.render('sidebar', { title: 'sidebar'});
+app.get('/Member/sidebar', (req, res) => {
+  res.render('Member/sidebar', { title: 'sidebar'});
+});
+
+app.get('/Manager/sidebarmanager', (req, res) => {
+  res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
  
 app.get('/login', (req, res) => {
@@ -503,9 +508,9 @@ app.post('/user_login', passport.authenticate('local', {
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
         case 'manager':
-          return res.redirect('/Manager/managerannouncement');
+          return res.redirect('/Manager/sidebarmanager');
         default:
-         return res.redirect('/Member/announcement');
+         return res.redirect('/Member /sidebar');
       }
     } else {
       console.error('Password does not match');
