@@ -301,6 +301,16 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
 });
 
 
+app.get('/managerannouncement', isAuthenticated, async (req, res) => {
+  try {
+    const contents = await Content.findAll();
+    res.render('managerannouncement', { contents, title: 'Announcement', user});
+  } catch (error) {
+    console.error('Error fetching contents:', error);
+    res.status(500).send('Error fetching contents.');
+  }
+});
+
 // app.post ('approved_loan', isAuthenticated, async (req, res) => {
 //   try{
 //     const Loan = await Loan.create ({
@@ -487,8 +497,8 @@ app.post('/user_login', passport.authenticate('local', {
           return res.redirect('/systemadmin');
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
-        // case 'manager':
-        //   return res.redirect('/manager_dashboard');
+        case 'manager':
+          return res.redirect('/managerannouncement');
         default:
          return res.redirect('/announcement');
       }
