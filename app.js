@@ -292,8 +292,12 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
  
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
-    const contents = await Content.findAll();
-    res.render('announcement', { contents, title: 'Announcement', user});
+    
+    const contents = await Content.findAll({
+      order: [['createdAt', 'DESC']] 
+    });
+    
+    res.render('announcement', { contents, title: 'Announcement', user });
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
