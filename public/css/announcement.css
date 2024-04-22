@@ -1,7 +1,14 @@
+@import url('https://fonts.google.com/specimen/Poppins?query=poppins');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 nav {
@@ -330,13 +337,31 @@ nav ul li a {
 
 .announcement-content table {
     width: 100%; 
-  }
-  
-  .announcement-content {
+}
+
+.announcement-content {
     background-color: #f5f5f5;
     padding: 100px;
     text-align: center;
     max-width: 1000px; 
     margin: 0 auto;
-   
-  }
+
+}
+
+.apply-for-loan-wrapper {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group {
+    
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    
+    display: block;
+    margin-bottom: 5px;
+}
+
