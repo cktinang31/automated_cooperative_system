@@ -224,7 +224,7 @@ app.get('/x', isAuthenticated, async (req, res) => {
   }
 });
  
-app.post('/post_announcement', async (req, res) => {
+app.post('/post_Member/announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
  
@@ -234,7 +234,7 @@ app.post('/post_announcement', async (req, res) => {
       timestamp: new Date()
     });
  
-    console.log('Announcement:', newContent);
+    console.log('Member/Announcement:', newContent);
     res.send('Announcement Posted');
   } catch (error) {
     console.error('Error creating announcement:', error);
@@ -242,14 +242,14 @@ app.post('/post_announcement', async (req, res) => {
   }
 });
  
-app.get('/create_announcement', isAuthenticated, async (req, res) => {
+app.get('/Manager/create_announcement', isAuthenticated, async (req, res) => {
   const user = req.user;
-  res.render('create_announcement', { title: 'Create_announcement', user});
+  res.render('Manager/create_announcement', { title: 'Create Announcement', user});
 });
  
-app.get('/applyloan', isAuthenticated, async (req, res) => {
+app.get('/Member/applyloan', isAuthenticated, async (req, res) => {
   const user = req.user;
-  res.render('applyloan', { title: 'Apply Loan', user});
+  res.render('Member/applyloan', { title: 'Apply Loan', user});
 });
  
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
@@ -290,14 +290,14 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
   }
 });
  
-app.get('/announcement', isAuthenticated, async (req, res) => {
+app.get('/Member/announcement', isAuthenticated, async (req, res) => {
   try {
    
     const contents = await Content.findAll({
       order: [['createdAt', 'DESC']]
     });
    
-    res.render('announcement', { contents, title: 'Announcement', user });
+    res.render('Member/announcement', { contents, title: 'Announcement', user });
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
@@ -305,10 +305,10 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
 });
  
  
-app.get('/managerannouncement', isAuthenticated, async (req, res) => {
+app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
-    res.render('managerannouncement', { contents, title: 'Announcement', user});
+    res.render('Manager/managerannouncement', { contents, title: 'Announcement', user});
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
@@ -409,7 +409,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
   const user = req.user;
   try {
     const users = await User.findAll();
-    res.render('systemadmin', { users, title: 'Back-end Testing', user });
+    res.render('SystemAdmin/systemadmin', { users, title: 'Back-end Testing', user });
   } catch (error) {
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
@@ -417,10 +417,10 @@ app.get('/profile', isAuthenticated, async (req, res) => {
 });
  
  
-app.get('/systemadmin', isAuthenticated, async (req, res) => {
+app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
   try {
     const users = await User.findAll();
-    res.render('systemadmin', { users: users, title: 'System Admin', user: req.user });
+    res.render('SystemAdmin/systemadmin', { users: users, title: 'System Admin', user: req.user });
   } catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).send('Error fetching users.');
@@ -498,13 +498,13 @@ app.post('/user_login', passport.authenticate('local', {
      
       switch (user.role) {
         case 'admin':
-          return res.redirect('/systemadmin');
+          return res.redirect('/SystemAdmin/systemadmin');
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
         case 'manager':
-          return res.redirect('/managerannouncement');
+          return res.redirect('/Manager/managerannouncement');
         default:
-         return res.redirect('/announcement');
+         return res.redirect('/Member/announcement');
       }
     } else {
       console.error('Password does not match');
