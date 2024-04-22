@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin | <%=title %></title>
+        <link rel="stylesheet" href="/systemadnin.css">
+    </head>
+    <body>
+
+
+        <div class="container">
+            <div class="header"> 
+                <h1>COOPERATIVE SYSTEM</h1> 
+                <h2>System Admin</h2>
+
+            </div>
+            
+         
+                    <table class="announcement-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (users.length > 0) { %>
+                                <% users.forEach(user => { %>
+                                    <tr>
+                                        <td class="title"><%= user.user_id %></td>
+                                        <td class="content"><%= user.fname %></td>
+                                        <td class="content"><%= user.lname %></td>
+                                        <td class="content"><%= user.email %></td>
+                                        <td class="content"><%= user.role %></td>
+
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="2">There are no users to display...</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                
+            </div>
+            
+            
+           
+          
+
+        </div>
+                
+    
+        
+       
+    </body>
+</html>
