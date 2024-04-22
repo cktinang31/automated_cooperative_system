@@ -165,6 +165,14 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: 'Profile'});
+});
+
+app.get('/partials/main', (req, res) => {
+  res.render('partials/main', { title: 'Main'});
+});
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
