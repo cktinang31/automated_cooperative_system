@@ -457,10 +457,6 @@ const Content = sequelize.define('Content', {
         autoIncrement: true,
         primaryKey: true,
     },
-    content_title: {
-        type: DataTypes.TEXT,
-        allowNull:false,
-    },
     content: {
         type: DataTypes.TEXT,
         allowNull: false

@@ -233,6 +233,7 @@ app.post('/post_announcement', async (req, res) => {
   }
 });
 
+
 app.get('/create_announcement', isAuthenticated, async (req, res) => {
   const user = req.user;
   res.render('create_announcement', { title: 'Create_announcement', user});
@@ -289,6 +290,16 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
   }
+});
+
+
+app.get('/savings_deposit', (req, res) => {
+  const contents = [
+      { content_title: 'Title 1', content: 'Content 1' },
+      { content_title: 'Title 2', content: 'Content 2' },
+  ];
+
+  res.render('savings_deposit', { contents }); 
 });
 
 app.get('/profile', isAuthenticated, async (req, res)  => {
@@ -384,3 +395,4 @@ app.use((req, res) => {
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 });
+
