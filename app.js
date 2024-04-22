@@ -141,9 +141,6 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
- 
- 
- 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
 });
@@ -152,16 +149,16 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction History'});
 });
  
-app.get('/Member/sidebar', (req, res) => {
-  res.render('Member/sidebar', { title: 'sidebar'});
-});
-
-app.get('/Manager/sidebarmanager', (req, res) => {
-  res.render('Manager/sidebarmanager', { title: 'sidebar'});
+app.get('/sidebar', (req, res) => {
+  res.render('sidebar', { title: 'sidebar'});
 });
  
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
+});
+
+app.get('/Manager/request', (req, res) => {
+  res.render('Manager/request', { title: 'Request'});
 });
  
 app.post('/mem_application', async (req, res) => {
@@ -506,9 +503,9 @@ app.post('/user_login', passport.authenticate('local', {
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
         case 'manager':
-          return res.redirect('/Manager/sidebarmanager');
+          return res.redirect('/Manager/managerannouncement');
         default:
-         return res.redirect('/Member/sidebar');
+         return res.redirect('/Member/announcement');
       }
     } else {
       console.error('Password does not match');
@@ -520,6 +517,8 @@ app.post('/user_login', passport.authenticate('local', {
     res.status(500).send('Error logging in.');
   }
 });
+
+
  
 // 404 page
 app.use((req, res) => {
