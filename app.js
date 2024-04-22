@@ -141,9 +141,6 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
- 
- 
- 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
 });
@@ -158,6 +155,10 @@ app.get('/sidebar', (req, res) => {
  
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
+});
+
+app.get('/Manager/request', (req, res) => {
+  res.render('Manager/request', { title: 'Request'});
 });
  
 // app.get('/mem_applications', async (req, res) => {
@@ -584,6 +585,8 @@ app.post('/user_login', passport.authenticate('local', {
     res.status(500).send('Error logging in.');
   }
 });
+
+
  
 // 404 page
 app.use((req, res) => {
