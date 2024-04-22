@@ -141,9 +141,6 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
- 
- 
- 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
 });
@@ -160,11 +157,9 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-app.get('/request', (req, res) => {
-  res.render('request', { title: 'Request'});
+app.get('/Manager/request', (req, res) => {
+  res.render('Manager/request', { title: 'Request'});
 });
-
-
  
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
