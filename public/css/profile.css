@@ -116,6 +116,7 @@ body {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 270px;
 }
 
 .edit-profile .contact-container {
@@ -143,4 +144,7 @@ body {
 
 .update-button {
     align-self: flex-end;
+    margin-right: 362px;
+    position: fixed;
+    margin-top: 304px;
 }
