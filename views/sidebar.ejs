@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop</title>
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="site-title">
+            <h1>KACooP</h1>
+            <span>Member<i class="fas fa-home"></i></span>
+        </div>
+    </nav>    
+
+    <div class="btn">
+        <span class="fas fa-bars"></span>
+    </div>
+
+    <div class="sidebar">
+        <div class="user">
+            <i class="bi bi-person-circle"></i>
+            <div class="user-details">
+                <p>Kristine Anne Cardosa</p>
+                <span>kristineanne@gmail.com</span>
+            </div>
+        </div>
+        <ul>
+            <li><a href="#"><i class="bi bi-person-fill"></i>My Profile</a></li>
+            <li>
+                <a href="#" class="fund-btn"><i class="fas fa-money-bill-wave"></i>Funds
+                    <span class="fas fa-caret-down first"></span>
+                </a>
+                <ul class="fund-show">
+                    <li><a href="#"><i class="fas fa-piggy-bank"></i>Savings</a></li>
+                    <li><a href="#"><i class="fas fa-wallet"></i>CBU</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="loan-btn"><i class="fas fa-hand-holding-usd"></i>Loans
+                    <span class="fas fa-caret-down second"></span>
+                </a>
+                <ul class="loan-show">
+                    <li><a href="#"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
+                    <li><a href="#"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><i class="fas fa-history"></i>Transaction History</a></li>
+            <li><a href="#"><i class="fas fa-search"></i>Inquire</a></li>
+        </ul>
+    </div>    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.btn').click(function(){
+            $(this).toggleClass("click");
+            $('.sidebar').toggleClass("show");
+        });
+
+        $('.fund-btn').click(function(e){
+            e.preventDefault();
+            $('.fund-show').toggleClass("show");
+            $(this).parent().toggleClass("active");
+        });
+        
+        $('.loan-btn').click(function(e){
+            e.preventDefault();
+            $('.loan-show').toggleClass("show");
+            $(this).parent().toggleClass("active");
+        });
+    });
+    </script>
+
+</body>
+</html>
