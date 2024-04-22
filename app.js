@@ -160,27 +160,15 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
  
-app.post('/mem_application', async (req, res) => {
-  const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
-  try {
-      const newApplication = await Application.create({
-          fname,
-          mname,
-          lname,
-          date_of_birth,
-          place_of_birth,
-          address,
-          email,
-          contact,
-      });
- 
-      console.log('New Application:', newApplication);
-      res.send('Application submitted successfully. Please wait for approval');
-  } catch (error) {
-      console.error('Error submitting the application:', error);
-      res.status(500).send('Error submitting the application');
-  }
-});
+// app.get('/mem_applications', async (req, res) => {
+//   try {
+//       const applications = await Application.find();
+//       res.json(applications);
+//   } catch (error) {
+//       console.error('Error fetching applications:', error);
+//       res.status(500).send('Error fetching applications');
+//   } 
+// });
  
 app.post('/user_reg', async (req, res) => {
   try {
@@ -212,17 +200,96 @@ app.post('/user_reg', async (req, res) => {
     res.status(500).send('Error registering.');
   }
 });
+
+app.post('/mem_applications/:applicationId', async (req, res) => {
+  const applicationId = req.params.applicationId;
+  const { application_status } = req.body;
+
+  try {
+    console.log('Request Body:', req.body);
+    
+    const application = await Application.findByPk(applicationId);
+
+    if (!application) {
+      return res.status(404).send('Application not found');
+    }
+
+    if (application_status !== 'approved' && application_status !== 'decline') {
+      return res.status(400).send('Invalid application status');
+    }
+
+    application.application_status = application_status;
+
+    await application.save();
+
+    console.log('Application status updated successfully:', application);
+    res.send('Application status updated successfully');
+  } catch (error) {
+    console.error('Error updating application status:', error);
+    res.status(500).send('Error updating application status');
+  }
+});
+
+
+
+
+
+app.get('/xx/:applicationId', isAuthenticated, async (req, res) => {
+  const applicationId = req.params.applicationId;
+
+  try {
+      const application = await Application.findByPk(applicationId);
+      if (!application) {
+          return res.status(404).send('Application not found');
+      }
+      res.render('xx', { application, title: 'Application Details', user: req.user });
+  } catch (error) {
+      console.error('Error fetching application:', error);
+      res.status(500).send('Error fetching application');
+  }
+});
+
+
+app.post('/mem_application', async (req, res) => {
+  const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
+  const applicationDate = new Date();
+  try {
+      const newApplication = await Application.create({
+          fname,
+          mname,
+          lname,
+          date_of_birth,
+          place_of_birth,
+          address,
+          email,
+          contact,
+          application_status: 'pending',
+          date_sent: applicationDate,
+      });
  
+      console.log('New Application:', newApplication);
+      res.send('Application submitted successfully. Please wait for approval');
+  } catch (error) {
+      console.error('Error submitting the application:', error);
+      res.status(500).send('Error submitting the application');
+  }
+});
+
+
+
 app.get('/x', isAuthenticated, async (req, res) => {
   const user = req.user;
   try {
     const loan_applications = await Loan_application.findAll();
-    res.render('x', { loan_applications, title: 'Back-end Testing', user });
+    const applications = await Application.findAll();
+    res.render('x', { loan_applications, applications, title: 'Back-end Testing', user });
   } catch (error) {
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
-  }
+  };
 });
+
+
  
 app.post('/post_Member/announcement', async (req, res) => {
   try {
@@ -297,7 +364,7 @@ app.get('/Member/announcement', isAuthenticated, async (req, res) => {
       order: [['createdAt', 'DESC']]
     });
    
-    res.render('Member/announcement', { contents, title: 'Announcement', user });
+    res.render('./Member/announcement', { contents, title: 'Announcement', user });
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
@@ -411,6 +478,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
     const users = await User.findAll();
     res.render('SystemAdmin/systemadmin', { users, title: 'Back-end Testing', user });
   } catch (error) {
+    
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
   }
@@ -504,7 +572,7 @@ app.post('/user_login', passport.authenticate('local', {
         case 'manager':
           return res.redirect('/Manager/managerannouncement');
         default:
-         return res.redirect('/Member/announcement');
+         return res.redirect('./Member/announcement');
       }
     } else {
       console.error('Password does not match');
