@@ -41,27 +41,38 @@
 .site-title h1 {
     margin: 0;
     margin-left: 10px;
-    font-size: 36px;
+    font-size: 45px;
     font-weight: 800;
 }
 
 .site-title span {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
     font-style: italic;
 }
 
 .site-title span i {
+    color: #ffa900;
     margin-left: 20px; 
     margin-right: 0;
 }
 
-.btn {
-    position: absolute;
+.sidebar .btn {
+    position: fixed;
     top: 75px;
-    left: 0;
+    left: 350px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+    z-index: 10;
+}
+
+.sidebar-btn .btn {
     height: 35px;
     width: 35px;
     text-align: center;
@@ -70,37 +81,17 @@
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
 }
 
-.btn:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.btn.click {
-    left: 310px;
-}
-
-.btn span {
-    color: #373F41;
-    font-size: 25px;
-    line-height: 35px;
-}
-
-.btn.click span:before {
-    content: '\f00d';
-    color: red;
-    font-size: 18px;
-}
-
 .sidebar {
     position: fixed;
     width: 300px;
     height: 100%;
-    left: -300px;
+    left: 0;
     background: #dbdbdb;
     transition: left 0.4s ease;
 }
 
 .sidebar.show {
-    left: 0px;
+    transition: none;
 }
 
 .sidebar text {
@@ -235,14 +226,9 @@
     padding: 60px 0 0;
     border-bottom: 1px solid #979797;
 }
-  
-.user label {
-    margin-right: 10px;
-    margin-top: 30px;
-}
 
 .user .bi-person-circle {
-    font-size: 3.5rem;
+    font-size: 6rem;
     margin-bottom: 20px;
 }
 
