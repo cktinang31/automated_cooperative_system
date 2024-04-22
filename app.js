@@ -153,13 +153,9 @@ app.get('/sidebar', (req, res) => {
   res.render('sidebar', { title: 'sidebar'});
 });
  
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
-});
 
-app.get('/Manager/request', (req, res) => {
-  res.render('Manager/request', { title: 'Request'});
-});
+
+
  
 // app.get('/mem_applications', async (req, res) => {
 //   try {
@@ -276,7 +272,16 @@ app.post('/mem_application', async (req, res) => {
   }
 });
 
-
+app.get('/Manager/request', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  try {
+    const applications = await Application.findAll();
+    res.render('Manager/request', { applications, title: 'Request', user});
+  } catch (error) {
+    console.error('Error fetching requests:', error);
+    res.status(500).send('Error fetching requests.');
+  };
+});
 
 app.get('/x', isAuthenticated, async (req, res) => {
   const user = req.user;
