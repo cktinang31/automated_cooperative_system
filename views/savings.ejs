@@ -7,21 +7,80 @@
     <style></style>
 </head>
 <body>
+
+    <div class="formBox">
+        <label for="total">Total Savings:</label>
+        <input type="number" id="total" readonly>
+    </div>
     
-        <form action="formBox">
-            <label for="title">Savings</label>
-            <input type="number" id="title" placeholder="Amount"/>
-        </div>
-        <div class="form-container">
-            <br>
-
-        <form action="formBox">
-            <label for="title"></label>
-            <input type="number" id="title" placeholder="Deposit"/>
-            <input type="number" id="title" placeholder="Withdraw"/>
+    <div class="create-deposit content">
+        <form action="/deposit" method="POST">
+        <label for="deposit">Deposit:</label>
+        <select id="deposit" onchange="calculateTotal()">
+            <option value="0"></option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
             
-            
-        </form>
+        </select>
+    </form>
+    </div>
+    
+    <div class="formBox">
+        <label for="withdrawal">Withdrawal:</label>
+        <input type="number" id="withdrawal" placeholder="Enter withdrawal amount" min="0" oninput="calculateTotal()">
+    </div>
+    
+    <div>
+        <h2>Select Mode of Payment</h2>
+        <input type="radio" id="creditCard" name="paymentMode" value="Credit Card">
+        <label for="creditCard">Credit Card</label><br>
+    
+        <input type="radio" id="debitCard" name="paymentMode" value="Debit Card">
+        <label for="debitCard">Debit Card</label><br>
+    
+        <input type="radio" id="paypal" name="paymentMode" value="PayPal">
+        <label for="paypal">PayPal</label><br>
+    
+        <input type="radio" id="bankTransfer" name="paymentMode" value="Bank Transfer">
+        <label for="bankTransfer">Bank Transfer</label><br>
+    
+        <button onclick="getSelectedPayment()">Submit</button>
+    </div>
+    <script>
+        function calculateTotal() {
+            // Get deposit and withdrawal amounts
+            var deposit = parseFloat(document.getElementById("deposit").value) || 0;
+            var withdrawal = parseFloat(document.getElementById("withdrawal").value) || 0;
+    
+            // Calculate total savings
+            var total = deposit - withdrawal;
+    
+            // Update total input field
+            document.getElementById("total").value = total.toFixed(2);
+        }
 
-</body>
-</html>
+        function getSelectedPayment() {
+            var paymentModeElements = document.getElementsByName("paymentMode");
+    
+            var selectedPaymentMode;
+            for (var i = 0; i < paymentModeElements.length; i++) {
+                if (paymentModeElements[i].checked) {
+                    selectedPaymentMode = paymentModeElements[i].value;
+                    break;
+                }
+            }
+    
+            if (selectedPaymentMode) {
+                alert("Selected mode of payment: " + selectedPaymentMode);
+            } else {
+                alert("Please select a mode of payment.");
+            }
+        }
+    </script>
+    
+    </body>
+    </html>
+
+
+    

@@ -147,8 +147,29 @@ app.get('/application', (req, res) => {
 
 // taladro backend testing (ayaw hilabti)
 app.get('/savings', (req, res) => {
-  res.render('savings', { title: 'Taladro Backend Testing'});
+  res.render('savings', { title: 'Savings'});
 });
+
+app.post('/deposit', async (req, res) => {
+  try {
+    const { deposit, content } = req.body;
+    // console.log('Request Body:', req.body); 
+
+  
+    const newDeposit = await deposit.create({
+      deposit,
+      content,
+      timestamp: new Date() 
+    });
+
+    console.log('deposit:', newDeposit);
+    res.send('Deposit saved');
+  } catch (error) {
+    console.error('Error creating deposit:', error);
+    res.status(500).send('Error creating deposit.');
+  }
+});
+
 
 
 app.get('/login', (req, res) => {
@@ -344,5 +365,5 @@ app.use((req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Server running on port 3000');
+    console.log('Server running on port 3001');
 });
