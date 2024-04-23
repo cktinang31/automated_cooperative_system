@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop</title>
+    <link rel="stylesheet" href="/css/sidebarmanager.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="site-title">
+            <h1>KACooP</h1>
+            <span>Member<i class="fas fa-home"></i></span>
+        </div>
+    </nav>    
+
+    <div class="sidebar-btn">
+        <div class="btn">
+            <span class="fas fa-bars"></span>
+        </div>
+    </div>    
+
+    <div class="sidebar">
+        <div class="user">
+            <label for="profile-pic-upload">
+                <i class="bi bi-person-circle"></i>  
+            </label>
+            <div class="user-details">
+            <p>Kristine Anne Cardosa</p>
+            <span><a href="mailto:kristineanne@gmail.com">kristineanne@gmail.com</a></span>
+            </div>
+            <input type="file" id="profile-pic-upload" accept="image/*"> 
+            <img id="profile-pic" src="">
+        </div>          
+        <ul>
+            <li><a href="#"><i class="bi bi-person-fill"></i>My Profile</a></li>
+            <li><a href="#"><i class="fas fa-comments"></i> Requests</a></li>
+            <li><a href="#"><i class="bi bi-people-fill"></i>Member</a></li>
+            <li><a href="#"><i class="fas fa-money-bill-wave"></i>Funds</a></li>
+        </ul>
+    </div>    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.btn').click(function(){
+            $(this).toggleClass("click");
+            $('.sidebar').toggleClass("show");
+        });
+        
+        $('.fund-btn').click(function(e){
+            e.preventDefault();
+            $('.fund-show').toggleClass("show");
+            $(this).parent().toggleClass("active");
+        });
+ 
+        $('.loan-btn').click(function(e){
+            e.preventDefault();
+            $('.loan-show').toggleClass("show");
+            $(this).parent().toggleClass("active");
+        });
+    });
+    </script>
+
+</body>
+</html>

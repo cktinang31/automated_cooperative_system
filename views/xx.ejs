@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>x | <%=title %></title>
+  
+        
+      
+      
+    </head>
+    <body>
+       
+
+        <div class="form-container">
+            <form action="/mem_applications/<%= application.application_id %>?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <li>First Name: <%= application.fname %></li>
+                <li>Middle Name: <%= application.mname %></li>
+                <li>Last Name: <%= application.lname %></li>
+                <li>Date of Birth: <%= application.date_of_birth %></li>
+                <li>Place of Birth: <%= application.place_of_birth %></li>
+                <li>Address: <%= application.address %></li>
+                <li>Email Add: <%= application.email %></li>
+                <li>Contact: <%= application.contact %></li>
+                <button type="submit" name="application_status" value="approved">Approve</button>
+                
+                <button type="submit" name="application_status" value="decline">Decline</button>
+                
+            </form>
+        </div>
+        
+        
+        
+    </body>
+</html>

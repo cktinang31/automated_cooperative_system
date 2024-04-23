@@ -141,27 +141,101 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
  
- 
- 
- 
 app.get('/Member/inquire', (req, res) => {
   res.render('Member/inquire', { title: 'Inquire'});
 });
  
-app.get('/transaction', (req, res) => {
-  res.render('transaction', { title: 'Transaction History'});
+app.get('/Member/transaction', (req, res) => {
+  res.render('Member/transaction', { title: 'Transaction History'});
 });
  
-app.get('/sidebar', (req, res) => {
-  res.render('sidebar', { title: 'sidebar'});
+app.get('/Member/sidebar', (req, res) => {
+  res.render('Member/sidebar', { title: 'sidebar'});
+});
+
+app.get('/Manager/sidebarmanager', (req, res) => {
+  res.render('Manager/sidebarmanager', { title: 'sidebar'});
+});
+
+app.get('/Manager/req', (req, res) => {
+  res.render('Manager/req', { title: 'Req'});
 });
  
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
+app.post('/user_reg', async (req, res) => {
+  try {
+    const { fname, lname, email, password } = req.body;
+    console.log('Request Body:', req.body);  
+    const existingUser = await User.findOne({ where: { email } });
+ 
+    if (existingUser) {
+      return res.status(400).send('A user with this email is already registered in the system.');
+    }
+ 
+    const hashedPassword = await bcrypt.hash(password, 10);
+   
+    const newUser = await User.create({
+      fname,
+      lname,
+      email,
+      password: hashedPassword, 
+    });
+ 
+    console.log('New User:', newUser);
+    res.send('Registered successfully. You can now log in Ka-Coop!');
+  } catch (error) {
+    console.error('Error registering:', error);
+    res.status(500).send('Error registering.');
+  }
+});
+
+app.post('/mem_applications/:applicationId', async (req, res) => {
+  const applicationId = req.params.applicationId;
+  const { application_status } = req.body;
+
+  try {
+    console.log('Request Body:', req.body);
+    
+    const application = await Application.findByPk(applicationId);
+
+    if (!application) {
+      return res.status(404).send('Application not found');
+    }
+
+    if (application_status !== 'approved' && application_status !== 'decline') {
+      return res.status(400).send('Invalid application status');
+    }
+
+    application.application_status = application_status;
+
+    await application.save();
+
+    console.log('Application status updated successfully:', application);
+    res.send('Application status updated successfully');
+  } catch (error) {
+    console.error('Error updating application status:', error);
+    res.status(500).send('Error updating application status');
+  }
 });
  
+app.get('/xx/:applicationId', isAuthenticated, async (req, res) => {
+  const applicationId = req.params.applicationId;
+
+  try {
+      const application = await Application.findByPk(applicationId);
+      if (!application) {
+          return res.status(404).send('Application not found');
+      }
+      res.render('xx', { application, title: 'Application Details', user: req.user });
+  } catch (error) {
+      console.error('Error fetching application:', error);
+      res.status(500).send('Error fetching application');
+  }
+});
+
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
+  const applicationDate = new Date();
   try {
       const newApplication = await Application.create({
           fname,
@@ -172,6 +246,8 @@ app.post('/mem_application', async (req, res) => {
           address,
           email,
           contact,
+          application_status: 'pending',
+          date_sent: applicationDate,
       });
  
       console.log('New Application:', newApplication);
@@ -181,49 +257,30 @@ app.post('/mem_application', async (req, res) => {
       res.status(500).send('Error submitting the application');
   }
 });
- 
-app.post('/user_reg', async (req, res) => {
+
+app.get('/Manager/request', isAuthenticated, async (req, res) => {
+  const user = req.user;
   try {
-    const { fname, lname, email, password } = req.body;
-    console.log('Request Body:', req.body); // Log request body for debugging
- 
-    // Check if a user with the provided email already exists
-    const existingUser = await User.findOne({ where: { email } });
- 
-    if (existingUser) {
-      return res.status(400).send('A user with this email is already registered in the system.');
-    }
- 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds parameter
-   
-    // Create a new user with the hashed password
-    const newUser = await User.create({
-      fname,
-      lname,
-      email,
-      password: hashedPassword, // Store the hashed password in the database
-    });
- 
-    console.log('New User:', newUser);
-    res.send('Registered successfully. You can now log in Ka-Coop!');
+    const applications = await Application.findAll();
+    res.render('Manager/request', { applications, title: 'Request', user});
   } catch (error) {
-    console.error('Error registering:', error);
-    res.status(500).send('Error registering.');
-  }
+    console.error('Error fetching requests:', error);
+    res.status(500).send('Error fetching requests.');
+  };
 });
- 
+
 app.get('/x', isAuthenticated, async (req, res) => {
   const user = req.user;
   try {
     const loan_applications = await Loan_application.findAll();
-    res.render('x', { loan_applications, title: 'Back-end Testing', user });
+    const applications = await Application.findAll();
+    res.render('x', { loan_applications, applications, title: 'Back-end Testing', user });
   } catch (error) {
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
-  }
+  };
 });
- 
+
 app.post('/post_Member/announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
@@ -297,13 +354,12 @@ app.get('/Member/announcement', isAuthenticated, async (req, res) => {
       order: [['createdAt', 'DESC']]
     });
    
-    res.render('Member/announcement', { contents, title: 'Announcement', user });
+    res.render('./Member/announcement', { contents, title: 'Announcement', user });
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
   }
 });
- 
  
 app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
   try {
@@ -391,7 +447,6 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
     user.fullName = fullName;
     user.email = email;
  
-   
     if (req.file) {
       user.profilePicture = req.file.buffer;
     }
@@ -411,11 +466,11 @@ app.get('/profile', isAuthenticated, async (req, res) => {
     const users = await User.findAll();
     res.render('SystemAdmin/systemadmin', { users, title: 'Back-end Testing', user });
   } catch (error) {
+    
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
   }
 });
- 
  
 app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
   try {
@@ -426,9 +481,6 @@ app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching users.');
   }
 });
- 
- 
- 
  
 app.post('update_user', isAuthenticated, async (req,res) => {
   try {
@@ -452,7 +504,6 @@ app.post('update_user', isAuthenticated, async (req,res) => {
     if (!updatedUser) {
       return res.status(404).send('User not found');
     }
- 
    
     if (application_status === 'approved') {
  
@@ -504,9 +555,9 @@ app.post('/user_login', passport.authenticate('local', {
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
         case 'manager':
-          return res.redirect('/Manager/managerannouncement');
+          return res.redirect('/Manager/sidebarmanager');
         default:
-         return res.redirect('/Member/announcement');
+         return res.redirect('/Member/sidebar');
       }
     } else {
       console.error('Password does not match');
@@ -518,7 +569,7 @@ app.post('/user_login', passport.authenticate('local', {
     res.status(500).send('Error logging in.');
   }
 });
- 
+
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
