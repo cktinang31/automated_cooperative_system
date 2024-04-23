@@ -152,6 +152,14 @@ app.get('/Member/transaction', (req, res) => {
 app.get('/Member/sidebar', (req, res) => {
   res.render('Member/sidebar', { title: 'sidebar'});
 });
+
+app.get('/Manager/sidebarmanager', (req, res) => {
+  res.render('Manager/sidebarmanager', { title: 'sidebar'});
+});
+
+app.get('/Manager/req', (req, res) => {
+  res.render('Manager/req', { title: 'Req'});
+});
  
 app.post('/user_reg', async (req, res) => {
   try {
@@ -165,7 +173,6 @@ app.post('/user_reg', async (req, res) => {
  
     const hashedPassword = await bcrypt.hash(password, 10);
    
-    
     const newUser = await User.create({
       fname,
       lname,
@@ -208,10 +215,6 @@ app.post('/mem_applications/:applicationId', async (req, res) => {
     console.error('Error updating application status:', error);
     res.status(500).send('Error updating application status');
   }
-});
-
-app.get('/Manager/req', (req, res) => {
-  res.render('Manager/req', { title: 'Req'});
 });
  
 app.get('/xx/:applicationId', isAuthenticated, async (req, res) => {
@@ -278,8 +281,6 @@ app.get('/x', isAuthenticated, async (req, res) => {
   };
 });
 
-
- 
 app.post('/post_Member/announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
@@ -359,7 +360,6 @@ app.get('/Member/announcement', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching contents.');
   }
 });
- 
  
 app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
   try {
@@ -447,7 +447,6 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
     user.fullName = fullName;
     user.email = email;
  
-   
     if (req.file) {
       user.profilePicture = req.file.buffer;
     }
@@ -473,7 +472,6 @@ app.get('/profile', isAuthenticated, async (req, res) => {
   }
 });
  
- 
 app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
   try {
     const users = await User.findAll();
@@ -483,9 +481,6 @@ app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching users.');
   }
 });
- 
- 
- 
  
 app.post('update_user', isAuthenticated, async (req,res) => {
   try {
@@ -509,7 +504,6 @@ app.post('update_user', isAuthenticated, async (req,res) => {
     if (!updatedUser) {
       return res.status(404).send('User not found');
     }
- 
    
     if (application_status === 'approved') {
  
@@ -559,9 +553,9 @@ app.post('/user_login', passport.authenticate('local', {
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
         case 'manager':
-          return res.redirect('/Manager/managerannouncement');
+          return res.redirect('/Manager/sidebarmanager');
         default:
-         return res.redirect('./Member/announcement');
+         return res.redirect('/Member/sidebar');
       }
     } else {
       console.error('Password does not match');
@@ -574,8 +568,6 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
 
-
- 
 // 404 page
 app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
