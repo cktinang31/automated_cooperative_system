@@ -570,7 +570,7 @@ app.post('/user_login', passport.authenticate('local', {
 
 // 404 page
 app.use((req, res) => {
-    res.status(404).render('404', { title: '404'})
+    res.status(404).render('404', { title: 'Page Not Found'})
 });
  
 app.listen(3000, () => {
