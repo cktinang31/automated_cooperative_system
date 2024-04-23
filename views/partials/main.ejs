@@ -5,7 +5,6 @@
         <title>Main<%=title %></title>
         <link rel="stylesheet" href="/css/main.css">
     </head>
-    <body>
 
 <nav>
     <div class="site-title">
@@ -22,50 +21,25 @@
     </div>
 </nav>
 
-<div class="sidebar-icon">
-    <a href="#" onclick="toggleSidebar()">
-        <img src="/svg/menu.svg" alt="Sidebar Icon">
-    </a>
-</div>
-
-<div id="sidebarContainer" class="container">
-    <div id="sidebar" class="sidebar">
-        <div class="user-icon">
-            <a href="">
-                <img src="/images/usericon.png" alt="User Icon">
-            </a>
-            <div class="user-details">
-                <span class="user-name">Mary Ann Ambos</span>
-                <div>
-                <span class="user-email">maryann@gmail.com</span>
-                </div>
-            </div>
+<body>
+    <label>
+        <input type="checkbox">
+        <div class="toggle">
+            <span class="top_line common"></span>
+            <span class="middle_line common"></span>
+            <span class="bottom_line common"></span>
         </div>
-        
-        
-        <ul class="sidebar-menu" id="sidebarMenu">
-            <li>
-                <img src="/images/user2.png" alt="User Icon">
-                <a href="/profile">My Profile</a>
-            </li>
-            <li>
-                <img src="/images/fundsicon.png" alt="Funds Icon">
-                <a href="/funds">Funds</a>
-            </li>
-            <li>
-                <img src="/images/loanicon.png" alt="Loan Icon">
-                <a href="/loan">Loan</a>
-            </li>
-            <li>
-                <img src="/images/icons8-payment-history-50.png" alt="Transaction History Icon">
-                <a href="/transaction-history">Transaction History</a>
-            </li>
-            <li>
-                <img src="/images/chaticon.png" alt="Inquire Icon">
-                <a href="/inquire">Inquire</a>
-            </li>
-        </ul>
-</div>
+
+        <div class="sidebar">
+            <ul>
+               <li><a href="#"><img src="/images/user2.png" alt="User Icon"></i>My Profile</a></li>
+               <li><a href="#"><img src="/images/user2.png" alt="User Icon"></i>Funds</a></li>
+               <li><a href="#"><img src="/images/user2.png" alt="User Icon"></i>Loan</a></li>
+               <li><a href="#"><img src="/images/user2.png" alt="User Icon"></i>Transaction History</a></li>
+               <li><a href="#"><img src="/images/user2.png" alt="User Icon"></i>Inquire</a></li>
+            </ul>
+    </label>
+</body>
 
 <div id="sidebarContent" class="sidebar-content">
     <!-- Sidebar content goes here -->
