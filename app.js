@@ -144,8 +144,8 @@ app.get('/application', (req, res) => {
  
  
  
-app.get('/inquire', (req, res) => {
-  res.render('inquire', { title: 'Inquire'});
+app.get('/Member/inquire', (req, res) => {
+  res.render('Member/inquire', { title: 'Inquire'});
 });
  
 app.get('/transaction', (req, res) => {
@@ -467,8 +467,10 @@ app.post('update_user', isAuthenticated, async (req,res) => {
     return res.status(500).send('Error updating loan status');
   }
 })
- 
- 
+app.get('/Member/savings_deposit', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('Member/savings_deposit', { title: 'Deposit', user});
+});
 // ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
  
 app.get('/login', (req, res) => {
