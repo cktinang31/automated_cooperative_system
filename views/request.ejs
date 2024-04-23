@@ -1,91 +1,67 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Main<%=title %></title>
-        <link rel="stylesheet" href="/css/main.css">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main<%=title %></title>
+    <link rel="stylesheet" href="/css/requests.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
 <nav>
     <div class="site-title">
         <h1>CTU-AC COOPERATIVE SYSTEM</h1>
     </div>
-    </div>
-    <div class="member-title">
-        <h1>Manager</h1>
-    </div>
-    <div class="home-icon">
-        <a href="/">
-            <img src="/svg/icons8-home.svg" alt="Home Icon">
-        </a>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Manager</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
     </div>
 </nav>
 
-<div class="sidebar-icon">
-    <a href="#" onclick="toggleSidebar()">
-        <img src="/svg/menu.svg" alt="Sidebar Icon">
-    </a>
-</div>
+<!-- Centering the h2 element -->
+<h2>Membership Requests</h2>
 
-<div id="sidebarContainer" class="container">
-    <div id="sidebar" class="sidebar">
-        <div class="user-icon">
-            <a href="">
-                <img src="/images/usericon.png" alt="User Icon">
-            </a>
-            <div class="user-details">
-                <span class="user-name">Mary Ann Ambos</span>
-                <div>
-                <span class="user-email">maryann@gmail.com</span>
-                </div>
-            </div>
-        </div>
-        
-        
-    <ul class="sidebar-menu" id="sidebarMenu">
-        <div>
-            <img src="/images/user2.png" alt=" Icon"><a href="/profile"></i>My Profile</a>
-        </div>
-
-        <div>
-            <img src="/images/fundsicon.png" alt=" Icon"><a href="/funds">Funds</a>
-        </div>
-
-        <div>
-            <img src="/images/loanicon.png" alt=" Icon"><a href="/loan">Loan</a>
-        </div>
-
-        <div>
-            <img src="/images/icons8-payment-history-50.png" alt=" Icon"><a href="/transaction-history">Transaction History</a>
-        </div>
-
-        <div>
-            <img src="/images/chaticon.png" alt=" Icon"><a href="/inquire">Inquire</a>
-        </div>
-    </ul>
-
-    
-    <div id="sidebarContent" class="sidebar-content">
-        <!-- Sidebar content goes here -->
-    </div>
-</div>
-
-<script src="script.js"></script>
+<table id="table">
+  <tr>
+    <th>Request ID</th>
+    <th>Details</th>
+    <th>Date</th>
+  </tr>
+  <tr>
+    <td>00111</td>
+    <td>Jay Sumaway has sent a membership application.<br><span id="timestamp1"></span></td>
+    <td>04-15-2024</td>
+  </tr>
+</table>
 
 <script>
-function toggleSidebar() {
-    var sidebarContainer = document.getElementById("sidebarContainer");
-    sidebarContainer.classList.toggle("active");
+    // Function to get current timestamp
+    function getTimestamp() {
+        const now = new Date();
+        const timestamp = now.toLocaleString();
+        return timestamp;
+    }
 
-    var sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("active");
+    // Update timestamp for each row
+    document.addEventListener("DOMContentLoaded", function() {
+        const table = document.getElementById("table");
+        const rows = table.getElementsByTagName("tr");
 
-    var sidebarMenu = document.getElementById("sidebarMenu");
-    sidebarMenu.classList.toggle("active");
-}
+        for (let i = 1; i < rows.length; i++) {
+            const detailsCell = rows[i].getElementsByTagName("td")[1];
+            const timestampSpan = document.createElement("span");
+            timestampSpan.textContent = " (" + getTimestamp() + ")";
+            detailsCell.appendChild(timestampSpan);
+        }
+    });
 </script>
 
 </body>
 </html>
-

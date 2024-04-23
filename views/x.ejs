@@ -3,24 +3,102 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>x | <%=title %></title>
+  
+        
         <script>
-            function calculateMonthlyPayment() {
-                const amount = parseFloat(document.getElementById('amount').value);
-                const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
-                const interest = parseFloat(document.getElementById('interest').value);
+            document.addEventListener("DOMContentLoaded", function() {
+              const applicationIds = document.querySelectorAll(".application_id");
+              applicationIds.forEach(id => {
+                id.addEventListener("click", function() {
+                  // Hide details for all applications
+                  const allDetails = document.querySelectorAll(".details");
+                  allDetails.forEach(detail => {
+                    detail.style.display = "none";
+                  });
+          
+                  // Show details for the clicked application
+                  const details = this.nextElementSibling;
+                  details.style.display = "block";
+                });
+              });
+            });
+        </script>
+        <script>
+          function updateLoanStatus(applicationId, status) {
+            fetch('/update_loan_application', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ application_id: application_id, application_status }),
+            })
+            .then(response => {
+              if (response.redirected) {
                 
-                const monthlyInterestRate = interest / 12;
-                const numberOfPayments = loanTerm;
+                window.location.href = response.url;
+              } else {
                 
-                const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
-                    (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-                
-                document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
-            }
+                return response.text();
+              }
+            })
+            .then(message => {
+              console.log(message);
+              
+            })
+            .catch(error => {
+              console.error('Error updating loan status:', error);
+            });
+          }
         </script>
     </head>
     <body>
         <div class="form-container">
+
+          <form action="update_loan_application">
+            <table>
+              <thead>
+                <tr>
+                  <th>Application ID</th>
+                  <th>User ID</th>
+                  <th>Loan Type</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                  <th>Interest</th>
+                  <th>Monthly Payment</th>
+                  <th>Number of Payments</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (loan_applications.length > 0) { %>
+                  <% loan_applications.forEach(loan_application => { %>
+                    <tr>
+                      <td><%= loan_application.application_id %></td>
+                      <td><%= loan_application.user_id %></td>
+                      <td><%= loan_application.loan_type %></td>
+                      <td><%= loan_application.application_status %></td>
+                      <td><%= loan_application.amount %></td>
+                      <td><%= loan_application.interest %></td>
+                      <td><%= loan_application.monthly_payment %></td>
+                      <td><%= loan_application.number_of_payments %></td>
+                      <td>
+                        <button onclick="updateLoanStatus('<%= loan_application.application_status %>', 'approved')">Approve</button>
+                        <button onclick="updateLoanStatus('<%= loan_application.application_status %>', 'declined')">Decline</button>
+                      </td>
+                    </tr>
+                  <% }) %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="8">No loan requests at the moment...</td>
+                  </tr>
+                <% } %>   
+              </tbody>
+            </table>
+            </form>
+          </div>
+              
+
+
             <form action="/post_announcement" method="POST">
                 <h1>Create Announcement</h1>
                 <input type="text" id="content_title" name="content_title" placeholder="Post Announcement" required />
@@ -30,36 +108,16 @@
         </div>
         <br>
         <br>
-        <div class="form-container">
-            <form action="/apply_loan" method="post">
-                <h1>Apply Loan</h1>
+       
+
+      </div>
+              
+
+
+
+      </div>
+       
+
         
-                <label for="loan_type">Loan Type:</label>
-                <select id="loan_type" name="loan_type" required>
-                    <option value="regular">Regular</option>
-                    <option value="medical">Medical</option>
-                    <option value="emergency">Emergency</option>
-                </select><br><br>
-        
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" name="amount" step="0.01" required oninput="calculateMonthlyPayment()"><br><br>
-        
-                <label for="loan_term">Loan Term:</label>
-                <select id="loan_term" name="loan_term" required onchange="calculateMonthlyPayment()">
-                    <option value="6 months">6 months</option>
-                    <option value="12 months">12 months</option>
-                    <option value="18 months">18 months</option>
-                    <option value="24 months">24 months</option>
-                </select><br><br>
-        
-                <label for="interest">Interest:</label>
-                <input type="number" id="interest" name="interest" step="0.01" required oninput="calculateMonthlyPayment()"><br><br>
-        
-                <label for="monthly_payment">Monthly Payment:</label>
-                <span id="monthly_payment">0.00</span><br><br>
-        
-                <button type="submit">Submit</button>
-            </form>
-        </div>
     </body>
 </html>

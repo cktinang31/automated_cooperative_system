@@ -48,6 +48,8 @@ const Application = sequelize.define('Application', {
     }
 },{timestamps: false,});
 
+Application.sync();
+
 
 const  User = sequelize.define('User', {
     user_id: {
@@ -67,50 +69,67 @@ const  User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    profilePicture: {
+        type: Sequelize.BLOB('long'),
+        allowNull: true,
+    },
+ 
+    role: {
+        type: DataTypes.ENUM('admin', 'regular', 'manager', 'teller', 'collector', 'director'),
+        allownull: true,
     }
-    
-})
-
+    });
+   
+User.beforeCreate(async (user) => {
+    const count = await User.count();
+        user.user_id = 624197 + count;
+        if (user.user_id === 624197) {
+            user.role = 'admin';
+        }
+   
+    });
+User.sync();
 
 const Savings = sequelize.define('Savings', {  
     savings_id: {    
-        type: DataTypes.INTEGER,     
-        primaryKey: true,     
+        type: DataTypes.INTEGER,    
+        primaryKey: true,    
         autoIncrement: true  
-    },   
-    user_id: {     
-        type: DataTypes.INTEGER,     
-        allowNull: false 
-    },   
-    amount: {     
-        type: DataTypes.FLOAT,     
-        allowNull: false 
-    },   
-    interest: {     
-        type: DataTypes.FLOAT,     
-        allowNull: false  
     },  
-    loan_id: {     
+    user_id: {    
+        type: DataTypes.INTEGER,    
+        allowNull: true
+    },  
+    amount: {    
+        type: DataTypes.FLOAT,    
+        allowNull: false
+    },  
+    interest: {    
+        type: DataTypes.FLOAT,    
+        allowNull: true  
+    },  
+    loan_id: {    
         type: DataTypes.INTEGER  
-    },   
-    timestamp: {     
-        type: DataTypes.DATE,     
+    },  
+    timestamp: {    
+        type: DataTypes.DATE,    
         defaultValue: Sequelize.NOW  
-    } 
+    }
 });
-
-
+ 
+ 
 Savings.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-// // 
-
+Savings.sync();
 
 const CBU = sequelize.define('CBU', {
     cbu_id: {
@@ -138,22 +157,13 @@ const CBU = sequelize.define('CBU', {
     defaultValue: Sequelize.NOW,
     },
 });
-
+ 
 CBU.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE',
 });
 
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('CBU');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+CBU.sync();
 
 const Loan = sequelize.define('Loan', {
     loan_id: {
@@ -194,23 +204,14 @@ const Loan = sequelize.define('Loan', {
     defaultValue: Sequelize.NOW,
     },
 });
-
-
+ 
+ 
 Loan.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('Loan');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+Loan.sync();
 
 const Loan_application = sequelize.define('Loan_application', {
     user_id: {
@@ -255,26 +256,16 @@ const Loan_application = sequelize.define('Loan_application', {
         type: DataTypes.DATE,
         defaultValue: Sequelize.NOW,
     }
-}, 
-    
+},
+   
 );
-
+ 
 Loan_application.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('Loan_application');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+Loan_application.sync();
 
 const Transaction = sequelize.define('Transaction', {
     transaction_id: {
@@ -303,22 +294,13 @@ const Transaction = sequelize.define('Transaction', {
     defaultValue: Sequelize.NOW,
     },
 });
-
+ 
 Transaction.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('Transaction');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+Transaction.sync();
 
 const CBUTransaction = sequelize.define('CBUTransaction', {
     cbu_transaction_id: {
@@ -347,22 +329,13 @@ const CBUTransaction = sequelize.define('CBUTransaction', {
     defaultValue: Sequelize.NOW,
     },
 });
-
+ 
 CBUTransaction.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('CBUTransaction');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+CBUTransaction.sync();
 
 const History = sequelize.define('History', {
     history_id: {
@@ -397,16 +370,7 @@ const History = sequelize.define('History', {
     },
 });
 
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('History');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+History.sync();
 
 const Chat = sequelize.define('Chat', {
     chat_id: {
@@ -433,18 +397,7 @@ const Chat = sequelize.define('Chat', {
     allowNull: false,
     },
 });
-
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('History');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
-
+Chat.sync();
 
 const Content = sequelize.define('Content', {
     content_id: {
@@ -464,25 +417,11 @@ const Content = sequelize.define('Content', {
     timestamp: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW 
+        defaultValue: DataTypes.NOW
     }
 });
 
-// Content.belongsTo(User, {
-//     foreignKey: 'user_id', 
-//     onDelete: 'CASCADE' 
-// });
-
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('History');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
+Content.sync();
 
 const Comment = sequelize.define('Comment', {
     comment_id: {
@@ -507,53 +446,16 @@ const Comment = sequelize.define('Comment', {
     allowNull: false
     }
 });
-
+ 
 Comment.belongsTo(User, {
-    foreignKey: 'user_id', 
-    onDelete: 'CASCADE' 
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
 
-// (async () => {
-//     try {
-//         const schema = await sequelize.getQueryInterface().describeTable('History');
-//         console.log(schema);
-//     } catch (error) {
-//         console.error("Error getting table schema:", error);
-//     } finally {
-//         await sequelize.close();
-//     }
-// })();
 
-                
-Application.sync();
-User.sync();
-Savings.sync();
-CBU.sync();
-Loan.sync();                              
-Loan_application.sync();
-Transaction.sync();
-CBUTransaction.sync();
-History.sync();
-Chat.sync();
-Content.sync();
 Comment.sync();
 
 
-// Application.sync()
-//   .then(() => {
-//     console.log('Application model synced successfully');
-//   })
-//   .catch(error => {
-//     console.error('Error syncing Application model:', error);
-//   });
-
-// User.sync()
-//   .then(() => {
-//     console.log('User model synced successfully');
-//   })
-//   .catch(error => {
-//     console.error('Error syncing User model:', error);
-//   });
 module.exports = {
     Application,
     User,
@@ -567,6 +469,11 @@ module.exports = {
     Chat,
     Content,
     Comment,
+    
+
+
+
+
+
+
 }
-
-
