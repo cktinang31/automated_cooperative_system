@@ -136,7 +136,7 @@ nav ul li a {
 }
 
 .user-name {
-    /* font-weight: bold; */ 
+    font-weight: bold; 
 }
 
 .user-email {
@@ -144,51 +144,72 @@ nav ul li a {
     color: #777;
 }
 
-.sidebar-menu div {
+.sidebar-menu li {
     position: relative;
     display: flex;
     align-items: center;
     padding: 10px 0;
 }
 
-.sidebar-menu div::before {
+.sidebar-menu li::before {
     content: '';
     position: absolute;
     left: -15px;
     top: 5px;
     height: 70%;
-    width: 4px; 
-    background-color: transparent; 
-    transition: background-color 0.3s ease; 
+    width: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
-.sidebar-menu div:hover::before {
+.sidebar-menu li:hover::before {
     background-color: #333;
 }
 
-.sidebar-menu div img {
+.sidebar-menu li img {
     width: 24px;
-    height: 24px; 
-    margin-right: 10px; 
+    height: 24px;
+    margin-right: 10px;
 }
+
 
 .sidebar-menu div a {
     text-decoration: none;
     color: #333; 
-    font-size: 16px;
-    /* font-weight: bold; */
+    font-size: 18px;
+    font-weight: bold;
 }
+
+.sidebar-menu li a:hover {
+    color: #555;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.sidebar-menu li img {
+    width: 20px; 
+    margin-right: 10px; 
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #333; 
+}
+    
 
 body {
-    overflow: hidden;
-    font-family: Tahoma, Arial, sans-serif;
-}
-
-
-.announcement-section h1 {
-    /* font-weight: normal; */ 
-}
-
+        font-family: 'Poppins', sans-serif; 
+    }
+    
 .announcement-section {
     display: flex;
     justify-content: center;
@@ -302,7 +323,7 @@ button {
     border: none; 
     padding: 10px 20px; 
     cursor: pointer; 
-    border-radius: 5px; 
+    border-radius: 10px; 
 }
 
 
@@ -333,7 +354,6 @@ button {
 label {
     display: block;
     margin-bottom: 5px;
-    /* font-weight: bold; */
 }
 
 
@@ -390,6 +410,7 @@ textarea {
     height: 500px;
 }
 
+
 .announcement-section {
     display: flex;
     flex-direction: column;
@@ -404,10 +425,31 @@ textarea {
 .form-group input[type="text"],
 .form-group textarea {
     width: 650px; 
-    height: 140px; 
+    height: 100px; 
     border-radius: 20px; 
     border: none; 
     background-color: #ccc; 
     padding: 20px; 
     box-sizing: border-box; 
 }
+
+.form-group input[type="text"] {
+    height: 50px;
+}
+
+
+.form-group textarea {
+    height: 200px; 
+}
+
+.announcement-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 15px;
+    margin: 90px 0 70px;
+    border-radius: 15px; 
+    overflow: hidden;  
+    background-color: gray;  
+}
+
