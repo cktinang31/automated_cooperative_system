@@ -13,8 +13,9 @@
         <h1>CTU-AC COOPERATIVE SYSTEM</h1>
     </div>
     <div class="member-title">
-        <h1>Member</h1>
+        <h1>Manager</h1>
     </div>
+    
     <div class="home-icon">
         <a href="/">
             <img src="/svg/icons8-home.svg" alt="Home Icon">
@@ -26,25 +27,25 @@
     <div class="content-wrapper">
         <div class="announcement-section">
             <h1>Create Announcement</h1>
-            <form id="create-announcement-form">
+
+            
+            <form id="create-announcement-form" action="/post_announcement" method="POST">
                 <div class="form-group">
                 <label for="announcement-title">Title:</label>
-                <input type="text" id="announcement-title" name="announcement_title" required>
+                <input type="text" id="content_title" name="content_title" required>
                 </div>
                 <div class="form-group">
                 <label for="announcement-content">Content:</label>
-                <textarea id="announcement-content" name="announcement_content" rows="10" required></textarea>
+                <textarea id="content" name="content" rows="10" required></textarea>
                 </div>
                 <div class="button-group">
                 <button type="submit">Post</button>
-                <button type="reset">Cancel</button>
                 </div>
             </form>
             </div>
         </main>
         
         <script src="script.js"></script>
+</div>
 </body>
 </html>
-</div>
-   
