@@ -156,38 +156,28 @@ app.get('/sidebar', (req, res) => {
 
 
 
- 
-// app.get('/mem_applications', async (req, res) => {
-//   try {
-//       const applications = await Application.find();
-//       res.json(applications);
-//   } catch (error) {
-//       console.error('Error fetching applications:', error);
-//       res.status(500).send('Error fetching applications');
-//   } 
-// });
+
+
+
  
 app.post('/user_reg', async (req, res) => {
   try {
     const { fname, lname, email, password } = req.body;
-    console.log('Request Body:', req.body); // Log request body for debugging
- 
-    // Check if a user with the provided email already exists
+    console.log('Request Body:', req.body);  
     const existingUser = await User.findOne({ where: { email } });
  
     if (existingUser) {
       return res.status(400).send('A user with this email is already registered in the system.');
     }
  
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds parameter
+    const hashedPassword = await bcrypt.hash(password, 10);
    
-    // Create a new user with the hashed password
+    
     const newUser = await User.create({
       fname,
       lname,
       email,
-      password: hashedPassword, // Store the hashed password in the database
+      password: hashedPassword, 
     });
  
     console.log('New User:', newUser);

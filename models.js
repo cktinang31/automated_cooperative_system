@@ -49,14 +49,7 @@ const Application = sequelize.define('Application', {
     application_status: {
         type: DataTypes.ENUM ('pending', 'approved', 'decline'),
         allowNull: false,
-        validate: {
-            
-            async isPendingStatus(value) {
-                if (this.previous('application_status') !== 'pending') {
-                    throw new Error('Cannot update application status once it is not pending');
-                }
-            }
-        }
+        
     },
 
     date_sent: {
