@@ -75,7 +75,7 @@ const  User = sequelize.define('User', {
     profilePicture: {
         type: Sequelize.BLOB('long'),
         allowNull: true,
-      },
+    },
     });
     
 
@@ -106,6 +106,16 @@ const Savings = sequelize.define('Savings', {
         defaultValue: Sequelize.NOW  
     } 
 });
+
+Savings.addHook('beforeValidate', (savings, options) => {
+
+    if (typeof savings.amount === 'undefined') {
+        savings.amount = 500;
+
+    }
+});
+
+
 
 
 Savings.belongsTo(User, {

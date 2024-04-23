@@ -10,6 +10,8 @@ const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const multer = require('multer');
+const user = require('user');
 
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
@@ -42,7 +44,6 @@ app.use(session({
 }));
 
 
-
 const pool = new Pool({
   connectionString:connectionString
 })
@@ -62,12 +63,9 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 
-
-
 app.use(express.static('public'));
-
 app.use(morgan('dev'));
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -150,30 +148,57 @@ app.get('/savings', (req, res) => {
   res.render('savings', { title: 'Savings'});
 });
 
-app.post('/deposit', async (req, res) => {
+app.post('/savings', async (req, res) => {
   try {
     const { deposit, content } = req.body;
-    // console.log('Request Body:', req.body); 
 
-  
-    const newDeposit = await deposit.create({
-      deposit,
-      content,
-      timestamp: new Date() 
-    });
+    // Insert data into PostgreSQL table
+    const query = 'INSERT INTO savings (deposit, content, timestamp) VALUES ($1, $2, $3) RETURNING *';
+    const values = [deposit, content, new Date()];
 
-    console.log('deposit:', newDeposit);
-    res.send('Deposit saved');
+    const result = await pool.query(query, values);
+    const newSavings = result.rows[0];
+
+    console.log('Savings:', newSavings);
+    res.send('Savings saved');
   } catch (error) {
-    console.error('Error creating deposit:', error);
-    res.status(500).send('Error creating deposit.');
+    console.error('Error creating savings:', error);
+    res.status(500).send('Error creating savings.');
   }
 });
 
 
 
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
+});
+app.get('/application', (req, res) => {
+    res.render('application', { title: 'Membership Application'});
+});
+
+app.get('/system_admin', (req, res) => {
+    res.render('system_admin', { title: 'Admin'});
+});
+
+app.get('/system_admin', (req, res) => {
+    res.render('system_admin', { title: 'Admin'});
+}); 
+
+app.get('/inquire', (req, res) => {
+  res.render('inquire', { title: 'Inquire'});
+}); 
+
+app.get('/transaction', (req, res) => {
+  res.render('transaction', { title: 'Transaction History'});
+}); 
+
+app.get('/sidebar', (req, res) => {
+  res.render('sidebar', { title: 'sidebar'});
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Sign In / Up Form'});
 });
 
 app.get('/system_admin', (req, res) => {
@@ -201,7 +226,6 @@ app.post('/mem_application', async (req, res) => {
       res.status(500).send('Error submitting the application');
   }
 });
-
 
 app.post('/user_reg', async (req, res) => {
   try {
@@ -239,14 +263,10 @@ app.get('/x', isAuthenticated, async (req, res) => {
   res.render('x', { title: 'Back-end Testing', user});
 });
 
-
-
 app.post('/post_announcement', async (req, res) => {
   try {
     const { content_title, content } = req.body;
-    // console.log('Request Body:', req.body); 
 
-  
     const newContent = await Content.create({
       content_title,
       content,
@@ -261,14 +281,23 @@ app.post('/post_announcement', async (req, res) => {
   }
 });
 
+app.get('/create_announcement', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('create_announcement', { title: 'Create_announcement', user});
+});
+
+app.get('/apply_loan', isAuthenticated, async (req, res) => {
+  const user = req.user;
+  res.render('apply_loan', { title: 'Apply Loan', user});
+});
+
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {
     const { application_id, loan_type, amount, loan_term, interest } = req.body;
     console.log('Request Body:', req.body);
-    const user_id = req.user ? req.user.id : null;
-    console.log('User ID:', user_id);
 
-    // Check if user_id is null
+    const user_id = req.session.passport.user;
+  
     if (!user_id) {
       console.error('User ID is null');
       return res.status(401).send('User ID is null');
@@ -303,9 +332,7 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
     res.status(500).send('Error submitting the application.');
   }
 });
-
-
-
+ 
 app.get('/announcement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll(); 
@@ -316,15 +343,47 @@ app.get('/announcement', isAuthenticated, async (req, res) => {
   }
 });
 
+app.get('/profile', isAuthenticated, async (req, res)  => {
+  const user = req.user;
+  res.render('profile', { title: 'Profile', user });
+});
+
+// app.post('/profile/update', upload.single('profilePicture'), async (req, res) => {
+//   try {
+//     const { fullName, email } = req.body;
+
+//     const user = await User.findByPk(req.user.id);
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     user.fullName = fullName;
+//     user.email = email;
+
+    
+//     if (req.file) {
+//       user.profilePicture = req.file.buffer;
+//     }
+
+//     await user.save();
+
+//     res.json({ message: 'Profile updated successfully' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Error updating profile' });
+//   }
+// });
+
+// ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-
 app.post('/user_login', passport.authenticate('local', {
   successRedirect: '/announcement',
   failureRedirect: '/login',
-  failureFlash: true
+  // failureFlash: true
 }), async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -358,6 +417,20 @@ app.post('/user_login', passport.authenticate('local', {
 
 
 
+// Route handler for displaying user profile
+app.get('/profile', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Fetch user details from the database
+    const userDetails = await User.findOne({ where: { email: user.email } });
+
+    res.render('profile', { title: 'Profile', user: userDetails });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Error fetching user details.');
+  }
+});
 
 // 404 page
 app.use((req, res) => {
