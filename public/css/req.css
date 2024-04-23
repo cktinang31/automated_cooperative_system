@@ -1,6 +1,10 @@
-/* requests.css */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+}
 
-/* Navigation Styles */
+
 nav {
     background-color: #373F41;
     color: #FFA900;
@@ -11,6 +15,9 @@ nav {
     font-family: 'Poppins', sans-serif; /* Set font family */
 }
 
+.home-icon {
+    font-size: 18px;
+}
 .site-title {
     display: flex;
     align-items: center;
@@ -31,26 +38,28 @@ h2 {
     font-family: 'Poppins', sans-serif; /* Set font family */
 }
 
-/* Centering the content in the "Details" column */
-th:nth-child(2),
-td:nth-child(2) {
+.table-container,
+.button-container {
     text-align: center;
+    margin: 20px auto; /* Center horizontally */
+    max-width: 600px; /* Set max-width for better alignment */
 }
 
-/* Table Styles */
 table {
     border-collapse: collapse;
-    width: 100%;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
     font-family: 'Poppins', sans-serif; /* Set font family */
 }
 
 th, td {
-    text-align: left;
     padding: 8px;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: white;
 }
 
 th {
@@ -58,8 +67,25 @@ th {
     color: white;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh; 
+.button-container .approve-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #373F41;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-container .decline-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button-container button:hover {
+    background-color: #45a049;
 }

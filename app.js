@@ -160,6 +160,11 @@ app.get('/login', (req, res) => {
 app.get('/Manager/request', (req, res) => {
   res.render('Manager/request', { title: 'Request'});
 });
+
+app.get('/Manager/req', (req, res) => {
+  res.render('Manager/req', { title: 'Req'});
+});
+ 
  
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
