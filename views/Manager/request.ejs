@@ -29,16 +29,30 @@
 <h2>Membership Requests</h2>
 
 <table id="table">
-  <tr>
-    <th>Request ID</th>
-    <th>Details</th>
-    <th>Date</th>
-  </tr>
-  <tr>
-    <td>00111</td>
-    <td>Jay Sumaway has sent a membership application.<br><span id="timestamp1"></span></td>
-    <td>04-15-2024</td>
-  </tr>
+    <thead
+        <tr>
+            <th>Application ID</th>
+            <th>Details</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (applications.length > 0) { %>
+          <% applications.forEach(application => { %>
+            <tr data-application-id="<%= application.application_id %>">
+                <td><%= application.application_id %></td>
+                <td><%= application.fname %> <%= application.lname %> has sent a membership request.</td>
+                <td><%= application.date_sent %></td>
+                
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="8">No membership requests at the moment...</td>
+            </tr>
+          <% } %>   
+        </tbody>
+
 </table>
 
 <script>

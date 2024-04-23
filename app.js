@@ -140,34 +140,114 @@ app.get('/contact', (req, res) => {
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
-
-app.get('/inquire', (req, res) => {
-  res.render('inquire', { title: 'Inquire'});
+ 
+app.get('/Member/inquire', (req, res) => {
+  res.render('Member/inquire', { title: 'Inquire'});
+});
+ 
+app.get('/Member/transaction', (req, res) => {
+  res.render('Member/transaction', { title: 'Transaction History'});
+});
+ 
+app.get('/Member/sidebar', (req, res) => {
+  res.render('Member/sidebar', { title: 'sidebar'});
 });
 
-app.get('/transaction', (req, res) => {
-  res.render('transaction', { title: 'Transaction History'});
+app.get('/Member/savings_deposit', isAuthenticated, async (req, res) => {
+  res.render('Member/savings_deposit', { title: 'Deposit'});
 });
 
-app.get('/sidebar', (req, res) => {
-  res.render('sidebar', { title: 'sidebar'});
+app.get('/Manager/sidebarmanager', (req, res) => {
+  res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
 
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
+app.get('/Manager/req', (req, res) => {
+  res.render('Manager/req', { title: 'Req'});
 });
 
-app.get('/Manager/request', (req, res) => {
-  res.render('Manager/request', { title: 'Request'});
+app.get('/Manager/membersdata', (req, res) => {
+  res.render('Manager/membersdata', { title: 'Membersdata'});
 });
 
-app.get('/Member/announcement', (req, res) => {
-  res.render('Member/announcement', { title: 'announcement'});
+app.get('/Manager/memberinfo', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Memberinfo'});
+});
+ 
+app.post('/user_reg', async (req, res) => {
+  try {
+    const { fname, lname, email, password } = req.body;
+    console.log('Request Body:', req.body);  
+    const existingUser = await User.findOne({ where: { email } });
+ 
+    if (existingUser) {
+      return res.status(400).send('A user with this email is already registered in the system.');
+    }
+ 
+    const hashedPassword = await bcrypt.hash(password, 10);
+   
+    const newUser = await User.create({
+      fname,
+      lname,
+      email,
+      password: hashedPassword, 
+    });
+ 
+    console.log('New User:', newUser);
+    res.send('Registered successfully. You can now log in Ka-Coop!');
+  } catch (error) {
+    console.error('Error registering:', error);
+    res.status(500).send('Error registering.');
+  }
+});
+
+app.post('/mem_applications/:applicationId', async (req, res) => {
+  const applicationId = req.params.applicationId;
+  const { application_status } = req.body;
+
+  try {
+    console.log('Request Body:', req.body);
+    
+    const application = await Application.findByPk(applicationId);
+
+    if (!application) {
+      return res.status(404).send('Application not found');
+    }
+
+    if (application_status !== 'approved' && application_status !== 'decline') {
+      return res.status(400).send('Invalid application status');
+    }
+
+    application.application_status = application_status;
+
+    await application.save();
+
+    console.log('Application status updated successfully:', application);
+    res.send('Application status updated successfully');
+  } catch (error) {
+    console.error('Error updating application status:', error);
+    res.status(500).send('Error updating application status');
+  }
+});
+ 
+app.get('/xx/:applicationId', isAuthenticated, async (req, res) => {
+  const applicationId = req.params.applicationId;
+
+  try {
+      const application = await Application.findByPk(applicationId);
+      if (!application) {
+          return res.status(404).send('Application not found');
+      }
+      res.render('xx', { application, title: 'Application Details', user: req.user });
+  } catch (error) {
+      console.error('Error fetching application:', error);
+      res.status(500).send('Error fetching application');
+  }
 });
 
 
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
+  const applicationDate = new Date();
   try {
       const newApplication = await Application.create({
           fname,
@@ -178,6 +258,8 @@ app.post('/mem_application', async (req, res) => {
           address,
           email,
           contact,
+          application_status: 'pending',
+          date_sent: applicationDate,
       });
 
       console.log('New Application:', newApplication);
@@ -188,49 +270,30 @@ app.post('/mem_application', async (req, res) => {
   }
 });
 
-app.post('/user_reg', async (req, res) => {
+app.get('/Manager/request', isAuthenticated, async (req, res) => {
+  const user = req.user;
   try {
-    const { fname, lname, email, password } = req.body;
-    console.log('Request Body:', req.body); // Log request body for debugging
-
-    // Check if a user with the provided email already exists
-    const existingUser = await User.findOne({ where: { email } });
-
-    if (existingUser) {
-      return res.status(400).send('A user with this email is already registered in the system.');
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds parameter
-  
-    // Create a new user with the hashed password
-    const newUser = await User.create({
-      fname,
-      lname,
-      email,
-      password: hashedPassword, // Store the hashed password in the database
-    });
-
-    console.log('New User:', newUser);
-    res.send('Registered successfully. You can now log in Ka-Coop!');
+    const applications = await Application.findAll();
+    res.render('Manager/request', { applications, title: 'Request', user});
   } catch (error) {
-    console.error('Error registering:', error);
-    res.status(500).send('Error registering.');
-  }
+    console.error('Error fetching requests:', error);
+    res.status(500).send('Error fetching requests.');
+  };
 });
 
 app.get('/x', isAuthenticated, async (req, res) => {
   const user = req.user;
   try {
     const loan_applications = await Loan_application.findAll();
-    res.render('x', { loan_applications, title: 'Back-end Testing', user });
+    const applications = await Application.findAll();
+    res.render('x', { loan_applications, applications, title: 'Back-end Testing', user });
   } catch (error) {
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
-  }
+  };
 });
- 
-app.post('/Member/announcement', async (req, res) => {
+
+app.post('/post_Member/announcement', async (req, res) => {
   try {
     const { title, content } = req.body;
  
@@ -301,15 +364,14 @@ app.get('/Member/announcement', isAuthenticated, async (req, res) => {
     const contents = await Content.findAll({
       order: [['createdAt', 'DESC']]
     });
-  
-    res.render('Member/announcement', { contents, title: 'Announcement', user });
+   
+    res.render('./Member/announcement', { contents, title: 'Announcement', user });
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
   }
 });
-
-
+ 
 app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
@@ -395,8 +457,7 @@ app.post('/profile/update', upload.single('profilePicture'), async (req, res) =>
 
     user.fullName = fullName;
     user.email = email;
-
-  
+ 
     if (req.file) {
       user.profilePicture = req.file.buffer;
     }
@@ -416,11 +477,11 @@ app.get('/profile', isAuthenticated, async (req, res) => {
     const users = await User.findAll();
     res.render('SystemAdmin/systemadmin', { users, title: 'Back-end Testing', user });
   } catch (error) {
+    
     console.error('Error fetching requests:', error);
     res.status(500).send('Error fetching requests.');
   }
 });
- 
  
 app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
   try {
@@ -431,10 +492,7 @@ app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching users.');
   }
 });
-
-
-
-
+ 
 app.post('update_user', isAuthenticated, async (req,res) => {
   try {
     const {
@@ -457,8 +515,7 @@ app.post('update_user', isAuthenticated, async (req,res) => {
     if (!updatedUser) {
       return res.status(404).send('User not found');
     }
-
-  
+   
     if (application_status === 'approved') {
  
      
@@ -472,8 +529,7 @@ app.post('update_user', isAuthenticated, async (req,res) => {
     return res.status(500).send('Error updating loan status');
   }
 })
- 
- 
+
 // ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
  
 app.get('/login', (req, res) => {
@@ -507,9 +563,9 @@ app.post('/user_login', passport.authenticate('local', {
         // case 'regular':
         //   return res.redirect('/regular_dashboard');
         case 'manager':
-          return res.redirect('/Manager/managerannouncement');
+          return res.redirect('/Manager/sidebarmanager');
         default:
-         return res.redirect('/Member/announcement');
+         return res.redirect('/Member/sidebar');
       }
     } else {
       console.error('Password does not match');
@@ -522,12 +578,11 @@ app.post('/user_login', passport.authenticate('local', {
   }
 });
 
- 
 // 404 page
 app.use((req, res) => {
-    res.status(404).render('404', { title: '404'})
+    res.status(404).render('404', { title: 'Page Not Found'})
 });
  
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+app.listen(8080, () => {
+    console.log('Server running on port 8080');
 });
