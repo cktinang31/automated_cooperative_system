@@ -5,22 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Announcement</title>
     <link rel="stylesheet" href="/css/applyloan.css">
-    <script>
-        function calculateMonthlyPayment() {
-            const amount = parseFloat(document.getElementById('amount').value);
-            const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
-            const interest = parseFloat(document.getElementById('interest').value);
-            
-            const monthlyInterestRate = interest / 12;
-            const numberOfPayments = loanTerm;
-            
-            const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
-                (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-            
-            document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
-        }
-    </script>
 </head>
+
 <body>
 
 <nav>
@@ -69,5 +55,20 @@
         <button type="submit">Submit</button>
     </form>
 </div>
+<script>
+        function calculateMonthlyPayment() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
+            const interest = parseFloat(document.getElementById('interest').value);
+            
+            const monthlyInterestRate = interest / 12;
+            const numberOfPayments = loanTerm;
+            
+            const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+                (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+            
+            document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
+        }
+    </script>
 </body>
 </html>
