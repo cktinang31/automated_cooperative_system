@@ -164,12 +164,7 @@ app.get('/Manager/sidebarmanager', (req, res) => {
 app.get('/Manager/req', (req, res) => {
   res.render('Manager/req', { title: 'Req'});
 });
- 
-app.post('/user_reg', async (req, res) => {
-  try {
-    const { fname, lname, email, password } = req.body;
-    console.log('Request Body:', req.body);  
-    const existingUser = await User.findOne({ where: { email } });
+
 app.get('/Manager/membersdata', (req, res) => {
   res.render('Manager/membersdata', { title: 'Membersdata'});
 });
@@ -177,6 +172,12 @@ app.get('/Manager/membersdata', (req, res) => {
 app.get('/Manager/memberinfo', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Memberinfo'});
 });
+ 
+app.post('/user_reg', async (req, res) => {
+  try {
+    const { fname, lname, email, password } = req.body;
+    console.log('Request Body:', req.body);  
+    const existingUser = await User.findOne({ where: { email } });
  
     if (existingUser) {
       return res.status(400).send('A user with this email is already registered in the system.');
