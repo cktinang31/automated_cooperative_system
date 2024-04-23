@@ -157,13 +157,15 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction'});
 }); 
 
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Sign In / Up Form'});
-});
-
 app.get('/mainhome', (req, res) => {
   res.render('mainhome', { title: 'Main Home'});
 });
+
+app.get('/request', (req, res) => {
+  res.render('request', { title: 'Request'});
+});
+
+
 
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
