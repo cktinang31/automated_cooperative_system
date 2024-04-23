@@ -12,7 +12,7 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
-const user = require('user');
+
 
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
@@ -140,7 +140,7 @@ app.get('/contact', (req, res) => {
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
- 
+
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
 });
@@ -160,7 +160,12 @@ app.get('/login', (req, res) => {
 app.get('/Manager/request', (req, res) => {
   res.render('Manager/request', { title: 'Request'});
 });
- 
+
+app.get('/Member/announcement', (req, res) => {
+  res.render('Member/announcement', { title: 'announcement'});
+});
+
+
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
   try {
@@ -225,33 +230,32 @@ app.get('/x', isAuthenticated, async (req, res) => {
   }
 });
  
-app.post('/post_Member/announcement', async (req, res) => {
+app.post('/Member/announcement', async (req, res) => {
   try {
-    const { content_title, content } = req.body;
-
-    const newContent = await Content.create({
-      content_title,
+    const { title, content } = req.body;
+ 
+    const newAnnouncement = await Announcement.create({
+      title,
       content,
       timestamp: new Date()
     });
  
-    console.log('Member/Announcement:', newContent);
+    console.log('Announcement created:', newAnnouncement);
     res.send('Announcement Posted');
   } catch (error) {
     console.error('Error creating announcement:', error);
     res.status(500).send('Error creating announcement.');
   }
 });
- 
+
 app.get('/Manager/create_announcement', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  res.render('Manager/create_announcement', { title: 'Create Announcement', user});
+  res.render('Manager/create_announcement', { title: 'Create Announcement'});
 });
- 
+
 app.get('/Member/applyloan', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  res.render('Member/applyloan', { title: 'Apply Loan', user});
+  res.render('Member/applyloan', { title: 'Apply Loan'});
 });
+
 
 app.post('/apply_loan', isAuthenticated, async (req, res) => {
   try {
@@ -290,22 +294,22 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
     return res.status(500).send('Error submitting the application.');
   }
 });
- 
+
 app.get('/Member/announcement', isAuthenticated, async (req, res) => {
   try {
   
     const contents = await Content.findAll({
       order: [['createdAt', 'DESC']]
     });
-   
+  
     res.render('Member/announcement', { contents, title: 'Announcement', user });
   } catch (error) {
     console.error('Error fetching contents:', error);
     res.status(500).send('Error fetching contents.');
   }
 });
- 
- 
+
+
 app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
   try {
     const contents = await Content.findAll();
@@ -517,7 +521,6 @@ app.post('/user_login', passport.authenticate('local', {
     res.status(500).send('Error logging in.');
   }
 });
-
 
  
 // 404 page
