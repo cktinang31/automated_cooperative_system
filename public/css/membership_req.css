@@ -52,3 +52,46 @@ nav ul li a {
     height: auto;
     margin-right: 5px;
 }
+
+.container {
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 36px;
+    margin-top: 3%;
+}
+
+.table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    height: 103px;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    border-bottom: 1px solid;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+.row:first-child .cell {
+    border-top: none;
+    background-color: #373F41;
+    color: white;
+}
+
+.cell:first-child {
+    border-left: none;
+}
+
+.cell:last-child {
+    border-right: none;
+}
+
