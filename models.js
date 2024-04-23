@@ -45,8 +45,25 @@ const Application = sequelize.define('Application', {
     contact: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    application_status: {
+        type: DataTypes.ENUM ('pending', 'approved', 'decline'),
+        allowNull: false,
+        
+    },
+
+    date_sent: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
     }
-},{timestamps: false,});
+},
+{timestamps: false,});
+
+Application.beforeCreate(async (application) => {
+    const count = await Application.count();
+        application.application_id = 499710 + count;
+    });
 
 Application.sync();
 
