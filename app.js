@@ -154,42 +154,24 @@ app.post('/savings', async (req, res) => {
   try {
     const { user_id, amount, interest, loan_id } = req.body;
 
-    const newSavings = await Savings.create({
-      user_id, 
-      amount, 
-      interest, 
+    
+    const newSavingsData = {
+      user_id,
+      amount: amount || 500, 
+      interest,
       loan_id,
-      timestamp: new Date() 
-    });
+      timestamp: new Date()
+    };
 
-    console.log('Announcement:', newSavings);
-    res.send('Announcement Posted');
+    const newSavings = await Savings.create(newSavingsData);
+
+    console.log('New Savings:', newSavings);
+    res.send('Savings created successfully.');
   } catch (error) {
-    console.error('Error creating announcement:', error);
+    console.error('Error creating savings:', error);
     res.status(500).send('Error creating savings.');
   }
 });
-// app.post('/savings', async (req, res) => {
-//   try {
-//     const { deposit, content } = req.body;
-
-//     // Insert data into PostgreSQL table
-//     const query = 'INSERT INTO savings (deposit, content, timestamp) VALUES ($1, $2, $3) RETURNING *';
-//     const values = [deposit, content, new Date()];
-
-//     const result = await pool.query(query, values);
-//     const newSavings = result.rows[0];
-
-//     console.log('Savings:', newSavings);
-//     res.send('Savings saved');
-//   } catch (error) {
-//     console.error('Error creating savings:', error);
-//     res.status(500).send('Error creating savings.');
-//   }
-// });
-
-
-
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});

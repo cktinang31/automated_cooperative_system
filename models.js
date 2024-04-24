@@ -58,10 +58,6 @@ const  User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true,
     },
-    application_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        },
     fname: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -86,7 +82,7 @@ const  User = sequelize.define('User', {
 
     role: {
         type: DataTypes.ENUM('admin', 'regular', 'manager', 'teller', 'collector', 'director'),
-        allownull: true,
+        allowNull: true,
     }
     });
 
@@ -128,12 +124,11 @@ const Savings = sequelize.define('Savings', {
 });
 
 Savings.addHook('beforeValidate', (savings, options) => {
-
-    if (typeof savings.amount === 'undefined') {
+    if (typeof savings.amount === 'undefined' || savings.amount === null) {
         savings.amount = 500;
-
     }
 });
+
 
 
 
