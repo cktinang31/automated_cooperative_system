@@ -160,7 +160,15 @@ app.get('/Manager/sidebarmanager', (req, res) => {
 app.get('/Manager/req', (req, res) => {
   res.render('Manager/req', { title: 'Req'});
 });
- 
+
+app.get('/Manager/loan_req', (req, res) => {
+  res.render('Manager/loan_req', { title: 'Loan Request'});
+});
+
+app.get('/Manager/loan_request', (req, res) => {
+  res.render('Manager/loan_request', { title: 'Loan Request'});
+});
+
 app.post('/user_reg', async (req, res) => {
   try {
     const { fname, lname, email, password } = req.body;

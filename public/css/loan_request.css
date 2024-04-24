@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; 
+}
+nav {
+    background-color: #373F41;
+    color: #FFA900;
+    padding: 20px 20px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.member-title{
+    padding-left: 1300px;
+}
+
+.title h1,
+.member-title {
+    margin: 0; 
+}
+
+nav ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0; 
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px; 
+}
+
+nav ul li:first-child {
+    margin-left: 0; 
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none; 
+}
+        
+.home-icon {
+    display: flex;
+    align-items: center;
+}
+
+.home-icon img {
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.manager-title h1 {
+    padding-left: 1300px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 36px;
+    margin-top: 3%;
+}
+
+.table-container {
+    margin: 0 auto;
+    width: 50%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.message-box {
+    margin: 40px auto;
+    width: 50%;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative; 
+}
+
+#message {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+#message::placeholder {
+    color: #999;
+    opacity: 1; 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    left: -390px; 
+    width: 100%; 
+    text-align: center; 
+}
+
+.message-box label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#message {
+    width: 100%;
+    padding: 0px;
+    border: 1px solid;
+    border-radius: 14px;
+    resize: vertical;
+}
+
+.approve-button,
+.decline-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 152px;
+}
+
+.approve-button {
+    background-color: #373F41;
+    color: white;
+}
+
+.decline-button {
+    background-color: #dc3545;
+    color: white;
+}
