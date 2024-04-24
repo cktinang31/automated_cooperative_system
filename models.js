@@ -58,6 +58,10 @@ const  User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true,
     },
+    application_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        },
     fname: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -79,20 +83,20 @@ const  User = sequelize.define('User', {
         type: Sequelize.BLOB('long'),
         allowNull: true,
     },
- 
+
     role: {
         type: DataTypes.ENUM('admin', 'regular', 'manager', 'teller', 'collector', 'director'),
         allownull: true,
     }
     });
-   
+
 User.beforeCreate(async (user) => {
     const count = await User.count();
         user.user_id = 624197 + count;
         if (user.user_id === 624197) {
             user.role = 'admin';
         }
-   
+
     });
 User.sync();
 
@@ -167,7 +171,7 @@ const CBU = sequelize.define('CBU', {
     defaultValue: Sequelize.NOW,
     },
 });
- 
+
 CBU.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE',
@@ -214,8 +218,8 @@ const Loan = sequelize.define('Loan', {
     defaultValue: Sequelize.NOW,
     },
 });
- 
- 
+
+
 Loan.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
@@ -224,15 +228,15 @@ Loan.belongsTo(User, {
 Loan.sync();
 
 const Loan_application = sequelize.define('Loan_application', {
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     application_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     application_status: {
         type: DataTypes.ENUM('pending', 'approve', 'decline'),
@@ -304,7 +308,7 @@ const Savings_Transaction = sequelize.define('Savings_Transaction', {
     defaultValue: Sequelize.NOW,
     },
 });
- 
+
 Savings_Transaction.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
@@ -339,7 +343,7 @@ const CBUTransaction = sequelize.define('CBUTransaction', {
     defaultValue: Sequelize.NOW,
     },
 });
- 
+
 CBUTransaction.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
@@ -456,7 +460,7 @@ const Comment = sequelize.define('Comment', {
     allowNull: false
     }
 });
- 
+
 Comment.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'

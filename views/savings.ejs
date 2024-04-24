@@ -7,7 +7,7 @@
     <style></style>
 </head>
 <body>
-
+<!-- 
     <div class="formBox">
         <label for="total">Total Savings:</label>
         <input type="number" id="total" readonly>
@@ -25,14 +25,15 @@
         </select>
     </form>
     </div>
+
     
     <div class="formBox">
         <label for="withdrawal">Withdrawal:</label>
         <input type="number" id="withdrawal" placeholder="Enter withdrawal amount" min="0" oninput="calculateTotal()">
-    </div>
+    </div> -->
     
     <div>
-        <h2>Select Mode of Payment</h2>
+        <!-- <h2>Select Mode of Payment</h2>
         <input type="radio" id="creditCard" name="paymentMode" value="Credit Card">
         <label for="creditCard">Credit Card</label><br>
     
@@ -46,6 +47,25 @@
         <label for="bankTransfer">Bank Transfer</label><br>
     
         <button onclick="getSelectedPayment()">Submit</button>
+    </div>
+
+    <div class="formbox"> -->
+        
+    <form action="/savings" method="POST">
+        <label for="userId">User ID:</label><br>
+        <input type="number" id="userId" name="user_id" required><br><br>
+
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount" ><br><br>
+
+        <label for="interest">Interest:</label><br>
+        <input type="number" id="interest" name="interest"><br><br>
+
+        <label for="loanId">Loan ID:</label><br>
+        <input type="number" id="loanId" name="loan_id"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
     </div>
     <script>
         function calculateTotal() {
