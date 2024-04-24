@@ -161,8 +161,8 @@ app.get('/Manager/request', (req, res) => {
   res.render('Manager/request', { title: 'Request'});
 });
 
-app.get('/membership_req', (req, res) => {
-  res.render('membership_req', { title: 'Membership Request'});
+app.get('/loan_req', (req, res) => {
+  res.render('loan_req', { title: 'Loan Request'});
 });
  
 app.post('/mem_application', async (req, res) => {
