@@ -165,6 +165,13 @@ app.get('/Manager/req', (req, res) => {
   res.render('Manager/req', { title: 'Req'});
 });
  
+app.get('/Manager/membersdata', (req, res) => {
+  res.render('Manager/membersdata', { title: 'Membersdata'});
+});
+
+app.get('/Manager/memberinfo', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Memberinfo'});
+});
  
 app.post('/mem_application', async (req, res) => {
   const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
