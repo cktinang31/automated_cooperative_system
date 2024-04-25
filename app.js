@@ -157,6 +157,14 @@ app.get('/Member/savings_deposit', isAuthenticated, async (req, res) => {
   res.render('Member/savings_deposit', { title: 'Deposit'});
 });
 
+app.get('/Member/cbu_deposit', isAuthenticated, async (req, res) => {
+  res.render('Member/cbu_deposit', { title: 'Deposit'});
+});
+
+app.get('/Member/dividend_deposit', isAuthenticated, async (req, res) => {
+  res.render('Member/dividend_deposit', { title: 'Deposit'});
+});
+
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
