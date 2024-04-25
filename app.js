@@ -172,6 +172,14 @@ app.get('/Manager/sidebarmanager', (req, res) => {
 app.get('/Manager/req', (req, res) => {
   res.render('Manager/req', { title: 'Req'});
 });
+
+app.get('/Manager/membersdata', (req, res) => {
+  res.render('Manager/membersdata', { title: 'Membersdata'});
+});
+
+app.get('/Manager/memberinfo', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Memberinfo'});
+});
  
 app.post('/user_reg', async (req, res) => {
   try {
@@ -581,7 +589,7 @@ app.post('/user_login', passport.authenticate('local', {
 
 // 404 page
 app.use((req, res) => {
-    res.status(404).render('404', { title: '404'})
+    res.status(404).render('404', { title: 'Page Not Found'})
 });
  
 app.listen(3000, () => {

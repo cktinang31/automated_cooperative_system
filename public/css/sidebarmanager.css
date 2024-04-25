@@ -143,21 +143,17 @@
     margin-right: 10px;
 }
 
-.bi-person-fill {
-    color: #ff6347;
-  }
-  
-  .fas.fa-comments {
-    color: #1e90ff;
-  }
-  
-  .bi-people-fill {
-    color: #20b2aa;
-  }
-  
-  .fas.fa-money-bill-wave {
-    color: #ff8c00; 
-  }
+.fas.fa-comments {
+color: #1e90ff;
+}
+
+.bi-people-fill {
+color: #20b2aa;
+}
+
+.fas.fa-money-bill-wave {
+color: #ff8c00; 
+}
 
 .user {
     display: flex;
