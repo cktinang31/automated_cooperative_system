@@ -9,19 +9,12 @@
 
 <body>
 
-<nav>
+<nav class="navbar">
     <div class="site-title">
-        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+        <h1>KACooP</h1>
+        <span>Member<i class="fas fa-home"></i></span>
     </div>
-    <div class="member-title">
-        <h1>Member</h1>
-    </div>
-    <div class="home-icon">
-        <a href="/">
-            <img src="/svg/icons8-home.svg" alt="Home Icon">
-        </a>
-    </div>
-</nav>
+</nav>  
 
 <div class="form-container">
     <form action="/apply_loan" method="post">
@@ -56,19 +49,19 @@
     </form>
 </div>
 <script>
-        function calculateMonthlyPayment() {
-            const amount = parseFloat(document.getElementById('amount').value);
-            const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
-            const interest = parseFloat(document.getElementById('interest').value);
-            
-            const monthlyInterestRate = interest / 12;
-            const numberOfPayments = loanTerm;
-            
-            const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
-                (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-            
-            document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
-        }
-    </script>
+    function calculateMonthlyPayment() {
+        const amount = parseFloat(document.getElementById('amount').value);
+        const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
+        const interest = parseFloat(document.getElementById('interest').value);
+        
+        const monthlyInterestRate = interest / 12;
+        const numberOfPayments = loanTerm;
+        
+        const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+            (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+        
+        document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
+    }
+</script>
 </body>
 </html>
