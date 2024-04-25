@@ -105,6 +105,8 @@
                 <input type="text" id="content" name="content" placeholder="Post Announcement" required />
                 <button type="submit">Post</button>
             </form>
+
+
         </div>
         <br>
         <br>
@@ -112,10 +114,51 @@
 
       </div>
               
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Application ID</th>
+              <th>Details</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (applications.length > 0) { %>
+              <% applications.forEach(application => { %>
+                <tr data-application-id="<%= application.application_id %>">
+                  <td><%= application.application_id %></td>
+                  <td><%= application.fname %> <%= application.lname %> has sent a membership request.</td>
+                  <td><%= application.date_sent %></td>
+                  
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="8">No membership requests at the moment...</td>
+              </tr>
+            <% } %>   
+          </tbody>
+        </table>
 
+      </div>
 
 
       </div>
+
+      <script>
+          document.querySelectorAll('tr[data-application-id]').forEach(row => {
+        row.addEventListener('click', function() {
+            
+            const applicationId = this.getAttribute('data-application-id');
+            
+            
+            const destinationUrl = '/xx/' + applicationId; 
+            window.location.href = destinationUrl;
+        });
+    });
+  
+      </script>
        
 
         

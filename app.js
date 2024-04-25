@@ -11,7 +11,6 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
-const user = require('user');
 const flash = require('flash');
 
 const isAuthenticated = (req, res, next) => {
@@ -582,6 +581,6 @@ app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('Server running on port 3001');
 });

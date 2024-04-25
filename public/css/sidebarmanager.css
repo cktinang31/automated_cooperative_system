@@ -139,80 +139,20 @@
     display: none;
 }
 
-.sidebar ul .fund-show.show,
-.sidebar ul .loan-show.show {
-    display: block;
-}
-
-.sidebar ul ul li {
-    line-height: 42px;
-    border-bottom: none;
-}
-
-.sidebar ul ul li a {
-    font-size: 17px;
-    color: #4a5355;
-    padding-left: 80px;
-}
-
 .sidebar i {
     margin-right: 10px;
 }
 
-.fa-money-bill-wave {
-    color: #28a745; 
+.fas.fa-comments {
+color: #1e90ff;
 }
 
-.fa-piggy-bank {
-    color: #ffc107; 
+.bi-people-fill {
+color: #20b2aa;
 }
 
-.fa-wallet {
-    color: #dc3545; 
-}
-
-.fa-hand-holding-usd {
-    color: #17a2b8; 
-}
-
-.fa-file-signature {
-    color: #6610f2;
-}
-
-.fa-file-invoice-dollar {
-    color: #6c757d;
-}
-
-.fa-history {
-    color: #fd7e14; 
-}
-
-.fa-search {
-    color: #6f42c1; 
-}
-
-.sidebar ul li.active ul li a{
-    color: #5c6a6d;
-    background: #e6e6e6;
-    border-left-color: transparent;
-}
-
-.sidebar ul ul li a:hover {
-    color: #ffffff !important;
-    background: #b3b3b3 !important;
-}
-
-.sidebar ul li a span {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 22px;
-    transition: transform 0.4s;
-}
-
-.sidebar ul li.active a span { 
-    transform: translateY(-50%) rotate(-180deg);
+.fas.fa-money-bill-wave {
+color: #ff8c00; 
 }
 
 .user {
