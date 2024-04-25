@@ -1,56 +1,54 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>x | <%=title %></title>
-  
-        
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-              const applicationIds = document.querySelectorAll(".application_id");
-              applicationIds.forEach(id => {
-                id.addEventListener("click", function() {
-                  // Hide details for all applications
-                  const allDetails = document.querySelectorAll(".details");
-                  allDetails.forEach(detail => {
-                    detail.style.display = "none";
-                  });
-          
-                  // Show details for the clicked application
-                  const details = this.nextElementSibling;
-                  details.style.display = "block";
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>KaCoop | <%=title %></title>
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            const applicationIds = document.querySelectorAll(".application_id");
+            applicationIds.forEach(id => {
+              id.addEventListener("click", function() {
+                // Hide details for all applications
+                const allDetails = document.querySelectorAll(".details");
+                allDetails.forEach(detail => {
+                  detail.style.display = "none";
                 });
+        
+                // Show details for the clicked application
+                const details = this.nextElementSibling;
+                details.style.display = "block";
               });
             });
-        </script>
-        <script>
-          function updateLoanStatus(applicationId, status) {
-            fetch('/update_loan_application', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ application_id: application_id, application_status }),
-            })
-            .then(response => {
-              if (response.redirected) {
-                
-                window.location.href = response.url;
-              } else {
-                
-                return response.text();
-              }
-            })
-            .then(message => {
-              console.log(message);
+          });
+      </script>
+      <script>
+        function updateLoanStatus(applicationId, status) {
+          fetch('/update_loan_application', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ application_id: application_id, application_status }),
+          })
+          .then(response => {
+            if (response.redirected) {
               
-            })
-            .catch(error => {
-              console.error('Error updating loan status:', error);
-            });
-          }
-        </script>
-    </head>
+              window.location.href = response.url;
+            } else {
+              
+              return response.text();
+            }
+          })
+          .then(message => {
+            console.log(message);
+            
+          })
+          .catch(error => {
+            console.error('Error updating loan status:', error);
+          });
+        }
+      </script>
+</head>
     <body>
         <div class="form-container">
 
