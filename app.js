@@ -165,6 +165,10 @@ app.get('/Member/dividend_deposit', isAuthenticated, async (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Deposit'});
 });
 
+app.get('/Member/current_loan', isAuthenticated, async (req, res) => {
+  res.render('Member/current_loan', { title: 'Loan'});
+});
+
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
