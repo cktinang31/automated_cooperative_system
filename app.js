@@ -14,6 +14,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
 
 
+
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -360,6 +361,8 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
 
 app.get('/Member/announcement', isAuthenticated, async (req, res) => {
   try {
+
+    const user = req.user; 
   
     const contents = await Content.findAll({
       order: [['createdAt', 'DESC']]
@@ -582,7 +585,7 @@ app.post('/user_login', passport.authenticate('local', {
 app.use((req, res) => {
     res.status(404).render('404', { title: 'Page Not Found'})
 });
- 
-app.listen(8080, () => {
-    console.log('Server running on port 8080');
+
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
 });
