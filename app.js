@@ -172,6 +172,11 @@ app.post('/savings', async (req, res) => {
   }
 });
 
+app.get('/savings', (req, res) => {
+  res.render('savings', { title: 'savings'});
+});
+
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
 });

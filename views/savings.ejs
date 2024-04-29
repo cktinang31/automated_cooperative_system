@@ -67,6 +67,23 @@
         <button type="submit">Submit</button>
     </form>
     </div>
+
+</div>
+
+<% if (savings.length > 0) { %>
+    <% applications.forEach(savings => { %>
+      <tr savings="<%= savings.amount%>">
+        <td><%= savings.amount %></td>
+        <td><%= application.fname %> <%= application.lname %> has sent a membership request.</td>
+        <td><%= application.date_sent %></td>
+        
+      </tr>
+    <% }) %>
+  <% } else { %>
+    <tr>
+      <td colspan="8">No membership requests at the moment...</td>
+    </tr>
+  <% } %> 
     <script>
         function calculateTotal() {
             // Get deposit and withdrawal amounts
