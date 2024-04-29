@@ -262,3 +262,12 @@
 .user input[type="file"] {
     display: none;
 }
+
+.adjusted {
+    position: fixed;
+    top: 80px; 
+    left: 450px; 
+    width: 170px;
+    height: 150px;
+    margin-top: 90px;
+}

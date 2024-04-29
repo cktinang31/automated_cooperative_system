@@ -320,6 +320,11 @@ app.post('/post_Member/announcement', async (req, res) => {
   }
 });
 
+// Separate route for rendering the input form
+app.get('/post_Member/announcement', (req, res) => {
+  res.render('announcementForm'); // Assuming you have a view file for the form
+});
+
 app.get('/Manager/create_announcement', isAuthenticated, async (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
 });

@@ -269,6 +269,7 @@ nav ul li a {
 .content-text table {
     width: 100%;
     border-collapse: collapse; 
+    
 }
 
 .content-text th,
@@ -359,3 +360,4 @@ nav ul li a {
         height: auto; 
 
     }
+
