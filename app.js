@@ -169,6 +169,10 @@ app.get('/Member/current_loan', isAuthenticated, async (req, res) => {
   res.render('Member/current_loan', { title: 'Loan'});
 });
 
+app.get('/Member/regular_loan', isAuthenticated, async (req, res) => {
+  res.render('Member/regular_loan', { title: 'Loan'});
+})
+
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
