@@ -249,9 +249,9 @@ nav ul li a {
     margin-right: -20px;
     margin-top: 50px;
   }
+  
   #withdraw-button {
-    width: 80%; +
-    
+    width: 80%;    
     height: 87px;
     background-color: #D9D9D9;
     color: #373F41;
@@ -304,7 +304,7 @@ nav ul li a {
     margin-right: 70px; 
   }
   
-  .price-label {
+  .price-label, .price-button {
     width: 300px;
     height: 63px;
     background-color: #D9D9D9;
@@ -318,7 +318,14 @@ nav ul li a {
     font-weight: 400;
     line-height: 51px;
     text-align: left;
-  }
+    border: none;
+    cursor: pointer;
+}
+
+.price-button:hover {
+    background-color: #BEBEBE; 
+}
+
   .form-group {
     margin-bottom: 15px;
     position: relative;

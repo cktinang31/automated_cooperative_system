@@ -204,7 +204,7 @@ nav ul li a {
     text-align: left;
     position: fixed;
     top: 150px;
-    left: 85%;
+    left: 83%;
     transform: translateX(calc(100% - 379px)); 
 }
     
