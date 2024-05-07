@@ -174,7 +174,6 @@ app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching users.');
   }
 });
-
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });

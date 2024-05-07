@@ -1,0 +1,65 @@
+/* requests.css */
+
+/* Navigation Styles */
+nav {
+    background-color: #373F41;
+    color: #FFA900;
+    padding: -10px -6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+.site-title {
+    display: flex;
+    align-items: center;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+}
+
+.member-title h1 {
+    margin-right: 10px;
+}
+
+/* Centering the h2 element */
+h2 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+/* Centering the content in the "Details" column */
+th:nth-child(2),
+td:nth-child(2) {
+    text-align: center;
+}
+
+/* Table Styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #373F41;
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+}
