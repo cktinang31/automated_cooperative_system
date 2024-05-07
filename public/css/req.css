@@ -38,7 +38,7 @@ h2 {
     font-family: 'Poppins', sans-serif; /* Set font family */
 }
 
-.table-container,
+.form-container,
 .button-container {
     text-align: center;
     margin: 20px auto; /* Center horizontally */

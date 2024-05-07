@@ -28,51 +28,74 @@
 <!-- Centering the h2 element -->
 <h2>Membership Requests</h2>
 
-<div class="table-container">
-    <table>
-        <tr>
-            <td>First Name:</td>
-            <td>Jay</td>
-        </tr>
-        <tr>
-            <td>Middle Name:</td>
-            <td>Anne</td>
-        </tr>
-        <tr>
-            <td>Last Name:</td>
-            <td>Sumaway</td>
-        </tr>
-        <tr>
-            <td>Date of Birth:</td>
-            <td>01-01-01</td>
-        </tr>
-        <tr>
-            <td>Place of Birth:</td>
-            <td>Ginatilan</td>
-        </tr>
-        <tr>
-            <td>Address:</td>
-            <td>Ginatilan</td>
-        </tr>
-        <tr>
-            <td>Email Add:</td>
-            <td>jay@gmail.com</td>
-        </tr>
-        <tr>
-            <td>Contact Number:</td>
-            <td>09090909002</td>
-        </tr>
-        <tr>
-            <td>Membership Fee:</td>
-            <td>1500.00 php</td>
-        </tr>
-    </table>
+<div class="form-container">
+    <form action="/mem_application_update/<%= application.application_id %>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td><%= application.fname %></td>
+            </tr>
+            <tr>
+                <td>Middle Name:</td>
+                <td><%= application.mname %></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><%= application.lname %></td>
+            </tr>
+            <tr>
+                <td>Date of Birth:</td>
+                <td><%= application.date_of_birth %></td>
+            </tr>
+            <tr>
+                <td>Place of Birth:</td>
+                <td><%= application.place_of_birth %></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><%= application.address %></td>
+            </tr>
+            <tr>
+                <td>Email Add:</td>
+                <td><%= application.email %></td>
+            </tr>
+            <tr>
+                <td>Contact Number:</td>
+                <td><%= application.contact %></td>
+            </tr>
+            <tr>
+                <td>Charges</td>
+            </tr>
+            <tr>
+                <td>Capital Build-Up:</td>
+                <td>1000.00 php</td>
+            </tr>
+            <tr>
+                <td>Savings:</td>
+                <td>500.00 php</td>
+            </tr>
+            <tr>
+                <td>Service Fee:</td>
+                <td>100.00 php</td>
+            </tr>
+            <tr>
+                <td>Total Charges:</td>
+                <td>1600.00 php</td>
+            </tr>
+            
+        </table>
+        <div class="button-container">
+            <button type="submit" class="approve-button" name="application_status" value="approved">Approve</button>
+                        
+            <button type="submit" class="decline-button" name="application_status" value="decline">Decline</button>
+        </div>
+
+    </form>
+    
 </div>
 
-<div class="button-container">
-    <button class="approve-button">Approve</button>
-    <button class="decline-button">Decline</button>
-</div>
+
 
 </body>
 </html>

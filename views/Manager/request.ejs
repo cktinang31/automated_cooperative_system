@@ -54,6 +54,19 @@
         </tbody>
 
 </table>
+<script>
+    document.querySelectorAll('tr[data-application-id]').forEach(row => {
+  row.addEventListener('click', function() {
+      
+      const applicationId = this.getAttribute('data-application-id');
+      
+      
+      const destinationUrl = '/Manager/req/' + applicationId; 
+      window.location.href = destinationUrl;
+  });
+});
+
+</script>
 
 <script>
     // Function to get current timestamp
