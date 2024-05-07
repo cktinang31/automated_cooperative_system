@@ -312,6 +312,25 @@ app.post('/post_Member/announcement', async (req, res) => {
       timestamp: new Date()
     });
  
+    const express = require('express');
+const app = express();
+
+// Endpoint para sa pagmugna og bag-ong anunsyo
+app.post('/create_announcement', (req, res) => {
+    // Diri ang imong logic para sa pagmugna og bag-ong anunsyo
+    
+    // Hibalua kon unsay gibuhat sa frontend
+    console.log('Bag-ong anunsyo gi-create');
+    
+    // Ibalik ang status 200 OK
+    res.sendStatus(200);
+});
+
+// Ibutang sa imong application sa port 3000
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
+
     console.log('Announcement created:', newAnnouncement);
     res.send('Announcement Posted');
   } catch (error) {

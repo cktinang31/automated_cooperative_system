@@ -361,3 +361,123 @@ nav ul li a {
 
     }
 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+    
+    .announcement-section h1 {
+        font-weight: 600; 
+        margin-top: 100px;
+        margin-bottom: 100px;
+        text-align: center;
+    }
+    
+    .announcement-section {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center; 
+        max-width: 300%; 
+        margin: 0 auto; 
+        width: 100%; 
+        height: auto; 
+    }
+    
+    .element-class {
+        overflow: hidden;
+    }
+    
+    .content-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        align-items: flex-start; 
+        display: flex;
+        height: 100vh; 
+        padding: 50px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .button-group {
+        text-align: center;
+    }
+    
+    .announcement-title {
+        margin-bottom: 50px; 
+    }
+    
+    #create-announcement-form {
+        width: 100%; 
+        max-width: 900px; 
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+        width: 80%;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #373F41;
+    }
+    
+    .button-group {
+        display: flex;
+        justify-content: center;
+        text-align: center; 
+    }
+    
+    button {
+        padding: 10px 20px;
+        margin: 0 10px;
+    }
+    
+    .button-group button[type="submit"] {
+        background-color: #FFA900;
+        border: none; 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        border-radius: 10px; 
+    }
+    
+    .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    #create-announcement-form .form-group input[type="text"] {
+        background: #e7e7e7;
+        width: 100%;
+        padding: 15px;
+        border-radius: 45px;
+        border: 1px solid #d4d4d4;
+        outline: none;
+        margin-bottom: 60px;
+    }
+    
+    #create-announcement-form .form-group textarea {
+        background: #e7e7e7;
+        width: 100%;
+        padding: 20px;
+        border-radius: 25px;
+        border: 1px solid #d4d4d4;
+        outline: none;
+        margin-bottom: 60px;
+    }
+    
+    
