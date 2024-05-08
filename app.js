@@ -6,12 +6,18 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
-const {Application, User, Content, Loan_application, Savings} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
+const memApplicationRoutes = require('./routes/mem_applicationRoute');
+const userRoutes = require('./routes/userRoute');
+const contentRoutes = require('./routes/contentRoute');
+const loan_applicationRoutes = require('./routes/loan_applicationRoute');
+const User = require('./models/user');
+const Application = require('./models/application');
+
 
  
 const isAuthenticated = (req, res, next) => {
@@ -69,6 +75,11 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  console.log('Request body:', req.body);
+  next();
+});
+
 const upload = multer({ dest: 'uploads/' });
 app.use(passport.initialize());
 app.use(passport.session());
@@ -92,95 +103,110 @@ passport.deserializeUser(async (user_id, done) => {
     done(error);
   }
 });
- 
+
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  failureFlash: true // Enable flash messages for authentication failures
-},
-async (email, password, done) => {
+  failureFlash: true
+}, async (email, password, done) => {
   try {
-      // Find the user by email
       const user = await User.findOne({ where: { email } });
- 
+
       if (!user) {
           return done(null, false, { message: 'User not found' });
       }
- 
-      // Compare password
+
       const passwordMatch = await bcrypt.compare(password, user.password);
- 
+
       if (!passwordMatch) {
           return done(null, false, { message: 'Incorrect password' });
       }
- 
-      // If user and password are correct, return the user
+
       return done(null, user);
   } catch (error) {
       return done(error);
   }
 }));
- 
+
+app.post('/login', passport.authenticate('local', {
+  failureRedirect: '/login',
+  failureFlash: true
+}), async (req, res) => {
+  try {
+      
+      const redirectTo = req.session.returnTo || '/'; 
+      res.redirect(redirectTo);
+  } catch (error) {
+      console.error('Error in login route handler:', error);
+      res.status(500).send('Internal server error');
+  }
+});
+
+app.use(memApplicationRoutes); 
+app.use(userRoutes);
+app.use(contentRoutes);
+app.use(loan_applicationRoutes);
+
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Landing'});
+  res.render('index', { title: 'Landing'});
 });
- 
+
 app.get('/about', (req, res) => {
-    res.render('about', { title: 'About'});
+  res.render('about', { title: 'About'});
 });
- 
+
 app.get('/service', (req, res) => {
-    res.render('service', { title: 'Services'});
+  res.render('service', { title: 'Services'});
 });
- 
+
 app.get('/contact', (req, res) => {
-    res.render('contact', { title: 'Contact Us'});
+  res.render('contact', { title: 'Contact Us'});
 });
- 
+
 app.get('/application', (req, res) => {
-    res.render('application', { title: 'Membership Application'});
+  res.render('application', { title: 'Membership Application'});
 });
- 
+
 app.get('/Member/inquire', (req, res) => {
-  res.render('Member/inquire', { title: 'Inquire'});
+res.render('Member/inquire', { title: 'Inquire'});
 });
- 
+
 app.get('/Member/transaction', (req, res) => {
-  res.render('Member/transaction', { title: 'Transaction History'});
+res.render('Member/transaction', { title: 'Transaction History'});
 });
- 
+
 app.get('/Member/sidebar', (req, res) => {
-  res.render('Member/sidebar', { title: 'sidebar'});
+res.render('Member/sidebar', { title: 'sidebar'});
 });
 
 app.get('/Member/savings_deposit', isAuthenticated, async (req, res) => {
-  res.render('Member/savings_deposit', { title: 'Deposit'});
+res.render('Member/savings_deposit', { title: 'Deposit'});
 });
 
 app.get('/Member/cbu_deposit', isAuthenticated, async (req, res) => {
-  res.render('Member/cbu_deposit', { title: 'Deposit'});
+res.render('Member/cbu_deposit', { title: 'Deposit'});
 });
 
 app.get('/Member/dividend_deposit', isAuthenticated, async (req, res) => {
-  res.render('Member/dividend_deposit', { title: 'Deposit'});
+res.render('Member/dividend_deposit', { title: 'Deposit'});
 });
 
 app.get('/Manager/sidebarmanager', (req, res) => {
-  res.render('Manager/sidebarmanager', { title: 'sidebar'});
+res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
 
 app.get('/Manager/req', (req, res) => {
-  res.render('Manager/req', { title: 'Req'});
+res.render('Manager/req', { title: 'Req'});
 });
 
 app.get('/Manager/membersdata', (req, res) => {
-  res.render('Manager/membersdata', { title: 'Membersdata'});
+res.render('Manager/membersdata', { title: 'Membersdata'});
 });
 
 app.get('/Manager/memberinfo', (req, res) => {
-  res.render('Manager/memberinfo', { title: 'Memberinfo'});
+res.render('Manager/memberinfo', { title: 'Memberinfo'});
 });
- 
+
 app.post('/user_reg', async (req, res) => {
   try {
     const { fname, lname, email, password } = req.body;
@@ -390,22 +416,7 @@ app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching contents.');
   }
 });
- 
-// app.post ('approved_loan', isAuthenticated, async (req, res) => {
-//   try{
-//     const Loan = await Loan.create ({
-//       user_id: Loan_application.user_id,
-//       loan_type: Loan_application.loan_type,
-//       amount: Loan_application.amount,
-//       interest: Loan_application.interest,
-//       monthly_payment: Loan_application.monthly_payment,
-//       number_of_payments: Loan_application.number_of_payments,
-//       status: 'active'
-   
-//     })
-//   }
-// });
- 
+
 app.post('update_loan_application', isAuthenticated, async (req,res) => {
   try {
     const { application_id,
@@ -491,17 +502,7 @@ app.get('/profile', isAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching requests.');
   }
 });
- 
-app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.render('SystemAdmin/systemadmin', { users: users, title: 'System Admin', user: req.user });
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).send('Error fetching users.');
-  }
-});
- 
+
 app.post('update_user', isAuthenticated, async (req,res) => {
   try {
     const {
@@ -539,59 +540,25 @@ app.post('update_user', isAuthenticated, async (req,res) => {
   }
 })
 
-// ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
- 
+app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.render('SystemAdmin/systemadmin', { users: users, title: 'System Admin', user: req.user });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).send('Error fetching users.');
+  }
+});
+
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
-});
- 
-app.post('/user_login', passport.authenticate('local', {
-  failureRedirect: '/login',
-  failureFlash: true
-}), async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log('Login Request Body:', req.body);
-    // Find the user by email
-    const user = await User.findOne({ where: { email } });
- 
-    if (!user) {
-      return res.status(404).send('User not found. Please register first.');
-    }
- 
-    const passwordMatch = await bcrypt.compare(password, user.password);
- 
-    if (passwordMatch) {
-      req.session.isLoggedIn = true;
-      req.session.user = user;
-      console.log('User Object:', req.user);
-     
-      switch (user.role) {
-        case 'admin':
-          return res.redirect('/SystemAdmin/systemadmin');
-        // case 'regular':
-        //   return res.redirect('/regular_dashboard');
-        case 'manager':
-          return res.redirect('/Manager/sidebarmanager');
-        default:
-         return res.redirect('/Member/sidebar');
-      }
-    } else {
-      console.error('Password does not match');
-      return res.status(401).send('Incorrect password.');
-    }
- 
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).send('Error logging in.');
-  }
 });
 
 // 404 page
 app.use((req, res) => {
-    res.status(404).render('404', { title: 'Page Not Found'})
+  res.status(404).render('404', { title: '404'})
 });
- 
+
 app.listen(3000, () => {
-    console.log('Server running on port 3000');
+  console.log('Server running on port 3000');
 });
