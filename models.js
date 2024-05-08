@@ -112,7 +112,6 @@ User.beforeCreate(async (user) => {
 
     });
 User.sync();
-
 const Savings = sequelize.define('Savings', {  
     savings_id: {    
         type: DataTypes.INTEGER,    
@@ -120,7 +119,7 @@ const Savings = sequelize.define('Savings', {
         autoIncrement: true
     },  
     amount: {    
-        type: DataTypes.INTEGER,    
+        type: DataTypes.FLOAT,    
         allowNull: false
     },  
     interest: {    

@@ -147,16 +147,16 @@ app.get('/application', (req, res) => {
 // taladro backend testing (ayaw hilabti)
 
 app.get('/savings', (req, res) => {
-  res.render('savings', { title: 'Savings'});
+  res.render('savings', { title: 'savings'});
 });
 
 app.post('/savings', async (req, res) => {
   try {
-    const { user_id, amount, interest, loan_id } = req.body;
+    const { savings_id, amount, interest, loan_id } = req.body;
 
     
     const newSavingsData = {
-      user_id,
+      savings_id,
       amount: amount || 500, 
       interest,
       loan_id,
@@ -175,9 +175,9 @@ app.post('/savings', async (req, res) => {
 
 app.post('/savings', async (req, res) => {
   try {
-      const { user_id, amount, interest, loan_id } = req.body;
+      const { savings_id, amount, interest, loan_id } = req.body;
       const newSavingsData = {
-          user_id,
+          savings_id,
           amount: amount || 500, 
           interest,
           loan_id,
