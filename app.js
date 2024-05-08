@@ -14,6 +14,8 @@ const memApplicationRoutes = require('./routes/mem_applicationRoute');
 const userRoutes = require('./routes/userRoute');
 const contentRoutes = require('./routes/contentRoute');
 const loan_applicationRoutes = require('./routes/loan_applicationRoute');
+const memberpageRoutes = require('./routes/memberpageRoute');
+const managerpageRoutes = require('./routes/managerpageRoute');
 const User = require('./models/user');
 const Application = require('./models/application');
 
@@ -25,10 +27,10 @@ const isAuthenticated = (req, res, next) => {
     console.log('Session ID:', req.sessionID);
     console.log('Session:', req.session);
     console.log('Authenticated:', req.isAuthenticated());
-    
-    if (req.isAuthenticated()) {
-      console.log('User is authenticated.');
-      return next(); 
+  
+    if (req.isAuthenticated() || req.path === '/login') {
+      console.log('User is authenticated or trying to log in.');
+      return next();
     } else {
       console.log('User is not authenticated. Redirecting to login page.');
       return res.redirect('/login'); 
@@ -129,6 +131,12 @@ passport.use(new LocalStrategy({
 ));
 
 
+app.use(memApplicationRoutes); 
+app.use(userRoutes);
+app.use(contentRoutes);
+app.use(loan_applicationRoutes);
+app.use(memberpageRoutes);
+app.use(managerpageRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
