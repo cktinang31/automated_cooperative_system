@@ -1,6 +1,13 @@
-/* requests.css */
 
-/* Navigation Styles */
+#table td:first-child input[type="checkbox"] {
+  
+    margin-right: 5px; /* Adjust the margin to create space between checkbox and text */
+}
+
+#table input[type="checkbox"] {
+    margin-right: 100px; /* Adjust the margin to create space between checkbox and text */
+}
+
 nav {
     background-color: #373F41;
     color: #FFA900;
@@ -16,6 +23,7 @@ nav {
     align-items: center;
 }
 
+
 .nav-content {
     display: flex;
     align-items: center;
@@ -28,11 +36,52 @@ nav {
 /* Centering the h2 element */
 h2 {
     text-align: center;
-    font-family: 'Poppins', sans-serif; /* Set font family */
+    font-family: 'Poppins', sans-serif;
+    margin-top: 50px; /* Set font family */
 }
 
 body {
     margin: 0;
     padding: 0;
     height: 100vh; 
+}
+
+.status-approved {
+    background-color: rgb(119, 202, 119);
+    color: white;
+}
+
+#table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+th, td {
+    text-align: center; /* Align text to the center within each th and td */
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #373F41;
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+}
+
+#table th {
+    text-align: center; /* Center align the text in th */
+    padding: 10px; /* Add padding to th */
+}
+
+#table th:nth-child(n+2), #table td:nth-child(n+2) {
+    width: 25%; /* Equal width for each column except the first one */
 }
