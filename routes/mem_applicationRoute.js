@@ -3,7 +3,7 @@ const applicationController = require('../controller/applicationController');
 const Application = require('../models/application');
 
 const router = express.Router();
- 
+
 router.get('/application', (req, res) => {
     
     res.render('application', { title: 'Membership Application' });
