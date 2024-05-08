@@ -5,13 +5,19 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
 const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
-const {Application, User, Content, Loan_application,Savings_Transaction, Savings} = require('./models')
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
-const flash = require('flash');
+const memApplicationRoutes = require('./routes/mem_applicationRoute');
+const userRoutes = require('./routes/userRoute');
+const contentRoutes = require('./routes/contentRoute');
+const loan_applicationRoutes = require('./routes/loan_applicationRoute');
+const User = require('./models/user');
+const Application = require('./models/application');
+
+
 
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
@@ -43,7 +49,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.use(flash());
+
 
 const pool = new Pool({
   connectionString:connectionString
@@ -68,8 +74,12 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log('Request body:', req.body);
+  next();
+});
 
+const upload = multer({ dest: 'uploads/' });
 app.use(passport.initialize());
 app.use(passport.session());
 // Serialize user to store in session
@@ -93,26 +103,24 @@ passport.deserializeUser(async (user_id, done) => {
   }
 });
 
-
-passport.use(new LocalStrategy(
-  { usernameField: 'email' }, // Specify the field name for the username/email
-  async (email, password, done) => {
-    try {
-      // Find the user by email
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  failureFlash: true
+}, async (email, password, done) => {
+  try {
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
         return done(null, false, { message: 'User not found' });
       }
 
-      // Compare password
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
         return done(null, false, { message: 'Incorrect password' });
       }
 
-      // If user and password are correct, return the user
       return done(null, user);
     } catch (error) {
       return done(error);
@@ -123,25 +131,23 @@ passport.use(new LocalStrategy(
 
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Landing'});
+  res.render('index', { title: 'Landing'});
 });
 
 app.get('/about', (req, res) => {
-    res.render('about', { title: 'About'});
+  res.render('about', { title: 'About'});
 });
 
 app.get('/service', (req, res) => {
-    res.render('service', { title: 'Services'});
+  res.render('service', { title: 'Services'});
 });
 
 app.get('/contact', (req, res) => {
-    res.render('contact', { title: 'Contact Us'});
+  res.render('contact', { title: 'Contact Us'});
 });
 
-
-
 app.get('/application', (req, res) => {
-    res.render('application', { title: 'Membership Application'});
+  res.render('application', { title: 'Membership Application'});
 });
 
 // taladro backend testing (ayaw hilabti)
@@ -152,11 +158,11 @@ app.get('/savings', (req, res) => {
 
 app.post('/savings', async (req, res) => {
   try {
-    const { savings_id, amount, interest, loan_id } = req.body;
+    const { user_id, amount, interest, loan_id } = req.body;
 
     
     const newSavingsData = {
-      savings_id,
+      user_id,
       amount: amount || 500, 
       interest,
       loan_id,
@@ -175,38 +181,30 @@ app.post('/savings', async (req, res) => {
 
 app.post('/savings', async (req, res) => {
   try {
-      const { savings_id, amount, interest, loan_id } = req.body;
-      const newSavingsData = {
-          savings_id,
-          amount: amount || 500, 
-          interest,
-          loan_id,
-          timestamp: new Date()
-      };
-      const newSavings = await Savings.create(newSavingsData); // Create a new savings record
-      console.log('New Savings:', newSavings);
-      res.send('Savings created successfully.');
+    const { user_id, amount, interest, loan_id } = req.body;
+
+    
+    const newSavingsData = {
+      user_id,
+      amount: amount || 500, 
+      interest,
+      loan_id,
+      timestamp: new Date()
+    };
+
+    const newSavings = await Savings.create(newSavingsData);
+
+    console.log('New Savings:', newSavings);
+    res.send('Savings created successfully.');
   } catch (error) {
-      console.error('Error creating savings:', error);
-      res.status(500).send('Error creating savings.');
+    console.error('Error creating savings:', error);
+    res.status(500).send('Error creating savings.');
   }
 });
 
 
 
-// app.get('/savings', isAuthenticated, async (req, res) => {
-//   try {
-  
-//     const savings = await Savings.findAll({
-//       order: [['createdAt', 'DESC']]
-//     });
-  
-//     res.render('Savings', { savings, title: 'savings',});
-//   } catch (error) {
-//     console.error('Error fetching savings:', error);
-//     res.status(500).send('Error fetching savings.');
-//   }
-// });
+
 
 
 
@@ -407,21 +405,6 @@ app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
   }
 });
 
-// app.post ('approved_loan', isAuthenticated, async (req, res) => {
-//   try{
-//     const Loan = await Loan.create ({
-//       user_id: Loan_application.user_id,
-//       loan_type: Loan_application.loan_type,
-//       amount: Loan_application.amount,
-//       interest: Loan_application.interest,
-//       monthly_payment: Loan_application.monthly_payment,
-//       number_of_payments: Loan_application.number_of_payments,
-//       status: 'active'
-
-//     })
-//   }
-// });
-
 app.post('update_loan_application', isAuthenticated, async (req,res) => {
   try {
     const { application_id,
@@ -508,24 +491,6 @@ app.get('/profile', isAuthenticated, async (req, res) => {
   }
 });
 
-
-app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.render('SystemAdmin/systemadmin', { users: users, title: 'System Admin', user: req.user });
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).send('Error fetching users.');
-  }
-});
-
-
-
-
-
-
-
-
 app.post('update_user', isAuthenticated, async (req,res) => {
   try {
     const {
@@ -564,61 +529,27 @@ app.post('update_user', isAuthenticated, async (req,res) => {
   }
 })
 
-
-// ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
+app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.render('SystemAdmin/systemadmin', { users: users, title: 'System Admin', user: req.user });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).send('Error fetching users.');
+  }
+});
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
-});
-
-app.post('/user_login', passport.authenticate('local', {
-  failureRedirect: '/login',
-  // failureFlash: true
-}), async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log('Login Request Body:', req.body); 
-    // Find the user by email
-    const user = await User.findOne({ where: { email } });
-
-    if (!user) {
-      return res.status(404).send('User not found. Please register first.');
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (passwordMatch) {
-      req.session.isLoggedIn = true; 
-      req.session.user = user; 
-
-      switch (user.role) {
-        case 'admin':
-          return res.redirect('/SystemAdmin/systemadmin');
-        // case 'regular':
-        //   return res.redirect('/regular_dashboard');
-        case 'manager':
-          return res.redirect('/Manager/managerannouncement');
-        default:
-        return res.redirect('/Member/announcement');
-      }
-    } else {
-      console.error('Password does not match'); 
-      return res.status(401).send('Incorrect password.');
-    }
-
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).send('Error logging in.');
-  }
 });
 
 
 
 // 404 page
 app.use((req, res) => {
-    res.status(404).render('404', { title: '404'})
+  res.status(404).render('404', { title: '404'})
 });
 
-app.listen(4000, () => {
-    console.log('Server running on port 4000');
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });

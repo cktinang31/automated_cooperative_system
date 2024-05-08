@@ -42,40 +42,73 @@
     <i class="fas fa-wallet"></i> Withdraw
   </button>
 </div>
-  <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
 
+<script>
+  // Get references to the deposit and withdraw buttons
+  var depositButton = document.getElementById("deposit-button");
+  var withdrawButton = document.getElementById("withdraw-button");
+
+  // Add click event listeners to the buttons
+  depositButton.addEventListener("click", function() {
+    // Toggle background colors
+    depositButton.style.backgroundColor = "#D9D9D9";
+    withdrawButton.style.backgroundColor = "#373F41";
+    // Toggle font colors
+    depositButton.style.color = "#373F41";
+    withdrawButton.style.color = "white";
+  });
+
+  withdrawButton.addEventListener("click", function() {
+    // Toggle background colors
+    depositButton.style.backgroundColor = "#373F41";
+    withdrawButton.style.backgroundColor = "#D9D9D9";
+    // Toggle font colors
+    depositButton.style.color = "white";
+    withdrawButton.style.color = "#373F41";
+  });
+</script>
+
+  <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
   <div id="price-labels">
     <div class="column">
-      <span class="price-label">PHP 1000</span>
-      <span class="price-label">PHP 4000</span>
+      <button class="price-button">PHP 1000</button>
+      <button class="price-button">PHP 4000</button>
     </div>
     <div class="column">
-      <span class="price-label">PHP 2000</span>
-      <span class="price-label">PHP 5000</span>
+      <button class="price-button">PHP 2000</button>
+      <button class="price-button">PHP 5000</button>
     </div>
     <div class="column">
-      <span class="price-label">PHP 3000</span>
-      <span class="price-label">PHP 6000</span>
+      <button class="price-button">PHP 3000</button>
+      <button class="price-button">PHP 6000</button>
     </div>
   </div>
   
-  <div class="form-group">
-    <label for="amount">AMOUNT:</label>
-    <input type="number" id="amount" name="amount" required>
-  </div>
-  <div class="form-group">
-    <label for="account-number">ACCOUNT NUMBER:</label>
-    <input type="text" id="account-number" name="account-number" required>
-    <div class="dropdown-container">
-      <label for="mode-of-payment">MODE OF PAYMENT:</label>
-      <select id="mode-of-payment" name="mode-of-payment" required>
-        <option value="" disabled selected hidden></option>
-        <option value="cash">Cash</option>
-        <option value="credit-card">Credit Card</option>
-        <option value="debit-card">Debit Card</option>
-      </select>
+  <form>
+    <div class="form-group">
+      <label for="amount">AMOUNT:</label>
+      <input type="number" id="amount" name="amount" required>
     </div>
-  </div>  
+    <div class="form-group">
+      <label for="account-number">ACCOUNT NUMBER:</label>
+      <input type="text" id="account-number" name="account-number" required>
+      <div class="dropdown-container">
+        <label for="mode-of-payment" id="mode-label">MODE OF PAYMENT:</label>
+        <select id="mode-of-payment" name="mode-of-payment" required onchange="toggleModeLabel()">
+          <option value="" disabled selected hidden></option>
+          <option value="cash">Cash</option>
+          <option value="credit-card">Credit Card</option>
+          <option value="debit-card">Debit Card</option>
+        </select>
+      </div>
+    </div>   
+
+  <script>
+    function toggleModeLabel() {
+     var modeLabel = document.getElementById("mode-label");
+     modeLabel.style.display = "none";
+   }
+     </script>  
 
 <button type="submit">DEPOSIT</button>
 </form>
