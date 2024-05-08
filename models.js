@@ -117,14 +117,10 @@ const Savings = sequelize.define('Savings', {
     savings_id: {    
         type: DataTypes.INTEGER,    
         primaryKey: true,    
-        autoIncrement: true  
-    },  
-    user_id: {    
-        type: DataTypes.INTEGER,    
-        allowNull: true
+        autoIncrement: true
     },  
     amount: {    
-        type: DataTypes.FLOAT,    
+        type: DataTypes.INTEGER,    
         allowNull: false
     },  
     interest: {    
@@ -151,8 +147,8 @@ Savings.addHook('beforeValidate', (savings, options) => {
 
 
 Savings.belongsTo(User, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+    foreignKey: 'savings_id',
+    onDelete: 'CASCADE', 
 });
 
 Savings.sync();

@@ -145,6 +145,7 @@ app.get('/application', (req, res) => {
 });
 
 // taladro backend testing (ayaw hilabti)
+
 app.get('/savings', (req, res) => {
   res.render('savings', { title: 'Savings'});
 });
@@ -172,9 +173,41 @@ app.post('/savings', async (req, res) => {
   }
 });
 
-app.get('/savings', (req, res) => {
-  res.render('savings', { title: 'savings'});
+app.post('/savings', async (req, res) => {
+  try {
+      const { user_id, amount, interest, loan_id } = req.body;
+      const newSavingsData = {
+          user_id,
+          amount: amount || 500, 
+          interest,
+          loan_id,
+          timestamp: new Date()
+      };
+      const newSavings = await Savings.create(newSavingsData); // Create a new savings record
+      console.log('New Savings:', newSavings);
+      res.send('Savings created successfully.');
+  } catch (error) {
+      console.error('Error creating savings:', error);
+      res.status(500).send('Error creating savings.');
+  }
 });
+
+
+
+// app.get('/savings', isAuthenticated, async (req, res) => {
+//   try {
+  
+//     const savings = await Savings.findAll({
+//       order: [['createdAt', 'DESC']]
+//     });
+  
+//     res.render('Savings', { savings, title: 'savings',});
+//   } catch (error) {
+//     console.error('Error fetching savings:', error);
+//     res.status(500).send('Error fetching savings.');
+//   }
+// });
+
 
 
 app.get('/login', (req, res) => {
@@ -349,7 +382,7 @@ app.post('/apply_loan', isAuthenticated, async (req, res) => {
   }
 });
 
-app.get('/announcement', isAuthenticated, async (req, res) => {
+app.get('/Member/announcement', isAuthenticated, async (req, res) => {
   try {
   
     const contents = await Content.findAll({
@@ -586,6 +619,6 @@ app.use((req, res) => {
     res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3001, () => {
-    console.log('Server running on port 3001');
+app.listen(4000, () => {
+    console.log('Server running on port 4000');
 });
