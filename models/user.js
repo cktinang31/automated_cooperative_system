@@ -6,8 +6,14 @@ const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     port: 5432,
     logging: console.log 
 });
+const Application = require ('../models/application');
 
 const  User = sequelize.define('User', {
+    application: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+    },
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -35,12 +41,23 @@ const  User = sequelize.define('User', {
         type: Sequelize.BLOB('long'),
         allowNull: true,
     },
+
+    registered: {
+        type: Boolean,
+        allowNull: false,
+    },
  
     role: {
         type: DataTypes.ENUM('admin', 'regular', 'manager', 'teller', 'collector', 'director'),
         allownull: true,
     }
     });
+
+
+User.belongsTo(Application, {
+    foreignKey: 'application_id',
+    onDelete: 'CASCADE'
+});
    
 User.beforeCreate(async (user) => {
     const count = await User.count();
