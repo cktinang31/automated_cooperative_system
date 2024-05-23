@@ -194,7 +194,7 @@ nav ul li a {
 }
 
 .loan-details {
-    width: 379px;
+    width: 320px;
     height: 56px;
     gap: 0px;
     font-family: Poppins;
@@ -204,10 +204,17 @@ nav ul li a {
     text-align: left;
     position: fixed;
     top: 150px;
-    left: 83%;
-    transform: translateX(calc(100% - 379px)); 
+    right: 20px; 
+    transform: translateX(0); 
 }
-    
+
+.status-ontime {
+    color: green;
+}
+.status-delayed {
+    color: red;
+}
+
 .loan-type {
     width: 295px;
     height: 56px;
