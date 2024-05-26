@@ -40,8 +40,8 @@
                     <span class="fas fa-caret-down first"></span>
                 </a>
                 <ul class="fund-show">
-                    <li><a href="#"><i class="fas fa-piggy-bank"></i>Savings</a></li>
-                    <li><a href="#"><i class="fas fa-wallet"></i>CBU</a></li>
+                    <li><a href="/Member/savings_deposit"><i class="fas fa-piggy-bank"></i>Savings</a></li>
+                    <li><a href="/Member/cbu_deposit"><i class="fas fa-wallet"></i>CBU</a></li>
                 </ul>
             </li>
             <li>
@@ -49,33 +49,54 @@
                     <span class="fas fa-caret-down second"></span>
                 </a>
                 <ul class="loan-show">
-                    <li><a href="#"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
-                    <li><a href="#"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
+                    <li><a href="/Member/applyloan"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
+                    <li><a href="/Member/current_loan"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
                 </ul>
             </li>
-            <li><a href="#"><i class="fas fa-history"></i>Transaction History</a></li>
-            <li><a href="#"><i class="fas fa-search"></i>Inquire</a></li>
+            <li><a href="transaction"><i class="fas fa-history"></i>Transaction History</a></li>
+            <li><a href="inquire"><i class="fas fa-search"></i>Inquire</a></li>
         </ul>
     </div>    
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function(){
+        // Restore sidebar state
+        if (localStorage.getItem('sidebarState') === 'show') {
+            $('.sidebar').addClass('show');
+            $('.btn').addClass('click');
+        }
+
+        // Restore fund dropdown state
+        if (localStorage.getItem('fundState') === 'show') {
+            $('.fund-show').addClass('show');
+            $('.fund-btn').parent().addClass('active');
+        }
+
+        // Restore loan dropdown state
+        if (localStorage.getItem('loanState') === 'show') {
+            $('.loan-show').addClass('show');
+            $('.loan-btn').parent().addClass('active');
+        }
+
         $('.btn').click(function(){
             $(this).toggleClass("click");
             $('.sidebar').toggleClass("show");
+            localStorage.setItem('sidebarState', $('.sidebar').hasClass('show') ? 'show' : 'hide');
         });
         
         $('.fund-btn').click(function(e){
             e.preventDefault();
             $('.fund-show').toggleClass("show");
             $(this).parent().toggleClass("active");
+            localStorage.setItem('fundState', $('.fund-show').hasClass('show') ? 'show' : 'hide');
         });
  
         $('.loan-btn').click(function(e){
             e.preventDefault();
             $('.loan-show').toggleClass("show");
             $(this).parent().toggleClass("active");
+            localStorage.setItem('loanState', $('.loan-show').hasClass('show') ? 'show' : 'hide');
         });
     });
     </script>

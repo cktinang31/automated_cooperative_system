@@ -36,6 +36,17 @@ body{
     height: 100%;
 }
 
+#successMessage {
+    display: none;
+    color: green;
+    font-size: 1.2em;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid green;
+    background-color: #e6ffe6;
+    border-radius: 5px;
+}
+
 .formtitle{
     font-style: normal;
     font-weight: 700;

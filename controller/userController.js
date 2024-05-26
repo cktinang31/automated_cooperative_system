@@ -60,9 +60,9 @@ const user_reg = async (req, res) => {
             case 'admin':
               return res.redirect('/SystemAdmin/systemadmin');
             case 'manager':
-              return res.redirect('/Manager/managerannouncement');
+              return res.redirect('/Manager/sidebarmanager');
             default:
-              return res.redirect('./Member/announcement');
+              return res.redirect('/Member/sidebar');
           }
         });
       })(req, res);
