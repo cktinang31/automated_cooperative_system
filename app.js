@@ -68,6 +68,7 @@ const logout = (req, res) => {
     });
   });
 };
+
 //express app
 const app = express();
 
@@ -78,7 +79,6 @@ app.use(session({
   re_save: false,
   saveUninitialized: false
 }));
-
 
 
 const pool = new Pool({
@@ -244,11 +244,6 @@ app.post('/savings', async (req, res) => {
 });
 
 
-
-
-
-
-
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
 });
@@ -364,6 +359,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(8080, () => {
-  console.log('Server running on port 8080');
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
