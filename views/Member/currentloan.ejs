@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/requests.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Manager</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Centering the h2 element -->
+<h2>Current Loan</h2>
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Interest Rate</th>
+            <th>Term</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (loans.length > 0) { %>
+          <% loans.forEach(loan => { %>
+            <tr data-loan-id="<%= loan.loan_id %>">
+                <td><%= loan.loan_id%></td>
+                <td><%= loan.loan_type %></td>
+                <td><%= loan.loan_amount %>php</td>
+                <td><%= loan.interest %>%</td>
+                <td><%= loan.loan_term %></td>
+                <td><%= loan.start_date %></td>
+                <td><%= loan.end_date %></td>
+
+
+                
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="8">No Loan at the moment...</td>
+            </tr>
+          <% } %>   
+        </tbody>
+
+</table>
+<script>
+    document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+  row.addEventListener('click', function() {
+      
+      const loanId = this.getAttribute('data-loan-id');
+      
+      
+      const destinationUrl = '/Member/specificloan/' + loanId; 
+      window.location.href = destinationUrl;
+  });
+});
+
+</script>
+
+<script>
+    // Function to get current timestamp
+    function getTimestamp() {
+        const now = new Date();
+        const timestamp = now.toLocaleString();
+        return timestamp;
+    }
+
+    // Update timestamp for each row
+    document.addEventListener("DOMContentLoaded", function() {
+        const table = document.getElementById("table");
+        const rows = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) {
+            const detailsCell = rows[i].getElementsByTagName("td")[1];
+            const timestampSpan = document.createElement("span");
+            timestampSpan.textContent = " (" + getTimestamp() + ")";
+            detailsCell.appendChild(timestampSpan);
+        }
+    });
+</script>
+
+</body>
+</html>
