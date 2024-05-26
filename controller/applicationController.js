@@ -5,7 +5,7 @@ const mem_application = async (req, res) => {
     const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
     const applicationDate = new Date();
     try {
-       
+    
         const newApplication = await Application.create({
             fname,
             mname,
@@ -22,7 +22,7 @@ const mem_application = async (req, res) => {
         console.log('New Application:', newApplication);
         res.send('Application submitted successfully. Please wait for approval');
     } catch (error) {
-  
+
         console.error('Error submitting the application:', error);
         res.status(500).send('Error submitting the application');
     }
