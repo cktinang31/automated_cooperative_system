@@ -171,9 +171,84 @@ app.get('/application', (req, res) => {
   res.render('application', { title: 'Membership Application'});
 });
 
-
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
+});
+
+app.get('/SystemAdmin/systemadmin', (req, res) => {
+  res.render('SystemAdmin/systemadmin', { title: 'System Admin'});
+});
+
+app.get('/Member/transaction', (req, res) => {
+  res.render('Member/transaction', { title: 'Transaction History'});
+});
+
+app.get('/Member/sidebar', (req, res) => {
+  res.render('Member/sidebar', { title: 'Sidebar'});
+});
+
+app.get('/Member/inquire', (req, res) => {
+  res.render('Member/inquire', { title: 'Inquire '});
+});
+
+app.get('/Member/announcement', (req, res) => {
+  res.render('Member/announcement', { title: 'Announcement '});
+});
+
+app.get('/Member/applyloan', (req, res) => {
+  res.render('Member/applyloan', { title: 'Apply Loan '});
+});
+
+app.get('/Member/cbu_deposit', (req, res) => {
+  res.render('Member/cbu_deposit', { title: 'CBU-Deposit '});
+});
+
+app.get('/Member/curent_loan', (req, res) => {
+  res.render('Member/curent_loan', { title: 'Current-Loan '});
+});
+
+app.get('/Member/dividend_deposit', (req, res) => {
+  res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
+});
+
+app.get('/Member/profile', (req, res) => {
+  res.render('Member/profile', { title: 'Profile '});
+});
+
+app.get('/Member/regular_loan', (req, res) => {
+  res.render('Member/regular_loan', { title: 'Regular Loan '});
+});
+
+app.get('/Member/savings_deposit', (req, res) => {
+  res.render('Member/savings_deposit', { title: 'Savings Deposit '});
+});
+
+app.get('/Manager/create_announcement', (req, res) => {
+  res.render('Manager/create_announcement', { title: 'Create Announcement'});
+});
+
+app.get('/Manager/managerannouncement', (req, res) => {
+  res.render('Manager/managerannouncement', { title: 'Manager Announcement'});
+});
+
+app.get('/Manager/memberinfo', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Member Info'});
+});
+
+app.get('/Manager/membersdata', (req, res) => {
+  res.render('Manager/membersdata', { title: 'Members Data'});
+});
+
+app.get('/Manager/req', (req, res) => {
+  res.render('Manager/req', { title: 'Req'});
+});
+
+app.get('/Manager/request', (req, res) => {
+  res.render('Manager/request', { title: 'Request'});
+});
+
+app.get('/Manager/sidebarmanager', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
 
 // 404 page
