@@ -12,6 +12,23 @@
 }
 
 nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.home-icon, .logout-wrapper {
+    margin-left: 10px;
+}
+
+nav {
     background-color: #373F41;
     color: #FFA900;
     padding: 20px 20px; 
@@ -20,7 +37,24 @@ nav {
     align-items: center;
 }
 
-.member-title{
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #373F41;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}  
+
+.home-icon, .logout-wrapper {
+    margin-left: 10px;
+}
+
+.member-title {
     padding-left: 1300px;
 }
 
@@ -48,7 +82,7 @@ nav ul li a {
     color: white;
     text-decoration: none; 
 }
-        
+
 .home-icon {
     display: flex;
     align-items: center;
@@ -85,7 +119,7 @@ nav ul li a {
 }
 
 .sidebar {
-    width: 300; 
+    width: 300px; 
     background-color: #D9D9D9;
     padding: 20px;
     height: 93vh;
@@ -122,11 +156,6 @@ nav ul li a {
     .sidebar-content {
         padding: 10px; 
     }
-}
-
-
-.sidebar-menu.active {
-    display: block; 
 }
 
 .user-icon img {
@@ -189,7 +218,7 @@ nav ul li a {
 .cooperative-advisory {
     width: 100%;
     max-width: 700px;
-    margin-left: 20; 
+    margin-left: 20px; 
     margin-top: 20vh;
     padding: 2rem;
     border: 2px solid black;
@@ -201,92 +230,22 @@ nav ul li a {
     align-items: center; 
 }
 
-.adjusted {
-    height: auto;
-    margin-right: 50px; 
-    margin-bottom: 100px;
-}
-
 .announcement-section {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 35px; 
-    margin-right: 1090px;
+    margin-bottom: 30px;
+    margin-top: 35px;
 }
 
-.announcement-header {
-    display: flex;
-    align-items: center;
-}
-
-.announcement-header img {
-    width: 75px;
+.announcement-section img.adjusted {
+    width: 100px;
     height: auto;
-    margin-right: 50px;
+    margin-right: 20px;
+    float: left;
 }
 
 .announcement-section h1 {
-    margin-left: 10px; 
-    margin-bottom: 90px;
-}
-
-
-
-.announcement-section h2 {
-    margin-left: 5px;
-    padding-left: 5px; 
-}
-
-
-
-.Cooperative.Advisory {
-    text-align: center;
-}
-
-
-.announcement-section img.adjusted {
-    width: 100px; 
-    height: auto; 
-    float: right; 
-    margin-right: 20px; 
-    margin-top: -5x; 
-}
-
-.announcement-content .content-text {
-    margin-top: 25px; 
-}
-
-.announcement-content .content-text p:last-child {
-    margin-top: 10px; 
-    margin-bottom: 15px;
-}
-
-.announcement-content .content-text p:nth-child(2) {
-    margin-bottom: 25px; 
-}
-
-.content-text table {
-    width: 100%;
-    border-collapse: collapse; 
-    
-}
-
-.content-text th,
-.content-text td {
-    border: 1px solid #ddd; 
-    padding: 8px; 
-    text-align: left; 
-}
-
-.content-text th {
-    background-color: #f2f2f2;
-}
-
-.container {
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    font-weight: normal;
+    margin: 0; 
 }
 
 .announcement-content {
@@ -305,7 +264,7 @@ nav ul li a {
 
 .announcement-content h3,
 .announcement-content p {
-    font-family: Arial, Helvetica, sans-serif, sans-serif; 
+    font-family: Arial, Helvetica, sans-serif; 
     font-size: 17px;
 } 
 
@@ -320,14 +279,6 @@ nav ul li a {
 
 .content-text p:nth-child(2) {
     margin-bottom: 25px; 
-}
-
-.content-text img {
-    max-width: 6%; 
-    height: auto;
-    float: right;
-    margin-top: 30px;
-    margin-right: -70;
 }
 
 .content-text table {
@@ -349,135 +300,123 @@ nav ul li a {
     margin-bottom: 5px;
 }
 
+.add-icon {
+    position: absolute;
+    top: 180px; 
+    right: 180px; 
+}
 
-    .add-icon {
-        position: absolute;
-        top: 180px; 
-        right: 180px; /
-    }
-    .add-icon img {
-        width: 50px; 
-        height: auto; 
+.add-icon img {
+    width: 50px; 
+    height: auto; 
+}
 
-    }
+body {
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        overflow: hidden;
-        font-family: Arial, sans-serif;
-    }
-    
-    .announcement-section h1 {
-        font-weight: 600; 
-        margin-top: 100px;
-        margin-bottom: 100px;
-        text-align: center;
-    }
-    
-    .announcement-section {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center; 
-        max-width: 300%; 
-        margin: 0 auto; 
-        width: 100%; 
-        height: auto; 
-    }
-    
-    .element-class {
-        overflow: hidden;
-    }
-    
-    .content-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        align-items: flex-start; 
-        display: flex;
-        height: 100vh; 
-        padding: 50px;
-    }
-    
-    .form-group {
-        margin-bottom: 20px;
-    }
-    
-    .button-group {
-        text-align: center;
-    }
-    
-    .announcement-title {
-        margin-bottom: 50px; 
-    }
-    
-    #create-announcement-form {
-        width: 100%; 
-        max-width: 900px; 
-    }
-    
-    .form-group {
-        margin-bottom: 20px;
-        width: 80%;
-    }
-    
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
-        color: #373F41;
-    }
-    
-    .button-group {
-        display: flex;
-        justify-content: center;
-        text-align: center; 
-    }
-    
-    button {
-        padding: 10px 20px;
-        margin: 0 10px;
-    }
-    
-    .button-group button[type="submit"] {
-        background-color: #FFA900;
-        border: none; 
-        padding: 10px 20px; 
-        cursor: pointer; 
-        border-radius: 10px; 
-    }
-    
-    .main-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    
-    #create-announcement-form .form-group input[type="text"] {
-        background: #e7e7e7;
-        width: 100%;
-        padding: 15px;
-        border-radius: 45px;
-        border: 1px solid #d4d4d4;
-        outline: none;
-        margin-bottom: 60px;
-    }
-    
-    #create-announcement-form .form-group textarea {
-        background: #e7e7e7;
-        width: 100%;
-        padding: 20px;
-        border-radius: 25px;
-        border: 1px solid #d4d4d4;
-        outline: none;
-        margin-bottom: 60px;
-    }
-    
-    
+.announcement-section h1 {
+    font-weight: 600; 
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.announcement-section {
+    max-width: 300%; 
+    margin: 0 auto; 
+    width: 100%; 
+    height: auto; 
+}
+
+.element-class {
+    overflow: hidden;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    align-items: flex-start; 
+    height: 100vh; 
+    padding: 50px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.button-group {
+    text-align: center;
+}
+
+.announcement-title {
+    margin-bottom: 50px; 
+}
+
+#create-announcement-form {
+    width: 100%; 
+    max-width: 900px; 
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #373F41;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    text-align: center; 
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+.button-group button[type="submit"] {
+    background-color: #FFA900;
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border-radius: 10px; 
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#create-announcement-form .form-group input[type="text"] {
+    background: #e7e7e7;
+    width: 100%;
+    padding: 15px;
+    border-radius: 45px;
+    border: 1px solid #d4d4d4;
+    outline: none;
+    margin-bottom: 60px;
+}
+
+#create-announcement-form .form-group textarea {
+    background: #e7e7e7;
+    width: 100%;
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid #d4d4d4;
+    outline: none;
+    margin-bottom: 60px;
+}
+
+

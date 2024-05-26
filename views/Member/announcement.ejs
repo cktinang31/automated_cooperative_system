@@ -3,167 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaCoop | <%=title %></title>
+    <title>KaCoop | <%= title %></title>
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/announcement.css">
 </head>
 <body>
-
-<nav class="navbar">
-    <div class="site-title">
-        <h1>KACooP</h1>
-        <span>Member<i class="fas fa-home"></i></span>
-    </div>
-</nav>    
-
-<div class="sidebar-btn">
-    <div class="btn">
-        <span class="fas fa-bars"></span>
-    </div>
-</div>    
-
-<div class="sidebar">
-    <div class="user">
-        <label for="profile-pic-upload">
-            <i class="bi bi-person-circle"></i>  
-        </label>
-        <div class="user-details">
-            <p>Kristine Anne Cardosa</p>
-            <span><a href="mailto:kristineanne@gmail.com">kristineanne@gmail.com</a></span>
+    <nav>
+        <div class="site-title">
+            <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+            <span>Member<i class="fas fa-home"></i></span>
         </div>
-        <input type="file" id="profile-pic-upload" accept="image/*"> 
-        <img id="profile-pic" src="">
-    </div>          
-    <ul>
-        <li>
-            <a href="#" class="fund-btn"><i class="fas fa-money-bill-wave"></i>Funds
-                <span class="fas fa-caret-down first"></span>
-            </a>
-            <ul class="fund-show">
-                <li><a href="#"><i class="fas fa-piggy-bank"></i>Savings</a></li>
-                <li><a href="#"><i class="fas fa-wallet"></i>CBU</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" class="loan-btn"><i class="fas fa-hand-holding-usd"></i>Loans
-                <span class="fas fa-caret-down second"></span>
-            </a>
-            <ul class="loan-show">
-                <li><a href="#"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
-                <li><a href="#"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
-            </ul>
-        </li>
-        <li><a href="#"><i class="fas fa-history"></i>Transaction History</a></li>
-        <li><a href="#"><i class="fas fa-search"></i>Inquire</a></li>
-    </ul>
-</div>    
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function(){
-    $('.btn').click(function(){
-        $(this).toggleClass("click");
-        $('.sidebar').toggleClass("show");
-    });
-    
-    $('.fund-btn').click(function(e){
-        e.preventDefault();
-        $('.fund-show').toggleClass("show");
-        $(this).parent().toggleClass("active");
-    });
-
-    $('.loan-btn').click(function(e){
-        e.preventDefault();
-        $('.loan-show').toggleClass("show");
-        $(this).parent().toggleClass("active");
-    });
-});
-</script>
-
-<nav>
-    <div class="site-title">
-    </div>
-    <div class="member-title">
-        <h1>Member</h1>
-    </div>
-    <div class="home-icon">
-        <a href="/">
-            <img src="/svg/icons8-home.svg" alt="Home Icon">
-        </a>
-    </div>
-</nav>
-
-<div class="main-content" id="main-content" style="display: none;">
-    <div class="content-wrapper">
-        <!-- Announcement Section -->
-        <div class="sidebar-announcement">
-            <!-- Sidebar content goes here -->
+        <div class="icon-container">
+            <div class="home-icon">
+                <a href="/">
+            </div>
+            <div class="logout-wrapper">
+                <a href="/logout">
+                    <img id="logout-icon" src="/images/log-out-regular-24.png" alt="Log out Icon">
+                </a>
+            </div>
         </div>
-        <div class="announcement-section">
-            <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
-            <h1>Announcement</h1>
+    </nav>    
+
+    <div class="sidebar-btn">
+        <div class="btn">
+            <span class="fas fa-bars"></span>
         </div>
-        <a href="#" class="add-icon" id="add-button">
-            <img src="/images/task-list-add.svg" alt="Add Icon">
-        </a>
-    </div>
-</div>
+    </div>    
 
-<script>
-    // Attach event listener to the "Add" button
-    document.getElementById("add-button").addEventListener("click", function() {
-        // Hide the "Announcement" section
-        document.getElementById("announcement-section").style.display = "none";
-        // Show the "Create Announcement" section
-        document.getElementById("main-content").style.display = "block";
-    });
-</script>
+    <div class="sidebar">
+        <div class="user">
+            <label for="profile-pic-upload">
+                <i class="bi bi-person-circle"></i>  
+            </label>
+            <div class="user-details">
+                <p>Kristine Anne Cardosa</p>
+                <span><a href="mailto:kristineanne@gmail.com">kristineanne@gmail.com</a></span>
+            </div>
+            <input type="file" id="profile-pic-upload" accept="image/*"> 
+            <img id="profile-pic" src="">
+        </div>          
+        <ul>
+            <li>
+                <a href="#" class="fund-btn"><i class="fas fa-money-bill-wave"></i>Funds
+                    <span class="fas fa-caret-down first"></span>
+                </a>
+                <ul class="fund-show">
+                    <li><a href="#"><i class="fas fa-piggy-bank"></i>Savings</a></li>
+                    <li><a href="#"><i class="fas fa-wallet"></i>CBU</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="loan-btn"><i class="fas fa-hand-holding-usd"></i>Loans
+                    <span class="fas fa-caret-down second"></span>
+                </a>
+                <ul class="loan-show">
+                    <li><a href="#"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
+                    <li><a href="#"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><i class="fas fa-history"></i>Transaction History</a></li>
+            <li><a href="#"><i class="fas fa-search"></i>Inquire</a></li>
+        </ul>
+    </div>    
 
-<div class="main-content" id="main-content" style="display: none;">
-    <div class="content-wrapper">
-        <div class="announcement-section">
-            <h1>Create Announcement</h1>
-            <form id="create-announcement-form" action="/post_announcement" method="POST">
-                <div class="form-group">
-                    <label for="announcement-title">Title:</label>
-                    <input type="text" id="content_title" name="content_title" required>
-                </div>
-                <div class="form-group">
-                    <label for="announcement-content">Content:</label>
-                    <textarea id="content" name="content" rows="10" required></textarea>
-                </div>
-                <div class="button-group">
-                    <button type="submit">Post</button>
-                </div>
-            </form>
+    <div class="main-content" id="main-content" style="display: none;">
+        <div class="content-wrapper">
+            <div class="announcement-section">
+                <h1>Create Announcement</h1>
+                <form id="create-announcement-form" action="/post_announcement" method="POST">
+                    <div class="form-group">
+                        <label for="announcement-title">Title:</label>
+                        <input type="text" id="content_title" name="content_title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="announcement-content">Content:</label>
+                        <textarea id="content" name="content" rows="10" required></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="main-content">
-    <div class="content-wrapper">
-        <div class="announcement-section">
-            <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
-            <h1>Announcement</h1>
-        </div>
-        <a href="#" class="add-icon">
-            <img src="/images/task-list-add.svg" alt="Add Icon">
-        </a>
-        
-        <script>
-            // Attach event listener to the "Add" button
-            document.getElementById("add-button").addEventListener("click", function() {
-                // Hide the "Announcement" section
-                document.getElementById("announcement-section").style.display = "none";
-                // Show the "Create Announcement" section
-                document.getElementById("main-content").style.display = "block";
+    <div class="announcement-section" id="announcement-section">
+        <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
+        <h1>Announcement</h1>
+    </div>
+    <a href="#" class="add-icon" id="add-button">
+        <img src="/images/task-list-add.svg" alt="Add Icon">
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.btn').click(function(){
+                $(this).toggleClass("click");
+                $('.sidebar').toggleClass("show");
             });
-        </script>      
-    </div>
-</div>
+            
+            $('.fund-btn').click(function(e){
+                e.preventDefault();
+                $('.fund-show').toggleClass("show");
+                $(this).parent().toggleClass("active");
+            });
+     
+            $('.loan-btn').click(function(e){
+                e.preventDefault();
+                $('.loan-show').toggleClass("show");
+                $(this).parent().toggleClass("active");
+            });
+        });
 
-</body>
-</html>
+        document.getElementById("add-button").addEventListener("click", function() {
+            document.getElementById("announcement-section").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+        });
+    </script>
 
 </body>
 </html>
