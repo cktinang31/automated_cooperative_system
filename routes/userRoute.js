@@ -29,10 +29,10 @@ router.post('/user_login', userController.user_login);
 //         res.status(500).send('Internal server error');
 //     }
 // }, async (req, res) => {
-   
+
 //         const user = req.user;
 //         res.render('./Manager/create_announcement', { title: 'Create Announcement', user });
- 
+
 // });
 
 module.exports = router;

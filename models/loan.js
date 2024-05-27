@@ -87,13 +87,13 @@ Loan.belongsTo(User, {
     onUpdate: 'CASCADE'
 });
 
-// // Synchronize models
-// Loan.sync()
-//     .then(() => {
-//         console.log('Loan table synchronized successfully!');
-//     })
-//     .catch((error) => {
-//         console.error('Error synchronizing Loan table:', error);
-//     });
+// Synchronize models
+Loan.sync()
+    .then(() => {
+        console.log('Loan table synchronized successfully!');
+    })
+    .catch((error) => {
+        console.error('Error synchronizing Loan table:', error);
+    });
 
 module.exports = Loan;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>savings| <%=title %></title>
+    <style></style>
+</head>
+<body>
+    <form action="/savings" method="POST">
+    
+        <label for="savingsId">Savings ID:</label><br>
+        <input type="number" id="savingsId" name="savingsId" ><br><br>
+
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount" ><br><br>
+
+        <label for="interest">Interest:</label><br>
+        <input type="number" id="interest" name="interest"><br><br>
+
+        <label for="loanId">Loan ID:</label><br>
+        <input type="number" id="loanId" name="loan_id"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+
+
+    <script>
+        function calculateTotal() {
+            // Get deposit and withdrawal amounts
+            var deposit = parseFloat(document.getElementById("deposit").value) || 0;
+            var withdrawal = parseFloat(document.getElementById("withdrawal").value) || 0;
+    
+            // Calculate total savings
+            var total = deposit - withdrawal;
+    
+            // Update total input field
+            document.getElementById("total").value = total.toFixed(2);
+        }
+
+        function getSelectedPayment() {
+            var paymentModeElements = document.getElementsByName("paymentMode");
+    
+            var selectedPaymentMode;
+            for (var i = 0; i < paymentModeElements.length; i++) {
+                if (paymentModeElements[i].checked) {
+                    selectedPaymentMode = paymentModeElements[i].value;
+                    break;
+                }
+            }
+    
+            if (selectedPaymentMode) {
+                alert("Selected mode of payment: " + selectedPaymentMode);
+            } else {
+                alert("Please select a mode of payment.");
+            }
+        }
+    </script>
+    
+    </body>
+    </html>
+
+
+    
