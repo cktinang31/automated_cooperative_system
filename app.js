@@ -15,10 +15,14 @@ const memApplicationRoutes = require('./routes/mem_applicationRoute');
 const userRoutes = require('./routes/userRoute');
 const contentRoutes = require('./routes/contentRoute');
 const loan_applicationRoutes = require('./routes/loan_applicationRoute');
+const loanRoutes = require('./routes/loanRoute');
 const memberpageRoutes = require('./routes/memberpageRoute');
 const managerpageRoutes = require('./routes/managerpageRoute');
+const systemadminRoutes = require('./routes/systemadminRoute');
+const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
 const User = require('./models/user');
-const Application = require('./models/application');
+const Loan_payment = require('./models/loan_payment');
+// const Application = require('./models/application');
 
 
  
@@ -40,6 +44,30 @@ const isAuthenticated = (req, res, next) => {
     console.error('Error in isAuthenticated middleware:', error);
     res.status(500).send('Internal server error');
   }
+};
+
+const logout = (req, res) => {
+  console.log('Logging out...');
+
+  console.log('Session ID:', req.sessionID);
+  console.log('Session before destroying:', req.session);
+
+  req.logout((err) => {
+    if (err) {
+      console.error('Error logging out:', err);
+      return res.status(500).send('Internal server error');
+    }
+
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).send('Internal server error');
+      }
+
+      console.log('Session destroyed successfully.');
+      res.redirect('/login');
+    });
+  });
 };
 //express app
 const app = express();
@@ -144,12 +172,17 @@ app.post('/login', passport.authenticate('local', {
   }
 });
 
+app.post('/logout', logout);
+
 app.use(memApplicationRoutes); 
 app.use(userRoutes);
 app.use(contentRoutes);
 app.use(loan_applicationRoutes);
+app.use(loanRoutes);
 app.use(memberpageRoutes);
 app.use(managerpageRoutes);
+app.use(systemadminRoutes);
+app.use(loan_paymentRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});

@@ -1,4 +1,4 @@
-const Application = require('../models/application');
+const Application = require('../models/application.js');
 
 
 const mem_application = async (req, res) => {

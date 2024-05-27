@@ -1,4 +1,10 @@
-const Loan_application = require ('../models/loan_application');
+const {loanpayment} = require ('../controller/paymentController');
+const Loan_application = require ('../models/loan_application.js');
+const Loan = require ('../models/loan.js');
+const Loan_payment = require ('../models/loan');
+const User = require ('../models/user');
+
+
 
 const apply_loan = async (req, res) => {
     try {
@@ -39,32 +45,114 @@ const apply_loan = async (req, res) => {
     
 };
 
-module.exports = {
-    apply_loan,
+const update_loan_request = async (req, res) => {
+  try {
+      const { application_id, application_status } = req.body;
+
+      if (!application_id || !application_status) {
+          return res.status(400).send('Application ID and status are required');
+      }
+
+      const updatedLoanApplication = await Loan_application.findByPk(application_id);
+
+      if (!updatedLoanApplication) {
+          return res.status(404).send('Loan application not found');
+      }
+
+      const user_id = updatedLoanApplication.user_id;
+
+      updatedLoanApplication.application_status = application_status;
+      await updatedLoanApplication.save();
+
+      if (application_status === 'approved') {
+          const startDate = calculateStartDate(updatedLoanApplication);
+          const endDate = calculateEndDate(updatedLoanApplication, startDate);
+
+          const approvedLoan = {
+              application_id,
+              user_id,
+              loan_status: 'active',
+              loan_type: updatedLoanApplication.loan_type,
+              loan_amount: updatedLoanApplication.amount,
+              loan_term: updatedLoanApplication.loan_term,
+              interest: updatedLoanApplication.interest,
+              start_date: startDate,
+              end_date: endDate,
+              timestamp: new Date(),
+          };
+
+          const newLoan = await Loan.create(approvedLoan);
+
+          if (!newLoan) {
+              throw new Error('Failed to create new Loan record');
+          }
+
+          // Call loanpayment function if action is specified and approved
+          if (req.body.action === 'loanpayment') {
+              await loanpayment(application_id, user_id, newLoan.loan_id);
+          }
+
+          return res.redirect('LoanApplicationApproved');
+      } else {
+          await updatedLoanApplication.destroy();
+          return res.send('Loan application declined');
+      }
+  } catch (error) {
+      console.error('Error updating loan status:', error);
+      return res.status(500).send('Error updating loan status');
+  }
+};
+
+
+
+function calculateStartDate(loanApplication) {
+    const currentDate = new Date();
+    const nextMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+    const nextMonth30thDay = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 30);
+    return nextMonth30thDay;
 }
 
-// const mem_application = async (req, res) => {
-//     const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
-//     const applicationDate = new Date();
-//     try {
-       
-//         const newApplication = await Application.create({
-//             fname,
-//             mname,
-//             lname,
-//             date_of_birth,
-//             place_of_birth,
-//             address,
-//             email,
-//             contact,
-//             application_status: 'pending',
-//             date_sent: applicationDate,
-//         });
+function calculateEndDate(loanApplication, startDate) {
+    const endDate = new Date(startDate);
+    switch (loanApplication.loan_term) {
+        case '6 months':
+            endDate.setMonth(endDate.getMonth() + 6);
+            break;
+        case '12 months':
+            endDate.setMonth(endDate.getMonth() + 12);
+            break;
+        case '18 months':
+            endDate.setMonth(endDate.getMonth() + 18);
+            break;
+        case '24 months':
+            endDate.setMonth(endDate.getMonth() + 24);
+            break;
+        default:
+           
+            break;
+    }
+    endDate.setDate(30); 
+    return endDate;
+};
 
-//         console.log('New Application:', newApplication);
-//         res.send('Application submitted successfully. Please wait for approval');
-//     } catch (error) {
-  
-//         console.error('Error submitting the application:', error);
-//         res.status(500).send('Error submitting the application');
-//     }
+
+
+function generateSchedule(paymentNumber) {
+  const currentDate = new Date();
+  const schedule = [];
+  for (let i = 0; i < paymentNumber; i++) {
+    const nextMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + i + 1, 30);
+    schedule.push(nextMonth);
+  }
+  return schedule;
+};
+
+module.exports = {
+  apply_loan,
+  update_loan_request,
+  calculateStartDate,
+  calculateEndDate,
+  generateSchedule,
+};
+
+

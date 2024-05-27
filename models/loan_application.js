@@ -1,25 +1,36 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
+
+
 const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
     port: 5432,
-    logging: console.log 
+    logging: console.log
 });
-const User = require('../models/user');
+
+
+const User = require('./user'); 
 
 const Loan_application = sequelize.define('Loan_application', {
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: User,
+            key: 'user_id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     },
     application_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID, 
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        defaultValue: () => uuidv4() 
     },
     application_status: {
-        type: DataTypes.ENUM('pending', 'approve', 'decline'),
+        type: DataTypes.ENUM('pending', 'approved', 'declined'),
         allowNull: false,
     },
     loan_type: {
@@ -42,29 +53,25 @@ const Loan_application = sequelize.define('Loan_application', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    number_of_payments:{
+    number_of_payments: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    timestamp: {
+    date_sent: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
     }
 },
-   
-);
- 
+{timestamps: false,});
+
+
 Loan_application.belongsTo(User, {
     foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
 });
 
-Loan_application.sync()
-    .then(() => {
-        console.log('Loan_application table synchronized successfully');
-    })
-    .catch((error) => {
-        console.error('Error synchronizing Loan_application table:', error);
-    });
 
+Loan_application.sync();
 module.exports = Loan_application;

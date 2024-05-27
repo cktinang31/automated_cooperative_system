@@ -1,19 +1,14 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
+
 const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
     host: 'localhost',
     dialect: 'postgres',
     port: 5432,
-    logging: console.log 
+    logging: console.log
 });
-const Application = require ('../models/application');
 
-const  User = sequelize.define('User', {
-    application: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-
-    },
+const User = sequelize.define('User', {
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -38,43 +33,26 @@ const  User = sequelize.define('User', {
         allowNull: false,
     },
     profilePicture: {
-        type: Sequelize.BLOB('long'),
+        type: DataTypes.BLOB('long'),
         allowNull: true,
     },
-
-    registered: {
-        type: Boolean,
-        allowNull: false,
-    },
- 
+   
     role: {
         type: DataTypes.ENUM('admin', 'regular', 'manager', 'teller', 'collector', 'director'),
-        allownull: true,
+        allowNull: true,
     }
-    });
-
-
-User.belongsTo(Application, {
-    foreignKey: 'application_id',
-    onDelete: 'CASCADE'
 });
-   
+
 User.beforeCreate(async (user) => {
     const count = await User.count();
-        user.user_id = 624197 + count;
-        if (user.user_id === 624197) {
-            user.role = 'admin';
-        }
-   
+    user.user_id = 624197 + count;
+    if (count === 0) {
+        user.role = 'admin';
+    }
 });
-User.sync()
-// .then(() => {
-//     console.log('User table synchronized successfully');
-// })
-// .catch((error) => {
-//     console.error('Error synchronizing User table:', error);
-// });
-    
 
+
+
+User.sync();
 
 module.exports = User;
