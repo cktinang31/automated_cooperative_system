@@ -30,40 +30,50 @@
 
 <table id="table">
     <thead>
-        <tr>
-            <th>Loan ID</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Interest Rate</th>
-            <th>Term</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-        </tr>
+      <tr>
+        <th>Loan ID</th>
+        <th>Loan Type</th>
+        <th>Loan Amount</th>
+        <th>Interest</th>
+        <th>Payment Balance</th>
+        <th>Payment Amount</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
     </thead>
     <tbody>
-        <% if (loans.length > 0) { %>
-          <% loans.forEach(loan => { %>
-            <tr data-loan-id="<%= loan.loan_id %>">
-                <td><%= loan.loan_id%></td>
+      <% if (loans.length > 0) { %>
+        <% loans.forEach(loan => { %>
+          <% if (loan.Loan_payments && loan.Loan_payments.length > 0) { %>
+            <% loan.Loan_payments.forEach(loan_payment => { %>
+              <tr data-loan-id="<%= loan.loan_id %>">
+                <td><%= loan.loan_id %></td>
                 <td><%= loan.loan_type %></td>
                 <td><%= loan.loan_amount %>php</td>
                 <td><%= loan.interest %>%</td>
-                <td><%= loan.loan_term %></td>
+                <td><%= loan_payment.balance %></td>
+                <td><%= loan_payment.amount %></td>
                 <td><%= loan.start_date %></td>
                 <td><%= loan.end_date %></td>
-
-
-                
               </tr>
             <% }) %>
           <% } else { %>
-            <tr>
-              <td colspan="8">No Loan at the moment...</td>
+            <tr data-loan-id="<%= loan.loan_id %>">
+              <td><%= loan.loan_id %></td>
+              <td><%= loan.loan_type %></td>
+              <td><%= loan.loan_amount %>php</td>
+              <td><%= loan.interest %>%</td>
+              <td colspan="4">No Payments</td>
             </tr>
-          <% } %>   
-        </tbody>
-
-</table>
+          <% } %>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="8">No Loan at the moment...</td>
+        </tr>
+      <% } %>   
+    </tbody>
+  </table>
 <script>
     document.querySelectorAll('tr[data-loan-id]').forEach(row => {
   row.addEventListener('click', function() {

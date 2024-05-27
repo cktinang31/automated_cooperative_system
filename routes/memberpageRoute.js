@@ -1,7 +1,10 @@
 const express = require('express');
 const User = require('../models/user');
 const Content = require('../models/content');
-const Loan = require('../models/loan')
+const Loan = require('../models/loan');
+const Loan_payment = require('../models/loan_payment');
+const Loan_application = require ('../models/loan_application');
+const { title } = require('process');
 
 const router = express.Router();
 
@@ -250,5 +253,47 @@ router.get('/Member/currentloan', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
+
+router.get('/Member/specificloan/:loanpaymentId', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is regular.');
+            const user = req.user;
+            const loanId = req.params.loanId;
+
+            try {
+                const loan_payment = await Loan_payment.findByPk(loanpaymentId, {
+                    include: [User, Loan]
+                });
+
+                if (!loan_payment) {
+                    return res.status(404).send('Loan not found.');
+                }
+
+                res.render('Member/specificloan', {
+                    loan,
+                    loanPayments: loan.Loan_payments,
+                    title: 'Loan Details',
+                    user: req.user
+                });
+            } catch (error) {
+                console.error('Error fetching loan:', error);
+                res.status(500).send('Error fetching loan');
+            }
+        } else {
+            console.log('User is not authenticated.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error.');
+    }
+});
+
 
 module.exports = router;
