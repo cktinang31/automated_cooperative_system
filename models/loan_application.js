@@ -51,9 +51,9 @@ const Loan_application = sequelize.define('Loan_application', {
         defaultValue: Sequelize.NOW,
     }
 },
-   
+
 );
- 
+
 Loan_application.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'

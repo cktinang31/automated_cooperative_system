@@ -3,13 +3,13 @@ const Content = require('../models/content');
 const post_announcement = async (req, res) => {
     try {
         const { content_title, content } = req.body;
-     
+    
         const newContent = await Content.create({
           content_title,
           content,
           timestamp: new Date()
         });
-     
+    
         console.log('Member/Announcement:', newContent);
         res.send('Announcement Posted');
       } catch (error) {
