@@ -200,8 +200,6 @@ app.get('/savings', (req, res) => {
 app.post('/savings', async (req, res) => {
   try {
     const { user_id, amount, interest, loan_id } = req.body;
-
-    
     const newSavingsData = {
       user_id,
       amount: amount || 500, 
@@ -223,8 +221,6 @@ app.post('/savings', async (req, res) => {
 app.post('/savings', async (req, res) => {
   try {
     const { user_id, amount, interest, loan_id } = req.body;
-
-    
     const newSavingsData = {
       user_id,
       amount: amount || 500, 
@@ -258,9 +254,6 @@ app.get('/system_admin', (req, res) => {
 app.get('/system_admin', (req, res) => {
     res.render('system_admin', { title: 'Admin'});
 }); 
-
-
-
 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
