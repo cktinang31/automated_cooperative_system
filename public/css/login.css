@@ -95,7 +95,7 @@ nav a {
 
 h3 {
     font-size: 30px;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 h4 {
@@ -320,10 +320,4 @@ input:hover {
 
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
-}
-
-footer {
-    color: #777;
-    text-align: center;
-    margin: 80px auto 20px;
 }
