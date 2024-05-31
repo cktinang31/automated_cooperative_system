@@ -20,7 +20,7 @@ const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
 const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
 const User = require('./models/user');
-const Loan_payment = require('./models/loan_payment');
+
 // const Application = require('./models/application');
 
 
@@ -169,7 +169,7 @@ app.use(loanRoutes);
 app.use(memberpageRoutes);
 app.use(managerpageRoutes);
 app.use(systemadminRoutes);
-app.use(loan_paymentRoutes);
+
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -306,9 +306,7 @@ app.get('/Member/cbu_deposit', (req, res) => {
   res.render('Member/cbu_deposit', { title: 'CBU-Deposit '});
 });
 
-app.get('/Member/curent_loan', (req, res) => {
-  res.render('Member/curent_loan', { title: 'Current-Loan '});
-});
+
 
 app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
@@ -318,9 +316,7 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
-app.get('/Member/regular_loan', (req, res) => {
-  res.render('Member/regular_loan', { title: 'Regular Loan '});
-});
+
 
 app.get('/Member/savings_deposit', (req, res) => {
   res.render('Member/savings_deposit', { title: 'Savings Deposit '});

@@ -1,8 +1,8 @@
 const express = require('express');
 const User = require('../models/user');
 const Content = require('../models/content');
-const Loan = require('../models/loan');
 const Loan_payment = require('../models/loan_payment');
+const Loan = require('../models/loan');
 const Loan_application = require ('../models/loan_application');
 const { title } = require('process');
 
@@ -281,35 +281,36 @@ router.get('/Member/currentloan', async (req, res, next) => {
     }
 });
 
-router.get('/Member/specificloan/:loanpaymentId', async (req, res, next) => {
-    try {
-        console.log('Session ID:', req.sessionID);
-        console.log('Session:', req.session);
-        console.log('Authenticated:', req.isAuthenticated());
 
+
+router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
+
+    try {
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
-            console.log('User is regular.');
             const user = req.user;
             const loanId = req.params.loanId;
+            console.log('Requested loanId:', loanId); // Debug log
 
             try {
-                const loan_payment = await Loan_payment.findByPk(loanpaymentId, {
-                    include: [User, Loan]
+                const loanPayment = await Loan_payment.findOne({
+                    where: { loan_id: loanId },
+                    include: [
+                        { model: Loan, required: true },
+                        { model: User, required: true },
+                        { model: Loan_application, required: true }
+                    ]
                 });
 
-                if (!loan_payment) {
-                    return res.status(404).send('Loan not found.');
+                if (!loanPayment) {
+                    console.log('Loan payment not found.');
+                    return res.status(404).send('Loan payment not found.');
                 }
 
-                res.render('Member/specificloan', {
-                    loan,
-                    loanPayments: loan.Loan_payments,
-                    title: 'Loan Details',
-                    user: req.user
-                });
+                console.log('Loan payment:', loanPayment);
+                res.render('Member/regular_loan', { loanPayment, title: 'Loan Payment Details', user: req.user });
             } catch (error) {
-                console.error('Error fetching loan:', error);
-                res.status(500).send('Error fetching loan');
+                console.error('Error fetching loan payment:', error);
+                res.status(500).send('Error fetching loan payment');
             }
         } else {
             console.log('User is not authenticated.');
@@ -321,6 +322,10 @@ router.get('/Member/specificloan/:loanpaymentId', async (req, res, next) => {
         res.status(500).send('Internal server error.');
     }
 });
+
+
+
+
 
 
 module.exports = router;

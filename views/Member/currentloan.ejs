@@ -71,34 +71,14 @@
       const loanId = this.getAttribute('data-loan-id');
       
       
-      const destinationUrl = '/Member/specificloan/' + loanId; 
+      const destinationUrl = '/Member/regular_loan/' + loanId; 
       window.location.href = destinationUrl;
   });
 });
 
 </script>
 
-<script>
-    // Function to get current timestamp
-    function getTimestamp() {
-        const now = new Date();
-        const timestamp = now.toLocaleString();
-        return timestamp;
-    }
 
-    // Update timestamp for each row
-    document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById("table");
-        const rows = table.getElementsByTagName("tr");
-
-        for (let i = 1; i < rows.length; i++) {
-            const detailsCell = rows[i].getElementsByTagName("td")[1];
-            const timestampSpan = document.createElement("span");
-            timestampSpan.textContent = " (" + getTimestamp() + ")";
-            detailsCell.appendChild(timestampSpan);
-        }
-    });
-</script>
 
 </body>
 </html>
