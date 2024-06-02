@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/req.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Manager</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Centering the h2 element -->
+<h2>Membership Requests</h2>
+
+<div class="form-container">
+    <form action="/update_loan_request" "/loanpayment" method="POST">
+        <input type="hidden" name="application_id" value="<%= loan_application.application_id %>">
+        <input type="hidden" name="action" value="loanpayment">
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td><%= loan_application.User.fname %></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><%= loan_application.User.lname %></td>
+            </tr>
+            <tr>
+                <td>Loan Type:</td>
+                <td><%= loan_application.loan_type %></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td><%= loan_application.amount %></td>
+            </tr>
+            <tr>
+                <td>Loan Term:</td>
+                <td><%= loan_application.loan_term %></td>
+            </tr>
+            <tr>
+                <td>Interest:</td>
+                <td><%= loan_application.interest %></td>
+            </tr>
+            <tr>
+                <td>Monthly Payment:</td>
+                <td><%= loan_application.monthly_payment %></td>
+            </tr>
+            <tr>
+                <td>Number of Payments:</td>
+                <td><%= loan_application.number_of_payments %></td>
+            </tr>
+            
+        </table>
+        <div class="button-container">
+            <button type="submit" class="approve-button" name="application_status" value="approved">Approve</button>
+                        
+            <button type="submit" class="decline-button" name="application_status" value="decline">Decline</button>
+        </div>
+
+    </form>
+    
+</div>
+
+
+
+</body>
+</html>

@@ -5,10 +5,25 @@
     <title>App | <%=title %></title>
     <link rel="stylesheet" href="/css/login.css">
 </head>
-
 <body>
+    
+    <nav>
+        <div class="site-title">
+            <div class="navbar-inner sticky-menu">
+                <div class="nav-yellow"></div>
+            </div>
+            <h2>KACooP</h2>
+        </div>
+        <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="#about">ABOUT US</a></li>
+            <li><a href="#service">SERVICES</a></li>
+            <li><a href="#contact">CONTACT US</a></li>
+        </ul>
+    </nav>
 
-     <h2>Sign In/Sign Up</h2>
+     <h3>Stay Connected, Co-op Member!</h3>
+     <h4>New to our cooperative? Sign up. Already with us? Log in.</h4>
      <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="/user_reg" method="POST">
@@ -48,12 +63,9 @@
             </div>
         </div>
      </div>
-     
      <script src="/js/scripts.js"></script>
-     
      <footer>
         Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
     </footer>
-
 </body>
 </html>
