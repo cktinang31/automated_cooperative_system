@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+}
+
+
+nav {
+    background-color: #373F41;
+    color: #FFA900;
+    padding: -10px -6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+.home-icon {
+    font-size: 18px;
+}
+.site-title {
+    display: flex;
+    align-items: center;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+}
+
+.member-title h1 {
+    margin-right: 10px;
+}
+
+/* Centering the h2 element */
+h2 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+.form-container,
+.button-container {
+    text-align: center;
+    margin: 20px auto; /* Center horizontally */
+    max-width: 600px; /* Set max-width for better alignment */
+}
+
+table {
+    border-collapse: collapse;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+th, td {
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+th {
+    background-color: #373F41;
+    color: white;
+}
+
+.button-container .approve-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #373F41;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-container .decline-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button-container button:hover {
+    background-color: #45a049;
+}

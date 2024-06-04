@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/applyloan.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="member-title">
+        <h1>Member</h1>
+    </div>
+    <div class="home-icon">
+        <a href="/">
+            <img src="/svg/icons8-home.svg" alt="Home Icon">
+        </a>
+    </div>
+</nav>
+
+<div class="form-container">
+    <form action="/apply_loan" method="post">
+        <h1>Apply Loan</h1> <img src="/images/loan.png" alt="Megaphone Icon" class="adjusted">
+        <input type="hidden" id="user_id" name="user_id" value="<%= user.user_id %>">
+
+        <label for="loan_type">Loan Type:</label>
+        <select id="loan_type" name="loan_type" required>
+            <option value="regular">Regular</option>
+            <option value="medical">Medical</option>
+            <option value="emergency">Emergency</option>
+        </select><br><br>
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" step="0.01" required oninput="calculateMonthlyPayment()"><br><br>
+
+        <label for="loan_term">Loan Term:</label>
+        <select id="loan_term" name="loan_term" required onchange="calculateMonthlyPayment()">
+            <option value="6 months">6 months</option>
+            <option value="12 months">12 months</option>
+            <option value="18 months">18 months</option>
+            <option value="24 months">24 months</option>
+        </select><br><br>
+
+        <label for="interest">Interest:</label>
+        <input type="number" id="interest" name="interest" step="0.01" required oninput="calculateMonthlyPayment()"><br><br>
+
+        <label for="monthly_payment">Monthly Payment:</label>
+        <span id="monthly_payment">0.00</span><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<script>
+        function calculateMonthlyPayment() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
+            const interest = parseFloat(document.getElementById('interest').value);
+            
+            const monthlyInterestRate = interest / 12;
+            const numberOfPayments = loanTerm;
+            
+            const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+                (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+            
+            document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
+        }
+    </script>
+</body>
+</html>

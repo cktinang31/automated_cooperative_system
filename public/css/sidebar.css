@@ -29,6 +29,13 @@
     left: 0;
 }
 
+.nav ul {
+    background: #dbdbdb;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+
 .site-title {
     display: flex;
     flex-wrap: wrap;
@@ -41,27 +48,38 @@
 .site-title h1 {
     margin: 0;
     margin-left: 10px;
-    font-size: 36px;
+    font-size: 45px;
     font-weight: 800;
 }
 
 .site-title span {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
     font-style: italic;
 }
 
 .site-title span i {
+    color: #ffa900;
     margin-left: 20px; 
     margin-right: 0;
 }
 
-.btn {
-    position: absolute;
+.sidebar .btn {
+    position: fixed;
     top: 75px;
-    left: 0;
+    left: 350px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+    z-index: 20;
+}
+
+.sidebar-btn .btn {
     height: 35px;
     width: 35px;
     text-align: center;
@@ -70,37 +88,17 @@
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
 }
 
-.btn:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.btn.click {
-    left: 260px;
-}
-
-.btn span {
-    color: #373F41;
-    font-size: 25px;
-    line-height: 35px;
-}
-
-.btn.click span:before {
-    content: '\f00d';
-    color: red;
-    font-size: 18px;
-}
-
 .sidebar {
     position: fixed;
-    width: 250px;
+    width: 300px;
     height: 100%;
-    left: -250px;
+    left: 0;
     background: #dbdbdb;
     transition: left 0.4s ease;
 }
 
 .sidebar.show {
-    left: 0px;
+    transition: none;
 }
 
 .sidebar text {
@@ -111,13 +109,6 @@
     text-align: center;
     background: #ebebeb;
     letter-spacing: 1px;
-}
-
-.nav ul {
-    background: #dbdbdb;
-    height: 100%;
-    width: 100%;
-    list-style: none;
 }
 
 .sidebar ul li {
@@ -166,10 +157,6 @@
 
 .sidebar i {
     margin-right: 10px;
-}
-
-.bi-person-fill {
-    color: #007bff;
 }
 
 .fa-money-bill-wave {
@@ -230,15 +217,15 @@
 
 .user {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #a5a5a5;
+    padding: 60px 0 0;
+    border-bottom: 1px solid #979797;
 }
 
-.user .bi {
-    font-size: 2rem;
-    margin-right: 10px;
-    margin-top: 100px;
+.user .bi-person-circle {
+    font-size: 6rem;
+    margin-bottom: 20px;
 }
 
 .user-details {
@@ -247,13 +234,112 @@
 
 .user-details p {
     margin: 0;
+    margin-bottom: 10px;
     font-size: 1.5rem;
     font-weight: 600;
     color: #2c3233; 
 }
 
 .user-details span {
+    display: flex;
+    justify-content: center;
+    text-align: center;
     font-size: 0.9rem;
     opacity: 0.7;
-    color: #373F41; 
+    color: #007bff; 
+    margin-bottom: 10px;
+}
+
+.user-details a {
+    color: inherit;
+    text-decoration: none;
+}
+  
+.user-details a:hover {
+    text-decoration: underline;
+}
+  
+.user input[type="file"] {
+    display: none;
+}
+
+.main-content {
+    margin-top: 70px; 
+    padding-left: 320px;
+    transition: padding-left 0.4s ease;
+}
+
+.content-wrapper {
+    padding: 20px;
+}
+
+.announcement-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.announcement-section h2 {
+    font-weight: 600;
+}
+
+.adjusted {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.announcement-content {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.announcement-wrapper {
+    border: 2px solid #F9A602;
+    padding: 85px;
+    margin-top: 100px;
+    margin-bottom: 20px; 
+    background-color: #d9d9d9d9;
+    max-width: 100%;
+    height: 500px; 
+    overflow: auto;
+    border-radius: 2px;
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.7);
+}
+
+.adjusted2 {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 100%;
+    top: 330px;
+}
+
+.content-text {
+    margin-left: 15px;
+    width: calc(100% - 45px);
+}
+
+.content-text h3.title {
+    font-size: 20px; 
+    font-weight: 400;
+    color: #373F41;
+    margin-bottom: 3px;
+}
+
+.content-text p.content {
+    font-size: 18px; 
+    color: #373F41;
+    margin-top: 3px; 
+}
+
+.announcement-wrapper p {
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    margin-top: 10%;
 }

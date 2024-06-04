@@ -1,0 +1,254 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KaCoop | <%=title %></title>
+        <link rel="stylesheet" href="/css/savings_deposit.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+   
+    <body>
+ 
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    </div>
+    <div class="member-title">
+        <h1>Member</h1>
+    </div>
+    <div class="home-icon">
+        <a href="/">
+            <img src="/svg/icons8-home.svg" alt="Home Icon">
+        </a>
+</nav>
+<div class="main-content">
+    <div class="content-wrapper">
+        <img src="/images/image.png" alt="Justice Icon" class="adjusted">
+        <div class="savings-section">
+            <div class="savings-container">
+                <h3>Dividend</h3>
+                <p class="savings-amount">PHP 3000.00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deposit-withdraw">
+  <button id="deposit-button">
+    <i class="fas fa-piggy-bank"></i> Deposit
+  </button>
+  <button id="withdraw-button">
+    <i class="fas fa-wallet"></i> Withdraw
+  </button>
+</div>
+
+<div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
+<div id="price-labels">
+  <div class="column">
+    <button class="price-button" onclick="updateAmount(1000)">PHP 1000</button>
+    <button class="price-button" onclick="updateAmount(4000)">PHP 4000</button>
+  </div>
+  <div class="column">
+    <button class="price-button" onclick="updateAmount(2000)">PHP 2000</button>
+    <button class="price-button" onclick="updateAmount(5000)">PHP 5000</button>
+  </div>
+  <div class="column">
+    <button class="price-button" onclick="updateAmount(3000)">PHP 3000</button>
+    <button class="price-button" onclick="updateAmount(6000)">PHP 6000</button>
+  </div>
+</div>
+
+<form id="transaction-form" onsubmit="return redirectToPayment()">
+  <div class="form-group">
+    <label for="amount">AMOUNT:</label>
+    <input type="number" id="amount" name="amount" required>
+  </div>
+  <div class="form-group-horizontal">
+    <div class="form-group">
+      <label for="account-number">ACCOUNT NUMBER:</label>
+      <input type="text" id="account-number" name="account-number" required>
+    </div>
+    <div class="form-group dropdown-container">
+      <label for="mode-of-payment" id="mode-label">MODE OF PAYMENT:</label>
+      <select id="mode-of-payment" name="mode-of-payment" required>
+        <option value="" disabled selected hidden></option>
+        <option value="cash">Cash</option>
+        <option value="credit-card">Credit Card</option>
+        <option value="debit-card">Debit Card</option>
+        <option value="gcash">Gcash</option>
+        <option value="maya">Maya</option>
+        <option value="paypal">PayPal</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit">CONFIRM</button>
+</form>
+
+<script>
+  function redirectToPayment() {
+    const modeOfPayment = document.getElementById('mode-of-payment').value;
+    
+    switch (modeOfPayment) {
+      case 'cash':
+        alert('Please visit our nearest branch to complete the payment.');
+        break;
+      case 'credit-card':
+        window.location.href = 'https://www.example.com/credit-card-payment';
+        break;
+      case 'debit-card':
+        window.location.href = 'https://www.example.com/debit-card-payment';
+        break;
+      case 'gcash':
+        window.location.href = 'https://www.gcash.com';
+        break;
+      case 'maya':
+        window.location.href = 'https://www.maya.ph';
+        break;
+      case 'paypal':
+        window.location.href = 'https://www.paypal.com';
+        break;
+      default:
+        alert('Please select a valid payment method.');
+        return false;
+    }
+    return false; // Prevent form submission
+  }
+</script>
+
+<script>
+  function toggleModeLabel() {
+    var modeLabel = document.getElementById("mode-label");
+    modeLabel.style.display = "none";
+  }
+
+  function updateAmount(amount) {
+    var amountInput = document.getElementById("amount");
+    var currentAmount = parseFloat(amountInput.value) || 0;
+    var updatedAmount = currentAmount + amount;
+    amountInput.value = updatedAmount;
+  }
+
+  function clearFormInputs() {
+    document.getElementById("amount").value = '';
+    document.getElementById("account-number").value = '';
+    document.getElementById("mode-of-payment").value = '';
+    document.getElementById("mode-label").style.display = 'block';
+  }
+
+  document.getElementById("deposit-button").addEventListener("click", function() {
+    document.getElementById("transaction-type").value = "deposit";
+    document.getElementById("deposit-button").classList.add("deposit-active");
+    document.getElementById("withdraw-button").classList.remove("withdraw-active");
+    depositButton.style.backgroundColor = "#373F41";
+    withdrawButton.style.backgroundColor = "#D9D9D9";
+    depositButton.style.color = "white";
+    withdrawButton.style.color = "#373F41";
+    console.log("Deposit button clicked");
+  });
+
+  document.getElementById("withdraw-button").addEventListener("click", function() {
+    document.getElementById("transaction-type").value = "withdraw";
+    document.getElementById("withdraw-button").classList.add("withdraw-active");
+    document.getElementById("deposit-button").classList.remove("deposit-active");
+    depositButton.style.backgroundColor = "#D9D9D9";
+    withdrawButton.style.backgroundColor = "#373F41";
+    depositButton.style.color = "#373F41";
+    withdrawButton.style.color = "white";
+    console.log("Withdraw button clicked");
+  });
+
+  document.getElementById("transaction-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+    var transactionType = document.getElementById("transaction-type").value;
+    var savingsAmountElement = document.getElementById("savings-amount");
+    var amountInput = document.getElementById("amount");
+    var currentSavings = parseFloat(savingsAmountElement.innerText.split(" ")[1]);
+    var transactionAmount = parseFloat(amountInput.value);
+
+    if (transactionType === "deposit") {
+      var updatedSavings = currentSavings + transactionAmount;
+      savingsAmountElement.innerText = "PHP " + updatedSavings.toFixed(2);
+      alert("Deposit successful!");
+      clearFormInputs();
+    } else if (transactionType === "withdraw") {
+      if (transactionAmount > 0 && transactionAmount <= currentSavings) {
+        var updatedSavings = currentSavings - transactionAmount;
+        savingsAmountElement.innerText = "PHP " + updatedSavings.toFixed(2);
+        alert("Withdrawal successful!");
+        clearFormInputs();
+      } else {
+        alert("Invalid withdrawal amount or insufficient funds!");
+      }
+    }
+  });
+</script>
+<script>
+ 
+  var depositButton = document.getElementById("deposit-button");
+  var withdrawButton = document.getElementById("withdraw-button");
+
+ 
+  depositButton.addEventListener("click", function() {
+   
+    depositButton.style.backgroundColor = "#373F41";
+    withdrawButton.style.backgroundColor = "#D9D9D9";
+   
+    depositButton.style.color = "white";
+    withdrawButton.style.color = "#373F41";
+  });
+
+  withdrawButton.addEventListener("click", function() {
+   
+    depositButton.style.backgroundColor = "#D9D9D9";
+    withdrawButton.style.backgroundColor = "#373F41";
+ 
+    depositButton.style.color = "#373F41";
+    withdrawButton.style.color = "white";
+  });
+</script>
+<script>
+  // Get the deposit and withdraw buttons
+  var depositButton = document.getElementById('deposit-button');
+  var withdrawButton = document.getElementById('withdraw-button');
+  
+  // Get the confirm button
+  var confirmButton = document.querySelector('button[type="submit"]');
+  
+  // Add event listener to deposit button
+  depositButton.addEventListener('click', function() {
+    // Update the text of the confirm button to 'CONFIRM DEPOSIT'
+    confirmButton.textContent = 'CONFIRM DEPOSIT';
+  });
+  
+  // Add event listener to withdraw button
+  withdrawButton.addEventListener('click', function() {
+    // Update the text of the confirm button to 'CONFIRM WITHDRAWAL'
+    confirmButton.textContent = 'CONFIRM WITHDRAWAL';
+  });
+</script>
+<script>
+// Get the select element
+var modeOfPaymentSelect = document.getElementById('mode-of-payment');
+
+// Add event listener to detect changes in the select element
+modeOfPaymentSelect.addEventListener('change', function() {
+    // Get the selected option
+    var selectedOption = modeOfPaymentSelect.options[modeOfPaymentSelect.selectedIndex];
+
+    // Get the label element
+    var modeLabel = document.getElementById('mode-label');
+
+    // Check if an option is selected
+    if (selectedOption.value !== "") {
+        // If an option is selected, hide the mode label
+        modeLabel.style.display = 'none';
+    } else {
+        // If no option is selected, show the mode label
+        modeLabel.style.display = 'block';
+    }
+});
+</script>
+
+</body>
+</html>
