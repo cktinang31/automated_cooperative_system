@@ -20,6 +20,9 @@ const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
 const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
 const User = require('./models/user');
+const cbuRoutes = require('./routes/cbuRoute');
+const savingsRoutes = require('./routes/savingsRoute');
+const Savtransaction = require('./models/savtransaction');
 
 // const Application = require('./models/application');
 
@@ -134,12 +137,12 @@ passport.deserializeUser(async (user_id, done) => {
 });
 
 passport.use(new LocalStrategy({
-  usernameField: 'email',
+  usernameField: 'user_id',
   passwordField: 'password',
   failureFlash: true
-}, async (email, password, done) => {
+}, async (user_id, password, done) => {
   try {
-      const user = await User.findOne({ where: { email } });
+      const user = await User.findOne({ where: { user_id } });
 
       if (!user) {
         return done(null, false, { message: 'User not found' });
@@ -169,7 +172,8 @@ app.use(loanRoutes);
 app.use(memberpageRoutes);
 app.use(managerpageRoutes);
 app.use(systemadminRoutes);
-
+app.use(cbuRoutes);
+app.use(savingsRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -247,13 +251,7 @@ app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
 
-app.get('/system_admin', (req, res) => {
-    res.render('system_admin', { title: 'Admin'});
-});
 
-app.get('/system_admin', (req, res) => {
-    res.render('system_admin', { title: 'Admin'});
-}); 
 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
@@ -263,25 +261,21 @@ app.get('/transaction', (req, res) => {
   res.render('transaction', { title: 'Transaction History'});
 });
 
-app.get('/sidebar', (req, res) => {
-  res.render('sidebar', { title: 'sidebar'});
-});
+// app.get('/sidebar', (req, res) => {
+//   res.render('sidebar', { title: 'sidebar'});
+// });
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-app.get('/SystemAdmin/systemadmin', (req, res) => {
-  res.render('SystemAdmin/systemadmin', { title: 'System Admin'});
-});
+
 
 app.get('/Member/transaction', (req, res) => {
   res.render('Member/transaction', { title: 'Transaction History'});
 });
 
-app.get('/Member/sidebar', (req, res) => {
-  res.render('Member/sidebar', { title: 'Sidebar'});
-});
+
 
 app.get('/Member/inquire', (req, res) => {
   res.render('Member/inquire', { title: 'Inquire '});
@@ -291,14 +285,11 @@ app.get('/Member/announcement', (req, res) => {
   res.render('Member/announcement', { title: 'Announcement '});
 });
 
-app.get('/Member/applyloan', (req, res) => {
-  res.render('Member/applyloan', { title: 'Apply Loan '});
-});
 
-app.get('/Member/cbu_deposit', (req, res) => {
-  res.render('Member/cbu_deposit', { title: 'CBU-Deposit '});
-});
 
+app.get('/x', (req, res) => {
+  res.render('x', { title: 'X'});
+});
 
 
 app.get('/Member/dividend_deposit', (req, res) => {
@@ -309,11 +300,6 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
-
-
-app.get('/Member/savings_deposit', (req, res) => {
-  res.render('Member/savings_deposit', { title: 'Savings Deposit '});
-});
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
@@ -331,13 +317,9 @@ app.get('/Manager/membersdata', (req, res) => {
   res.render('Manager/membersdata', { title: 'Members Data'});
 });
 
-app.get('/Manager/req', (req, res) => {
-  res.render('Manager/req', { title: 'Req'});
-});
 
-app.get('/Manager/request', (req, res) => {
-  res.render('Manager/request', { title: 'Request'});
-});
+
+
 
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});

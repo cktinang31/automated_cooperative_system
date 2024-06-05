@@ -88,12 +88,12 @@ Loan.belongsTo(User, {
 });
 
 // Synchronize models
-Loan.sync()
-    .then(() => {
-        console.log('Loan table synchronized successfully!');
-    })
-    .catch((error) => {
-        console.error('Error synchronizing Loan table:', error);
-    });
+Loan.sync();
+    // .then(() => {
+    //     console.log('Loan table synchronized successfully!');
+    // })
+    // .catch((error) => {
+    //     console.error('Error synchronizing Loan table:', error);
+    // });
 
 module.exports = Loan;

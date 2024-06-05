@@ -22,17 +22,24 @@
             <img src="/svg/icons8-home.svg" alt="Home Icon">
         </a>
 </nav>
-<div class="main-content">
-    <div class="content-wrapper">
+
+<% if (cbu.length > 0) { %>
+  <% cbu.forEach(cbu => { %>
+    <div class="main-content">
+      <div class="content-wrapper">
         <img src="/images/image.png" alt="Justice Icon" class="adjusted">
         <div class="savings-section">
-            <div class="savings-container">
-                <h3>CBU</h3>
-                <p class="savings-amount">PHP 5000.00</p>
-            </div>
+          <div class="savings-container">
+            <h3>CBU</h3>
+            <p id="savings-amount" class="savings-amount">PHP <%= cbu.amount %>.00</p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  <% }) %>
+<% } else { %>
+  <p>No funds available.</p>
+<% } %>   
 
 <div id="deposit-withdraw">
   <button id="deposit-button">

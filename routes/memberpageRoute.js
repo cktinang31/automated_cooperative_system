@@ -4,6 +4,8 @@ const Content = require('../models/content');
 const Loan_payment = require('../models/loan_payment');
 const Loan = require('../models/loan');
 const Loan_application = require ('../models/loan_application');
+const Savings = require ('../models/savings');
+const Cbu = require('../models/cbu');
 const { title } = require('process');
 
 const router = express.Router();
@@ -127,67 +129,7 @@ router.get('/Member/transaction', (req,res, next) =>{
         
 });
 
-router.get('/Member/savings_deposit', (req, res, next) => {
-    console.log('Checking authentication status...');
-    try {
-        console.log('Session ID:', req.sessionID);
-        console.log('Session:', req.session);
-        console.log('Authenticated:', req.isAuthenticated());
- 
-        if (req.isAuthenticated()) {
-            console.log('User is authenticated.');
-            next(); // Proceed to the route handler
-        } else {
-            console.log('User is not authenticated. Redirecting to login page.');
-            res.redirect('/login');
-        }
-    } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
-        res.status(500).send('Internal server error');
-    }
-}, async (req, res) => {
-    try {
-        const contents = await Content.findAll({
-            order: [['createdAt', 'DESC']]
-        });
-        const user = req.user;
-        res.render('./Member/savings_deposit', { contents, title: 'Savings', user });
-    } catch (error) {
-        console.error('Error fetching contents:', error);
-        res.status(500).send('Error fetching contents.');
-    }
-});
 
-router.get('/Member/cbu_deposit', (req, res, next) => {
-    console.log('Checking authentication status...');
-    try {
-        console.log('Session ID:', req.sessionID);
-        console.log('Session:', req.session);
-        console.log('Authenticated:', req.isAuthenticated());
- 
-        if (req.isAuthenticated()) {
-            console.log('User is authenticated.');
-            next(); // Proceed to the route handler
-        } else {
-            console.log('User is not authenticated. Redirecting to login page.');
-            res.redirect('/login');
-        }
-    } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
-        res.status(500).send('Internal server error');
-    }
-}, async (req, res) => {
-    try {
-        const contents = await Content.findAll({
-            order: [['createdAt', 'DESC']]
-        });
-        const user = req.user;
-        res.render('./Member/cbu_deposit', { contents, title: 'CBU', user });
-    } catch (error) {
-        console.error('Error fetching contents:', error);
-        res.status(500).send('Error fetching contents.');
-    }
-});
 
 
 router.get('/Member/dividend_deposit', (req,res, next) =>{
@@ -345,6 +287,102 @@ router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
 
 
 
+router.get('/Member/savings_deposit', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is regular.');
+            const user = req.user;
+
+            
+            try {
+                const savings = await Savings.findAll( {
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+                res.render('Member/savings_deposit', { savings, title: 'Current Loan', user });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
+router.get('/Member/cbu_deposit', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is regular.');
+            const user = req.user;
+
+            
+            try {
+                const cbu = await Cbu.findAll( {
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+                res.render('Member/cbu_deposit', { cbu, title: 'Current Loan', user });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 
+router.get('/Member/sidebar', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is regular.');
+            const user = req.user;
+
+            try {
+                const userData = await User.findOne({
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+                res.render('Member/sidebar', { title: 'Sidebar', user: userData });
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                res.status(500).send('Error fetching user data.');
+            }
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 module.exports = router;
