@@ -27,12 +27,12 @@
     </thead>
     <tbody>
         <% if (savtransaction.length > 0) { %>
-            <% savtransaction.forEach(savtrans => { %>
-                <tr data-application-id="<%= savtrans.savtransaction_id %>">
-                    <td><%= savtrans.User.fname %> <%= savtrans.User.lname %> has sent a <%= savtrans.transaction_type %> request.</td>
-                    <td><%= savtrans.date_sent %></td>
+            <% savtransaction.forEach(savtransaction => { %>
+                <tr data-application-id="<%= savtransaction.savtransaction_id %>">
+                    <td><%= savtransaction.User.fname %> <%= savtransaction.User.lname %> has sent a <%= savtransaction.transaction_type %> request.</td>
+                    <td><%= savtransaction.date_sent %></td>
                 </tr>
-            <% }) %>
+            <% }) %>            
         <% } else { %>
             <tr>
                 <td colspan="2">No Requests at the moment...</td>
@@ -48,7 +48,7 @@
       const applicationId = this.getAttribute('data-application-id');
       
       
-      const destinationUrl = '/Manager/loanrequestupdate/' + applicationId; 
+      const destinationUrl = '/Manager/savingsrequestupdate/' + applicationId; 
       window.location.href = destinationUrl;
   });
 });

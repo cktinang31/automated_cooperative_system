@@ -4,5 +4,6 @@ const savtransactionController = require ('../controller/savtransactionControlle
 const router = express.Router();
 
 router.post('/savings_transaction', savtransactionController.savings_transaction);
+router.post('/update_savings_request', savtransactionController.update_savings_request);
 
 module.exports = router;
