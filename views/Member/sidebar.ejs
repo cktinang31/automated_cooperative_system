@@ -12,7 +12,7 @@
     <nav class="navbar">
         <div class="site-title">
             <h1>KACooP</h1>
-            <span>Member<i class="fas fa-home"></i></span>
+            <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
     </nav>    
 
@@ -60,15 +60,11 @@
 
     <div class="main-content">
         <div class="content-wrapper">
-            <div class="announcement-section">
-                <img src="/images/megaphone.png" alt="Megaphone Icon" class="adjusted">
-                <h2>Announcement</h2>
-            </div>
             <div class="announcement-wrapper">
                 <div class="announcement-content">
                     <div class="content-text">
                         <h3 class="title"></h3>
-                        <p class="content"></p>
+                        <p class="content">Cooperative Advisory</p>
                         <img src="/images/comment.png" alt="comment" class="adjusted2">
                     </div>
                 </div>
@@ -124,13 +120,7 @@
                 localStorage.removeItem('fundState');
                 localStorage.removeItem('loanState');
             }
-        
-            // Call clearLocalStorage function when user logs out
-            // You might have a logout button or link somewhere in your application
-            // Attach an event listener to that logout button/link and call clearLocalStorage() when clicked
         });
-        </script>
-        
-
+    </script>
 </body>
 </html>
