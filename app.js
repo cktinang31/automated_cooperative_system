@@ -347,6 +347,10 @@ app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
 
+app.get('/Member/apply_loan', (req, res) => {
+  res.render('Member/apply_loan', { title: 'Apply Loan '});
+});
+
 // 404 page
 app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
