@@ -9,21 +9,21 @@ const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
 });
 
 const User = require('../models/user'); 
-const Application = require('../models/application');
+const Savings = require('../models/savings');
 
-const Savings = sequelize.define('Savings', {
-    savings_id: {
+const Savtransaction = sequelize.define('Savtransaction', {
+    savtransaction_id: {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         defaultValue: uuidv4(),
     },
-    application_id: {
-        type: DataTypes.INTEGER,
+    savings_id: {
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: Application,  
-            key: 'application_id'
+            model: Savings,  
+            key: 'savings_id'
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
@@ -42,12 +42,12 @@ const Savings = sequelize.define('Savings', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    interest: {
-        type: DataTypes.FLOAT,
-        allowNull: true
+    transaction_type: {
+        type: DataTypes.ENUM ('deposit', 'withdraw'),
+        allowNull: false
     },
-    loan_id: {
-        type: DataTypes.INTEGER,
+    status: {
+        type: DataTypes.ENUM ('pending', 'approved', 'decline'),
         allowNull: true
     },
     timestamp: {
@@ -57,25 +57,25 @@ const Savings = sequelize.define('Savings', {
 });
 
 
-Savings.belongsTo(Application, {
-    foreignKey: 'application_id',
+Savtransaction.belongsTo(Savings, {
+    foreignKey: 'savings_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
-Savings.belongsTo(User, {
+Savtransaction.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
 
-Savings.sync()
+Savtransaction.sync()
     .then(() => {
-        console.log('Savings tables synchronized successfully');
+        console.log('Savings Transaction tables synchronized successfully');
     })
     .catch((error) => {
         console.error('Error synchronizing tables:', error);
     });
 
-module.exports = Savings;
+module.exports = Savtransaction;

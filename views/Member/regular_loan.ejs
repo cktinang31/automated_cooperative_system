@@ -5,111 +5,81 @@
     <title>Regular_Loan</title>
     <link rel="stylesheet" href="/css/regular_loan.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
+   
 <body>
-    <nav>
-        <div class="site-title">
-            <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-        </div>
-        <div class="member-title">
-            <h1>Member</h1>
-        </div>
-        <div class="home-icon">
-            <a href="/">
-                <img src="/svg/icons8-home.svg" alt="Home Icon">
-            </a>
-        </div>
-    </nav>
-
-    <div class="regular-loan">
-        <div class="regular-loan-header">
-            <h3 class="loan-type"><i class="fas fa-hand-holding-usd"></i> Regular Loan</h3>
-            <div class="loan-details">Loan: PHP 50000.00</div>
-        </div>
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
     </div>
+    <div class="member-title">
+        <h1>Member</h1>
+    </div>
+    <div class="home-icon">
+        <a href="/">
+            <img src="/svg/icons8-home.svg" alt="Home Icon">
+        </a>
+    </div>
+</nav>
 
-    <div class="table-container">
+<div class="regular-loan">
+    <div class="regular-loan-header">
+        <h3 class="loan-type"><i class="fas fa-hand-holding-usd"></i> <%= loanPayment.id %></h3>
+        <div class="loan-details">Loan: PHP 50000.00</div>
+    </div>
+</div>
+
+<div class="table-container">
+   
         <table>
             <thead>
                 <tr>
                     <th>No. of Payment</th>
                     <th>Date</th>
-                    <th>Deposit</th>
-                    <th>Savings</th>
                     <th>Balance</th>
+                    <th>Amount</th>
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody id="paymentTableBody">
-                <!-- Table body will be generated dynamically -->
+            <tbody>
+                <% if (loanPayment) { %>
+                    <tr>
+                        <td><%= loanPayment.id %></td>
+                        <td><%= loanPayment.schedule %></td>
+                        <td><%= loanPayment.balance %></td>
+                        <td><%= loanPayment.amount %></td>
+                        <td><%= loanPayment.status %></td>
+                    </tr>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No loan payment details available.</td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
-    </div>
+       
+</div>
 
-    <div class="add-payment-button-container">
-        <button id="paymentButton">Add Payment</button>
-    </div>
 
-    <script>
-        // Find the button element
-        var paymentButton = document.getElementById("paymentButton");
 
-        // Add an event listener to handle the click action
-        paymentButton.addEventListener("click", function() {
-            alert("Payment added successfully!");
-        });
+ 
 
-        // Function to update the status colors
-        function updateStatusColors() {
-            var statusCells = document.querySelectorAll('.status');
+<div class="add-payment-button-container">
+    <button id="paymentButton">Add Payment</button>
+</div>
 
-            statusCells.forEach(function(cell) {
-                if (cell.textContent.trim() === "ONTIME") {
-                    cell.classList.add('status-ontime');
-                } else if (cell.textContent.trim() === "DELAYED") {
-                    cell.classList.add('status-delayed');
-                }
-            });
-        }
+<script>
+// Find the button element
+var paymentButton = document.getElementById("paymentButton");
 
-        // Call the function to update status colors on page load
-        document.addEventListener("DOMContentLoaded", updateStatusColors);
+// Add an event listener to handle the click action
+paymentButton.addEventListener("click", function() {
+    // Your click action code here
+    // For example, you can navigate to another page or perform some action
+    alert("Payment added successfully!");
+});
+</script>
 
-        // Function to generate table rows dynamically
-        function generatePaymentRows() {
-            var tableBody = document.getElementById("paymentTableBody");
-
-            // Clear existing rows
-            tableBody.innerHTML = "";
-
-            // Sample payment data (you can replace this with actual data)
-            var paymentData = [
-                { paymentNumber: 1, date: "03-01-24", deposit: 500, savings: 50, balance: 49500.00, status: "ONTIME" },
-                { paymentNumber: 2, date: "03-08-24", deposit: 500, savings: 50, balance: 49000.00, status: "DELAYED" }
-                // Add more payment data as needed
-            ];
-
-            // Loop through payment data to generate table rows
-            paymentData.forEach(function(payment) {
-                var newRow = document.createElement("tr");
-                newRow.innerHTML = `
-                    <td>${payment.paymentNumber}</td>
-                    <td>${payment.date}</td>
-                    <td>${payment.deposit}</td>
-                    <td>${payment.savings}</td>
-                    <td>${payment.balance}</td>
-                    <td class="status">${payment.status}</td>
-                `;
-                tableBody.appendChild(newRow);
-            });
-
-            // Update status colors
-            updateStatusColors();
-        }
-
-        // Call the function to generate table rows on page load
-        document.addEventListener("DOMContentLoaded", generatePaymentRows);
-    </script>
 </body>
 </html>
+

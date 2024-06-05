@@ -92,7 +92,7 @@ const update_loan_request = async (req, res) => {
               await loanpayment(application_id, user_id, newLoan.loan_id);
           }
 
-          return res.redirect('LoanApplicationApproved');
+          return res.redirect('/Manager/loanrequest');
       } else {
           await updatedLoanApplication.destroy();
           return res.send('Loan application declined');
@@ -154,5 +154,3 @@ module.exports = {
   calculateEndDate,
   generateSchedule,
 };
-
-
