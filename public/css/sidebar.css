@@ -53,9 +53,10 @@
 }
 
 .site-title span {
+    color: #ffffff;
     display: flex;
     align-items: center;
-    font-size: 28px;
+    font-size: 14px;
     font-weight: 600;
     font-style: italic;
 }
@@ -64,6 +65,22 @@
     color: #ffa900;
     margin-left: 20px; 
     margin-right: 0;
+    font-size: 32px;
+    transition: color 0.3s ease;
+}
+
+.site-title span i:hover {
+    color: #ffffff;
+}
+
+.logout-icon {
+    cursor: pointer;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .sidebar .btn {
@@ -332,9 +349,10 @@
 }
 
 .content-text p.content {
-    font-size: 18px; 
+    font-size: 30px;
     color: #373F41;
-    margin-top: 3px; 
+    margin-top: 3px;
+    font-weight: 800;
 }
 
 .announcement-wrapper p {

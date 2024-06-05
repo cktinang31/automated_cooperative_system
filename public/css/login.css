@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
     height: 100vh;
-    margin: -20px 0 50px;
+    margin: -50px 0 50px;
 }
 
 h2,
@@ -95,7 +95,7 @@ nav a {
 
 h3 {
     font-size: 30px;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 h4 {
@@ -108,7 +108,7 @@ h1 {
     font-weight: bold;
     padding-bottom: 25px;
     text-align: center;
-    padding-bottom: 45px;
+    padding-bottom: 35px;
 }
 
 p {
@@ -320,10 +320,4 @@ input:hover {
 
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
-}
-
-footer {
-    color: #777;
-    text-align: center;
-    margin: 80px auto 20px;
 }

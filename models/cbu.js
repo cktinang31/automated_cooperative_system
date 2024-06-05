@@ -11,14 +11,15 @@ const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
 const User = require('../models/user'); 
 const Application = require('../models/application');
 
-const Savings = sequelize.define('Savings', {
-    savings_id: {
+const Cbu = sequelize.define('Cbu', {
+    cbu_id: {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        unique:true,
+        unique: true,
         defaultValue: uuidv4(),
     },
+
     application_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -58,25 +59,25 @@ const Savings = sequelize.define('Savings', {
 });
 
 
-Savings.belongsTo(Application, {
+Cbu.belongsTo(Application, {
     foreignKey: 'application_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
-Savings.belongsTo(User, {
+Cbu.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
 
-Savings.sync()
+Cbu.sync()
     .then(() => {
-        console.log('Savings tables synchronized successfully');
+        console.log('Cbu tables synchronized successfully');
     })
     .catch((error) => {
         console.error('Error synchronizing tables:', error);
     });
 
-module.exports = Savings;
+module.exports = Cbu;
