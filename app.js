@@ -22,7 +22,9 @@ const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
 const User = require('./models/user');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
-const Savtransaction = require('./models/savtransaction');
+const savtransactionRoutes = require('./routes/savtransactionRoute');
+const cbutransactionRoutes = require('./routes/cbutransactionRoute');
+
 
 // const Application = require('./models/application');
 
@@ -174,6 +176,8 @@ app.use(managerpageRoutes);
 app.use(systemadminRoutes);
 app.use(cbuRoutes);
 app.use(savingsRoutes);
+app.use(savtransactionRoutes);
+app.use(cbutransactionRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});

@@ -16,8 +16,10 @@ const Cbu = sequelize.define('Cbu', {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
+        unique: true,
         defaultValue: uuidv4(),
     },
+
     application_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

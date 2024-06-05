@@ -17,6 +17,7 @@ const Savtransaction = sequelize.define('Savtransaction', {
         allowNull: false,
         primaryKey: true,
         defaultValue: uuidv4(),
+        unique: true,
     },
     savings_id: {
         type: DataTypes.UUID,
@@ -46,15 +47,21 @@ const Savtransaction = sequelize.define('Savtransaction', {
         type: DataTypes.ENUM ('deposit', 'withdraw'),
         allowNull: false
     },
+    mode:  {
+        type: DataTypes.ENUM ('cash', 'credit card', 'debit card', 'gcash', 'maya', 'paypal'),
+        allownull: false,
+    },
     status: {
         type: DataTypes.ENUM ('pending', 'approved', 'decline'),
         allowNull: true
     },
-    timestamp: {
+    date_sent: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
     }
-});
+},
+{timestamps: false,});
 
 
 Savtransaction.belongsTo(Savings, {
@@ -70,12 +77,12 @@ Savtransaction.belongsTo(User, {
 });
 
 
-Savtransaction.sync()
-    .then(() => {
-        console.log('Savings Transaction tables synchronized successfully');
-    })
-    .catch((error) => {
-        console.error('Error synchronizing tables:', error);
-    });
+Savtransaction.sync();
+    // .then(() => {
+    //     console.log('Savings Transaction tables synchronized successfully');
+    // })
+    // .catch((error) => {
+    //     console.error('Error synchronizing tables:', error);
+    // });
 
 module.exports = Savtransaction;
