@@ -325,6 +325,15 @@ app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
 
+app.get('/your-route', (req, res) => {
+  const user = {
+      name: 'Kristine Anne Cardosa',
+      email: 'kristineanne@gmail.com'
+  };
+  res.render('your-template', { user: user });
+});
+
+
 // 404 page
 app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
