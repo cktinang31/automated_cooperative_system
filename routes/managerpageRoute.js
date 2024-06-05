@@ -3,6 +3,8 @@ const User = require('../models/user');
 const Content = require('../models/content');
 const Loan_application = require('../models/loan_application.js');
 const Application = require ('../models/application.js');
+const Savtransaction = require ('../models/savtransaction');
+const Cbutransaction = require ('../models/cbutransaction');
 const router = express.Router();
 
 
@@ -288,5 +290,72 @@ router.get('/Manager/req/:applicationId', async (req, res, next) =>  {
     }
 
 })
+
+router.get('/Manager/savingsrequest', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
+            console.log('User is authenticated as manager.');
+            const user = req.user;
+
+            
+            try {
+                const savtransaction = await Savtransaction.findAll( {
+                    where: {
+                        status: 'pending'
+                    },
+                    include: User});
+                res.render('Manager/savingsrequest', { savtransaction, title: 'Savings Deposit/Withdraw Request', user });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
+        } else {
+            console.log('User is not authenticated or not a manager. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
+
+router.get('/Manager/cburequest', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
+            console.log('User is authenticated as manager.');
+            const user = req.user;
+
+            
+            try {
+                const cbutransaction = await Cbutransaction.findAll( {
+                    where: {
+                        status: 'pending'
+                    },
+                    include: User});
+                res.render('Manager/cburequest', { cbutransaction, title: 'CBU Deposit/Withdraw Request', user });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
+        } else {
+            console.log('User is not authenticated or not a manager. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 module.exports = router;
