@@ -3,6 +3,7 @@ const Loan_application = require ('../models/loan_application.js');
 const Loan = require ('../models/loan.js');
 const Loan_payment = require ('../models/loan');
 const User = require ('../models/user');
+const { v4: uuidv4 } = require('uuid');
 
 
 
@@ -26,6 +27,7 @@ const apply_loan = async (req, res) => {
             (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
      
         const newLoan_application = await Loan_application.create({
+          application_id: uuidv4(),  
           user_id,
           loan_type,
           amount,
@@ -71,6 +73,7 @@ const update_loan_request = async (req, res) => {
           const approvedLoan = {
               application_id,
               user_id,
+              loan_id: uuidv4(),
               loan_status: 'active',
               loan_type: updatedLoanApplication.loan_type,
               loan_amount: updatedLoanApplication.amount,

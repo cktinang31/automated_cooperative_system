@@ -16,7 +16,6 @@ const Savtransaction = sequelize.define('Savtransaction', {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        defaultValue: uuidv4(),
         unique: true,
     },
     savings_id: {

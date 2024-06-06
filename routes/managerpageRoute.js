@@ -372,4 +372,36 @@ router.get('/Manager/cburequest', async (req, res, next) => {
     }
 });
 
+router.get('/Manager/cburequestupdate/:applicationId', async (req, res, next) =>  {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
+            console.log('User is authenticated as manager.');
+            const user = req.user;
+            const applicationId = req.params.applicationId;
+
+            try {
+                const cbutransaction = await Cbutransaction.findByPk(applicationId, { include: User });
+                if (!cbutransaction) {
+                    return res.status(404).send('Request not found');
+                }
+                res.render('Manager/cburequestupdate', { cbutransaction, title: 'Request Details', user: req.user });
+            } catch (error) {
+                console.error('Error fetching application:', error);
+                res.status(500).send('Error fetching request');
+            }
+        } else {
+            console.log('User is not authenticated or not a manager. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
 module.exports = router;

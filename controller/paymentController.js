@@ -2,6 +2,7 @@ const Loan_application = require ('../models/loan_application');
 const User = require ('../models/user');
 const Loan = require ('../models/loan');
 const Loan_payment = require ('../models/loan_payment');
+const { v4: uuidv4 } = require('uuid');
 
 
 const loanpayment = async (application_id, user_id, loan_id) => {
@@ -17,6 +18,7 @@ const loanpayment = async (application_id, user_id, loan_id) => {
 
         const newPayment = await Loan_payment.create({
             application_id: loanApplication.application_id,
+            payment_id: uuidv4(),
             user_id: user.user_id,
             loan_id: loan_id,
             balance,
