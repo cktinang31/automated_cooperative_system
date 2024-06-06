@@ -318,9 +318,6 @@ app.get('/Manager/membersdata', (req, res) => {
 });
 
 
-
-
-
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
