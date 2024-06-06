@@ -14,36 +14,33 @@
             <h1>KACooP</h1>
             <span>Manager<i class="fas fa-home"></i></span>
         </div>
-    </nav>
+    </nav>   
 
-<h2>Membership Requests</h2>
+<h2>Savings Deposit/Withdraw Requests</h2>
 
 <table id="table">
     <thead>
         <tr>
-            <th>Application ID</th>
             <th>Details</th>
             <th>Date</th>
         </tr>
     </thead>
     <tbody>
-        <% if (applications.length > 0) { %>
-          <% applications.forEach(application => { %>
-            <tr data-application-id="<%= application.application_id %>">
-                <td><%= application.application_id %></td>
-                <td><%= application.fname %> <%= application.lname %> has sent a membership request.</td>
-                <td><%= application.date_sent %></td>
-                
-              </tr>
-            <% }) %>
-          <% } else { %>
+        <% if (savtransaction.length > 0) { %>
+            <% savtransaction.forEach(savtransaction => { %>
+                <tr data-application-id="<%= savtransaction.savtransaction_id %>">
+                    <td><%= savtransaction.User.fname %> <%= savtransaction.User.lname %> has sent a <%= savtransaction.transaction_type %> request.</td>
+                    <td><%= savtransaction.date_sent %></td>
+                </tr>
+            <% }) %>            
+        <% } else { %>
             <tr>
-              <td colspan="8">No membership requests at the moment...</td>
+                <td colspan="2">No Requests at the moment...</td>
             </tr>
-          <% } %>   
-        </tbody>
-
+        <% } %>   
+    </tbody>
 </table>
+
 <script>
     document.querySelectorAll('tr[data-application-id]').forEach(row => {
   row.addEventListener('click', function() {
@@ -51,7 +48,7 @@
       const applicationId = this.getAttribute('data-application-id');
       
       
-      const destinationUrl = '/Manager/req/' + applicationId; 
+      const destinationUrl = '/Manager/savingsrequestupdate/' + applicationId; 
       window.location.href = destinationUrl;
   });
 });

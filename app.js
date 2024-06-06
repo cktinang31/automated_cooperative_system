@@ -22,10 +22,12 @@ const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
 const User = require('./models/user');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
-const Savtransaction = require('./models/savtransaction');
+const savtransactionRoutes = require('./routes/savtransactionRoute');
+const cbutransactionRoutes = require('./routes/cbutransactionRoute');
+const collectorRoutes = require('./routes/collectorRoute');
+
 
 // const Application = require('./models/application');
-
 
 
 const isAuthenticated = (req, res, next) => {
@@ -174,6 +176,9 @@ app.use(managerpageRoutes);
 app.use(systemadminRoutes);
 app.use(cbuRoutes);
 app.use(savingsRoutes);
+app.use(savtransactionRoutes);
+app.use(cbutransactionRoutes);
+app.use(collectorRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -243,15 +248,12 @@ app.post('/savings', async (req, res) => {
   }
 });
 
-
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
 });
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
-
-
 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
@@ -269,13 +271,9 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-
-
 app.get('/Member/transaction', (req, res) => {
   res.render('Member/transaction', { title: 'Transaction History'});
 });
-
-
 
 app.get('/Member/inquire', (req, res) => {
   res.render('Member/inquire', { title: 'Inquire '});
@@ -285,12 +283,9 @@ app.get('/Member/announcement', (req, res) => {
   res.render('Member/announcement', { title: 'Announcement '});
 });
 
-
-
 app.get('/x', (req, res) => {
   res.render('x', { title: 'X'});
 });
-
 
 app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
@@ -300,6 +295,9 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
+app.get('/Member/apply_loan', (req, res) => {
+  res.render('Member/apply_loan', { title: 'Apply Loan '});
+});
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
@@ -317,7 +315,6 @@ app.get('/Manager/membersdata', (req, res) => {
   res.render('Manager/membersdata', { title: 'Members Data'});
 });
 
-
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
@@ -327,6 +324,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+app.listen(3000,() => {
+  console.log('Server running on 3000');
 });

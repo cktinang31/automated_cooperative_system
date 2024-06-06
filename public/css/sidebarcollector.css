@@ -213,32 +213,28 @@
     color: #28a745; 
 }
 
-.fa-piggy-bank {
-    color: #ffc107; 
-}
-
-.fa-wallet {
-    color: #dc3545; 
-}
-
 .fa-hand-holding-usd {
     color: #17a2b8; 
-}
-
-.fa-file-signature {
-    color: #6610f2;
-}
-
-.fa-file-invoice-dollar {
-    color: #6c757d;
 }
 
 .fa-history {
     color: #fd7e14; 
 }
 
-.fa-search {
-    color: #6f42c1; 
+.fa-question-circle {
+    color: #007bff;
+}
+
+.fa-bell {
+    color: #28a745
+}
+
+.fa-envelope-open-text {
+    color: #dfa806;
+}
+
+.fa-check-circle {
+    color: #17a2b8;
 }
 
 .user .bi-person-circle {

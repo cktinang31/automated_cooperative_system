@@ -50,13 +50,14 @@ const user_login = async (req, res) => {
           return res.status(500).send('Error logging in.');
         }
         console.log('User logged in successfully:', user);
-
        
         switch (user.role) {
           case 'admin':
             return res.redirect('/SystemAdmin/systemadmin');
           case 'manager':
             return res.redirect('/Manager/sidebarmanager');
+          case 'collector': 
+            return res.redirect('Collector/sidebarcollector');
           default:
             return res.redirect('/Member/sidebar');
         }

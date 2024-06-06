@@ -9,21 +9,21 @@ const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
 });
 
 const User = require('../models/user'); 
-const Application = require('../models/application');
+const Cbu = require('../models/cbu');
 
-const Savings = sequelize.define('Savings', {
-    savings_id: {
+const Cbutransaction = sequelize.define('Cbutransaction', {
+    cbutransaction_id: {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        unique:true,
+        unique: true,
     },
-    application_id: {
-        type: DataTypes.INTEGER,
+    cbu_id: {
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: Application,  
-            key: 'application_id'
+            model: Cbu,  
+            key: 'cbu_id'
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
@@ -42,40 +42,44 @@ const Savings = sequelize.define('Savings', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    interest: {
-        type: DataTypes.FLOAT,
+    transaction_type: {
+        type: DataTypes.ENUM ('deposit', 'withdraw'),
+        allowNull: false
+    },
+    mode:  {
+        type: DataTypes.ENUM ('cash', 'credit card', 'debit card', 'gcash', 'maya', 'paypal'),
+        allownull: false,
+    },
+    status: {
+        type: DataTypes.ENUM ('pending', 'approved', 'decline'),
         allowNull: true
     },
-    loan_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    timestamp: {
+    date_sent: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW
+        allowNull: false,
+        defaultValue: DataTypes.NOW 
     }
-});
+},
+{timestamps: false,});
 
-
-Savings.belongsTo(Application, {
-    foreignKey: 'application_id',
+Cbutransaction.belongsTo(Cbu, {
+    foreignKey: 'cbu_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
-Savings.belongsTo(User, {
+Cbutransaction.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
-
-Savings.sync()
+Cbutransaction.sync()
     .then(() => {
-        console.log('Savings tables synchronized successfully');
+        console.log('CBU Transaction tables synchronized successfully');
     })
     .catch((error) => {
         console.error('Error synchronizing tables:', error);
     });
 
-module.exports = Savings;
+module.exports = Cbutransaction;
