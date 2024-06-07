@@ -17,7 +17,6 @@ const Savings = sequelize.define('Savings', {
         allowNull: false,
         primaryKey: true,
         unique:true,
-        defaultValue: uuidv4(),
     },
     application_id: {
         type: DataTypes.INTEGER,

@@ -299,11 +299,16 @@ router.get('/Member/savings_deposit', async (req, res, next) => {
 
             
             try {
-                const savings = await Savings.findAll( {
+                const savings = await Savings.findAll({
                     where: {
-                        user_id: user.user_id,
+                      user_id: user.user_id,
                     },
-                });
+                    include: [{
+                      model: User, 
+                      attributes: ['user_id'], 
+                    }],
+                  });
+                  
                 res.render('Member/savings_deposit', { savings, title: 'Current Loan', user });
             } catch (error) {
                 console.error('Error fetching requests:', error);

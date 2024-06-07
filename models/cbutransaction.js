@@ -16,7 +16,6 @@ const Cbutransaction = sequelize.define('Cbutransaction', {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
         unique: true,
     },
     cbu_id: {

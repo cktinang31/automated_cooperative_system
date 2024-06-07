@@ -26,29 +26,29 @@
 </nav>
 
 <!-- Centering the h2 element -->
-<h2>Savings Deposit/Withdraw Requests</h2>
+<h2>CBU Deposit/Withdraw Requests</h2>
 
 <div class="form-container">
-    <form action="/update_savings_request/<%= savtransaction.savtransaction_id %>" method="POST">
+    <form action="/update_cbu_request/<%= cbutransaction.cbutransaction_id %>" method="POST">
         <input type="hidden" name="_method" value="PUT">
-        <input type="hidden" name="savtransaction_id" value="<%= savtransaction.savtransaction_id %>">
+        <input type="hidden" name="cbutransaction_id" value="<%= cbutransaction.cbutransaction_id %>">
         
         <table>
             <tr>
                 <td>Name:</td>
-                <td><%= savtransaction.User.fname %> <%= savtransaction.User.lname %></td>
+                <td><%= cbutransaction.User.fname %> <%= cbutransaction.User.lname %></td>
             </tr>
             <tr>
                 <td>Request Type:</td>
-                <td><%= savtransaction.transaction_type %></td>
+                <td><%= cbutransaction.transaction_type %></td>
             </tr>
             <tr>
                 <td>Amount:</td>
-                <td><%= savtransaction.amount %></td>
+                <td><%= cbutransaction.amount %></td>
             </tr>
             <tr>
                 <td>Mode of Payment:</td>
-                <td><%= savtransaction.mode %></td>
+                <td><%= cbutransaction.mode %></td>
             </tr>
         </table>
         <div class="button-container">
