@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | <%=title %></title>
-    <link rel="stylesheet" href="/systemadmin.css">
+    <link rel="stylesheet" href="/css/systemadmin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="container">
-        <div class="header"> 
-            <h1>COOPERATIVE SYSTEM</h1> 
-            <h2>System Admin</h2>
+    <nav class="navbar">
+        <div class="site-title">
+        <h1>KACooP</h1>
+        <span>You are now signed as an Admin<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
+    </nav>  
 
+    <div class="container">
         <div class="container">
             <form action="/add_user" method="POST">
-                <h1>Add User</h1>
+                <h2>Add User</h2>
                 <input type="text" id="fname" name="fname" placeholder="First Name" required />
                 <input type="text" id="lname" name="lname" placeholder="Last Name" required />
                 <input type="email" id="email" name="email" placeholder="Email" required />
@@ -23,7 +26,6 @@
             </form>
         </div>
 
-    
         <form action="/update_user/<%= user.user_id %>" method="POST">
             <input type="hidden" name="_method" value="PUT">
             <table class="announcement-table">
