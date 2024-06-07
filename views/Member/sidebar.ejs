@@ -20,7 +20,7 @@
         <div class="btn">
             <span class="fas fa-bars"></span>
         </div>
-    </div>    
+    </div>   
 
     <div class="sidebar">
         <div class="user">
@@ -40,8 +40,8 @@
                     <span class="fas fa-caret-down first"></span>
                 </a>
                 <ul class="fund-show">
-                    <li><a href="#"><i class="fas fa-piggy-bank"></i>Savings</a></li>
-                    <li><a href="#"><i class="fas fa-wallet"></i>CBU</a></li>
+                    <li><a href="/Member/savings_deposit"><i class="fas fa-piggy-bank"></i>Savings</a></li>
+                    <li><a href="/Member/cbu_deposit"><i class="fas fa-wallet"></i>CBU</a></li>
                 </ul>
             </li>
             <li>
@@ -49,36 +49,88 @@
                     <span class="fas fa-caret-down second"></span>
                 </a>
                 <ul class="loan-show">
-                    <li><a href="#"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
-                    <li><a href="#"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
+                    <li><a href="/Member/applyloan"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
+                    <li><a href="/Member/current_loan"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
                 </ul>
             </li>
-            <li><a href="#"><i class="fas fa-history"></i>Transaction History</a></li>
-            <li><a href="#"><i class="fas fa-search"></i>Inquire</a></li>
+            <li><a href="transaction"><i class="fas fa-history"></i>Transaction History</a></li>
+            <li><a href="inquire"><i class="fas fa-search"></i>Inquire</a></li>
         </ul>
     </div>    
 
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="announcement-section">
+                <img src="/images/megaphone.png" alt="Megaphone Icon" class="adjusted">
+                <h2>Announcement</h2>
+            </div>
+            <div class="announcement-wrapper">
+                <div class="announcement-content">
+                    <div class="content-text">
+                        <h3 class="title"></h3>
+                        <p class="content"></p>
+                        <img src="/images/comment.png" alt="comment" class="adjusted2">
+                    </div>
+                </div>
+                <p>There are no announcements to display...</p>
+            </div>            
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    $(document).ready(function(){
-        $('.btn').click(function(){
-            $(this).toggleClass("click");
-            $('.sidebar').toggleClass("show");
-        });
+        $(document).ready(function(){
+            // Restore sidebar state
+            if (localStorage.getItem('sidebarState') === 'show') {
+                $('.sidebar').addClass('show');
+                $('.btn').addClass('click');
+            }
         
-        $('.fund-btn').click(function(e){
-            e.preventDefault();
-            $('.fund-show').toggleClass("show");
-            $(this).parent().toggleClass("active");
+            // Restore fund dropdown state
+            if (localStorage.getItem('fundState') === 'show') {
+                $('.fund-show').addClass('show');
+                $('.fund-btn').parent().addClass('active');
+            }
+        
+            // Restore loan dropdown state
+            if (localStorage.getItem('loanState') === 'show') {
+                $('.loan-show').addClass('show');
+                $('.loan-btn').parent().addClass('active');
+            }
+        
+            $('.btn').click(function(){
+                $(this).toggleClass("click");
+                $('.sidebar').toggleClass("show");
+                localStorage.setItem('sidebarState', $('.sidebar').hasClass('show') ? 'show' : 'hide');
+            });
+            
+            $('.fund-btn').click(function(e){
+                e.preventDefault();
+                $('.fund-show').toggleClass("show");
+                $(this).parent().toggleClass("active");
+                localStorage.setItem('fundState', $('.fund-show').hasClass('show') ? 'show' : 'hide');
+            });
+        
+            $('.loan-btn').click(function(e){
+                e.preventDefault();
+                $('.loan-show').toggleClass("show");
+                $(this).parent().toggleClass("active");
+                localStorage.setItem('loanState', $('.loan-show').hasClass('show') ? 'show' : 'hide');
+            });
+        
+            // Function to clear localStorage when user logs out
+            function clearLocalStorage() {
+                localStorage.removeItem('sidebarState');
+                localStorage.removeItem('fundState');
+                localStorage.removeItem('loanState');
+            }
+        
+            // Call clearLocalStorage function when user logs out
+            // You might have a logout button or link somewhere in your application
+            // Attach an event listener to that logout button/link and call clearLocalStorage() when clicked
         });
- 
-        $('.loan-btn').click(function(e){
-            e.preventDefault();
-            $('.loan-show').toggleClass("show");
-            $(this).parent().toggleClass("active");
-        });
-    });
-    </script>
+        </script>
+        
 
 </body>
 </html>

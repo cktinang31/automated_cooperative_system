@@ -21,30 +21,47 @@
     </nav>
 
     
-<div class="main-content">
-    <div class="content-wrapper">
-        <div class="announcement-section">
-            <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
-            <h1>Announcement</h1>
-        </div>
-
-        <% if (contents.length > 0) { %>
-            <% contents.forEach(content => { %>
-        <div class="announcement-content">
-            <i class="custom-announcement-icon"></i>
-            <div class="content-text">
-
-                <h3 class="title"><%= content.content_title %></h3>
-                <p class="content"><%= content.content %></p>
-              
-                <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="announcement-section">
+                <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
+                <h1>Announcement</h1>
             </div>
-        </div>
-        <% }) %>
-                <% } else { %>
+    
+            <% if (contents.length > 0) { %>
+                <% contents.forEach(content => { %>
+                    <div class="announcement-content">
+                        <i class="custom-announcement-icon"></i>
+                        <div class="content-text">
+                            <h3 class="title"><%= content.content_title %></h3>
+                            <p class="content"><%= content.content %></p>
+                            <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
                 <p>There are no announcements to display...</p>
-                <% } %>
+            <% } %>
+        </div>
     </div>
-</div>
+    
+
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="announcement-section">
+                <img src="/images/megaphone.jpg" alt="Megaphone Icon" class="adjusted">
+                <h1>Announcement</h1>
+            </div>
+                <div class="announcement-content">
+                    <i class="custom-announcement-icon"></i>
+                    <div class="content-text">
+                        <h3 class="title"></h3>
+                        <p class="content"></p>
+                        <img src="/images/comment.jpg" alt="NicePng_american-football-png_5625275">
+                    </div>
+                </div>
+                <p>There are no announcements to display...</p>
+        </div>
+    </div>
 </body>
 </html>

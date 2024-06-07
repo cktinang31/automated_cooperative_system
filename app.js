@@ -1,6 +1,5 @@
 const express = require('express');
 const session = require('express-session');
-const flash = require('connect-flash');
 const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -15,62 +14,92 @@ const memApplicationRoutes = require('./routes/mem_applicationRoute');
 const userRoutes = require('./routes/userRoute');
 const contentRoutes = require('./routes/contentRoute');
 const loan_applicationRoutes = require('./routes/loan_applicationRoute');
+const loanRoutes = require('./routes/loanRoute');
+const memberpageRoutes = require('./routes/memberpageRoute');
+const managerpageRoutes = require('./routes/managerpageRoute');
+const systemadminRoutes = require('./routes/systemadminRoute');
+const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
 const User = require('./models/user');
-const Application = require('./models/application');
+const Loan_payment = require('./models/loan_payment');
+// const Application = require('./models/application');
 
 
- 
+
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
     console.log('Session ID:', req.sessionID);
     console.log('Session:', req.session);
     console.log('Authenticated:', req.isAuthenticated());
-   
-    if (req.isAuthenticated()) {
-      console.log('User is authenticated.');
+  
+    if (req.isAuthenticated() || req.path === '/login') {
+      console.log('User is authenticated or trying to log in.');
       return next();
     } else {
       console.log('User is not authenticated. Redirecting to login page.');
-      return res.redirect('/login');
+      return res.redirect('/login'); 
     }
   } catch (error) {
     console.error('Error in isAuthenticated middleware:', error);
     res.status(500).send('Internal server error');
   }
 };
+
+const logout = (req, res) => {
+  console.log('Logging out...');
+
+  console.log('Session ID:', req.sessionID);
+  console.log('Session before destroying:', req.session);
+
+  req.logout((err) => {
+    if (err) {
+      console.error('Error logging out:', err);
+      return res.status(500).send('Internal server error');
+    }
+
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).send('Internal server error');
+      }
+
+      console.log('Session destroyed successfully.');
+      res.redirect('/login');
+    });
+  });
+};
+
 //express app
 const app = express();
- 
+
 const secretKey = crypto.randomBytes(64).toString('hex');
- 
+
 app.use(session({
-  secret: secretKey,
-  resave: false,
+  secret: secretKey, 
+  re_save: false,
   saveUninitialized: false
 }));
- 
-app.use(flash());
- 
+
+
 const pool = new Pool({
   connectionString:connectionString
 })
- 
+
 pool.connect()
- 
+
 .then(() => {
   console.log('Connected to PostgreSQL database');
- 
+
 })
- 
+
 .catch(err => console.error('Error connecting to PostgreSQL database', err));
- 
- 
+
+
 // register view engine
 app.set('view engine', 'ejs');
- 
+
 // middleware & static files
- 
+
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -87,7 +116,7 @@ app.use(passport.session());
 passport.serializeUser((user, done) => {
   done(null, user.user_id);
 });
- 
+
 // Deserialize user from session
 passport.deserializeUser(async (user_id, done) => {
   try {
@@ -96,7 +125,7 @@ passport.deserializeUser(async (user_id, done) => {
       console.error('User not found in database');
       return done(null, false);
     }
-    console.log('Deserialized User:', user);
+    console.log('Deserialized User:', user); 
     done(null, user);
   } catch (error) {
     console.error('Error in deserialization:', error);
@@ -113,39 +142,34 @@ passport.use(new LocalStrategy({
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
-          return done(null, false, { message: 'User not found' });
+        return done(null, false, { message: 'User not found' });
       }
 
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
-          return done(null, false, { message: 'Incorrect password' });
+        return done(null, false, { message: 'Incorrect password' });
       }
 
       return done(null, user);
-  } catch (error) {
+    } catch (error) {
       return done(error);
+    }
   }
-}));
+));
 
-app.post('/login', passport.authenticate('local', {
-  failureRedirect: '/login',
-  failureFlash: true
-}), async (req, res) => {
-  try {
-      
-      const redirectTo = req.session.returnTo || '/'; 
-      res.redirect(redirectTo);
-  } catch (error) {
-      console.error('Error in login route handler:', error);
-      res.status(500).send('Internal server error');
-  }
-});
+
+app.post('/logout', logout);
 
 app.use(memApplicationRoutes); 
 app.use(userRoutes);
 app.use(contentRoutes);
 app.use(loan_applicationRoutes);
+app.use(loanRoutes);
+app.use(memberpageRoutes);
+app.use(managerpageRoutes);
+app.use(systemadminRoutes);
+app.use(loan_paymentRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -167,392 +191,166 @@ app.get('/application', (req, res) => {
   res.render('application', { title: 'Membership Application'});
 });
 
-app.get('/Member/inquire', (req, res) => {
-res.render('Member/inquire', { title: 'Inquire'});
+// taladro backend testing (ayaw hilabti)
+
+app.get('/savings', (req, res) => {
+  res.render('savings', { title: 'savings'});
 });
 
-app.get('/Member/transaction', (req, res) => {
-res.render('Member/transaction', { title: 'Transaction History'});
-});
-
-app.get('/Member/sidebar', (req, res) => {
-res.render('Member/sidebar', { title: 'sidebar'});
-});
-
-app.get('/Member/savings_deposit', isAuthenticated, async (req, res) => {
-res.render('Member/savings_deposit', { title: 'Deposit'});
-});
-
-app.get('/Member/cbu_deposit', isAuthenticated, async (req, res) => {
-res.render('Member/cbu_deposit', { title: 'Deposit'});
-});
-
-app.get('/Member/dividend_deposit', isAuthenticated, async (req, res) => {
-res.render('Member/dividend_deposit', { title: 'Deposit'});
-});
-
-app.get('/Manager/sidebarmanager', (req, res) => {
-res.render('Manager/sidebarmanager', { title: 'sidebar'});
-});
-
-app.get('/Manager/req', (req, res) => {
-res.render('Manager/req', { title: 'Req'});
-});
-
-app.get('/Manager/membersdata', (req, res) => {
-res.render('Manager/membersdata', { title: 'Membersdata'});
-});
-
-app.get('/Manager/memberinfo', (req, res) => {
-res.render('Manager/memberinfo', { title: 'Memberinfo'});
-});
-
-app.post('/user_reg', async (req, res) => {
+app.post('/savings', async (req, res) => {
   try {
-    const { fname, lname, email, password } = req.body;
-    console.log('Request Body:', req.body);  
-    const existingUser = await User.findOne({ where: { email } });
- 
-    if (existingUser) {
-      return res.status(400).send('A user with this email is already registered in the system.');
-    }
- 
-    const hashedPassword = await bcrypt.hash(password, 10);
-   
-    const newUser = await User.create({
-      fname,
-      lname,
-      email,
-      password: hashedPassword, 
-    });
- 
-    console.log('New User:', newUser);
-    res.send('Registered successfully. You can now log in Ka-Coop!');
-  } catch (error) {
-    console.error('Error registering:', error);
-    res.status(500).send('Error registering.');
-  }
-});
-
-app.post('/mem_applications/:applicationId', async (req, res) => {
-  const applicationId = req.params.applicationId;
-  const { application_status } = req.body;
-
-  try {
-    console.log('Request Body:', req.body);
-    
-    const application = await Application.findByPk(applicationId);
-
-    if (!application) {
-      return res.status(404).send('Application not found');
-    }
-
-    if (application_status !== 'approved' && application_status !== 'decline') {
-      return res.status(400).send('Invalid application status');
-    }
-
-    application.application_status = application_status;
-
-    await application.save();
-
-    console.log('Application status updated successfully:', application);
-    res.send('Application status updated successfully');
-  } catch (error) {
-    console.error('Error updating application status:', error);
-    res.status(500).send('Error updating application status');
-  }
-});
- 
-app.get('/xx/:applicationId', isAuthenticated, async (req, res) => {
-  const applicationId = req.params.applicationId;
-
-  try {
-      const application = await Application.findByPk(applicationId);
-      if (!application) {
-          return res.status(404).send('Application not found');
-      }
-      res.render('xx', { application, title: 'Application Details', user: req.user });
-  } catch (error) {
-      console.error('Error fetching application:', error);
-      res.status(500).send('Error fetching application');
-  }
-});
-
-
-app.post('/mem_application', async (req, res) => {
-  const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
-  const applicationDate = new Date();
-  try {
-      const newApplication = await Application.create({
-          fname,
-          mname,
-          lname,
-          date_of_birth,
-          place_of_birth,
-          address,
-          email,
-          contact,
-          application_status: 'pending',
-          date_sent: applicationDate,
-      });
- 
-      console.log('New Application:', newApplication);
-      res.send('Application submitted successfully. Please wait for approval');
-  } catch (error) {
-      console.error('Error submitting the application:', error);
-      res.status(500).send('Error submitting the application');
-  }
-});
-
-app.get('/Manager/request', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  try {
-    const applications = await Application.findAll();
-    res.render('Manager/request', { applications, title: 'Request', user});
-  } catch (error) {
-    console.error('Error fetching requests:', error);
-    res.status(500).send('Error fetching requests.');
-  };
-});
-
-app.get('/x', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  try {
-    const loan_applications = await Loan_application.findAll();
-    const applications = await Application.findAll();
-    res.render('x', { loan_applications, applications, title: 'Back-end Testing', user });
-  } catch (error) {
-    console.error('Error fetching requests:', error);
-    res.status(500).send('Error fetching requests.');
-  };
-});
-
-app.post('/post_Member/announcement', async (req, res) => {
-  try {
-    const { content_title, content } = req.body;
- 
-    const newContent = await Content.create({
-      content_title,
-      content,
-      timestamp: new Date()
-    });
- 
-    console.log('Member/Announcement:', newContent);
-    res.send('Announcement Posted');
-  } catch (error) {
-    console.error('Error creating announcement:', error);
-    res.status(500).send('Error creating announcement.');
-  }
-});
- 
-app.get('/Manager/create_announcement', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  res.render('Manager/create_announcement', { title: 'Create Announcement', user});
-});
- 
-app.get('/Member/applyloan', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  res.render('Member/applyloan', { title: 'Apply Loan', user});
-});
- 
-app.post('/apply_loan', isAuthenticated, async (req, res) => {
-  try {
-    const { loan_type, amount, loan_term, interest } = req.body;
-    console.log('Request Body:', req.body);
- 
-    const user_id = req.session.passport.user;
- 
-    if (!user_id) {
-      console.error('User ID is null or undefined');
-      return res.status(401).send('User ID is null or undefined');
-    }
- 
-    const monthlyInterestRate = interest / 12;
- 
-    const number_of_payments = parseInt(loan_term.split(' ')[0]);
- 
-    const monthly_payment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, number_of_payments)) /
-        (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
- 
-    const newLoan_application = await Loan_application.create({
+    const { user_id, amount, interest, loan_id } = req.body;
+    const newSavingsData = {
       user_id,
-      loan_type,
-      amount,
-      loan_term,
+      amount: amount || 500, 
       interest,
-      monthly_payment: monthly_payment.toFixed(2),
-      number_of_payments,
-      application_status: 'pending',
+      loan_id,
       timestamp: new Date()
-    });
-    console.log('Loan Application Submitted:', newLoan_application);
-    res.send('Loan Application Submitted');
+    };
+
+    const newSavings = await Savings.create(newSavingsData);
+
+    console.log('New Savings:', newSavings);
+    res.send('Savings created successfully.');
   } catch (error) {
-    console.error('Error submitting the application:', error);
-    return res.status(500).send('Error submitting the application.');
-  }
-});
- 
-app.get('/Member/announcement', isAuthenticated, async (req, res) => {
-  try {
-   
-    const contents = await Content.findAll({
-      order: [['createdAt', 'DESC']]
-    });
-   
-    res.render('./Member/announcement', { contents, title: 'Announcement', user });
-  } catch (error) {
-    console.error('Error fetching contents:', error);
-    res.status(500).send('Error fetching contents.');
-  }
-});
- 
-app.get('/Manager/managerannouncement', isAuthenticated, async (req, res) => {
-  try {
-    const contents = await Content.findAll();
-    res.render('Manager/managerannouncement', { contents, title: 'Announcement', user});
-  } catch (error) {
-    console.error('Error fetching contents:', error);
-    res.status(500).send('Error fetching contents.');
+    console.error('Error creating savings:', error);
+    res.status(500).send('Error creating savings.');
   }
 });
 
-app.post('update_loan_application', isAuthenticated, async (req,res) => {
+app.post('/savings', async (req, res) => {
   try {
-    const { application_id,
-      application_status,
+    const { user_id, amount, interest, loan_id } = req.body;
+    const newSavingsData = {
       user_id,
-      loan_type,
-      amount,
+      amount: amount || 500, 
       interest,
-      monthly_payment,
-      number_of_payments,
-       } = req.body;
- 
-    const updatedLoanApplication = await Loan_application.findOneAndUpdate(
-      { application_id },
-      { user_id },
-      { loan_type },
-      { amount },
-      { interest },
-      { monthly_payment },
-      { number_of_payments },
-      { application_status},
-      { new: true }
-    );
- 
-    if (!updatedLoanApplication) {
-      return res.status(404).send('Loan application not found');
-    }
- 
-   
-    if (application_status === 'approved') {
- 
-     
-      return res.redirect('/loan_success');
-    } else {
-      // Handle decline scenario, if needed
-      return res.send('Loan application declined');
-    }
+      loan_id,
+      timestamp: new Date()
+    };
+
+    const newSavings = await Savings.create(newSavingsData);
+
+    console.log('New Savings:', newSavings);
+    res.send('Savings created successfully.');
   } catch (error) {
-    console.error('Error updating loan status:', error);
-    return res.status(500).send('Error updating loan status');
-  }
-})
- 
- 
-app.get('/profile', isAuthenticated, async (req, res)  => {
-  const user = req.user;
-  res.render('profile', { title: 'Profile', user });
-});
- 
-app.post('/profile/update', upload.single('profilePicture'), async (req, res) => {
-  try {
-    const { fullName, email } = req.body;
- 
-    const user = await User.findByPk(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
- 
-    user.fullName = fullName;
-    user.email = email;
- 
-    if (req.file) {
-      user.profilePicture = req.file.buffer;
-    }
- 
-    await user.save();
- 
-    res.json({ message: 'Profile updated successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error updating profile' });
-  }
-});
- 
-app.get('/profile', isAuthenticated, async (req, res) => {
-  const user = req.user;
-  try {
-    const users = await User.findAll();
-    res.render('SystemAdmin/systemadmin', { users, title: 'Back-end Testing', user });
-  } catch (error) {
-    
-    console.error('Error fetching requests:', error);
-    res.status(500).send('Error fetching requests.');
+    console.error('Error creating savings:', error);
+    res.status(500).send('Error creating savings.');
   }
 });
 
-app.post('update_user', isAuthenticated, async (req,res) => {
-  try {
-    const {
-      user_id,
-      fname,
-      lname,
-      email,
-      role,
-       } = req.body;
- 
-    const updatedUser = await User.findOneAndUpdate(
-      { user_id },
-      { fname },
-      { lname },
-      { email },
-      { role },
-      { new: true }
-    );
- 
-    if (!updatedUser) {
-      return res.status(404).send('User not found');
-    }
-   
-    if (application_status === 'approved') {
- 
-     
-      return res.redirect('/loan_success');
-    } else {
-      // Handle decline scenario, if needed
-      return res.send('Loan application declined');
-    }
-  } catch (error) {
-    console.error('Error updating loan status:', error);
-    return res.status(500).send('Error updating loan status');
-  }
-})
 
-app.get('/SystemAdmin/systemadmin', isAuthenticated, async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.render('SystemAdmin/systemadmin', { users: users, title: 'System Admin', user: req.user });
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).send('Error fetching users.');
-  }
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login'});
+});
+app.get('/application', (req, res) => {
+    res.render('application', { title: 'Membership Application'});
+});
+
+app.get('/system_admin', (req, res) => {
+    res.render('system_admin', { title: 'Admin'});
+});
+
+app.get('/system_admin', (req, res) => {
+    res.render('system_admin', { title: 'Admin'});
+}); 
+
+app.get('/inquire', (req, res) => {
+  res.render('inquire', { title: 'Inquire'});
+});
+
+app.get('/transaction', (req, res) => {
+  res.render('transaction', { title: 'Transaction History'});
+});
+
+app.get('/sidebar', (req, res) => {
+  res.render('sidebar', { title: 'sidebar'});
 });
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
+
+app.get('/SystemAdmin/systemadmin', (req, res) => {
+  res.render('SystemAdmin/systemadmin', { title: 'System Admin'});
+});
+
+app.get('/Member/transaction', (req, res) => {
+  res.render('Member/transaction', { title: 'Transaction History'});
+});
+
+app.get('/Member/sidebar', (req, res) => {
+  res.render('Member/sidebar', { title: 'Sidebar'});
+});
+
+app.get('/Member/inquire', (req, res) => {
+  res.render('Member/inquire', { title: 'Inquire '});
+});
+
+app.get('/Member/announcement', (req, res) => {
+  res.render('Member/announcement', { title: 'Announcement '});
+});
+
+app.get('/Member/applyloan', (req, res) => {
+  res.render('Member/applyloan', { title: 'Apply Loan '});
+});
+
+app.get('/Member/cbu_deposit', (req, res) => {
+  res.render('Member/cbu_deposit', { title: 'CBU-Deposit '});
+});
+
+app.get('/Member/curent_loan', (req, res) => {
+  res.render('Member/curent_loan', { title: 'Current-Loan '});
+});
+
+app.get('/Member/dividend_deposit', (req, res) => {
+  res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
+});
+
+app.get('/Member/profile', (req, res) => {
+  res.render('Member/profile', { title: 'Profile '});
+});
+
+app.get('/Member/regular_loan', (req, res) => {
+  res.render('Member/regular_loan', { title: 'Regular Loan '});
+});
+
+app.get('/Member/savings_deposit', (req, res) => {
+  res.render('Member/savings_deposit', { title: 'Savings Deposit '});
+});
+
+app.get('/Manager/create_announcement', (req, res) => {
+  res.render('Manager/create_announcement', { title: 'Create Announcement'});
+});
+
+app.get('/Manager/managerannouncement', (req, res) => {
+  res.render('Manager/managerannouncement', { title: 'Manager Announcement'});
+});
+
+app.get('/Manager/memberinfo', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Member Info'});
+});
+
+app.get('/Manager/membersdata', (req, res) => {
+  res.render('Manager/membersdata', { title: 'Members Data'});
+});
+
+app.get('/Manager/req', (req, res) => {
+  res.render('Manager/req', { title: 'Req'});
+});
+
+app.get('/Manager/request', (req, res) => {
+  res.render('Manager/request', { title: 'Request'});
+});
+
+app.get('/Manager/sidebarmanager', (req, res) => {
+  res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
+});
+
+app.get('/Collector/reminder', (req, res) => {
+  res.render('Collector/reminder', { title: 'reminder'});
+});
+
 
 // 404 page
 app.use((req, res) => {
