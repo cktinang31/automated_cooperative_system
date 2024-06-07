@@ -322,6 +322,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000, () => {
+app.listen(8080, () => {
   console.log('Server running on port 3000');
 });
