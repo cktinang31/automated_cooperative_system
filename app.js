@@ -329,8 +329,8 @@ app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
 
-app.get('/Collector/reminder', (req, res) => {
-  res.render('Collector/reminder', { title: 'reminder'});
+app.get('/Collector/paymentnotif', (req, res) => {
+  res.render('Collector/paymentnotif', { title: 'paymentnotif'});
 });
 
 
