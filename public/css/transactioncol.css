@@ -8,17 +8,7 @@
 body {
     margin: 0;
     padding: 0;
-    user-select: none;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-#table td:first-child input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-#table input[type="checkbox"] {
-    margin-right: 100px;
+    height: 100vh; 
 }
 
 .navbar {
@@ -89,6 +79,39 @@ body {
     display: flex;
     align-items: center;
     text-decoration: none;
+}
+
+
+#table td:first-child input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#table input[type="checkbox"] {
+    margin-right: 100px;
+}
+
+nav {
+    background-color: #373F41;
+    color: #FFA900;
+    padding: -10px -6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.site-title {
+    display: flex;
+    align-items: center;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+}
+
+.member-title h1 {
+    margin-right: 10px;
 }
 
 h2 {

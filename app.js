@@ -293,6 +293,10 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
+app.get('/Member/apply_loan', (req, res) => {
+  res.render('Member/apply_loan', { title: 'Apply Loan '});
+});
+
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
 });
@@ -317,8 +321,16 @@ app.get('/Collector/paymentnotif', (req, res) => {
   res.render('Collector/paymentnotif', { title: 'paymentnotif'});
 });
 
-app.get('/Member/apply_loan', (req, res) => {
-  res.render('Member/apply_loan', { title: 'Apply Loan '});
+app.get('/Collector/sidebarcollector', (req, res) => {
+  res.render('Collector/sidebarcollector', { title: 'Sidebar Collector'});
+});
+
+app.get('/Collector/inquirecol', (req, res) => {
+  res.render('Collector/inquirecol', { title: 'Inquiries'});
+});
+
+app.get('/Collector/transactioncol', (req, res) => {
+  res.render('Collector/transactioncol', { title: 'Transaction History'});
 });
 
 // 404 page
