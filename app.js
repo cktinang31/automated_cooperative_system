@@ -24,6 +24,7 @@ const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
+const collectorRoutes = require('./routes/collectorRoute');
 
 
 // const Application = require('./models/application');
@@ -177,6 +178,7 @@ app.use(cbuRoutes);
 app.use(savingsRoutes);
 app.use(savtransactionRoutes);
 app.use(cbutransactionRoutes);
+app.use(collectorRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -315,22 +317,6 @@ app.get('/Manager/membersdata', (req, res) => {
 
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
-});
-
-app.get('/Collector/paymentnotif', (req, res) => {
-  res.render('Collector/paymentnotif', { title: 'paymentnotif'});
-});
-
-app.get('/Collector/sidebarcollector', (req, res) => {
-  res.render('Collector/sidebarcollector', { title: 'Sidebar Collector'});
-});
-
-app.get('/Collector/inquirecol', (req, res) => {
-  res.render('Collector/inquirecol', { title: 'Inquiries'});
-});
-
-app.get('/Collector/transactioncol', (req, res) => {
-  res.render('Collector/transactioncol', { title: 'Transaction History'});
 });
 
 // 404 page
