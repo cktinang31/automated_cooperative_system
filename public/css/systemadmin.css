@@ -215,7 +215,7 @@ h3 {
 
 .fa-user-plus {
     font-size: 30px;
-    color: #373F41;
+    color: #007bff;
     cursor: pointer;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
