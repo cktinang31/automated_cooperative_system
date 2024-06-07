@@ -83,13 +83,186 @@
     text-decoration: none;
 }
 
-h1 {
-    color: #ffffff;
-    font-weight: bold;
-    padding-bottom: 40px;
+.container {
+    margin-top: 30px; 
+    padding: 20px; 
+    box-sizing: border-box; 
 }
 
-h2{
+.announcement-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.announcement-table td {
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    padding: 8px;
+    text-align: left;
+}
+
+.announcement-table th {
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    padding: 8px;
+    text-align: left;
+}
+
+.announcement-table th {
+    background-color: #373f418c;
+    color: #ffffff;
+}
+
+.announcement-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.role-dropdown {
+    width: 100%;
+    padding: 6px;
+    display: none;
+}
+
+.delete-btn,
+.save-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 4px;
+    font-size: 16px;
+}
+
+.delete-btn i {
+    color: #dc3545;
+}
+
+.delete-btn:hover i {
+    color: #be1f2f;
+}
+
+.save-btn i {
+    color: #28a745;
+}
+
+.save-btn:hover i {
+    color: #1d8634;
+}
+
+.user-row.editing .role-text {
+    display: none;
+}
+
+.user-row.editing .role-dropdown {
+    display: inline-block;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
     text-align: center;
-    padding-bottom: 70px;
+    text-transform: uppercase;
+}
+
+ /* Modal container */
+ .modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Modal content */
+.modal-content {
+    border-radius: 10px;
+    background-color: #373F41;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%; 
+}
+
+h3 {
+    color: #ffa900;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Add User button */
+.add-user-btn {
+    float: right; 
+}
+
+.fa-user-plus {
+    font-size: 30px;
+    color: #373F41;
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.fa-user-plus:hover {
+    color: #ffa900;
+}
+
+form {
+    margin-top: 20px;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    outline: none;
+    border: 1px solid #373F41;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover {
+    color: #373F41;
+    font-weight: bold;
+    box-shadow: 0 0 5px #f9a702e1
+}
+
+button[type="submit"] {
+    background-color: #ffa900;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #373F41;
+    border: none;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #e29701;
 }
