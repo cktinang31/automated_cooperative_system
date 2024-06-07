@@ -22,13 +22,6 @@
     left: 0;
 }
 
-.nav ul {
-    background: #dbdbdb;
-    height: 100%;
-    width: 100%;
-    list-style: none;
-}
-
 .site-title {
     display: flex;
     flex-wrap: wrap;
@@ -46,9 +39,10 @@
 }
 
 .site-title span {
+    color: #ffffff;
     display: flex;
     align-items: center;
-    font-size: 28px;
+    font-size: 14px;
     font-weight: 600;
     font-style: italic;
 }
@@ -57,7 +51,24 @@
     color: #ffa900;
     margin-left: 20px; 
     margin-right: 0;
+    font-size: 32px;
+    transition: color 0.3s ease;
 }
+
+.site-title span i:hover {
+    color: #ffffff;
+}
+
+.logout-icon {
+    cursor: pointer;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
 
 h2 {
     color: #373F41;
