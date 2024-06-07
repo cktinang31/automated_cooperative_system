@@ -1,9 +1,25 @@
+@import url('https://fonts.google.com/specimen/Poppins?query=poppins');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
 body {
     margin: 0;
     padding: 0;
-    height: 100vh; 
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
+#table td:first-child input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#table input[type="checkbox"] {
+    margin-right: 100px;
+}
 
 .navbar {
     background-color: #373F41;
@@ -77,31 +93,26 @@ body {
 
 h2 {
     text-align: center;
-    font-family: 'Poppins', sans-serif; /* Set font family */
+    margin-top: 100px;
 }
 
-.form-container,
-.button-container {
-    text-align: center;
-    margin: 20px auto; /* Center horizontally */
-    max-width: 600px; /* Set max-width for better alignment */
+.status-approved {
+    background-color: rgb(119, 202, 119);
+    color: white;
 }
 
-table {
+#table {
     border-collapse: collapse;
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif; /* Set font family */
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
 th, td {
-    padding: 8px;
+    text-align: center; 
 }
 
 tr:nth-child(even) {
-    background-color: white;
+    background-color: #f2f2f2;
 }
 
 th {
@@ -109,25 +120,11 @@ th {
     color: white;
 }
 
-.button-container .approve-button {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #373F41;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+#table th {
+    text-align: center;
+    padding: 10px;
 }
 
-.button-container .decline-button {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: maroon;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.button-container button:hover {
-    background-color: #45a049;
+#table th:nth-child(n+2), #table td:nth-child(n+2) {
+    width: 25%; 
 }

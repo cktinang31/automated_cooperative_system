@@ -29,7 +29,6 @@ const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 // const Application = require('./models/application');
 
 
-
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -247,15 +246,12 @@ app.post('/savings', async (req, res) => {
   }
 });
 
-
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
 });
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
-
-
 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
@@ -273,13 +269,9 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-
-
 app.get('/Member/transaction', (req, res) => {
   res.render('Member/transaction', { title: 'Transaction History'});
 });
-
-
 
 app.get('/Member/inquire', (req, res) => {
   res.render('Member/inquire', { title: 'Inquire '});
@@ -289,12 +281,9 @@ app.get('/Member/announcement', (req, res) => {
   res.render('Member/announcement', { title: 'Announcement '});
 });
 
-
-
 app.get('/x', (req, res) => {
   res.render('x', { title: 'X'});
 });
-
 
 app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
@@ -304,6 +293,9 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
+app.get('/Member/apply_loan', (req, res) => {
+  res.render('Member/apply_loan', { title: 'Apply Loan '});
+});
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
@@ -321,12 +313,24 @@ app.get('/Manager/membersdata', (req, res) => {
   res.render('Manager/membersdata', { title: 'Members Data'});
 });
 
-
-
-
-
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
+});
+
+app.get('/Collector/paymentnotif', (req, res) => {
+  res.render('Collector/paymentnotif', { title: 'paymentnotif'});
+});
+
+app.get('/Collector/sidebarcollector', (req, res) => {
+  res.render('Collector/sidebarcollector', { title: 'Sidebar Collector'});
+});
+
+app.get('/Collector/inquirecol', (req, res) => {
+  res.render('Collector/inquirecol', { title: 'Inquiries'});
+});
+
+app.get('/Collector/transactioncol', (req, res) => {
+  res.render('Collector/transactioncol', { title: 'Transaction History'});
 });
 
 // 404 page
