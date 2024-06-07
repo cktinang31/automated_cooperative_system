@@ -37,10 +37,7 @@
           </div>
         </div>
       </div>
-    <% }) %>
-  <% } else { %>
-    <p></p>
-  <% } %>   
+
 
   <div class="form-container">
     <form action="/savings_transaction" method="post" id="transaction-form">
@@ -67,14 +64,11 @@
           <button class="price-button" onclick="updateAmount(6000)">PHP 6000</button>
         </div>
       </div>
-      <div class="form-group">
-        <label for="amount">AMOUNT:</label>
-        <input type="number" id="amount" name="amount" required>
-      </div>
+      
       <div class="form-group-horizontal">
         <div class="form-group">
-          <label for="account-number">User ID:</label>
-          <input type="text" id="user_id" name="account-number" required>
+          <label for="amount">AMOUNT:</label>
+          <input type="number" id="amount" name="amount" required>
         </div>
         <div class="form-group dropdown-container">
           <label for="mode" id="mode">MODE OF PAYMENT:</label>
@@ -93,6 +87,12 @@
 
     </form>
   </div>
+
+
+    <% }) %>
+  <% } else { %>
+    <p></p>
+  <% } %>   
 
  
 

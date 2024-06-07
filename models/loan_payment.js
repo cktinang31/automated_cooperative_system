@@ -49,7 +49,7 @@ const Loan_payment = sequelize.define('Loan_payment', {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        defaultValue: uuidv4(),
+
     },
     balance: {
         type: DataTypes.FLOAT,

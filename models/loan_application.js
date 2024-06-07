@@ -27,7 +27,6 @@ const Loan_application = sequelize.define('Loan_application', {
         type: DataTypes.UUID, 
         allowNull: false,
         primaryKey: true,
-        defaultValue: () => uuidv4() 
     },
     application_status: {
         type: DataTypes.ENUM('pending', 'approved', 'declined'),

@@ -17,7 +17,6 @@ const Cbu = sequelize.define('Cbu', {
         allowNull: false,
         primaryKey: true,
         unique: true,
-        defaultValue: uuidv4(),
     },
 
     application_id: {
