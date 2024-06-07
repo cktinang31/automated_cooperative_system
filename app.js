@@ -295,9 +295,7 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
-app.get('/Member/apply_loan', (req, res) => {
-  res.render('Member/apply_loan', { title: 'Apply Loan '});
-});
+
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
@@ -324,6 +322,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000,() => {
-  console.log('Server running on 3000');
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
