@@ -222,7 +222,6 @@ nav ul li a {
     font-size: 31px; 
     margin-left: 1050px; 
 }
-
 #deposit-withdraw {
     display: flex;
     margin-left: 100px;
@@ -236,17 +235,11 @@ nav ul li a {
     width: 100%; 
 }
 
-.deposit-active {
-    background-color: #D9D9D9;
-    color: #373F41;
+.button-container input[type="radio"] {
+    display: none;
 }
 
-.withdraw-active {
-    background-color: #D9D9D9;
-    color: #373F41;
-}
-
-#deposit-button {
+.button-container label {
     width: 80%;
     height: 87px;
     background-color: #373F41;
@@ -262,22 +255,23 @@ nav ul li a {
     margin-right: -20px;
     margin-top: 50px;
 }
-  
-#withdraw-button {
-    width: 80%;    
-    height: 87px;
+
+.button-container input[type="radio"] + label {
     background-color: #D9D9D9;
     color: #373F41;
-    font-size: 24px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 4px 4px 0px #373F41;
-    position: relative;
     z-index: 1;
-    margin-top: 50px;
 }
+
+.button-container input[type="radio"]:checked + label {
+    background-color: #373F41;
+    color: white;
+    z-index: 2;
+}
+
+.button-container label i {
+    margin-right: 8px;
+}
+
 
 #choose-amount-text {
     width: 311px;

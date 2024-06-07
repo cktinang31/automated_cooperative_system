@@ -53,9 +53,10 @@
 }
 
 .site-title span {
+    color: #ffffff;
     display: flex;
     align-items: center;
-    font-size: 28px;
+    font-size: 14px;
     font-weight: 600;
     font-style: italic;
 }
@@ -64,6 +65,22 @@
     color: #ffa900;
     margin-left: 20px; 
     margin-right: 0;
+    font-size: 32px;
+    transition: color 0.3s ease;
+}
+
+.site-title span i:hover {
+    color: #ffffff;
+}
+
+.logout-icon {
+    cursor: pointer;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .sidebar .btn {
@@ -159,6 +176,39 @@
     margin-right: 10px;
 }
 
+.sidebar ul li.active ul li a{
+    font-size: 14px;
+    color: #5c6a6d;
+    background: #e6e6e6;
+    border-left-color: transparent;
+}
+
+.sidebar ul ul li a:hover {
+    color: #ffffff !important;
+    background: #b3b3b3 !important;
+}
+
+.sidebar ul li a span {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: transform 0.4s;
+}
+
+.sidebar ul li.active a span { 
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0 0;
+    border-bottom: 1px solid #979797;
+}
+
 .fa-money-bill-wave {
     color: #28a745; 
 }
@@ -189,38 +239,6 @@
 
 .fa-search {
     color: #6f42c1; 
-}
-
-.sidebar ul li.active ul li a{
-    color: #5c6a6d;
-    background: #e6e6e6;
-    border-left-color: transparent;
-}
-
-.sidebar ul ul li a:hover {
-    color: #ffffff !important;
-    background: #b3b3b3 !important;
-}
-
-.sidebar ul li a span {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 22px;
-    transition: transform 0.4s;
-}
-
-.sidebar ul li.active a span { 
-    transform: translateY(-50%) rotate(-180deg);
-}
-
-.user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 0 0;
-    border-bottom: 1px solid #979797;
 }
 
 .user .bi-person-circle {
@@ -332,9 +350,10 @@
 }
 
 .content-text p.content {
-    font-size: 18px; 
+    font-size: 30px;
     color: #373F41;
-    margin-top: 3px; 
+    margin-top: 3px;
+    font-weight: 800;
 }
 
 .announcement-wrapper p {
