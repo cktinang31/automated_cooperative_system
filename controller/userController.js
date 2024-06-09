@@ -123,7 +123,7 @@ const delete_user = async (req, res) => {
  
 const add_user = async (req, res) => {
   try  {
-    const {fname, lname, email} = req.body;
+    const {fname, lname, email, role} = req.body;
     console.log ('Request Body:', req.body);
  
     const existingUser = await User.findOne({where: {email}});
@@ -137,6 +137,7 @@ const add_user = async (req, res) => {
       fname,
       lname,
       email,
+      role,
     });
  
     console.log('New User:', newUser);

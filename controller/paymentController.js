@@ -36,6 +36,7 @@ const loanpayment = async (application_id, user_id, loan_id) => {
 };
 
 
+
 module.exports = {
     loanpayment,
 };
