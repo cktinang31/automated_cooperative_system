@@ -104,7 +104,6 @@ const edit_user = async (req, res) => {
   }
 };
 
-
  
 const delete_user = async (req, res) => {
   try {
