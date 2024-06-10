@@ -41,27 +41,7 @@ router.get('/Member/announcement', (req, res, next) => {
     }
 });
 
-router.get('/Member/sidebar', (req,res, next) =>{
-    try {
-                console.log('Session ID:', req.sessionID);
-                console.log('Session:', req.session);
-                console.log('Authenticated:', req.isAuthenticated());
-        
-                if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
-                    console.log('User is authenticated a regular.');
-                    const user = req.user;
-                    res.render('./Member/sidebar', { title: 'Sidebar', user });
-                } else {
-                    console.log('User is not authenticated. Redirecting to login page.');
-                    req.session.returnTo = req.originalUrl;
-                    res.redirect('/login');
-                }
-            } catch (error) {
-                console.error('Error in isAuthenticated middleware:', error);
-                res.status(500).send('Internal server error');
-            }
-        
-});
+
 
 router.get('/Member/inquire', (req,res, next) =>{
     try {
