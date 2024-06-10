@@ -37,7 +37,6 @@ const Loan = sequelize.define('Loan', {
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        defaultValue: uuidv4
     },
     loan_status: {
         type: DataTypes.ENUM('active', 'approved', 'closed'),

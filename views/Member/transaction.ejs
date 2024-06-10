@@ -1,23 +1,43 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>KaCoop | <%=title %></title>
-        <link rel="stylesheet" href="/css/announcement.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/transaction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <body>
-    <nav>
-        <div class="site-title">
-            <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-        </div>
-        <div class="member-title">
-            <h1>Member</h1>
-        </div>
-        <div class="home-icon">
-            <a href="/">
-                <img src="/svg/icons8-home.svg" alt="Home Icon">
-            </a>
-        </div>
-    </nav>
+
+  <nav class="navbar">
+    <div class="site-title">
+      <h1>KACooP</h1>
+      <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+    </div>
+</nav>  
+
+<div class="img">
+  <h2><img src="https://img.icons8.com/ios/50/payment-history.png" alt="payment-history"/>Transaction History</h2>
+  </a>
+</div>
+
+<table id="table">
+  <tr>
+    <th></th>
+    <th>Transaction ID</th>
+    <th>Date</th>
+    <th>Details</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td><input type="checkbox">
+    <td>ID: 624197</td>
+    <td>17 Oct, 2024</td>
+    <td>PHP 500,000.00 Regular Loan Application</td>
+    <td class="status-approved">Approved</td>
+  </tr>
+</table>
+
 </body>
 </html>

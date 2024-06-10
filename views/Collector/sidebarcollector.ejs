@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaCoop | <%=title %></title>
-    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/sidebarcollector.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
     <nav class="navbar">
         <div class="site-title">
-        <h1>KACooP</h1>
-        <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+            <h1>KACooP</h1>
+            <span>You are now signed as a Collector<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
     </nav>    
 
@@ -19,7 +20,7 @@
         <div class="btn">
             <span class="fas fa-bars"></span>
         </div>
-    </div>   
+    </div>    
 
     <div class="sidebar">
         <div class="user">
@@ -34,26 +35,13 @@
             <img id="profile-pic" src="">
         </div>          
         <ul>
-            <li>
-                <a href="#" class="fund-btn"><i class="fas fa-money-bill-wave"></i>Funds
-                    <span class="fas fa-caret-down first"></span>
-                </a>
-                <ul class="fund-show">
-                    <li><a href="/Member/savings_deposit"><i class="fas fa-piggy-bank"></i>Savings</a></li>
-                    <li><a href="/Member/cbu_deposit"><i class="fas fa-wallet"></i>CBU</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" class="loan-btn"><i class="fas fa-hand-holding-usd"></i>Loans
-                    <span class="fas fa-caret-down second"></span>
-                </a>
-                <ul class="loan-show">
-                    <li><a href="/Member/applyloan"><i class="fas fa-file-signature"></i>Apply Loan</a></li>
-                    <li><a href="/Member/currentloan"><i class="fas fa-file-invoice-dollar"></i>Current Loan</a></li>
-                </ul>
-            </li>
-            <li><a href="transaction"><i class="fas fa-history"></i>Transaction History</a></li>
-            <li><a href="inquire"><i class="fas fa-search"></i>Inquire</a></li>
+            <li><a href="#"><i class="fas fa-money-bill-wave"></i>Funds</a></li>
+            <li><a href="#"><i class="fas fa-hand-holding-usd"></i>Loans</a></li>
+            <li><a href="/Collector/transactioncol"><i class="fas fa-history"></i>Transaction History</a></li>
+            <li><a href="/Collector/inquirecol"><i class="fas fa-question-circle"></i>Inquire</a></li>
+            <li><a href="#"><i class="fas fa-bell"></i>Reminder</a></li>
+            <li><a href="#"><i class="fas fa-envelope-open-text"></i>Address Inquiries</a></li>
+            <li><a href="#"><i class="fas fa-check-circle"></i>Regular Compliance</a></li>
         </ul>
     </div>    
 
@@ -64,16 +52,21 @@
                     <div class="content-text">
                         <h3 class="title"></h3>
                         <p class="content">Cooperative Advisory</p>
-                        <img src="/images/comment.png" alt="comment" class="adjusted2">
                     </div>
                 </div>
-                <p>There are no announcements to display...</p>
+                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting on Wednesday, July 24, 2024, at  10:00 AM and ends in Thursday, July 25, 2024 at 5:00 AM.
+
+                    Please feel free to comment down your concerns. Thank you for your patience and understanding. </p>
             </div>            
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        function redirectToNewPage() {
+            window.location.href = "/Manager/create_announcement";
+        }
+
         $(document).ready(function(){
             // Restore sidebar state
             if (localStorage.getItem('sidebarState') === 'show') {
@@ -121,5 +114,6 @@
             }
         });
     </script>
+
 </body>
 </html>

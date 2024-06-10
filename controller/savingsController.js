@@ -1,6 +1,7 @@
 const Savings = require('../models/savings');
 const Application = require('../models/application');
 const User = require('../models/user');
+const { v4: uuidv4 } = require('uuid');
 
 const create_savings = async (application_id, user_id) => {
     try {
@@ -17,6 +18,7 @@ const create_savings = async (application_id, user_id) => {
         console.log('Creating new Savings with User ID:', user_id);
 
         const newSavings = await Savings.create({
+            savings_id: uuidv4(),
             application_id: application.application_id,
             user_id: user_id,
             amount,

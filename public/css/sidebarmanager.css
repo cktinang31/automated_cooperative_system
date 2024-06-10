@@ -100,7 +100,7 @@
 
 .sidebar {
     position: fixed;
-    width: 315px;
+    width: 330px;
     height: 100%;
     left: 0;
     background: #dbdbdb;
@@ -131,7 +131,7 @@
     color: #373F41;
     text-decoration: none;
     font-size: 18px;
-    padding-left: 20px;
+    padding-left: 15px;
     font-weight: 500;
     display: block;
     width: 100%;
@@ -161,34 +161,15 @@
 .sidebar ul ul li a {
     font-size: 17px;
     color: #4a5355;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .sidebar i {
     margin-right: 10px;
 }
 
-.fas.fa-comments {
-color: #1e90ff;
-}
-
-.fa-id-card {
-    color: #007bff; 
-}
-
-.fa-hand-holding-usd {
-    color: #17a2b8; 
-}
-
-.bi-people-fill {
-color: #20b2aa;
-}
-
-.fas.fa-money-bill-wave {
-color: #ff8c00; 
-}
-
 .sidebar ul li.active ul li a{
+    font-size: 14px;
     color: #5c6a6d;
     background: #e6e6e6;
     border-left-color: transparent;
@@ -210,6 +191,34 @@ color: #ff8c00;
 
 .sidebar ul li.active a span { 
     transform: translateY(-50%) rotate(-180deg);
+}
+
+.fas.fa-comments {
+    color: #1e90ff;
+}
+    
+.fa-id-card {
+    color: #007bff; 
+}
+
+.fa-hand-holding-usd {
+    color: #17a2b8; 
+}
+
+.bi-people-fill {
+    color: #20b2aa;
+}
+
+.fas.fa-money-bill-wave {
+    color: #ff8c00; 
+}
+
+.custom-icon-savings {
+    color: #d4b504;
+}
+
+.custom-icon-cbu {
+    color: #4B0082;
 }
 
 .user {
