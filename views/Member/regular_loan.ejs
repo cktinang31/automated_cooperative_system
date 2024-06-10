@@ -67,10 +67,6 @@
                             <td><%= loan.total_amount %> php</td>
                         </tr>
                         <tr>
-                            <td>Balance:</td>
-                            <td><%= loan.balance%> php</td>
-                        </tr>
-                        <tr>
                             <td>Loan Period:</td>
                             <td><%= loan.start_date %> to <%= loan.end_date %></td>
                         </tr>
@@ -112,29 +108,32 @@
 
             
 
-            <div class="service">
-                <i class="bi bi-cash-coin"></i>
-                <h4>Funds</h4>
-                <table>
+
+    <div class="service">
+        <i class="bi bi-cash-coin"></i>
+        <h4>Loan Status</h4>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Number of Payments</th>
+                    <th>Balance</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+              
                     <tr>
-                        <td>CBU:</td>
-                        <td>100,000</td>
-                    </tr>
-                    <tr>
-                        <td>Savings:</td>
-                        <td>500,000</td>
-                    </tr>
-                    <tr>
-                        <td>Current Loan:</td>
-                        <td>Regular Loan</td>
-                    </tr>
-                    <tr>
-                        <td>Transaction History:</td>
-                        <td>Pending</td>
-                    </tr>
-                    <tr>
-                </table>
-            </div>
+                        <td></td>
+                       
+                      
+              
+            </tbody>
+        </table>
+    </div>
+
+
         </div>
     </div>
 </section>

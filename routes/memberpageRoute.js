@@ -8,6 +8,7 @@ const Savings = require ('../models/savings');
 const Cbu = require('../models/cbu');
 const { title } = require('process');
 
+
 const router = express.Router();
 
 router.get('/Member/announcement', (req, res, next) => {
@@ -223,7 +224,6 @@ router.get('/Member/currentloan', async (req, res, next) => {
 
 
 router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
-
     try {
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
             const user = req.user;
@@ -244,11 +244,14 @@ router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
                     return res.status(404).send('loan not found.');
                 }
 
+               
+
                 console.log('Loan :', loan);
+                
                 res.render('Member/regular_loan', { loan, title: 'Loan Payment Details', user: req.user });
             } catch (error) {
-                console.error('Error fetching loan payment:', error);
-                res.status(500).send('Error fetching loan payment');
+                console.error('Error fetching loan ', error);
+                res.status(500).send('Error fetching loan ');
             }
         } else {
             console.log('User is not authenticated.');
