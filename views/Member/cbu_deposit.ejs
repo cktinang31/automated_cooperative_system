@@ -259,5 +259,32 @@ modeOfPaymentSelect.addEventListener('change', function() {
   });
 </script>  
 
+<script>
+  document.getElementById('mode-of-payment').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex];
+    var selectedText = selectedOption.text;
+    
+    // Calculate font size based on text length
+    var fontSize = 20; // Initial font size
+    var maxWidth = 420; // Maximum width of the input box
+    var textWidth = getTextWidth(selectedText, '20px Poppins'); // Function to get text width
+    if (textWidth > maxWidth) {
+      fontSize = Math.floor(fontSize * (maxWidth / textWidth)); // Adjust font size
+    }
+    
+    // Update style of input box
+    this.style.fontSize = fontSize + 'px';
+    this.style.color = '#373F41';
+  });
+  
+  // Function to calculate text width
+  function getTextWidth(text, font) {
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    context.font = font;
+    var metrics = context.measureText(text);
+    return metrics.width;
+  }
+  </script> 
 </body>
 </html>

@@ -151,7 +151,7 @@ router.get('/Member/dividend_deposit', (req,res, next) =>{
         
 });
 
-router.get('/Member/applyloan', (req, res, next) =>{
+router.get('/Member/apply_loan', (req, res, next) =>{
     console.log('checking authentication status');
     try{
         console.log('Session ID:', req.sessionID);
@@ -173,7 +173,7 @@ router.get('/Member/applyloan', (req, res, next) =>{
     }, async (req, res) => {
 
         const user = req.user;
-        res.render('./Member/applyloan', { title: 'Apply Loan', user});
+        res.render('./Member/apply_loan', { title: 'Apply Loan', user});
 
     
 });

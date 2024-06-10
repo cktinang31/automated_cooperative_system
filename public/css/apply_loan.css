@@ -252,6 +252,7 @@
     text-align: center;
     text-align-last: center; 
     color: #373F41; 
+    margin-left: 680px;
 }
 
 .form-group select:focus {
@@ -277,15 +278,15 @@ select.has-value::after {
 .loan-details {
     position: relative;
     margin-bottom: 20px;
-    width: 85%; 
+    width: 76%; 
     margin-top: 30px;
-    margin-left: 10%;
+    margin-left: 9%;
 }
 
 .loan-details label {
     position: absolute;
     top: 50%;
-    left: 50px; 
+    left: 70px; 
     transform: translateY(-50%);
     font-weight: 300; 
     font-family: 'Poppins', sans-serif; 
@@ -299,12 +300,14 @@ select.has-value::after {
     padding: 15px 20px;
     border: 1px solid #ccc;
     border-radius: 15px;
-    width: calc(100% - 100px); 
+    width: 120%; 
     height: 80px;
-    padding-left: 70%; 
+    padding-left: 1020px; 
     position: relative; 
     color: #373F41; 
     font-size: 35px; 
+    margin-left: 39px;
+    outline: 1px solid #373F41; 
 }
 
 .loan-details input[type="number"]::-webkit-inner-spin-button,
@@ -315,9 +318,25 @@ select.has-value::after {
 
 .loan-terms {
     margin-bottom: 20px;
-    width: 50%; 
-    margin-left: 10%;
+    width: 60%; 
+    margin-left: 190px;
     margin-top: 50px;
+    border-radius: 10px;
+    position: relative; /* Ensure position relative for absolute positioning of the outline */
+}
+
+.loan-terms::before {
+    content: '';
+    position: absolute;
+    top: -1px; /* Adjust as needed */
+    left: -1px; /* Adjust as needed */
+    right: -1px; /* Adjust as needed */
+    bottom: -1px; /* Adjust as needed */
+    border: 1px solid #373F41; /* Apply the same outline style */
+    border-radius: 10px; /* Apply the same border radius */
+    pointer-events: none; /* Ensure the outline doesn't interfere with interactions */
+    width: 90%;
+    height: 80px;
 }
 
 .loan-terms-input {
@@ -330,7 +349,7 @@ select.has-value::after {
     font-size: 35px;
     color: #373F41;
     position: absolute;
-    left: 15%;
+    left: 11%;
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -411,16 +430,12 @@ select.has-value::after {
     left: 6%; 
     transform: translateY(-50%);
     margin: 0 auto;
+    outline: 1px solid #373F41; 
 }
 
 .hide {
     display: none;
 }
-
-.loan-terms-input {
-    position: relative; 
-}
-
 .arrow {
     position: absolute;
     right: 15px; 
@@ -437,7 +452,7 @@ select.has-value::after {
 .interest-details {
     position: relative;
     width: calc(41% - 41px); 
-    margin-left: 56%;
+    margin-left: 57%;
     margin-top: -100px; 
 }
 
@@ -449,21 +464,21 @@ select.has-value::after {
     height: 80px;
     font-size: 35px;
     color: #373F41;
-    margin-left: 0; 
+    margin-left: 200px; 
     text-align: center;
+    position: relative; /* Added */
 }
 
 .interest-details .placeholder-label {
     position: absolute;
-
     top: 50%;
-    left: 43%;
+    left: 111%;
     transform: translate(-50%, -50%); 
     pointer-events: none;
-    color: #999; 
+    color: #373F41; 
     transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     font-size: 35px;
-    color: #373F41;
+    white-space: nowrap; /* Ensures label stays on one line */
 }
 
 .interest-details input[type="number"]:focus + .placeholder-label,
@@ -472,7 +487,7 @@ select.has-value::after {
     font-size: 12px; 
     color: #333; 
     top: 30%;
-    left: 8%; 
+    left: 76%; /* Changed */
 }
 
 .main-content {
@@ -490,6 +505,7 @@ select.has-value::after {
     background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     margin-top: 50px; 
+    margin-left: 200px;
 }
 
 .paymentpercollection-container {
