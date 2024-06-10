@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Loan</title>
+    <link rel="stylesheet" href="/css/apply_loan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="site-title">
+            <h1>KACooP</h1>
+            <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+        </div>
+    </nav>  
+    
+    <div class="form-container">
+        <div class="content">
+            <img src="/images/loan.png" alt="Megaphone Icon" class="adjusted">
+            <h1>Apply Loan</h1>
+        </div>
+        <div class="form-group">
+            <select id="loan_type" name="loan_type" required>
+                <option value="" disabled selected hidden>Loan Type</option>
+                <option value="regular">Regular</option>
+                <option value="medical">Medical</option>
+                <option value="emergency">Emergency</option>
+            </select>
+        </div>
+    </div>
+    
+    <script>
+        const selectElement = document.getElementById('loan_type');
+        selectElement.addEventListener('change', function() {
+            if (this.value) {
+                this.classList.add('has-value');
+            } else {
+                this.classList.remove('has-value');
+            }
+        });
+    </script>
+    
+    <div class="loan-details">
+        <input type="number" id="loan_amount" min="0" step="1000" placeholder="">
+        <label for="loan_amount">Amount</label>
+    </div>
+    
+    <div class="loan-terms">
+        <div class="loan-terms-input">
+            <div class="custom-select-wrapper">
+                <div class="custom-select" id="custom_select">
+                    <div class="select-trigger">
+                        <span id="selected_option" class="default-option">Select Option</span>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options">
+                        <span class="custom-option" data-value="3">3 Months</span>
+                        <span class="custom-option" data-value="6">6 Months</span>
+                        <span class="custom-option" data-value="12">1 Year</span>
+                    </div>
+                </div>
+            </div>
+            <label for="loan_terms" class="loan-terms-label" id="loan_terms_label">Loan Terms</label>
+        </div>
+    </div>
+    
+    
+    <script>
+        const customSelect = document.getElementById('custom_select');
+        const selectedOption = document.getElementById('selected_option');
+        const loanTermsLabel = document.getElementById('loan_terms_label');
+        const customOptions = document.querySelectorAll('.custom-option');
+        
+        // Toggle the custom-select open/close on click
+        customSelect.addEventListener('click', function(event) {
+            this.classList.toggle('open');
+        });
+        
+        // Update selected option and close the custom-select on option click
+        customOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                selectedOption.textContent = this.textContent;
+                selectedOption.classList.remove('default-option');
+                selectedOption.classList.add('selected');
+                loanTermsLabel.style.display = 'none'; // Hide loan terms label
+                customSelect.classList.remove('open');
+            });
+        });
+        
+        // Close the custom-select if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!customSelect.contains(event.target)) {
+                customSelect.classList.remove('open');
+            }
+        });
+    </script>
+    
+    <div class="interest-details">
+        <input type="number" id="interest_rate" min="0" step="0.01" placeholder="">
+        <label for="interest_rate" class="placeholder-label">Interest Rate (%)</label>
+    </div>
+      
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="paymentpercollection-section">
+                <div class="paymentpercollection-container">
+                    <h3>Payment per Collection</h3>
+                    <p id="paymentpercollection-amount" class="paymentpercollection-amount">PHP 0.00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const interestRateInput = document.getElementById('interest_rate');
+        const loanAmountInput = document.getElementById('loan_amount');
+        const paymentAmount = document.getElementById('paymentpercollection-amount');
+    
+        // Function to calculate payment per collection
+        function calculatePaymentPerCollection() {
+            const loanAmount = parseFloat(loanAmountInput.value);
+            const interestRate = parseFloat(interestRateInput.value);
+    
+            // Assuming a fixed loan term of 12 months for demonstration
+            const loanTermMonths = 12;
+    
+            const monthlyInterestRate = interestRate / 100 / 12;
+            const numberOfPayments = loanTermMonths;
+    
+            const monthlyPayment = (loanAmount * monthlyInterestRate) /
+                (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+    
+            paymentAmount.textContent = 'PHP ' + monthlyPayment.toFixed(2);
+        }
+    
+        // Event listener for input changes
+        interestRateInput.addEventListener('input', calculatePaymentPerCollection);
+        loanAmountInput.addEventListener('input', calculatePaymentPerCollection);
+    
+        // Initial calculation
+        calculatePaymentPerCollection();
+    </script>
+      
+    <button type="submit">APPLY</button>
+    
+    </body>
+    </html>
