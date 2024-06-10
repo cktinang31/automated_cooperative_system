@@ -215,7 +215,7 @@ nav ul li a {
 
 .form-group select {
     padding: 20px; 
-    font-size: 35px; /* Set font size to 35px */
+    font-size: 35px; 
     width: 100%; 
     height: 80px; 
     appearance: none;
@@ -229,8 +229,8 @@ nav ul li a {
     background-position: right 20px center;
     background-size: 20px 20px;
     text-align: center;
-    text-align-last: center; /* for IE */
-    color: #373F41; /* Set text color to #373F41 */
+    text-align-last: center; 
+    color: #373F41; 
 }
 
 .form-group select:focus {
@@ -238,7 +238,7 @@ nav ul li a {
 }
 
 .form-group select option {
-    color: #373F41; /* Set option text color to #373F41 */
+    color: #373F41; 
 }
 
 select.has-value option:not(:checked) {
@@ -365,7 +365,7 @@ select.has-value::after {
 .custom-option {
     padding: 10px 15px;
     cursor: pointer;
-    color: #373F41; /* Set custom option text color to #373F41 */
+    color: #373F41; 
 }
 
 .custom-option:hover {
@@ -384,10 +384,10 @@ select.has-value::after {
     visibility: visible;
     display: block;
     font-size: 35px;
-    color: #373F41; /* Set selected text color to #373F41 */
+    color: #373F41; 
     position: absolute;
     top: 50%;
-    left: 6%; /* Adjust left position to align with loan terms label */
+    left: 6%; 
     transform: translateY(-50%);
     margin: 0 auto;
 }
@@ -415,21 +415,21 @@ select.has-value::after {
 
 .interest-details {
     position: relative;
-    width: calc(41% - 41px); /* Adjusted width */
+    width: calc(41% - 41px); 
     margin-left: 56%;
-    margin-top: -100px; /* Adjusted margin to align vertically */
+    margin-top: -100px; 
 }
 
 .interest-details input[type="number"] {
-    padding: 20px 20px; /* Adjusted padding */
+    padding: 20px 20px; 
     border: 1px solid #ccc;
     border-radius: 15px;
-    width: calc(100% - 100px); /* Adjusted width */
+    width: calc(100% - 100px); 
     height: 80px;
     font-size: 35px;
     color: #373F41;
-    margin-left: 0; /* Remove left margin */
-    text-align: center; /* Align text in the center */
+    margin-left: 0; 
+    text-align: center;
 }
 
 .interest-details .placeholder-label {
@@ -437,9 +437,9 @@ select.has-value::after {
 
     top: 50%;
     left: 43%;
-    transform: translate(-50%, -50%); /* Center the label horizontally and vertically */
+    transform: translate(-50%, -50%); 
     pointer-events: none;
-    color: #999; /* Optional: change color to match placeholder text */
+    color: #999; 
     transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     font-size: 35px;
     color: #373F41;
@@ -447,11 +447,11 @@ select.has-value::after {
 
 .interest-details input[type="number"]:focus + .placeholder-label,
 .interest-details input[type="number"]:not(:placeholder-shown) + .placeholder-label {
-    transform: translateY(-90%) scale(0.8) translateX(-50%); /* Adjusted transformation */
-    font-size: 12px; /* Optional: change font size when input is focused or not empty */
-    color: #333; /* Optional: change color when input is focused or not empty */
+    transform: translateY(-90%) scale(0.8) translateX(-50%); 
+    font-size: 12px; 
+    color: #333; 
     top: 30%;
-    left: 8%; /* Adjusted left position */
+    left: 8%; 
 }
 
 .main-content {
@@ -465,15 +465,15 @@ select.has-value::after {
 .paymentpercollection-section {
     padding: 20px;
     border-radius: 15px;
-    width: 1500px; /* Adjust width as needed */
-    background-color: transparent; /* Set background color to transparent */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow */
-    margin-top: 50px; /* Adjust margin top as needed */
+    width: 1500px; 
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    margin-top: 50px; 
 }
 
 .paymentpercollection-container {
     text-align: center;
-    color: #373F41; /* Set text color to #373F41 */
+    color: #373F41; 
 }
 
 .paymentpercollection-amount {
@@ -486,11 +486,11 @@ select.has-value::after {
 button[type="submit"] {
     width: 50%;
     height: 100%;
-    padding: 20px; /* Adjust padding as needed */
-    font-size: 36px; /* Adjust font size as needed */
+    padding: 20px; 
+    font-size: 36px;
     border: none;
     border-radius: 10px;
-    background-color: #373F41; /* Adjust the background color as needed */
+    background-color: #373F41; 
     color: white;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
@@ -503,5 +503,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #2c3234; /* Darker shade of the original color */
+    background-color: #2c3234;
 }

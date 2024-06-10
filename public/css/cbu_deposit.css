@@ -358,97 +358,79 @@ nav ul li a {
     line-height: 63px; 
     text-align: center; 
 }
-  label[for="amount"] {
-    width: 311px;
-    height: 47px;
-    top: 642px;
-    left: 204px;
-    font-family: Poppins;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 30px;
-    text-align: left;
-    padding: 10px;
-    color: rgba(55, 63, 65, 0.5);
-}
-  
-  #amount {
-    width: 1027px;
-    height: 52px;
-    top: 673px;
-    left: 201 px;
-    gap: 0px;
-    border: 2px solid #373F41;
-    box-shadow: 0px 4px 4px 0px #00000040;
+/* Flex container for aligning amount and mode of payment */
+.flex-container {
+    display: flex;
+    align-items: center; /* Align items vertically center */
+    justify-content: flex-start; /* Align items from the start */
+    margin-left: 190px; /* Align the container */
+    margin-top: 70px; /* Top margin to match the input's margin */
 }
 
-label[for="account-number"] {
-    width: 310px;
-    height: 46px;
-    top: 747px;
-    left: 202px;
-    gap: 0px;
-    font-family: Poppins;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 30px;
-    text-align: left;
-    color: rgba(55, 63, 65, 0.5);
+/* Amount Container */
+.amount-container {
+    position: relative; /* Create a positioning context for the label */
+    width: 999px; /* Same width as the input */
 }
 
-#account-number {
-    width: 587px;
+#amount {
+    width: 100%; /* Full width of the container */
+    outline: 2px solid #373F41;
+    border-radius: 10px;
     height: 53px;
-    top: 776px;
-    left: 202px;
-    gap: 0px;
-    border: 2px solid #373F41;
-    box-shadow: 0px 4px 4px 0px #00000040;
+    font-size: 35px; /* Set font size to 35px */
+    color: #373F41; /* Set color to #373F41 */
+    text-align: center; /* Center-align the input */
 }
 
-.dropdown-container {
-    position: absolute;
-    bottom: 0px; 
-    left: 660px;
-    width: 370px;
-}
-
-.dropdown-container label {
-    position: absolute;
-    top: 50%; 
-    left: 10px;
-    transform: translateY(-50%);
+label[for="amount"] {
+    position: absolute; /* Position the label absolutely within the container */
+    top: -30px; /* Adjust this value to position the label vertically */
+    left: 0; /* Align with the container */
+    font-size: 20px;
+    text-align: left;
     color: rgba(55, 63, 65, 0.5);
-    font-family: Poppins;
-    font-size: 16px;
+    font-family: 'Poppins', sans-serif; /* Set font family to Poppins */
+    margin: 0; /* Remove margin to prevent it from affecting the layout */
 }
 
+/* Custom Dropdown */
+.custom-dropdown {
+    margin-left: 20px; /* Adjust spacing between the two elements */
+}
 
 #mode-of-payment {
-    width: 370px;
+    width: 443px;
     height: 53px;
-    gap: 0px;
-    border: 2px solid #373F41;
+    border: 1px solid #373F41;
+    outline: 0.5px solid #373F41;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px 0px #00000040;
+    padding: 14px; /* Increased padding to ensure the full text is visible and centered */
+    font-size: 16px;
+    border-radius: 10px;
+    color: rgba(55, 63, 65, 0.5);
+    font-family: 'Poppins', sans-serif;
+    text-align: center; /* Center-align the text */
+    /* Remove margin-top */
 }
-
-#mode-of-payment option {
-    display: none;
-}
-
-#mode-of-payment:focus option {
-    display: block;
-}
-.custom-dropdown {
-    position: relative;
-    display: inline-block;
+  
+  #mode-of-payment:focus {
+    border: 1px solid #373F41;
+    outline: 0.5px solid #373F41;
   }
   
   .dropdown-icon {
     position: absolute;
     top: 50%;
-    left: 10px; 
+    right: 10px;
     transform: translateY(-50%);
     pointer-events: none;
   }
+  
+  /* Style the dropdown options */
+  #mode-of-payment option {
+    font-size: 14px; /* Set smaller font size for options */
+    font-family: 'Poppins', sans-serif;
+    color: #373F41;
+  }  
