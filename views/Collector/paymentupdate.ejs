@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/req.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Manager</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<h2>Payment Request</h2>
+
+<div class="form-container">
+    <form action="/update_loanpayment" method="POST">
+        <input type="hidden" name="payment_id" value="<%= loan_payment.payment_id %>">
+       
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><%= loan_payment.User.fname %> <%= loan_payment.User.lname %></td>
+            </tr>      
+            <tr>
+                <td>Loan Type:</td>
+                <td><%= loan_payment.Loan.loan_type %></td>
+            </tr>
+            <tr>
+                <td>Loan Amount:</td>
+                <td><%= loan_payment.Loan.loan_amount %></td>
+            </tr>
+            <tr>
+                <td>Payment Amount:</td>
+                <td><%= loan_payment.amount %></td>
+            </tr>
+            <tr>
+                <td>Balance:</td>
+                <td><%= loan_payment.balance %></td>
+            </tr>
+                  
+        </table>
+        <div class="button-container">
+            <button type="submit" class="approve-button" name="status" value="approved">Approve</button>
+                        
+            <button type="submit" class="decline-button" name="status" value="decline">Decline</button>
+        </div>
+
+    </form>
+    
+</div>
+
+
+
+</body>
+</html>

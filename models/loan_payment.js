@@ -51,12 +51,8 @@ const Loan_payment = sequelize.define('Loan_payment', {
         primaryKey: true,
 
     },
-    balance: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-    },
     amount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false,
     },
     schedule: {

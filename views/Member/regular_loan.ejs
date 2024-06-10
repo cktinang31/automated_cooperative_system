@@ -63,6 +63,14 @@
                             <td><%= loan.Loan_application.monthly_payment %> php</td>
                         </tr>
                         <tr>
+                            <td>Total Amount to be Paid:</td>
+                            <td><%= loan.total_amount %> php</td>
+                        </tr>
+                        <tr>
+                            <td>Balance:</td>
+                            <td><%= loan.balance%> php</td>
+                        </tr>
+                        <tr>
                             <td>Loan Period:</td>
                             <td><%= loan.start_date %> to <%= loan.end_date %></td>
                         </tr>

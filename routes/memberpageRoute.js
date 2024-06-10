@@ -181,32 +181,6 @@ router.get('/Member/applyloan', (req, res, next) =>{
     
 });
 
-router.get('/Member/current_loan', (req, res, next) =>{
-    console.log('checking authentication status');
-    try{
-        console.log('Session ID:', req.sessionID);
-        console.log('Session:', req.session);
-        console.log('Authenticated:', req.isAuthenticated());
-
-        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
-            console.log('User is authenticated a regular member.');
-            next(); 
-        } else {
-            console.log('User is not authenticated. Redirecting to login page.');
-            req.session.returnTo = req.originalUrl;
-            res.redirect('/login');
-        }
-    } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
-        res.status(500).send('Internal server error');
-    }
-    }, async (req, res) => {
-
-        const user = req.user;
-        res.render('./Member/current_loan', { title: 'Apply Loan', user});
-
-    
-});
 
 router.get('/Member/currentloan', async (req, res, next) => {
     try {
@@ -222,10 +196,14 @@ router.get('/Member/currentloan', async (req, res, next) => {
             try {
                 const loans = await Loan.findAll( {
                     where: {
-                        loan_status: 'active',
-                        user_id: user.user_id,
-                    },
-                });
+                        loan_status : 'active',
+                        user_id: user.user_id
+                      },
+                      include: [{
+                        model: User, 
+                        attributes: ['user_id'], 
+                      }],
+                    });
                 res.render('Member/currentloan', { loans, title: 'Current Loan', user });
             } catch (error) {
                 console.error('Error fetching requests:', error);
