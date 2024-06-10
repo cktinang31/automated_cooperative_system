@@ -16,12 +16,6 @@
         </div>
     </nav>    
 
-    <div class="sidebar-btn">
-        <div class="btn">
-            <span class="fas fa-bars"></span>
-        </div>
-    </div>    
-
     <div class="sidebar">
         <div class="user">
             <label for="profile-pic-upload">
@@ -52,7 +46,7 @@
     </div>    
 
     <div class="main-content">
-        <button class="add-button" onclick="redirectToNewPage()">+ Create New Announcement</button>
+        <button class="add-button" onclick="showModal()">+ Create New Announcement</button>
         <div class="content-wrapper">
             <div class="announcement-wrapper">
                 <div class="announcement-content">
@@ -61,17 +55,51 @@
                         <p class="content">Cooperative Advisory</p>
                     </div>
                 </div>
-                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting on Wednesday, July 24, 2024, at  10:00 AM and ends in Thursday, July 25, 2024 at 5:00 AM.
-
-                    Please feel free to comment down your concerns. Thank you for your patience and understanding. </p>
+                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting on Wednesday, July 24, 2024, at 10:00 AM and ends on Thursday, July 25, 2024, at 5:00 AM.
+                    Please feel free to comment down your concerns. Thank you for your patience and understanding.</p>
             </div>            
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="announcementModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideModal()">&times;</span>
+            <div class="announcement-section">
+                <h1>Create Announcement</h1>
+                <form id="create-announcement-form" action="/post_announcement" method="POST">
+                    <div class="form-group">
+                        <label for="announcement-title">Title:</label>
+                        <input type="text" id="content_title" name="content_title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="announcement-content">Content:</label>
+                        <textarea id="content" name="content" rows="10" required></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function redirectToNewPage() {
-            window.location.href = "/Manager/create_announcement";
+
+        function showModal() {
+            document.getElementById('announcementModal').style.display = 'block';
+        }
+
+        function hideModal() {
+            document.getElementById('announcementModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('announcementModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
 
         $(document).ready(function(){

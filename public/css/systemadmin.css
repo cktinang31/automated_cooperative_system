@@ -124,6 +124,7 @@
 }
 
 .delete-btn,
+.edit-btn,
 .save-btn {
     background: none;
     border: none;
@@ -141,12 +142,20 @@
     color: #be1f2f;
 }
 
-.save-btn i {
+.edit-btn i {
     color: #28a745;
 }
 
-.save-btn:hover i {
+.edit-btn:hover i {
     color: #1d8634;
+}
+
+.save-btn i {
+    color: #f9a702e1;
+}
+
+.save-btn:hover i {
+    color: #d18b00e1;
 }
 
 .user-row.editing .role-text {
@@ -210,7 +219,8 @@ h3 {
 
 /* Add User button */
 .add-user-btn {
-    float: right; 
+    float: right;
+    position: relative;
 }
 
 .fa-user-plus {
@@ -222,6 +232,33 @@ h3 {
 
 .fa-user-plus:hover {
     color: #ffa900;
+}
+
+/* Tooltip styles */
+.tooltip {
+    visibility: hidden;
+    background-color: none;
+    color: #373F41;
+    text-align: center;
+    text-transform: initial;
+    border-radius: 2px;
+    border: 1px solid #373F41;
+    padding: 2px 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 8px;
+    font-family: Arial;
+    white-space: nowrap;
+}
+
+.add-user-btn:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 form {
@@ -244,13 +281,14 @@ button[type="submit"] {
     border-radius: 50px;
     outline: none;
     border: 1px solid #373F41;
+    transition: box-shadow 0.3s ease, font-weight 0.2s ease;
 }
 
 input[type="text"]:hover,
 input[type="email"]:hover {
     color: #373F41;
     font-weight: bold;
-    box-shadow: 0 0 5px #f9a702e1
+    box-shadow: 0 0 5px #f9a702e1 
 }
 
 button[type="submit"] {
