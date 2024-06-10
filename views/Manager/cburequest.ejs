@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaCoop | <%=title %></title>
-    <link rel="stylesheet" href="/css/requests.css">
+    <link rel="stylesheet" href="/css/cbureq.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,9 +12,9 @@
     <nav class="navbar">
         <div class="site-title">
             <h1>KACooP</h1>
-            <span>Manager<i class="fas fa-home"></i></span>
+            <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
-    </nav>   
+    </nav>       
 
 <h2>CBU Deposit/Withdraw Requests</h2>
 
@@ -28,7 +28,7 @@
     <tbody>
         <% if (cbutransaction.length > 0) { %>
             <% cbutransaction.forEach(cbutrans => { %>
-                <tr data-application-id="<%= cbutrans.cbutransaction_id %>">
+                <tr data-application-id="<%= cbutrans.cbutransaction_id %>" data-user-fname="<%= cbutrans.User.fname %>" data-user-lname="<%= cbutrans.User.lname %>" data-transaction-type="<%= cbutrans.transaction_type %>" data-amount="<%= cbutrans.amount %>" data-mode="<%= cbutrans.mode %>" data-date-sent="<%= cbutrans.date_sent %>">
                     <td><%= cbutrans.User.fname %> <%= cbutrans.User.lname %> has sent a <%= cbutrans.transaction_type %> request.</td>
                     <td><%= cbutrans.date_sent %></td>
                 </tr>
@@ -41,40 +41,81 @@
     </tbody>
 </table>
 
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="modalForm" action="" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="cbutransaction_id" id="modalTransactionId">
+            
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td id="modalUserName"></td>
+                </tr>
+                <tr>
+                    <td>Request Type:</td>
+                    <td id="modalTransactionType"></td>
+                </tr>
+                <tr>
+                    <td>Amount:</td>
+                    <td id="modalAmount"></td>
+                </tr>
+                <tr>
+                    <td>Mode of Payment:</td>
+                    <td id="modalMode"></td>
+                </tr>
+                <tr>
+                    <td>Date Sent:</td>
+                    <td id="modalDateSent"></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="approve-button" name="status" value="approved">Approve</button>
+                <button type="submit" class="decline-button" name="status" value="decline">Decline</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
-    document.querySelectorAll('tr[data-application-id]').forEach(row => {
-  row.addEventListener('click', function() {
-      
-      const applicationId = this.getAttribute('data-application-id');
-      
-      
-      const destinationUrl = '/Manager/cburequestupdate/' + applicationId; 
-      window.location.href = destinationUrl;
-  });
+   document.querySelectorAll('tr[data-application-id]').forEach(row => {
+    row.addEventListener('click', function() {
+        const applicationId = this.getAttribute('data-application-id');
+        const userFname = this.getAttribute('data-user-fname');
+        const userLname = this.getAttribute('data-user-lname');
+        const transactionType = this.getAttribute('data-transaction-type');
+        const amount = this.getAttribute('data-amount');
+        const mode = this.getAttribute('data-mode');
+        const dateSent = this.getAttribute('data-date-sent');
+
+        document.getElementById('modalTransactionId').value = applicationId;
+        document.getElementById('modalUserName').textContent = `${userFname} ${userLname}`;
+        document.getElementById('modalTransactionType').textContent = transactionType;
+        document.getElementById('modalAmount').textContent = amount;
+        document.getElementById('modalMode').textContent = mode;
+        document.getElementById('modalDateSent').textContent = dateSent;
+        
+        document.getElementById('modalForm').action = `/update_cbu_request/${applicationId}`;
+        
+        const modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    });
 });
 
-</script>
-
-<script>
-    // Function to get current timestamp
-    function getTimestamp() {
-        const now = new Date();
-        const timestamp = now.toLocaleString();
-        return timestamp;
-    }
-
-    // Update timestamp for each row
-    document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById("table");
-        const rows = table.getElementsByTagName("tr");
-
-        for (let i = 1; i < rows.length; i++) {
-            const detailsCell = rows[i].getElementsByTagName("td")[1];
-            const timestampSpan = document.createElement("span");
-            timestampSpan.textContent = " (" + getTimestamp() + ")";
-            detailsCell.appendChild(timestampSpan);
-        }
+    // Close the modal
+    document.querySelector(".close").addEventListener('click', function() {
+    document.getElementById("myModal").style.display = "none";
     });
+
+    window.onclick = function(event) {
+    const modal = document.getElementById("myModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    };
+
 </script>
 
 </body>

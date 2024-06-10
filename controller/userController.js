@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const User = require ('../models/user');
 
 
-
-
 const user_reg = async (req, res) => {
   try {
     const { user_id, password } = req.body;
@@ -50,13 +48,14 @@ const user_login = async (req, res) => {
           return res.status(500).send('Error logging in.');
         }
         console.log('User logged in successfully:', user);
-
        
         switch (user.role) {
           case 'admin':
             return res.redirect('/SystemAdmin/systemadmin');
           case 'manager':
             return res.redirect('/Manager/sidebarmanager');
+          case 'collector': 
+            return res.redirect('Collector/sidebarcollector');
           default:
             return res.redirect('/Member/sidebar');
         }
@@ -69,86 +68,89 @@ const user_login = async (req, res) => {
   }
 };
 
-const update_user = async (req, res) => {
+const edit_user = async (req, res) => {
   try {
-    const { user_id } = req.params;
-    const { role } = req.body;
+    const { userId } = req.params;
+    const { fname, lname, email, role } = req.body;
 
-    if (!user_id || !role) {
-      return res.status(400).send('User Id and role are required.');
+    console.log('Received data:', { userId, fname, lname, email, role });
+
+    if (!userId || !fname || !lname || !email || !role) {
+      return res.status(400).json({ message: 'User ID, first name, last name, email, and role are required.' });
     }
 
-    const updatedUser = await User.findByPk(user_id);
-    if (!updatedUser) {
-      return res.status(404).send('User not found.');
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
     }
 
-    updatedUser.role = role;
-    await updatedUser.save();
+   
+    user.fname = fname;
+    user.lname = lname;
+    user.email = email;
+    user.role = role;
+    
+  
+    await user.save();
 
-    return res.status(200).json(updatedUser);
+    console.log('Updated user:', user);
+
+    return res.status(200).json(user);
   } catch (error) {
     console.error('Error updating user:', error);
-    return res.status(500).send('Internal server error.');
+    return res.status(500).json({ message: 'Internal server error.' });
   }
 };
 
+ 
 const delete_user = async (req, res) => {
   try {
-    const { user_id } = req.body;
-
-    if (!user_id) {
-      return res.status(400).send('User ID is required.');
-    }
-
-    const deleteUser = await User.findByPk(user_id);
-    if (!deleteUser) {
-      return res.status(404).send('User not found.');
-    }
-
-    if (deleteUser.role === 'admin') {
-      return res.status(403).send('Cannot delete admin user.');
-    }
-
-    await deleteUser.destroy();
-    return res.status(200).send('User deleted.');
+      const { userId } = req.params;
+      const user = await User.findByPk(userId);
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+      await user.destroy();
+      return res.status(200).send('User deleted successfully');
   } catch (error) {
-    return res.status(500).send('Error deleting user.');
+      console.error('Error deleting user:', error);
+      return res.status(500).send('Error deleting user.');
   }
 };
-
+ 
 const add_user = async (req, res) => {
   try  {
-    const {fname, lname, email} = req.body;
+    const {fname, lname, email, role} = req.body;
     console.log ('Request Body:', req.body);
-
+ 
     const existingUser = await User.findOne({where: {email}});
-
+ 
     if (existingUser) {
         return res.status(400).send('A user with this email is already registered in the system.');
     }
-    
-  
+   
+ 
     const newUser = await User.create({
       fname,
       lname,
       email,
+      role,
     });
-
+ 
     console.log('New User:', newUser);
     res.send('User added successfully. Proceed to register!');
   } catch (error) {
     console.error('Error registering:', error);
     res.status(500).send('Error registering.');
   }
-
+ 
   };
-
-
+ 
+ 
 module.exports = {
    user_reg,
    user_login,
-   update_user,
+   edit_user,
    delete_user,
    add_user,
 }

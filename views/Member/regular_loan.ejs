@@ -1,85 +1,136 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regular_Loan</title>
-    <link rel="stylesheet" href="/css/regular_loan.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>KaCoop | <%= title %></title>
+    <link rel="stylesheet" href="/css/memberinfo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
-   
 <body>
+
 <nav>
     <div class="site-title">
         <h1>CTU-AC COOPERATIVE SYSTEM</h1>
     </div>
-    <div class="member-title">
-        <h1>Member</h1>
-    </div>
-    <div class="home-icon">
-        <a href="/">
-            <img src="/svg/icons8-home.svg" alt="Home Icon">
-        </a>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Member</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
     </div>
 </nav>
 
-<div class="regular-loan">
-    <div class="regular-loan-header">
-        <h3 class="loan-type"><i class="fas fa-hand-holding-usd"></i> <%= loanPayment.id %></h3>
-        <div class="loan-details">Loan: PHP 50000.00</div>
-    </div>
-</div>
+<% if (loan) { %>
+    <h2>
+        <% if (loan.loan_type === 'medical') { %>
+            <p>Medical Loan</p>
+        <% } else if (loan.loan_type === 'emergency') { %>
+            <p>Emergency Loan</p>
+        <% } else { %>
+            <p>Regular Loan</p>
+        <% } %>
+    </h2>
 
-<div class="table-container">
-   
-        <table>
+    <section id="service">
+        <div class="container">
+            <div class="row">
+                <div class="service">
+                    <i class="bi bi-piggy-bank"></i>
+                    <h4>Loan Details</h4>
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td><%= loan.User.fname %> <%= loan.User.lname %></td>
+                        </tr>
+                        <tr>
+                            <td>Loan Amount:</td>
+                            <td><%= loan.loan_amount %>.00 php</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Interest Rate:</td>
+                            <td><%= loan.interest %></td>
+                        </tr>
+                        <tr>
+                            <td>Loan Term:</td>
+                            <td><%= loan.loan_term %></td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Payment:</td>
+                            <td><%= loan.Loan_application.monthly_payment %> php</td>
+                        </tr>
+                        <tr>
+                            <td>Total Amount to be Paid:</td>
+                            <td><%= loan.total_amount %> php</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Period:</td>
+                            <td><%= loan.start_date %> to <%= loan.end_date %></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <button type="button">Add Payment</button>
+
+                <div class="form-container">
+                    <form action="/loanpayment" method="post">
+                        <h1>Add Payment</h1>
+
+                        <input type="hidden" id="user_id" name="user_id" value="<%= loan.User.user_id %>">
+                        <input type="hidden" id="loan_id" name="loan_id" value="<%= loan.loan_id %>">
+                        <input type="hidden" id="application_id" name="application_id" value="<%= loan.Loan_application.application_id %>">
+
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="amount" name="amount" value="<%= loan.Loan_application.monthly_payment %>">
+                        </div><br>
+
+                        <div class="form-group">
+                            <button type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<% } %>
+
+<section id="loan-status">
+    <div class="service">
+        <i class="bi bi-cash-coin"></i>
+        <h4>Loan Status</h4>
+        <% if (loan_payment && loan_payment.length > 0) { %>
+        <table id="table">
             <thead>
                 <tr>
-                    <th>No. of Payment</th>
-                    <th>Date</th>
+                    <th>Number of Payments</th>
                     <th>Balance</th>
                     <th>Amount</th>
                     <th>Status</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                <% if (loanPayment) { %>
-                    <tr>
-                        <td><%= loanPayment.id %></td>
-                        <td><%= loanPayment.schedule %></td>
-                        <td><%= loanPayment.balance %></td>
-                        <td><%= loanPayment.amount %></td>
-                        <td><%= loanPayment.status %></td>
-                    </tr>
-                <% } else { %>
-                    <tr>
-                        <td colspan="5">No loan payment details available.</td>
-                    </tr>
-                <% } %>
+                <% loan_payment.forEach(loan_payment => { %>
+                <tr>
+                    <td><%= loan_payment.number_of_payments %></td>
+                    <td><%= loan_payment.Loan.balance %></td>
+                    <td><%= loan_payment.amount %></td>
+                    <td><%= loan_payment.status %></td>
+                    <td><%= loan_payment.timestamp %></td>
+                </tr>
+                <% }) %>
             </tbody>
         </table>
-       
-</div>
-
-
-
- 
-
-<div class="add-payment-button-container">
-    <button id="paymentButton">Add Payment</button>
-</div>
-
-<script>
-// Find the button element
-var paymentButton = document.getElementById("paymentButton");
-
-// Add an event listener to handle the click action
-paymentButton.addEventListener("click", function() {
-    // Your click action code here
-    // For example, you can navigate to another page or perform some action
-    alert("Payment added successfully!");
-});
-</script>
+        <% } else { %>
+            <p>No payments found.</p>
+        <% } %>
+    </div>
+</section>
 
 </body>
 </html>
-

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaCoop | <%=title %></title>
-    <link rel="stylesheet" href="/css/requests.css">
+    <link rel="stylesheet" href="/css/memreq.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,9 +12,9 @@
     <nav class="navbar">
         <div class="site-title">
             <h1>KACooP</h1>
-            <span>Manager<i class="fas fa-home"></i></span>
+            <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
-    </nav>
+    </nav>    
 
 <h2>Membership Requests</h2>
 
@@ -29,56 +29,124 @@
     <tbody>
         <% if (applications.length > 0) { %>
           <% applications.forEach(application => { %>
-            <tr data-application-id="<%= application.application_id %>">
+            <tr data-application-id="<%= application.application_id %>" data-application="<%= encodeURIComponent(JSON.stringify(application)) %>">
                 <td><%= application.application_id %></td>
                 <td><%= application.fname %> <%= application.lname %> has sent a membership request.</td>
                 <td><%= application.date_sent %></td>
-                
-              </tr>
-            <% }) %>
-          <% } else { %>
-            <tr>
-              <td colspan="8">No membership requests at the moment...</td>
             </tr>
-          <% } %>   
-        </tbody>
-
+          <% }) %>
+        <% } else { %>
+            <tr>
+              <td colspan="3">No membership requests at the moment...</td>
+            </tr>
+        <% } %>
+    </tbody>
 </table>
+
+<!-- Modal Structure -->
+<div id="application-modal" class="modal" style="display:none;">
+    <div class="form-container">
+        <form id="application-form" action="" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <table>
+                <tr>
+                    <td>First Name:</td>
+                    <td id="modal-fname"></td>
+                </tr>
+                <tr>
+                    <td>Middle Name:</td>
+                    <td id="modal-mname"></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td id="modal-lname"></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth:</td>
+                    <td id="modal-dob"></td>
+                </tr>
+                <tr>
+                    <td>Place of Birth:</td>
+                    <td id="modal-pob"></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td id="modal-address"></td>
+                </tr>
+                <tr>
+                    <td>Email Add:</td>
+                    <td id="modal-email"></td>
+                </tr>
+                <tr>
+                    <td>Contact Number:</td>
+                    <td id="modal-contact"></td>
+                </tr>
+                <tr>
+                    <td>Charges</td>
+                </tr>
+                <tr>
+                    <td>Capital Build-Up:</td>
+                    <td>1000.00 php</td>
+                </tr>
+                <tr>
+                    <td>Savings:</td>
+                    <td>500.00 php</td>
+                </tr>
+                <tr>
+                    <td>Service Fee:</td>
+                    <td>100.00 php</td>
+                </tr>
+                <tr>
+                    <td>Total Charges:</td>
+                    <td>1600.00 php</td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="approve-button" name="application_status" value="approved">Approve</button>
+                <button type="submit" class="decline-button" name="application_status" value="decline">Decline</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
-    document.querySelectorAll('tr[data-application-id]').forEach(row => {
-  row.addEventListener('click', function() {
-      
-      const applicationId = this.getAttribute('data-application-id');
-      
-      
-      const destinationUrl = '/Manager/req/' + applicationId; 
-      window.location.href = destinationUrl;
-  });
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        const rows = document.querySelectorAll('#table tbody tr');
 
-</script>
+        rows.forEach(function (row) {
+            row.addEventListener('click', function () {
+                const applicationData = JSON.parse(decodeURIComponent(this.dataset.application));
 
-<script>
-    // Function to get current timestamp
-    function getTimestamp() {
-        const now = new Date();
-        const timestamp = now.toLocaleString();
-        return timestamp;
-    }
+                // Update modal content with application data
+                document.getElementById('modal-fname').innerText = applicationData.fname;
+                document.getElementById('modal-mname').innerText = applicationData.mname;
+                document.getElementById('modal-lname').innerText = applicationData.lname;
+                document.getElementById('modal-dob').innerText = applicationData.date_of_birth;
+                document.getElementById('modal-pob').innerText = applicationData.place_of_birth;
+                document.getElementById('modal-address').innerText = applicationData.address;
+                document.getElementById('modal-email').innerText = applicationData.email;
+                document.getElementById('modal-contact').innerText = applicationData.contact;
 
-    // Update timestamp for each row
-    document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById("table");
-        const rows = table.getElementsByTagName("tr");
+                // Update form action
+                const form = document.getElementById('application-form');
+                form.action = '/mem_application_update/' + applicationData.application_id;
 
-        for (let i = 1; i < rows.length; i++) {
-            const detailsCell = rows[i].getElementsByTagName("td")[1];
-            const timestampSpan = document.createElement("span");
-            timestampSpan.textContent = " (" + getTimestamp() + ")";
-            detailsCell.appendChild(timestampSpan);
-        }
+                // Show modal
+                const modal = document.getElementById('application-modal');
+                modal.style.display = 'block';
+            });
+        });
+
+        // Close modal when clicking outside of it
+        window.onclick = function (event) {
+            const modal = document.getElementById('application-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
     });
 </script>
+
 
 </body>
 </html>

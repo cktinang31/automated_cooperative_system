@@ -25,37 +25,43 @@
     </div>
 </nav>
 
-<!-- Centering the h2 element -->
-<h2>Savings Deposit/Withdraw Requests</h2>
+<h2>Payment Request</h2>
 
 <div class="form-container">
-    <form action="/update_savings_request/<%= savtransaction.savtransaction_id %>" method="POST">
-        <input type="hidden" name="_method" value="PUT">
-        <input type="hidden" name="savtransaction_id" value="<%= savtransaction.savtransaction_id %>">
-        
+    <form action="/update_loanpayment" method="POST">
+        <input type="hidden" name="payment_id" value="<%= loan_payment.payment_id %>">
+       
         <table>
             <tr>
                 <td>Name:</td>
-                <td><%= savtransaction.User.fname %> <%= savtransaction.User.lname %></td>
+                <td><%= loan_payment.User.fname %> <%= loan_payment.User.lname %></td>
+            </tr>      
+            <tr>
+                <td>Loan Type:</td>
+                <td><%= loan_payment.Loan.loan_type %></td>
             </tr>
             <tr>
-                <td>Request Type:</td>
-                <td><%= savtransaction.transaction_type %></td>
+                <td>Loan Amount:</td>
+                <td><%= loan_payment.Loan.loan_amount %></td>
             </tr>
             <tr>
-                <td>Amount:</td>
-                <td><%= savtransaction.amount %></td>
+                <td>Payment Amount:</td>
+                <td><%= loan_payment.amount %></td>
             </tr>
             <tr>
-                <td>Mode of Payment:</td>
-                <td><%= savtransaction.mode %></td>
+                <td>Balance:</td>
+                <td><%= loan_payment.balance %></td>
             </tr>
+                  
         </table>
         <div class="button-container">
             <button type="submit" class="approve-button" name="status" value="approved">Approve</button>
+                        
             <button type="submit" class="decline-button" name="status" value="decline">Decline</button>
         </div>
+
     </form>
+    
 </div>
 
 

@@ -39,7 +39,7 @@ const Cbutransaction = sequelize.define('Cbutransaction', {
         onUpdate: 'CASCADE'
     },
     amount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false
     },
     transaction_type: {

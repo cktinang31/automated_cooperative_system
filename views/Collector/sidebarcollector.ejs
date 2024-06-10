@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaCoop | <%=title %></title>
-    <link rel="stylesheet" href="/css/sidebarmanager.css">
+    <link rel="stylesheet" href="/css/sidebarcollector.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -12,9 +12,15 @@
     <nav class="navbar">
         <div class="site-title">
             <h1>KACooP</h1>
-            <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+            <span>You are now signed as a Collector<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
     </nav>    
+
+    <div class="sidebar-btn">
+        <div class="btn">
+            <span class="fas fa-bars"></span>
+        </div>
+    </div>    
 
     <div class="sidebar">
         <div class="user">
@@ -29,24 +35,17 @@
             <img id="profile-pic" src="">
         </div>          
         <ul>
-            <li>
-                <a href="#" class="fund-btn"><i class="fas fa-comments"></i>Requests
-                    <span class="fas fa-caret-down first"></span>
-                </a>
-                <ul class="fund-show">
-                    <li><a href="/Manager/request"><i class="fas fa-id-card"></i>Membership Application</a></li>
-                    <li><a href="/Manager/loanrequest"><i class="fas fa-hand-holding-usd"></i>Loan Requests</a></li>
-                    <li><a href="/Manager/savingsrequest"><i class="custom-icon-savings fas fa-piggy-bank"></i>Savings Deposit/Withdraw Requests</a></li>
-                    <li><a href="/Manager/cburequest"><i class="custom-icon-cbu fas fa-university"></i>CBU Deposit/Withdraw Requests</a></li>
-                </ul>
-            </li>
-            <li><a href="/Manager/membersdata"><i class="bi bi-people-fill"></i>Members</a></li>
             <li><a href="#"><i class="fas fa-money-bill-wave"></i>Funds</a></li>
+            <li><a href="/Collector/paymentnotif"><i class="fas fa-hand-holding-usd"></i>Loans</a></li>
+            <li><a href="/Collector/transactioncol"><i class="fas fa-history"></i>Transaction History</a></li>
+            <li><a href="/Collector/inquirecol"><i class="fas fa-question-circle"></i>Inquire</a></li>
+            <li><a href="#"><i class="fas fa-bell"></i>Reminder</a></li>
+            <li><a href="#"><i class="fas fa-envelope-open-text"></i>Address Inquiries</a></li>
+            <li><a href="/Collector/collector"><i class="fas fa-check-circle"></i>Regulatory Compliance</a></li>
         </ul>
     </div>    
 
     <div class="main-content">
-        <button class="add-button" onclick="showModal()">+ Create New Announcement</button>
         <div class="content-wrapper">
             <div class="announcement-wrapper">
                 <div class="announcement-content">
@@ -55,51 +54,17 @@
                         <p class="content">Cooperative Advisory</p>
                     </div>
                 </div>
-                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting on Wednesday, July 24, 2024, at 10:00 AM and ends on Thursday, July 25, 2024, at 5:00 AM.
-                    Please feel free to comment down your concerns. Thank you for your patience and understanding.</p>
-            </div>            
-        </div>
-    </div>
+                <p>Due to scheduled maintenance of our facilities, the Cooperative Online Services: e-Services and Online Payment is temporarily unavailable starting on Wednesday, July 24, 2024, at  10:00 AM and ends in Thursday, July 25, 2024 at 5:00 AM.
 
-    <!-- Modal -->
-    <div id="announcementModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="hideModal()">&times;</span>
-            <div class="announcement-section">
-                <h1>Create Announcement</h1>
-                <form id="create-announcement-form" action="/post_announcement" method="POST">
-                    <div class="form-group">
-                        <label for="announcement-title">Title:</label>
-                        <input type="text" id="content_title" name="content_title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="announcement-content">Content:</label>
-                        <textarea id="content" name="content" rows="10" required></textarea>
-                    </div>
-                    <div class="button-group">
-                        <button type="submit">Post</button>
-                    </div>
-                </form>
-            </div>
+                    Please feel free to comment down your concerns. Thank you for your patience and understanding. </p>
+            </div>            
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-
-        function showModal() {
-            document.getElementById('announcementModal').style.display = 'block';
-        }
-
-        function hideModal() {
-            document.getElementById('announcementModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            var modal = document.getElementById('announcementModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
+        function redirectToNewPage() {
+            window.location.href = "/Manager/create_announcement";
         }
 
         $(document).ready(function(){

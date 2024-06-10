@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const session = require('express-session');
 const crypto = require('crypto');
 const morgan = require('morgan');
@@ -24,10 +25,10 @@ const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
+const collectorRoutes = require('./routes/collectorRoute');
 
 
 // const Application = require('./models/application');
-
 
 
 const isAuthenticated = (req, res, next) => {
@@ -178,6 +179,8 @@ app.use(cbuRoutes);
 app.use(savingsRoutes);
 app.use(savtransactionRoutes);
 app.use(cbutransactionRoutes);
+app.use(collectorRoutes);
+app.use(loan_paymentRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -247,15 +250,12 @@ app.post('/savings', async (req, res) => {
   }
 });
 
-
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login'});
 });
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
 });
-
-
 
 app.get('/inquire', (req, res) => {
   res.render('inquire', { title: 'Inquire'});
@@ -273,13 +273,9 @@ app.get('/login', (req, res) => {
   res.render('login', { title: 'Sign In / Up Form'});
 });
 
-
-
 app.get('/Member/transaction', (req, res) => {
   res.render('Member/transaction', { title: 'Transaction History'});
 });
-
-
 
 app.get('/Member/inquire', (req, res) => {
   res.render('Member/inquire', { title: 'Inquire '});
@@ -289,12 +285,9 @@ app.get('/Member/announcement', (req, res) => {
   res.render('Member/announcement', { title: 'Announcement '});
 });
 
-
-
 app.get('/x', (req, res) => {
   res.render('x', { title: 'X'});
 });
-
 
 app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
@@ -303,6 +296,7 @@ app.get('/Member/dividend_deposit', (req, res) => {
 app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
+
 
 
 app.get('/Manager/create_announcement', (req, res) => {
@@ -321,17 +315,24 @@ app.get('/Manager/membersdata', (req, res) => {
   res.render('Manager/membersdata', { title: 'Members Data'});
 });
 
-
-
-
-
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
 
-app.get('/Member/apply_loan', (req, res) => {
-  res.render('Member/apply_loan', { title: 'Apply Loan '});
+//collector nako //
+
+app.get('/Collector/collector', (req, res) => {
+  res.render('Collector/collector', { title: 'collector'});
+}); 
+
+app.get('/your-route', (req, res) => {
+  const user = {
+      name: 'Kristine Anne Cardosa',
+      email: 'kristineanne@gmail.com'
+  };
+  res.render('your-template', { user: user });
 });
+
 
 // 404 page
 app.use((req, res) => {

@@ -12,13 +12,13 @@
     <nav class="navbar">
         <div class="site-title">
             <h1>KACooP</h1>
-            <span>Manager<i class="fas fa-home"></i></span>
+            <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
-    </nav>   
+    </nav>    
 
 <h2>Loan Requests</h2>
 
-<table id="table">
+<table id="table" class="application-table">
     <thead>
         <tr>
             <th>Application ID</th>
@@ -42,42 +42,106 @@
             </tr>
           <% } %>   
         </tbody>
-
 </table>
+
+<!-- Modal -->
+<div id="loanModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="form-container">
+        <form action="/update_loan_request" method="POST">
+            <input type="hidden" id="application_id" name="application_id">
+            <input type="hidden" name="action" value="loanpayment">
+            <table>
+                <tr>
+                    <td>First Name:</td>
+                    <td id="fname"></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td id="lname"></td>
+                </tr>
+                <tr>
+                    <td>Loan Type:</td>
+                    <td id="loan_type"></td>
+                </tr>
+                <tr>
+                    <td>Amount:</td>
+                    <td id="amount"></td>
+                </tr>
+                <tr>
+                    <td>Loan Term:</td>
+                    <td id="loan_term"></td>
+                </tr>
+                <tr>
+                    <td>Interest:</td>
+                    <td id="interest"></td>
+                </tr>
+                <tr>
+                    <td>Monthly Payment:</td>
+                    <td id="monthly_payment"></td>
+                </tr>
+                <tr>
+                    <td>Number of Payments:</td>
+                    <td id="number_of_payments"></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="approve-button" name="application_status" value="approved">Approve</button>
+                <button type="submit" class="decline-button" name="application_status" value="decline">Decline</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     document.querySelectorAll('tr[data-application-id]').forEach(row => {
-  row.addEventListener('click', function() {
-      
-      const applicationId = this.getAttribute('data-application-id');
-      
-      
-      const destinationUrl = '/Manager/loanrequestupdate/' + applicationId; 
-      window.location.href = destinationUrl;
-  });
-});
+        row.addEventListener('click', function() {
+            const applicationId = this.getAttribute('data-application-id');
+            populateModal(applicationId);
+            showModal();
+        });
+    });
 
-</script>
+    function populateModal(applicationId) {
+        // Assuming you have the loan application details available in JavaScript objects
+        const loan_application = {
+            "fname": "John",
+            "lname": "Doe",
+            "loan_type": "Personal Loan",
+            "amount": "$10,000",
+            "loan_term": "3 years",
+            "interest": "5%",
+            "monthly_payment": "$300",
+            "number_of_payments": "36"
+        };
 
-<script>
-    // Function to get current timestamp
-    function getTimestamp() {
-        const now = new Date();
-        const timestamp = now.toLocaleString();
-        return timestamp;
+        document.getElementById('application_id').value = applicationId;
+        document.getElementById('fname').innerText = loan_application.fname;
+        document.getElementById('lname').innerText = loan_application.lname;
+        document.getElementById('loan_type').innerText = loan_application.loan_type;
+        document.getElementById('amount').innerText = loan_application.amount;
+        document.getElementById('loan_term').innerText = loan_application.loan_term;
+        document.getElementById('interest').innerText = loan_application.interest;
+        document.getElementById('monthly_payment').innerText = loan_application.monthly_payment;
+        document.getElementById('number_of_payments').innerText = loan_application.number_of_payments;
     }
 
-    // Update timestamp for each row
-    document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById("table");
-        const rows = table.getElementsByTagName("tr");
+    function showModal() {
+        document.getElementById('loanModal').style.display = 'block';
+    }
 
-        for (let i = 1; i < rows.length; i++) {
-            const detailsCell = rows[i].getElementsByTagName("td")[1];
-            const timestampSpan = document.createElement("span");
-            timestampSpan.textContent = " (" + getTimestamp() + ")";
-            detailsCell.appendChild(timestampSpan);
+    function closeModal() {
+        document.getElementById('loanModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('loanModal');
+        if (event.target == modal) {
+            closeModal();
         }
-    });
+    }
+    
 </script>
 
 </body>

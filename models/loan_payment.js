@@ -51,12 +51,12 @@ const Loan_payment = sequelize.define('Loan_payment', {
         primaryKey: true,
 
     },
-    balance: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
+    number_of_payments: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
     },
     amount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false,
     },
     schedule: {
@@ -64,8 +64,8 @@ const Loan_payment = sequelize.define('Loan_payment', {
         allowNull: true,
     },
     status: {
-        type: DataTypes.ENUM('pending', 'advanced', 'ontime', 'delayed'),
-        allowNull: false,
+        type: DataTypes.ENUM('pending', 'approved',  'decline'),
+        allowNull: true,
     },
     timestamp: {
         type: DataTypes.DATE,
