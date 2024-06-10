@@ -210,7 +210,8 @@ h3 {
 
 /* Add User button */
 .add-user-btn {
-    float: right; 
+    float: right;
+    position: relative;
 }
 
 .fa-user-plus {
@@ -222,6 +223,33 @@ h3 {
 
 .fa-user-plus:hover {
     color: #ffa900;
+}
+
+/* Tooltip styles */
+.tooltip {
+    visibility: hidden;
+    background-color: none;
+    color: #373F41;
+    text-align: center;
+    text-transform: initial;
+    border-radius: 2px;
+    border: 1px solid #373F41;
+    padding: 2px 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 8px;
+    font-family: Arial;
+    white-space: nowrap;
+}
+
+.add-user-btn:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 form {
