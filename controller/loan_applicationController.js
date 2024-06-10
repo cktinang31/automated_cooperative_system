@@ -48,63 +48,58 @@ const apply_loan = async (req, res) => {
 };
 
 const update_loan_request = async (req, res) => {
-  try {
-      const { application_id, application_status } = req.body;
-
-      if (!application_id || !application_status) {
-          return res.status(400).send('Application ID and status are required');
-      }
-
-      const updatedLoanApplication = await Loan_application.findByPk(application_id);
-
-      if (!updatedLoanApplication) {
-          return res.status(404).send('Loan application not found');
-      }
-
-      const user_id = updatedLoanApplication.user_id;
-
-      updatedLoanApplication.application_status = application_status;
-      await updatedLoanApplication.save();
-
-      if (application_status === 'approved') {
-          const startDate = calculateStartDate(updatedLoanApplication);
-          const endDate = calculateEndDate(updatedLoanApplication, startDate);
-
-          const approvedLoan = {
-              application_id,
-              user_id,
-              loan_id: uuidv4(),
-              loan_status: 'active',
-              loan_type: updatedLoanApplication.loan_type,
-              loan_amount: updatedLoanApplication.amount,
-              loan_term: updatedLoanApplication.loan_term,
-              interest: updatedLoanApplication.interest,
-              start_date: startDate,
-              end_date: endDate,
-              timestamp: new Date(),
-          };
-
-          const newLoan = await Loan.create(approvedLoan);
-
-          if (!newLoan) {
-              throw new Error('Failed to create new Loan record');
-          }
-
-          // Call loanpayment function if action is specified and approved
-          if (req.body.action === 'loanpayment') {
-              await loanpayment(application_id, user_id, newLoan.loan_id);
-          }
-
-          return res.redirect('/Manager/loanrequest');
-      } else {
-          await updatedLoanApplication.destroy();
-          return res.send('Loan application declined');
-      }
-  } catch (error) {
-      console.error('Error updating loan status:', error);
-      return res.status(500).send('Error updating loan status');
-  }
-};
+    try {
+        const { application_id, application_status } = req.body;
+   
+        if (!application_id || !application_status) {
+            return res.status(400).send('Application ID and status are required');
+        }
+   
+        const updatedLoanApplication = await Loan_application.findByPk(application_id);
+   
+        if (!updatedLoanApplication) {
+            return res.status(404).send('Loan application not found');
+        }
+   
+        const user_id = updatedLoanApplication.user_id;
+   
+        updatedLoanApplication.application_status = application_status;
+        await updatedLoanApplication.save();
+   
+        if (application_status === 'approved') {
+            const startDate = calculateStartDate(updatedLoanApplication);
+            const endDate = calculateEndDate(updatedLoanApplication, startDate);
+   
+            const approvedLoan = {
+                loan_id: uuidv4 (),
+                application_id,
+                user_id,
+                loan_status: 'active',
+                loan_type: updatedLoanApplication.loan_type,
+                loan_amount: updatedLoanApplication.amount,
+                loan_term: updatedLoanApplication.loan_term,
+                interest: updatedLoanApplication.interest,
+                start_date: startDate,
+                end_date: endDate,
+                timestamp: new Date(),
+            };
+   
+            const newLoan = await Loan.create(approvedLoan);
+   
+            if (!newLoan) {
+                throw new Error('Failed to create new Loan record');
+            }
+            
+            return res.redirect('/Manager/loanrequest');
+        } else {
+            await updatedLoanApplication.destroy();
+            return res.send('Loan application declined');
+        }
+    } catch (error) {
+        console.error('Error updating loan status:', error);
+        return res.status(500).send('Error updating loan status');
+    }
+  };
 
 
 

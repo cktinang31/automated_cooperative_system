@@ -25,7 +25,7 @@ const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
-
+const Collected_payment = require('./models/collected_payment');
 
 // const Application = require('./models/application');
 
@@ -179,6 +179,7 @@ app.use(savingsRoutes);
 app.use(savtransactionRoutes);
 app.use(cbutransactionRoutes);
 app.use(collectorRoutes);
+app.use(loan_paymentRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -322,6 +323,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(8080, () => {
+app.listen(3000, () => {
   console.log('Server running on port 3000');
 });

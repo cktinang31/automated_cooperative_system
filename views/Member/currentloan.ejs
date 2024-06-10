@@ -24,35 +24,34 @@
         <tr>
             <th>Loan ID</th>
             <th>Type</th>
-            <th>Amount</th>
-            <th>Interest Rate</th>
-            <th>Term</th>
             <th>Start Date</th>
             <th>End Date</th>
         </tr>
     </thead>
     <tbody>
-        <% if (loans.length > 0) { %>
-          <% loans.forEach(loan => { %>
-            <tr data-loan-id="<%= loan.loan_id %>">
-                <td><%= loan.loan_id%></td>
-                <td><%= loan.loan_type %></td>
-                <td><%= loan.loan_amount %>php</td>
-                <td><%= loan.interest %>%</td>
-                <td><%= loan.loan_term %></td>
-                <td><%= loan.start_date %></td>
-                <td><%= loan.end_date %></td>
-
-
-                
-              </tr>
-            <% }) %>
-          <% } else { %>
-            <tr>
-              <td colspan="8">No Loan at the moment...</td>
-            </tr>
-          <% } %>   
-        </tbody>
+      <% if (loans.length > 0) { %>
+        <% loans.forEach(loan => { %>
+          <tr data-loan-id="<%= loan.loan_id %>">
+            <td><%= loan.loan_id %></td>
+            <td>
+              <% if (loan.loan_type === 'medical') { %>
+                <p>Medical Loan</p>
+              <% } else if (loan.loan_type === 'emergency') { %>
+                <p>Emergency Loan</p>
+              <% } else { %>
+                <p>Regular Loan</p>
+              <% } %>
+            </td>
+            <td><%= loan.start_date %></td>
+            <td><%= loan.end_date %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="8">No Loan at the moment...</td>
+        </tr>
+      <% } %>
+      
 
 </table>
 <script>

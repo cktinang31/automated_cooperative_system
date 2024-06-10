@@ -250,25 +250,24 @@ router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
             const user = req.user;
             const loanId = req.params.loanId;
-            console.log('Requested loanId:', loanId); // Debug log
+            console.log('Requested loanId:', loanId); 
 
             try {
-                const loanPayment = await Loan_payment.findOne({
+                const loan = await Loan.findOne({
                     where: { loan_id: loanId },
                     include: [
-                        { model: Loan, required: true },
                         { model: User, required: true },
-                        { model: Loan_application, required: true }
+                        { model: Loan_application, required: true },
                     ]
                 });
 
-                if (!loanPayment) {
-                    console.log('Loan payment not found.');
-                    return res.status(404).send('Loan payment not found.');
+                if (!loan) {
+                    console.log('loan not found.');
+                    return res.status(404).send('loan not found.');
                 }
 
-                console.log('Loan payment:', loanPayment);
-                res.render('Member/regular_loan', { loanPayment, title: 'Loan Payment Details', user: req.user });
+                console.log('Loan :', loan);
+                res.render('Member/regular_loan', { loan, title: 'Loan Payment Details', user: req.user });
             } catch (error) {
                 console.error('Error fetching loan payment:', error);
                 res.status(500).send('Error fetching loan payment');
@@ -283,6 +282,7 @@ router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
         res.status(500).send('Internal server error.');
     }
 });
+
 
 
 
@@ -390,4 +390,10 @@ router.get('/Member/sidebar', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
+
+
+router.get('/Manager/membersinfo', (req, res) => {
+    res.render('Manager/memberinfo', { title: 'Member'});
+  });
+  
 module.exports = router;

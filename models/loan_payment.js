@@ -64,8 +64,8 @@ const Loan_payment = sequelize.define('Loan_payment', {
         allowNull: true,
     },
     status: {
-        type: DataTypes.ENUM('pending', 'advanced', 'ontime', 'delayed'),
-        allowNull: false,
+        type: DataTypes.ENUM('pending', 'approved',  'decline'),
+        allowNull: true,
     },
     timestamp: {
         type: DataTypes.DATE,
