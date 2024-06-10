@@ -149,12 +149,13 @@
 .edit-btn:hover i {
     color: #1d8634;
 }
+
 .save-btn i {
     color: #f9a702e1;
 }
 
 .save-btn:hover i {
-    color: #9e932d;
+    color: #d18b00e1;
 }
 
 .user-row.editing .role-text {
@@ -280,14 +281,14 @@ button[type="submit"] {
     border-radius: 50px;
     outline: none;
     border: 1px solid #373F41;
-  
+    transition: box-shadow 0.3s ease, font-weight 0.2s ease;
 }
 
 input[type="text"]:hover,
 input[type="email"]:hover {
     color: #373F41;
     font-weight: bold;
-     box-shadow: 0 0 5px #f9a702e1 
+    box-shadow: 0 0 5px #f9a702e1 
 }
 
 button[type="submit"] {

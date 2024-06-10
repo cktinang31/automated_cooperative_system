@@ -27,41 +27,41 @@
         
 
         <!-- Modal for Add User -->
-        <div id="addUserModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form action="/add_user" method="POST">
-                    <h3>Add New User</h3>
-                    <input type="text" id="fname" name="fname" placeholder="First Name" required />
-                    <input type="text" id="lname" name="lname" placeholder="Last Name" required />
-                    <input type="email" id="email" name="email" placeholder="Email" required />
-                    <input type="text" id="role" name="role" placeholder="Role" required />
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-        <tr class="user-row">
-            <form action="/delete_user" method="POST" class="delete-user-form">
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="user_id" value="<%= user.user_id %>">
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="/add_user" method="POST">
+                <h3>Add New User</h3>
+                <input type="text" id="fname" name="fname" placeholder="First Name" required />
+                <input type="text" id="lname" name="lname" placeholder="Last Name" required />
+                <input type="email" id="email" name="email" placeholder="Email" required />
+                <input type="text" id="role" name="role" placeholder="Role" required />
+                <button type="submit">Submit</button>
             </form>
-
-
-            <form action="/edit_user/<%= user.user_id %>" method="POST" class="edit-user-form">
-                <input type="hidden" name="_method" value="POST">
-                <input type="hidden" name="user_id" value="<%= user.user_id %>">
-                
-                <table class="announcement-table">
-                    <thead>
-                        <tr>
-                            <th>User ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+        </div>
+    </div>
+    
+    <tr class="user-row">
+        <form action="/delete_user" method="POST" class="delete-user-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="user_id" value="<%= user.user_id %>">
+        </form>
+        
+        <form action="/edit_user/<%= user.user_id %>" method="POST" class="edit-user-form">
+            <input type="hidden" name="_method" value="POST">
+            <input type="hidden" name="user_id" value="<%= user.user_id %>">
+            
+            <table class="announcement-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
                     <tbody>
                         <% if (users.length > 0) { %>
                             <% users.forEach(user => { %>
@@ -111,10 +111,9 @@
                     </tbody>
                 </table>
             </form>
-            
     </div>
+
     <script>
-    
     document.addEventListener('DOMContentLoaded', () => {
         const addUserBtn = document.querySelector('.add-user-btn');
         const modal = document.getElementById('addUserModal');
@@ -134,11 +133,9 @@
             }
         });
 
-       
-
         document.querySelectorAll('.delete-btn').forEach(button => {
-    button.addEventListener('click', async (event) => {
-        const userId = event.target.closest('.delete-btn').dataset.userId; // Corrected to find the closest .delete-btn
+        button.addEventListener('click', async (event) => {
+        const userId = event.target.closest('.delete-btn').dataset.userId;
         if (confirm('Are you sure you want to delete this user?')) {
             try {
                 const response = await fetch(`/delete_user/${userId}`, {
@@ -153,85 +150,83 @@
             } catch (error) {
                 console.error('Error deleting user:', error);
                 alert('Error deleting user.');
-            }
-        }
-    });
-});
+                }
+                }
+                });
+                });
 
         document.addEventListener('DOMContentLoaded', () => {
-    const toggleVisibility = (elements, displayStyle) => {
-      elements.forEach(el => {
+        const toggleVisibility = (elements, displayStyle) => {
+        elements.forEach(el => {
         el.style.display = displayStyle;
-      });
-    };
-
+        });
+        };
         });
 
         function toggleVisibility(elements, displayStyle) {
-    elements.forEach(element => {
+        elements.forEach(element => {
         element.style.display = displayStyle;
     });
-}
+    }
 
-document.querySelectorAll('.edit-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        const row = button.closest('.user-row');
-        toggleVisibility(row.querySelectorAll('.fname-text, .lname-text, .email-text, .role-text, .edit-btn'), 'none');
-        toggleVisibility(row.querySelectorAll('.fname-input, .lname-input, .email-input, .role-dropdown, .save-btn'), 'inline');
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = button.closest('.user-row');
+            toggleVisibility(row.querySelectorAll('.fname-text, .lname-text, .email-text, .role-text, .edit-btn'), 'none');
+            toggleVisibility(row.querySelectorAll('.fname-input, .lname-input, .email-input, .role-dropdown, .save-btn'), 'inline');
+        });
     });
-});
 
-document.querySelectorAll('.save-btn').forEach(button => {
-    button.addEventListener('click', async function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        const row = button.closest('.user-row');
-        const userId = row.dataset.userId;
+    document.querySelectorAll('.save-btn').forEach(button => {
+        button.addEventListener('click', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const row = button.closest('.user-row');
+            const userId = row.dataset.userId;
 
-        const formData = new FormData();
-        formData.set('user_id', userId);
-        formData.set('fname', row.querySelector('.fname-input').value);
-        formData.set('lname', row.querySelector('.lname-input').value);
-        formData.set('email', row.querySelector('.email-input').value);
-        formData.set('role', row.querySelector('.role-dropdown').value);
+            const formData = new FormData();
+            formData.set('user_id', userId);
+            formData.set('fname', row.querySelector('.fname-input').value);
+            formData.set('lname', row.querySelector('.lname-input').value);
+            formData.set('email', row.querySelector('.email-input').value);
+            formData.set('role', row.querySelector('.role-dropdown').value);
 
-        const jsonData = Object.fromEntries(formData.entries());
+            const jsonData = Object.fromEntries(formData.entries());
+            console.log('Sending data:', jsonData);
 
-        console.log('Sending data:', jsonData);
+            try {
+                const response = await fetch(`/edit_user/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-HTTP-Method-Override': 'PUT'
+                    },
+                    body: JSON.stringify(jsonData)
+                });
 
-        try {
-            const response = await fetch(`/edit_user/${userId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-HTTP-Method-Override': 'PUT'
-                },
-                body: JSON.stringify(jsonData)
-            });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to update user');
+                }
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to update user');
+                const data = await response.json();
+                console.log('Success:', data);
+
+                row.querySelector('.fname-text').textContent = data.fname;
+                row.querySelector('.lname-text').textContent = data.lname;
+                row.querySelector('.email-text').textContent = data.email;
+                row.querySelector('.role-text').textContent = data.role;
+
+                toggleVisibility(row.querySelectorAll('.fname-input, .lname-input, .email-input, .role-dropdown, .save-btn'), 'none');
+                toggleVisibility(row.querySelectorAll('.fname-text, .lname-text, .email-text, .role-text, .edit-btn'), 'inline');
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error updating user details: ' + error.message);
             }
-
-            const data = await response.json();
-            console.log('Success:', data);
-
-            row.querySelector('.fname-text').textContent = data.fname;
-            row.querySelector('.lname-text').textContent = data.lname;
-            row.querySelector('.email-text').textContent = data.email;
-            row.querySelector('.role-text').textContent = data.role;
-
-            toggleVisibility(row.querySelectorAll('.fname-input, .lname-input, .email-input, .role-dropdown, .save-btn'), 'none');
-            toggleVisibility(row.querySelectorAll('.fname-text, .lname-text, .email-text, .role-text, .edit-btn'), 'inline');
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error updating user details: ' + error.message);
-        }
+        });
     });
-});
-});
+    });
+</script>
 
-    </script>
 </body>
 </html>

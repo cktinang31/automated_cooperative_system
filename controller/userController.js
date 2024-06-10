@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const User = require ('../models/user');
 
 
-
-
 const user_reg = async (req, res) => {
   try {
     const { user_id, password } = req.body;
