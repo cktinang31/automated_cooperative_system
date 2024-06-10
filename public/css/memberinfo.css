@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+}
+
+
+nav {
+    background-color: #373F41;
+    color: #FFA900;
+    padding: -10px -6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif; /* Set font family */
+}
+
+.home-icon {
+    font-size: 18px;
+}
+.site-title {
+    display: flex;
+    align-items: center;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+}
+
+.member-title h1 {
+    margin-right: 10px;
+}
+
+/* Centering the h2 element */
+h2 {
+    text-align: center;
+    font-family: Poppins;
+    margin-top: 50px;
+}
+
+.container {
+    width: 90%;
+    height: 100vh;
+    padding: 0;
+    font-family: "Poppins";
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
+    margin-left: 10%;
+    margin-top: 100px;
+}
+
+.service {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
+    text-align:left;
+    padding: 40px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    background: #dbd6d6;
+    transition: transform 0.5s, background 0.5s;
+}
+
+
+.service h4 {
+    color: #474645;
+    font-weight: 700;
+    font-size: 20;
+    font-family: Poppins;
+    text-align: center;
+}
+
+.service h5 {
+    font-weight: 400;
+    font-style: oppins;
+}
+
+.service h6 {
+    font-weight: 200;
+    font-style: Poppins;
+}
+

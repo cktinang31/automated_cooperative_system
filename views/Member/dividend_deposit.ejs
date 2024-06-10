@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KaCoop | <%=title %></title>
+        <link rel="stylesheet" href="/css/savings_deposit.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+   
+    <body>
+ 
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    </div>
+    <div class="member-title">
+        <h1>Member</h1>
+    </div>
+    <div class="home-icon">
+        <a href="/">
+            <img src="/svg/icons8-home.svg" alt="Home Icon">
+        </a>
+</nav>
+<div class="main-content">
+    <div class="content-wrapper">
+        <img src="/images/image.png" alt="Justice Icon" class="adjusted">
+        <div class="savings-section">
+            <div class="savings-container">
+                <h3>Dividend</h3>
+                <p class="savings-amount">PHP 3000.00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deposit-withdraw">
+  <button id="deposit-button">
+    <i class="fas fa-piggy-bank"></i> Deposit
+  </button>
+  <button id="withdraw-button">
+    <i class="fas fa-wallet"></i> Withdraw
+  </button>
+</div>
+  <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
+
+  <div id="price-labels">
+    <div class="column">
+      <span class="price-label">PHP 1000</span>
+      <span class="price-label">PHP 4000</span>
+    </div>
+    <div class="column">
+      <span class="price-label">PHP 2000</span>
+      <span class="price-label">PHP 5000</span>
+    </div>
+    <div class="column">
+      <span class="price-label">PHP 3000</span>
+      <span class="price-label">PHP 6000</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="amount">AMOUNT:</label>
+    <input type="number" id="amount" name="amount" required>
+  </div>
+  <div class="form-group">
+    <label for="account-number">ACCOUNT NUMBER:</label>
+    <input type="text" id="account-number" name="account-number" required>
+    <div class="dropdown-container">
+      <label for="mode-of-payment">MODE OF PAYMENT:</label>
+      <select id="mode-of-payment" name="mode-of-payment" required>
+        <option value="" disabled selected hidden></option>
+        <option value="cash">Cash</option>
+        <option value="credit-card">Credit Card</option>
+        <option value="debit-card">Debit Card</option>
+      </select>
+    </div>
+  </div>  
+
+<button type="submit">DEPOSIT</button>
+</form>
+    </body>
+    </html>

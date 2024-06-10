@@ -12,7 +12,7 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
-const user = require('user');
+
  
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
@@ -153,6 +153,18 @@ app.get('/Member/sidebar', (req, res) => {
   res.render('Member/sidebar', { title: 'sidebar'});
 });
 
+app.get('/Member/savings_deposit', isAuthenticated, async (req, res) => {
+  res.render('Member/savings_deposit', { title: 'Deposit'});
+});
+
+app.get('/Member/cbu_deposit', isAuthenticated, async (req, res) => {
+  res.render('Member/cbu_deposit', { title: 'Deposit'});
+});
+
+app.get('/Member/dividend_deposit', isAuthenticated, async (req, res) => {
+  res.render('Member/dividend_deposit', { title: 'Deposit'});
+});
+
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/sidebarmanager', { title: 'sidebar'});
 });
@@ -160,15 +172,7 @@ app.get('/Manager/sidebarmanager', (req, res) => {
 app.get('/Manager/req', (req, res) => {
   res.render('Manager/req', { title: 'Req'});
 });
-
-app.get('/Manager/loan_req', (req, res) => {
-  res.render('Manager/loan_req', { title: 'Loan Request'});
-});
-
-app.get('/Manager/loan_request', (req, res) => {
-  res.render('Manager/loan_request', { title: 'Loan Request'});
-});
-
+ 
 app.post('/user_reg', async (req, res) => {
   try {
     const { fname, lname, email, password } = req.body;
@@ -526,8 +530,7 @@ app.post('update_user', isAuthenticated, async (req,res) => {
     return res.status(500).send('Error updating loan status');
   }
 })
- 
- 
+
 // ibutang sa babaw ani inyong code (ayaw nig idelete nga line para linaw atong kinabuhi)
  
 app.get('/login', (req, res) => {
@@ -578,7 +581,7 @@ app.post('/user_login', passport.authenticate('local', {
 
 // 404 page
 app.use((req, res) => {
-    res.status(404).render('404', { title: '404'})
+    res.status(404).render('404', { title: 'Page Not Found'})
 });
  
 app.listen(3000, () => {
