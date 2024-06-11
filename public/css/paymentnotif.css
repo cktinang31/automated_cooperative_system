@@ -48,16 +48,19 @@
 }
 
 .site-title span i {
-    color: #ffa900;
+    color: black;
     margin-left: 20px; 
     margin-right: 0;
     font-size: 32px;
     transition: color 0.3s ease;
 }
 
-.site-title span i:hover {
-    color: #ffffff;
+.site-title span i {
+    color: #ffa900;
+    margin-left: 20px; 
+    margin-right: 0;
 }
+
 
 .logout-icon {
     cursor: pointer;
