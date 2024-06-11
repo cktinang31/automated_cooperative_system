@@ -26,7 +26,7 @@ const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
-const Collected_payment = require('./models/collected_payment');
+
 
 // const Application = require('./models/application');
 

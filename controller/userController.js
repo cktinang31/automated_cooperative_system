@@ -84,13 +84,13 @@ const edit_user = async (req, res) => {
       return res.status(404).json({ message: 'User not found.' });
     }
 
-    // Update user details
+   
     user.fname = fname;
     user.lname = lname;
     user.email = email;
     user.role = role;
     
-    // Save changes to the database
+  
     await user.save();
 
     console.log('Updated user:', user);
