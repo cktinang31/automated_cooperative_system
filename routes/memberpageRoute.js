@@ -222,7 +222,6 @@ router.get('/Member/currentloan', async (req, res, next) => {
 });
 
 
-
 router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
     try {
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
@@ -239,16 +238,22 @@ router.get('/Member/regular_loan/:loanId', async (req, res, next) => {
                     ]
                 });
 
+                const loan_payment = await Loan_payment.findAll({
+                    where: { loan_id: loanId },
+                    include: [
+                        { model: User, required: true },
+                        { model: Loan, required: true },
+                    ]
+                });
+
                 if (!loan) {
                     console.log('loan not found.');
                     return res.status(404).send('loan not found.');
-                }
-
-               
+                };
 
                 console.log('Loan :', loan);
                 
-                res.render('Member/regular_loan', { loan, title: 'Loan Payment Details', user: req.user });
+                res.render('Member/regular_loan', { loan, loan_payment, title: 'Loan Payment Details', user: req.user });
             } catch (error) {
                 console.error('Error fetching loan ', error);
                 res.status(500).send('Error fetching loan ');
