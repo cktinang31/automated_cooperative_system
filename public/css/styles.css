@@ -408,6 +408,7 @@ h3::after {
 }
 
 .inputBox input {
+    font-family: "Poppins";
     padding: 10px;
     font-size: 1em;
     outline: none;
@@ -416,8 +417,9 @@ h3::after {
 }
 
 .inputBox textarea {
+    font-family: "Poppins";
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1em;
     outline: none;
     border: 1px solid #777;
     border-radius: 5px;
