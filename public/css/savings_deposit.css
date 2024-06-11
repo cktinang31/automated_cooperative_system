@@ -245,6 +245,7 @@
     font-size: 31px; 
     margin-left: 1050px; 
 }
+
 #deposit-withdraw {
     display: flex;
     margin-left: 100px;
@@ -499,5 +500,3 @@ label[for="account-number"] {
     transform: translateY(-50%);
     pointer-events: none;
 }
-
-
