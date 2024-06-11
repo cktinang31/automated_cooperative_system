@@ -110,67 +110,43 @@
 </div>
 
 <script>
-    document.querySelectorAll('tr[data-application-id]').forEach(row => {
-        row.addEventListener('click', function() {
-            const applicationId = this.getAttribute('data-application-id');
-            const destinationUrl = '/Manager/req/' + applicationId; 
-            window.location.href = destinationUrl;
-        });
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('#table tbody tr').forEach(function (row) {
-        row.addEventListener('click', function () {
-            var applicationData = JSON.parse(decodeURIComponent(this.dataset.application));
-            document.getElementById('modal-fname').innerText = applicationData.fname;
-            document.getElementById('modal-mname').innerText = applicationData.mname;
-            document.getElementById('modal-lname').innerText = applicationData.lname;
-            document.getElementById('modal-dob').innerText = applicationData.date_of_birth;
-            document.getElementById('modal-pob').innerText = applicationData.place_of_birth;
-            document.getElementById('modal-address').innerText = applicationData.address;
-            document.getElementById('modal-email').innerText = applicationData.email;
-            document.getElementById('modal-contact').innerText = applicationData.contact;
+        const rows = document.querySelectorAll('#table tbody tr');
 
-            var formAction = '/mem_application_update/' + applicationData.application_id;
-            document.getElementById('application-form').action = formAction;
+        rows.forEach(function (row) {
+            row.addEventListener('click', function () {
+                const applicationData = JSON.parse(decodeURIComponent(this.dataset.application));
 
-            document.getElementById('application-modal').style.display = 'block';
+                // Update modal content with application data
+                document.getElementById('modal-fname').innerText = applicationData.fname;
+                document.getElementById('modal-mname').innerText = applicationData.mname;
+                document.getElementById('modal-lname').innerText = applicationData.lname;
+                document.getElementById('modal-dob').innerText = applicationData.date_of_birth;
+                document.getElementById('modal-pob').innerText = applicationData.place_of_birth;
+                document.getElementById('modal-address').innerText = applicationData.address;
+                document.getElementById('modal-email').innerText = applicationData.email;
+                document.getElementById('modal-contact').innerText = applicationData.contact;
+
+                // Update form action
+                const form = document.getElementById('application-form');
+                form.action = '/mem_application_update/' + applicationData.application_id;
+
+                // Show modal
+                const modal = document.getElementById('application-modal');
+                modal.style.display = 'block';
+            });
         });
-    });
 
-    // Close the modal when clicking outside of it (optional)
-    window.onclick = function (event) {
-        var modal = document.getElementById('application-modal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
-});
-
-
-</script>
-
-<script>
-    // Function to get current timestamp
-    function getTimestamp() {
-        const now = new Date();
-        const timestamp = now.toLocaleString();
-        return timestamp;
-    }
-
-    // Update timestamp for each row
-    document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById("table");
-        const rows = table.getElementsByTagName("tr");
-
-        for (let i = 1; i < rows.length; i++) {
-            const detailsCell = rows[i].getElementsByTagName("td")[1];
-            const timestampSpan = document.createElement("span");
-            timestampSpan.textContent = " (" + getTimestamp() + ")";
-            detailsCell.appendChild(timestampSpan);
-        }
+        // Close modal when clicking outside of it
+        window.onclick = function (event) {
+            const modal = document.getElementById('application-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
     });
 </script>
+
 
 </body>
 </html>
