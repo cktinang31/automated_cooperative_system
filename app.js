@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const session = require('express-session');
 const crypto = require('crypto');
 const morgan = require('morgan');
@@ -316,6 +317,12 @@ app.get('/Manager/membersdata', (req, res) => {
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
+
+//collector nako //
+
+app.get('/Collector/collector', (req, res) => {
+  res.render('Collector/collector', { title: 'collector'});
+}); 
 
 app.get('/your-route', (req, res) => {
   const user = {
