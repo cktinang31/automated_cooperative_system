@@ -134,6 +134,14 @@
     function closeModal() {
         document.getElementById('loanModal').style.display = 'none';
     }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('loanModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    
 </script>
 
 </body>
