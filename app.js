@@ -325,6 +325,10 @@ app.get('/Collector/collector', (req, res) => {
   res.render('Collector/collector', { title: 'collector'});
 }); 
 
+app.get('/Collector/paymentnotif', (req, res) => {
+  res.render('Collector/paymentnotif', { title: 'Payment Notification'});
+});
+
 app.get('/your-route', (req, res) => {
   const user = {
       name: 'Kristine Anne Cardosa',
