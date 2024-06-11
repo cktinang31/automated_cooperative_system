@@ -47,7 +47,15 @@ const Loan = sequelize.define('Loan', {
         allowNull: false,
     },
     loan_amount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10, 2),
+        allowNull: false,
+    },
+    total_amount: {
+        type: DataTypes.FLOAT(10, 2),
+        allowNull: false,
+    },
+    balance: {
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false,
     },
     loan_term: {
@@ -55,7 +63,7 @@ const Loan = sequelize.define('Loan', {
         allowNull: false,
     },
     interest: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false,
     },
     start_date: {

@@ -5,27 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaCoop | <%=title %></title>
     <link rel="stylesheet" href="/css/req.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav>
-    <div class="site-title">
-        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-    </div>
-    <div class="nav-content">
-        <div class="member-title">
-            <h1>Manager</h1>
+    <nav class="navbar">
+        <div class="site-title">
+        <h1>KACooP</h1>
+        <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
-        <div class="home-icon">
-            <a href="/">
-                <img src="/svg/icons8-home.svg" alt="Home Icon">
-            </a>
-        </div>
-    </div>
-</nav>
+    </nav>  
 
-<!-- Centering the h2 element -->
 <h2>Membership Requests</h2>
 
 <div class="form-container">
@@ -69,15 +60,9 @@
         </table>
         <div class="button-container">
             <button type="submit" class="approve-button" name="application_status" value="approved">Approve</button>
-                        
             <button type="submit" class="decline-button" name="application_status" value="decline">Decline</button>
         </div>
-
     </form>
-    
 </div>
-
-
-
 </body>
 </html>

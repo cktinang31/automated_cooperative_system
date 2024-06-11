@@ -40,15 +40,11 @@ const Cbu = sequelize.define('Cbu', {
         onUpdate: 'CASCADE'
     },
     amount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false
     },
     interest: {
-        type: DataTypes.FLOAT,
-        allowNull: true
-    },
-    loan_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT(10, 2),
         allowNull: true
     },
     timestamp: {
