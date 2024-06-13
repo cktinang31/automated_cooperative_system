@@ -3,7 +3,6 @@ const Loan_application = require ('../models/loan_application');
 const User = require ('../models/user');
 const Loan_payment = require ('../models/loan_payment');
 const { v4: uuidv4 } = require('uuid');
-const Collected_payment = require('../models/collected_payment');
 
 
 
@@ -43,7 +42,6 @@ const loanpayment = async (req, res) => {
         return res.status(500).send('Error submitting the payment.');
     }
 };
-
 const update_loanpayment = async (req, res) => {
     try {
         const { payment_id, status } = req.body;
@@ -74,40 +72,23 @@ const update_loanpayment = async (req, res) => {
             loanToUpdate.balance -= paymentToUpdate.amount;
             await loanToUpdate.save();
 
-            let collectedPayment = await Collected_payment.findOne({
+            // Increment number_of_payments for the corresponding loan_id
+            const approvedPaymentsCount = await Loan_payment.count({
                 where: {
-                    loan_id: loanToUpdate.loan_id,
-                    user_id: paymentToUpdate.User.user_id
+                    loan_id: paymentToUpdate.loan_id,
+                    status: 'approved'
                 }
             });
+            paymentToUpdate.number_of_payments = approvedPaymentsCount;
+            await paymentToUpdate.save();
 
-            if (collectedPayment) {
-                // Increment the number of payments if a record already exists
-                collectedPayment.number_of_payments += 1;
-                collectedPayment.timestamp = new Date();
-            } else {
-                // Create a new collected payment record if none exists
-                collectedPayment = {
-                    payment_id: payment_id,
-                    loan_id: loanToUpdate.loan_id,
-                    user_id: paymentToUpdate.User.user_id,
-                    collectedpayment_id: uuidv4(),
-                    number_of_payments: 1,
-                    status: 'on-time',
-                    timestamp: new Date(),
-                };
+            console.log('Payment updated and loan balance adjusted');
 
-                collectedPayment = await Collected_payment.create(collectedPayment);
-            }
-
-            await collectedPayment.save();
-
-            console.log('Payment updated and collected payment saved');
             return res.redirect('/Collector/paymentnotif');
         }
 
-       
-        return res.send('Payment declined');
+        console.log('New collected payment record created');
+        return res.redirect('/Collector/paymentnotif');
     } catch (error) {
         console.error('Error updating payment:', error);
         return res.status(500).send('Error updating payment');

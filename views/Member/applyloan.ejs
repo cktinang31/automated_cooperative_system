@@ -24,7 +24,7 @@
 </nav>
 
 <div class="form-container">
-    <form action="/apply_loan" method="post">
+    <form action="/apply_loan" method="post" oninput="calculateMonthlyPayment()">
         <img src="/images/loan.png" alt="Megaphone Icon" class="adjusted">
         <h1>Apply Loan</h1>
 
@@ -43,12 +43,12 @@
 
         <div class="form-group">
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" step="0.01" required oninput="calculateMonthlyPayment()">
+            <input type="number" id="amount" name="amount" step="0.01" required>
         </div><br>
 
         <div class="form-group">
             <label for="loan_term">Loan Term:</label>
-            <select id="loan_term" name="loan_term" required onchange="calculateMonthlyPayment()">
+            <select id="loan_term" name="loan_term" required>
                 <option value="6 months">6 months</option>
                 <option value="12 months">12 months</option>
                 <option value="18 months">18 months</option>
@@ -58,7 +58,7 @@
 
         <div class="form-group">
             <label for="interest">Interest:</label>
-            <input type="number" id="interest" name="interest" step="0.01" required oninput="calculateMonthlyPayment()">
+            <input type="number" id="interest" name="interest" step="0.01" required>
         </div><br>
 
         <div class="form-group">
@@ -73,19 +73,19 @@
 </div>
 
 <script>
-        function calculateMonthlyPayment() {
-            const amount = parseFloat(document.getElementById('amount').value);
-            const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
-            const interest = parseFloat(document.getElementById('interest').value);
-            
-            const monthlyInterestRate = interest / 12;
-            const numberOfPayments = loanTerm;
-            
-            const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
-                (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-            
-            document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
-        }
-    </script>
+    function calculateMonthlyPayment() {
+        const amount = parseFloat(document.getElementById('amount').value);
+        const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
+        const interest = parseFloat(document.getElementById('interest').value);
+        
+        const monthlyInterestRate = interest / 12;
+        const numberOfPayments = loanTerm;
+        
+        const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+            (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+        
+        document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
+    }
+</script>
 </body>
 </html>
