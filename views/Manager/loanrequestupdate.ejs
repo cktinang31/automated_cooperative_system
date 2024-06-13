@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/req.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="site-title">
+        <h1>KACooP</h1>
+        <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+        </div>
+    </nav>  
+
+<h2>Membership Requests</h2>
+
+<div class="form-container">
+    <form action="/update_loan_request" "/loanpayment" method="POST">
+        <input type="hidden" name="application_id" value="<%= loan_application.application_id %>">
+        <input type="hidden" name="action" value="loanpayment">
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td><%= loan_application.User.fname %></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><%= loan_application.User.lname %></td>
+            </tr>
+            <tr>
+                <td>Loan Type:</td>
+                <td><%= loan_application.loan_type %></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td><%= loan_application.amount %></td>
+            </tr>
+            <tr>
+                <td>Loan Term:</td>
+                <td><%= loan_application.loan_term %></td>
+            </tr>
+            <tr>
+                <td>Interest:</td>
+                <td><%= loan_application.interest %></td>
+            </tr>
+            <tr>
+                <td>Monthly Payment:</td>
+                <td><%= loan_application.monthly_payment %></td>
+            </tr>
+            <tr>
+                <td>Number of Payments:</td>
+                <td><%= loan_application.number_of_payments %></td>
+            </tr>
+            
+        </table>
+        <div class="button-container">
+            <button type="submit" class="approve-button" name="application_status" value="approved">Approve</button>
+            <button type="submit" class="decline-button" name="application_status" value="decline">Decline</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/req.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Manager</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Centering the h2 element -->
+<h2>Savings Deposit/Withdraw Requests</h2>
+
+<div class="form-container">
+    <form action="/update_savings_request/<%= savtransaction.savtransaction_id %>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="savtransaction_id" value="<%= savtransaction.savtransaction_id %>">
+        
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><%= savtransaction.User.fname %> <%= savtransaction.User.lname %></td>
+            </tr>
+            <tr>
+                <td>Request Type:</td>
+                <td><%= savtransaction.transaction_type %></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td><%= savtransaction.amount %></td>
+            </tr>
+            <tr>
+                <td>Mode of Payment:</td>
+                <td><%= savtransaction.mode %></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button type="submit" class="approve-button" name="status" value="approved">Approve</button>
+            <button type="submit" class="decline-button" name="status" value="decline">Decline</button>
+        </div>
+    </form>
+</div>
+
+
+
+</body>
+</html>

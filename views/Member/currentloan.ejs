@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/currentloan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <nav class="navbar">
+    <div class="site-title">
+        <h1>KACooP</h1>
+        <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+    </div>
+  </nav> 
+
+<h2>Current Loan</h2>
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% if (loans.length > 0) { %>
+        <% loans.forEach(loan => { %>
+          <tr data-loan-id="<%= loan.loan_id %>">
+            <td><%= loan.loan_id %></td>
+            <td>
+              <% if (loan.loan_type === 'medical') { %>
+                <p>Medical Loan</p>
+              <% } else if (loan.loan_type === 'emergency') { %>
+                <p>Emergency Loan</p>
+              <% } else { %>
+                <p>Regular Loan</p>
+              <% } %>
+            </td>
+            <td><%= loan.start_date %></td>
+            <td><%= loan.end_date %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="8">No Loan at the moment...</td>
+        </tr>
+      <% } %>
+      
+
+</table>
+<script>
+    document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+  row.addEventListener('click', function() {
+      
+      const loanId = this.getAttribute('data-loan-id');
+      
+      
+      const destinationUrl = '/Member/regular_loan/' + loanId; 
+      window.location.href = destinationUrl;
+  });
+});
+
+</script>
+
+
+
+</body>
+</html>

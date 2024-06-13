@@ -1,56 +1,79 @@
 * {
     margin: 0;
     padding: 0;
+    user-select: none;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-nav {
+.navbar {
     background-color: #373F41;
-    color: #FFA900;
-    padding: 20px 20px; 
+    color: #ffa900;
+    max-width: 100%;
     display: flex;
-    justify-content: space-between; 
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
 }
 
-.member-title{
-    padding-left: 1300px;
+.nav ul {
+    background: #dbdbdb;
+    height: 100%;
+    width: 100%;
+    list-style: none;
 }
 
-.title h1,
-.member-title {
-    margin: 0; 
+.site-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 20px);
+    padding: 0 10px; 
 }
 
-nav ul {
-    list-style-type: none; 
+.site-title h1 {
     margin: 0;
-    padding: 0; 
-    display: flex;
+    margin-left: 10px;
+    font-size: 45px;
+    font-weight: 800;
 }
 
-nav ul li {
-    margin-left: 20px; 
-}
-
-nav ul li:first-child {
-    margin-left: 0; 
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none; 
-}
-        
-.home-icon {
+.site-title span {
+    color: #ffffff;
     display: flex;
     align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: italic;
 }
 
-.home-icon img {
-    width: 20px;
-    height: auto;
-    margin-right: 5px;
+.site-title span i {
+    color: #ffa900;
+    margin-left: 20px; 
+    margin-right: 0;
+    font-size: 32px;
+    transition: color 0.3s ease;
+}
+
+.site-title span i:hover {
+    color: #ffffff;
+}
+
+.logout-icon {
+    cursor: pointer;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .sidebar-icon {
@@ -78,7 +101,7 @@ nav ul li a {
 }
 
 .sidebar {
-    width: 300; 
+    width: 300px; 
     background-color: #D9D9D9;
     padding: 20px;
     height: 93vh;
@@ -116,7 +139,6 @@ nav ul li a {
         padding: 10px; 
     }
 }
-
 
 .sidebar-menu.active {
     display: block; 
@@ -178,6 +200,7 @@ nav ul li a {
     font-size: 16px;
     font-weight: bold;
 }
+
 .content-wrapper {
     display: flex;
     align-items: center;
@@ -188,12 +211,13 @@ nav ul li a {
     display: flex;
     align-items: center; 
 }
+
 .adjusted {
-    margin-top: 20px; 
+    margin-top: 100px; 
 }
 
 .savings-container {
-    margin-top: 30px; 
+    margin-top: 120px; 
     width: 1450px;
     height: 89px;
     gap: 0px;
@@ -220,12 +244,13 @@ nav ul li a {
 .savings-container p {
     font-size: 31px; 
     margin-left: 1050px; 
-  }
+}
 #deposit-withdraw {
     display: flex;
     margin-left: 100px;
     margin-right: 190px;
 }
+
 .button-container {
     position: relative;
     display: flex;
@@ -233,7 +258,11 @@ nav ul li a {
     width: 100%; 
 }
 
-#deposit-button {
+.button-container input[type="radio"] {
+    display: none;
+}
+
+.button-container label {
     width: 80%;
     height: 87px;
     background-color: #373F41;
@@ -248,22 +277,25 @@ nav ul li a {
     z-index: 2;
     margin-right: -20px;
     margin-top: 50px;
-  }
-  #withdraw-button {
-    width: 80%; 
-    height: 87px;
+}
+
+.button-container input[type="radio"] + label {
     background-color: #D9D9D9;
     color: #373F41;
-    font-size: 24px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 4px 4px 0px #373F41;
-    position: relative;
     z-index: 1;
-    margin-top: 50px;
-  }
+}
+
+.button-container input[type="radio"]:checked + label {
+    background-color: #373F41;
+    color: white;
+    z-index: 2;
+}
+
+.button-container label i {
+    margin-right: 8px;
+}
+
+
 #choose-amount-text {
     width: 311px;
     height: 48px;
@@ -277,32 +309,33 @@ nav ul li a {
     text-align: left;
     color: rgba(55, 63, 65, 0.5); 
     margin-left: 100px;
-  } 
+} 
   
-  #price-labels {
+#price-labels {
     display: flex;
-  }
-  .column {
+}
+
+.column {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0;
-  }
+}
   
-  .column:not(:last-child) {
+.column:not(:last-child) {
     margin-right: 0; 
-  }  
-  
-  .column:first-child {
+}  
+
+.column:first-child {
     margin-left: calc(100px + 68px); 
-  }
-  
-  .column:last-child {
+}
+
+.column:last-child {
     margin-right: 70px; 
-  }
-  
-  .price-label {
+}
+
+.price-label, .price-button {
     width: 300px;
     height: 63px;
     background-color: #D9D9D9;
@@ -316,28 +349,35 @@ nav ul li a {
     font-weight: 400;
     line-height: 51px;
     text-align: left;
-  }
-  .form-group {
+    border: none;
+    cursor: pointer;
+}
+
+.price-button:hover {
+    background-color: #BEBEBE; 
+}
+
+.form-group {
     margin-bottom: 15px;
     position: relative;
     margin-left: 400px;
-  }
+}
   
-  label {
+label {
     display: block;
     margin-bottom: 0px;
-  }
+}
   
-  input,
-  select {
+input,
+select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
-  }
+}
   
-  button[type="submit"] {
+button[type="submit"] {
     width: 745px;
     height: 63px;
     top: 860px;
@@ -357,8 +397,15 @@ nav ul li a {
     font-weight: 400; 
     line-height: 63px; 
     text-align: center; 
+    transition: background-color 0.3s, box-shadow 0.3s; 
 }
-  label[for="amount"] {
+
+button[type="submit"]:hover {
+    background-color: #2c3436; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+label[for="amount"] {
     width: 311px;
     height: 47px;
     top: 642px;
@@ -372,7 +419,7 @@ nav ul li a {
     color: rgba(55, 63, 65, 0.5);
 }
   
-  #amount {
+#amount {
     width: 1027px;
     height: 52px;
     top: 673px;
@@ -408,9 +455,9 @@ label[for="account-number"] {
 
 .dropdown-container {
     position: absolute;
-    bottom: 0px; 
     left: 660px;
     width: 370px;
+    margin-top: -7vh;
 }
 
 .dropdown-container label {
@@ -422,7 +469,6 @@ label[for="account-number"] {
     font-family: Poppins;
     font-size: 16px;
 }
-
 
 #mode-of-payment {
     width: 370px;
@@ -440,15 +486,16 @@ label[for="account-number"] {
 #mode-of-payment:focus option {
     display: block;
 }
+
 .custom-dropdown {
     position: relative;
     display: inline-block;
-  }
+}
   
-  .dropdown-icon {
+.dropdown-icon {
     position: absolute;
     top: 50%;
     left: 10px; 
     transform: translateY(-50%);
     pointer-events: none;
-  }
+}

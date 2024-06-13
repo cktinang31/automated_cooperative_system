@@ -178,151 +178,50 @@ nav ul li a {
     font-size: 16px;
     font-weight: normal;
 }
-
-h2 {
-    text-align: left;
-    margin-top: 150px; 
-    margin-left: 100px; 
+.form-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.content-wrapper {
-    overflow: hidden;
-}
-
-
-#apply-for-loan-form {
+.form-header {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
-    margin: 0;
+    margin-bottom: 20px;
 }
 
-
-    .apply-for-loan-wrapper {
-        text-align: left; 
-        padding-top: 30px; 
-    }
-
-    .apply-for-loan-wrapper img {
-        width: 150px; 
-        height: auto; 
-        margin-bottom: 10px; 
-    }
-
-.form-group {
-    margin-bottom: 25px;
+.form-header img {
+    width: 30px; 
+    height: auto;
+    margin-right: 10px;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 label {
-    display: block; 
+    display: block;
+    margin-bottom: 5px;
 }
 
-button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-
-body {
-    font-size: 16px; 
-}
-
-.apply-for-loan-wrapper h2 {
-    font-size: 35px; 
-}
-
-.form-group label,
-#loan-type option,
-#loan-terms option,
-#interest-rate,
-#payment-per-collection {
-    font-size: 30px; 
-}
-
-input[type="number"] {
-    font-size: 30px;
-}
-
-select {
-    font-size: 30px; 
-}
-
-button {
-    font-size: 30px; 
-}
-
-
-
-
-.box {
-    border: 1px solid #ccc;
-    padding: 10px;
+input, select, button {
+    width: 100%;
+    padding: 8px;
     margin-top: 5px;
 }
 
-.box span {
-    display: inline-block;
-    font-size: 16px; 
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-
-
-
-.right-align {
-    text-align: right;
-
-    width: 100%;
+button:hover {
+    background-color: #0056b3;
 }
-
-.right-align select {
-    width: 100%; 
-}
-
-.form-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300vh; 
-}
-
-.heading-container {
-    display: flex;
-    align-items: center;
-}
-
-.adjusted {
-    margin-left: -1500px; 
-    width: 50px; 
-}
-
-.adjusted {
-    width: 120px; 
-    height: auto; 
-    margin-right: 10px; 
-}
-
-
-
-

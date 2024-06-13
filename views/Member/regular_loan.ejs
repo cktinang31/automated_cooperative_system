@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%= %></title>
+    <link rel="stylesheet" href="/css/memberinfo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="site-title">
+        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+    </div>
+    <div class="nav-content">
+        <div class="member-title">
+            <h1>Member</h1>
+        </div>
+        <div class="home-icon">
+            <a href="/">
+                <img src="/svg/icons8-home.svg" alt="Home Icon">
+            </a>
+        </div>
+    </div>
+</nav>
+<% if (loan) { %>
+    <h2>
+        <% if (loan.loan_type === 'medical') { %>
+            <p>Medical Loan</p>
+        <% } else if (loan.loan_type === 'emergency') { %>
+            <p>Emergency Loan</p>
+        <% } else { %>
+            <p>Regular Loan</p>
+        <% } %>
+    </h2>
+
+    <section id="service">
+        <div class="container">
+            <div class="row">
+                <div class="service">
+                    <i class="bi bi-piggy-bank"></i>
+                    <h4>Loan Details</h4>
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td><%= loan.User.fname %> <%= loan.User.lname %></td>
+                        </tr>
+                        <tr>
+                            <td>Loan Amount:</td>
+                            <td><%= loan.loan_amount %>.00 php</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Interest Rate:</td>
+                            <td><%= loan.interest %></td>
+                        </tr>
+                        <tr>
+                            <td>Loan Term:</td>
+                            <td><%= loan.loan_term %></td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Payment:</td>
+                            <td><%= loan.Loan_application.monthly_payment %> php</td>
+                        </tr>
+                        <tr>
+                            <td>Total Amount to be Paid:</td>
+                            <td><%= loan.total_amount %> php</td>
+                        </tr>
+                        <tr>
+                            <td>Balance:</td>
+                            <td><%= loan.balance%> php</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Period:</td>
+                            <td><%= loan.start_date %> to <%= loan.end_date %></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <button type="button">Add Payment</button>
+
+                <div class="form-container">
+                    <form action="/loanpayment" method="post">
+                        <h1>Add Payment</h1>
+
+                        <input type="hidden" id="user_id" name="user_id" value="<%= loan.User.user_id %>">
+                        <input type="hidden" id="loan_id" name="loan_id" value="<%= loan.loan_id %>">
+                        <input type="hidden" id="loan_id" name="application_id" value="<%= loan.Loan_application.application_id %>">
+
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="amount" name="amount" value="<%= loan.Loan_application.monthly_payment %>">
+                        </div><br>
+
+                        <div class="form-group">
+                            <button type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<% } else { %>
+    <tr>
+        <td colspan="5"></td>
+    </tr>
+<% } %>
+
+
+
+
+
+            
+
+            <div class="service">
+                <i class="bi bi-cash-coin"></i>
+                <h4>Funds</h4>
+                <table>
+                    <tr>
+                        <td>CBU:</td>
+                        <td>100,000</td>
+                    </tr>
+                    <tr>
+                        <td>Savings:</td>
+                        <td>500,000</td>
+                    </tr>
+                    <tr>
+                        <td>Current Loan:</td>
+                        <td>Regular Loan</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction History:</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

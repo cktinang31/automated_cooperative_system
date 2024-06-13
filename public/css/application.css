@@ -1,7 +1,7 @@
 @import url('https://fonts.google.com/specimen/Poppins?query=poppins');
 
 body{
-    background-color: #f9a702e1;
+    background-color: #ffbe3be1;
     max-width: 100%;
     margin: 50px auto;
     padding: 0 20px;
@@ -28,12 +28,23 @@ body{
 }
 .column2 {
     margin-right: 10%;
-    margin-top: 1%;
+    margin-top: 2%;
     flex: 10%;
     background-color: #373f41e8;
     border-radius: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     height: 100%;
+}
+
+#successMessage {
+    display: none;
+    color: green;
+    font-size: 1.2em;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid green;
+    background-color: #e6ffe6;
+    border-radius: 5px;
 }
 
 .formtitle{

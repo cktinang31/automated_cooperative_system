@@ -4,32 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaCoop | <%=title %></title>
-    <link rel="stylesheet" href="/css/requests.css">
+    <link rel="stylesheet" href="/css/memreq.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav>
-    <div class="site-title">
-        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-    </div>
-    <div class="nav-content">
-        <div class="member-title">
-            <h1>Manager</h1>
+    <nav class="navbar">
+        <div class="site-title">
+            <h1>KACooP</h1>
+            <span>You are now signed as a Manager<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
-        <div class="home-icon">
-            <a href="/">
-                <img src="/svg/icons8-home.svg" alt="Home Icon">
-            </a>
-        </div>
-    </div>
-</nav>
+    </nav>    
 
-<!-- Centering the h2 element -->
 <h2>Membership Requests</h2>
 
 <table id="table">
-    <thead
+    <thead>
         <tr>
             <th>Application ID</th>
             <th>Details</th>
@@ -54,6 +44,19 @@
         </tbody>
 
 </table>
+<script>
+    document.querySelectorAll('tr[data-application-id]').forEach(row => {
+  row.addEventListener('click', function() {
+      
+      const applicationId = this.getAttribute('data-application-id');
+      
+      
+      const destinationUrl = '/Manager/req/' + applicationId; 
+      window.location.href = destinationUrl;
+  });
+});
+
+</script>
 
 <script>
     // Function to get current timestamp

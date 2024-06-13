@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/paymentnotif.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="site-title">
+            <h1>KACooP</h1>
+            <span>You are now signed as a Collector<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+            <h2>Loan Payment</h2>
+          
+            <table id="table">
+              <thead>
+                  <tr>
+                      <th>Payment ID</th>
+                      <th>Details</th>
+                      <th>Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% if (loan_payment.length > 0) { %>
+                    <% loan_payment.forEach(loan_payment => { %>
+                      <tr data-application-id="<%= loan_payment.payment_id %>">
+                          <td><%= loan_payment.payment_id %></td>
+                          <td><%= loan_payment.User.fname %> <%= loan_payment.User.lname %> has sent a loan payment.</td>
+                          <td><%= loan_payment.date_sent %></td>
+                          
+                        </tr>
+                      <% }) %>
+                    <% } else { %>
+                      <tr>
+                        <td colspan="8">No Loan Payments at the moment...</td>
+                      </tr>
+                    <% } %>   
+                  </tbody>
+
+            </table>  
+        </div>
+    </nav>    
+
+
+    <script>
+      document.querySelectorAll('tr[data-application-id]').forEach(row => {
+    row.addEventListener('click', function() {
+        
+        const applicationId = this.getAttribute('data-application-id');
+        
+        
+        const destinationUrl = '/Collector/paymentupdate/' + applicationId; 
+        window.location.href = destinationUrl;
+    });
+  });
+  
+  </script>
+</body>
+</html>
