@@ -1,48 +1,92 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>KaCoop | <%=title %></title>
-        <link rel="stylesheet" href="/css/collector.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %>
+    </title>
+    <link rel="stylesheet" href="/css/collector.css">
+</head>
+
 <body>
     <nav class="navbar">
         <div class="site-title">
             <h1>KACooP</h1>
-            <span>You are now signed as a Collector<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+            <span>You are now signed as a Collector<a href="/" class="logout-link"><i
+                        class="fas fa-sign-out-alt logout-icon"></i></a></span>
         </div>
-    </nav>    
+    </nav>
 
     <div class="main-content">
         <div class="content-wrapper">
-        <img src="/images/Reminder-595b40b85ba036ed117de019.svg" alt="img" class="adjusted">
+            <img src="/images/Reminder-595b40b85ba036ed117de019.svg" alt="img" class="adjusted">
             <h3>Reminder Customization</h3>
             <h4>Create Reminder</h4>
+</div>
+</div>
+            <form>
+                <div class="type-container" >
+                <div class="radio-buttons">
+                    Type
+                    <label><input type="radio" name="type" value="call"> Call</label>
+                    <label><input type="radio" name="type" value="email"> Email</label>
+                    <label><input type="radio" name="type" value="other"> Other</label>
+                    </div>
+                    <br>
+                    <div class="name-container">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name">
+                    </div>
 
-            <h5>Type</h5>
-                <div class="radio-container">
-                    <input type="radio" id="call" name="notify" value="call" checked>
-                    <label for="call">Call</label>
-                </div>
-                <div class="radio-container">
-                    <input type="radio" id="email" name="notify" value="email">
-                    <label for="email">Email</label>
-                </div>
-                <div class="radio-container">
-                    <input type="radio" id="other" name="notify" value="other">
-                    <label for="other">Other</label>
-                </div>
+                    <br>
 
-                <div class="name-container">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name">
-                </div>
+                    <div class="details-container">
+                        <label for="details">Details</label>
+                        <input type="text" id="details" name="details">
+                    </div>
+                    <br>
+                    <div class="date-time-container">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    
+                    <div class="Notify-container">
+                        <label for="Notify">Notify</label>
+                        <input type="text" id="Notify" name="Notify">
+                        <select id="status" name="status">
+                     </div>
                 
-                <div class="details-container">
-                    <label for="details">Details:</label>
-                    <textarea id="details" name="details"></textarea>
-                </div>
-            </div>
-    </div>
+                            <option value="on-time">On time</option>
+                            <option value="delayed">Delayed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn cancel">Cancel</button>
+                            <button type="submit" class="btn save">Save</button>
+                        </div>
+                    <div class="time-container">
+                        <label for="time">Time:</label>
+                        <input type="time" id="time" name="time" required>
+                    <div>
+                        <div class="ampm-container">
+                        <select id="ampm" name="am/pm" required>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        </div>
+
+                    <div>
+
+                    <div class="checkbox-anytime-container">
+                        <input type="checkbox" id="anytime" name="anytime">
+                        <label for="anytime">Anytime</label>
+                        
+                        
+            </form>
+        </div>
 </body>
+
 </html>
