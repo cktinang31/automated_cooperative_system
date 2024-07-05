@@ -84,9 +84,7 @@ router.get('/Manager/sidebarmanager', (req,res, next) =>{
                 console.error('Error in isAuthenticated middleware:', error);
                 res.status(500).send('Internal server error');
             }
-        
 });
-
 
 
 router.get('/Manager/membersdata', (req,res, next) =>{
@@ -402,6 +400,27 @@ router.get('/Manager/cburequestupdate/:applicationId', async (req, res, next) =>
         console.error('Error in route handler:', error);
         res.status(500).send('Internal server error');
     }
+});
+
+router.get('/Manager/dashboard', (req,res, next) =>{
+    try {
+                console.log('Session ID:', req.sessionID);
+                console.log('Session:', req.session);
+                console.log('Authenticated:', req.isAuthenticated());
+        
+                if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
+                    console.log('User is authenticated as manager.');
+                    const user = req.user;
+                    res.render('./Manager/dashboard', { title: 'Sidebar', user });
+                } else {
+                    console.log('User is not authenticated. Redirecting to login page.');
+                    req.session.returnTo = req.originalUrl;
+                    res.redirect('/login');
+                }
+            } catch (error) {
+                console.error('Error in isAuthenticated middleware:', error);
+                res.status(500).send('Internal server error');
+            }
 });
 
 module.exports = router;
