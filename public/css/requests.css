@@ -91,7 +91,6 @@ h2 {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Common styles for the table */
 .application-table {
     width: 100%;
     border-collapse: collapse;
@@ -111,7 +110,6 @@ h2 {
     text-align: left;
 }
 
-/* Styles for the thead */
 .application-table thead th {
     background-color: #373f418c;
     color: #ffffff;
@@ -121,7 +119,6 @@ h2 {
     background-color: #f5f5f5;
 }
 
-/* Modal */
 .modal {
     display: none; 
     position: fixed;
@@ -134,7 +131,6 @@ h2 {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* Modal content */
 .modal-content {
     border-radius: 10px;
     background-color: #373F41;
@@ -144,7 +140,6 @@ h2 {
     width: 30%; 
 }
 
-/* Close Button */
 .close {
     color: #aaa;
     float: right;
@@ -161,39 +156,33 @@ h2 {
     transition: box-shadow 0.3s ease;
 }
 
-/* Modal table */
 .modal-content table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-/* Table rows */
 .modal-content table tr {
     border-bottom: 1px solid #aaa;
 }
 
-/* Table cells */
 .modal-content table td {
     background-color: #dbdbdb;
     padding: 8px;
 }
 
-/* Table headings */
 .modal-content table th {
     padding: 8px;
     text-align: left;
     border-bottom: 2px solid #ddd;
 }
 
-/* Button container */
 .button-container {
     margin-top: 40px; 
     display: flex;
     justify-content: space-around;
 }
 
-/* Buttons */
 .approve-button,
 .decline-button {
     padding: 5px 15px;
@@ -214,7 +203,6 @@ h2 {
     color: white;
 }
 
-/* Hover effects */
 .approve-button:hover,
 .decline-button:hover {
     opacity: 0.8;

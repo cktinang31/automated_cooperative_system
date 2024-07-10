@@ -60,32 +60,23 @@
       </div>
     </div>
     
-    <div class="form-group-horizontal">
-
-      <div class="form-group">
-        <label for="amount">AMOUNT:</label>
-        <input type="number" id="amount" name="amount" required>
+    <div class="flex-container">
+      <div class="amount-container">
+          <label for="amount">Amount</label>
+          <input type="text" id="amount">
       </div>
-      
-      <div class="form-group dropdown-container">
-        <label for="mode" id="mode">MODE OF PAYMENT:</label>
-        <select id="mode" name="mode" required>
-          <option value="" disabled selected hidden></option>
-          <option value="cash">Cash</option>
-          <option value="credit card">Credit Card</option>
-          <option value="debit card">Debit Card</option>
-          <option value="gcash">Gcash</option>
-          <option value="maya">Maya</option>
-          <option value="paypal">PayPal</option>
-        </select>
-      </div>
-    </div>
+  <div class="custom-dropdown">
+    <select id="mode-of-payment">
+        <option value="" disabled selected>Mode of Payment</option>
+        <option value="credit">Credit Card</option>
+        <option value="debit">Debit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="bank">Bank Transfer</option>
+    </select>
+</div>  
     <button type="submit">CONFIRM</button>
-
-  </form>
 </div>
-
-
+</form>
 
 <script>
 function setTransactionType(type) {
@@ -236,5 +227,64 @@ modeOfPaymentSelect.addEventListener('change', function() {
 });
 </script>
 
+<script>
+  // Remove event listeners from price buttons
+  var priceButtons = document.querySelectorAll('.price-button');
+  priceButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default button behavior
+      var amount = parseFloat(button.textContent.split(' ')[1]); // Extract amount from button text
+      updateAmount(amount); // Update amount input
+    });
+  });
+
+  // Get the confirm button
+  var confirmButton = document.querySelector('button[type="submit"]');
+
+  // Add event listener to confirm button
+  confirmButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default button behavior
+    var transactionType = document.querySelector('input[name="transaction_type"]:checked');
+    var amountInput = document.getElementById('amount');
+    var amount = parseFloat(amountInput.value);
+
+    // Check if transaction type and amount are selected/filled
+    if (transactionType && amount) {
+      // Submit the form
+      document.getElementById('transaction-form').submit();
+    } else {
+      // Notify the user to fill in all necessary fields
+      alert('Please select transaction type and enter amount before confirming.');
+    }
+  });
+</script>  
+
+<script>
+  document.getElementById('mode-of-payment').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex];
+    var selectedText = selectedOption.text;
+    
+    // Calculate font size based on text length
+    var fontSize = 20; // Initial font size
+    var maxWidth = 420; // Maximum width of the input box
+    var textWidth = getTextWidth(selectedText, '20px Poppins'); // Function to get text width
+    if (textWidth > maxWidth) {
+      fontSize = Math.floor(fontSize * (maxWidth / textWidth)); // Adjust font size
+    }
+    
+    // Update style of input box
+    this.style.fontSize = fontSize + 'px';
+    this.style.color = '#373F41';
+  });
+  
+  // Function to calculate text width
+  function getTextWidth(text, font) {
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    context.font = font;
+    var metrics = context.measureText(text);
+    return metrics.width;
+  }
+  </script> 
 </body>
 </html>
