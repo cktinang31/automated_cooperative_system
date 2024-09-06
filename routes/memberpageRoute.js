@@ -374,4 +374,8 @@ router.get('/Manager/membersinfo', (req, res) => {
 router.get('/Member/dashboard', (req, res) => {
     res.render('Member/dashboard', { title: 'Dashboard'});
  });
+
+router.get('/Member/loans', (req, res) => {
+    res.render('Member/loans', { title: 'Loans'});
+ });
 module.exports = router;
