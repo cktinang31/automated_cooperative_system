@@ -371,4 +371,7 @@ router.get('/Manager/membersinfo', (req, res) => {
     res.render('Manager/memberinfo', { title: 'Member'});
   });
   
+router.get('/Member/dashboard', (req, res) => {
+    res.render('Member/dashboard', { title: 'Dashboard'});
+ });
 module.exports = router;
