@@ -13,23 +13,15 @@ body {
     max-width: 100%;
     margin: 89px auto;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Poppins";
     max-width: 100%;
 }
 
-h1,
-a,
 ul {
     margin: 0;
     padding: 0;
     text-decoration: none;
     color: #222;
-}
-
-.nav-yellow {
-    height: 10px;
-    background-color: #f9a602 !important;
-    width: 1000%;
 }
 
 nav {
@@ -38,17 +30,23 @@ nav {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    background-color: #373f41;
-    border-bottom: 1px solid #f9a602;
+    background-color: #ffffff;
     position: fixed;
     z-index: 8;
     top: 0;
     left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.site-title img{
+    margin-left: 60px;
+    height: 100px;
+    width: auto;
+    display: block;
 }
 
 nav a {
     position: relative;
-    color: black;
     text-decoration: none;
 }
 
@@ -56,22 +54,33 @@ nav ul {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    color: #ffffff;
-    margin-bottom: 9px;
+    margin-bottom: 14px;
 }
 
 nav ul li a {
-    color: #ffffff;
+    color: #373f41;
     font-family: 'Poppins';
-    font-weight: 600;
-    font-size: medium;
+    font-weight: 800;
+    font-size: 1.2rem;
     padding: 2px 25px;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: #ffb951; 
-    text-decoration: underline;
+nav ul li a:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background-color: #373f41;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1);
+    
 }
 
 nav li {
@@ -85,7 +94,7 @@ nav h1 {
     position: relative;
     margin-left: 50px;
     font-size: 3.5em;
-    color: #f9a602;
+    color: #373f41;
 }
 
 nav p,
