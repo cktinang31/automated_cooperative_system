@@ -1,0 +1,165 @@
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 90vh;
+            background-color: #fff;
+            color: white;
+        }
+        
+        .sidebar {
+            width: 80px;
+            background-color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .sidebar i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px;
+            grid-auto-rows: minmax(100px, auto); /* Adjust row height */
+        }
+        
+        
+        .card {
+            padding: 20px;
+            background-color: #444;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .card-coop-advisory {
+            grid-column: span 1;
+        }
+        
+        .card-loans {
+            grid-column: span 1; 
+        }
+        
+        .card-chart {
+            grid-column: span 1;
+        }
+        
+        .card-coop-funds {
+            grid-column: span 2;
+        }
+        
+        .card-collections {
+            grid-column: span 1;
+            height: 94px;
+        }
+        
+        .card-inquiries {
+            grid-column: span 1;
+            height: 94px;
+            margin-top: 42px;
+        }
+        
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .card-content p {
+            font-size: 1rem;
+        }
+        
+        .card-content .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .card-content .coins {
+            font-size: 1rem;
+        }
+        
+        .card-content .chart {
+            width: 100%;
+            height: 200px;
+            background-color: #555;
+        }
+        
+        .card-content .chart-legend {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .card-content .chart-legend span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .card-content .chart-legend .color {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .user img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .user .info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user .info h3 {
+            margin: 0;
+        }
+        
+        .user .info p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+        
+        .notification {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .notification .badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 5px;
+            border-radius: 50%;
+        }
+        

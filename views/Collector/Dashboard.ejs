@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KaCoop | <%=title %></title>
+        <link rel="stylesheet" href="/css/dashboardcollector.css">
+    </head>
+    
+    <body>
+        
+        <%- include("../Member/header.ejs") %>
+
+            <div class="main">
+                <div class="card card-coop-advisory">
+                    <div class="card-header">Cooperative Advisory</div>
+                    <div class="card-content">
+                        <p>There are no announcements...</p>
+                    </div>
+                </div>
+                <div class="card card-loans">
+                    <div class="card-header">Loans</div>
+                    <div class="card-content">
+                        <p class="value">45K</p>
+                        <p class="coins">coins</p>
+                    </div>
+                </div>
+                <div class="card card-chart"></div>
+                <div class="card card-coop-funds">
+                    <div class="card-header">2024 COOP FUNDS</div>
+                    <div class="card-content">
+                        <div class="chart-legend">
+                            <span><div class="color" style="background-color: #4CAF50;"></div>Cash and Equivalents</span>
+                            <span><div class="color" style="background-color: red;"></div>Expenses</span>
+                            <span><div class="color" style="background-color: yellow;"></div>Receivables</span>
+                            <span><div class="color" style="background-color: blue;"></div>Fixed Assets</span>
+                        </div>
+                        <div class="chart"></div>
+                    </div>
+                </div>
+                <div class="card card-collections">
+                    <div class="card-header">Upcoming Collections</div>
+                    <div class="card-content">
+                        <input type="text" placeholder="Collection 1" disabled>
+                        <input type="text" placeholder="Collection 2" disabled>
+                    </div>
+                    
+                    <div class="card card-inquiries">
+                        <div class="card-header">Inquiries</div>
+                        <div class="card-content">
+                            <input type="text" placeholder="Inquiry 1" disabled>
+                            <input type="text" placeholder="Inquiry 2" disabled>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>
