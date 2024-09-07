@@ -92,7 +92,7 @@ header i {
 
 aside {
     top: 87px;
-    width: 94px;
+    width: 95px;
     height: 100%;
     background: #373F41;
     position: fixed;
@@ -102,5 +102,18 @@ aside {
 
 ul {
     list-style-type: none;
+    margin-top: 50px;
+    margin-left: 0;
+    padding-left: 30px;
+}
+
+ul li {
     
+    margin-bottom: 50px;
+}
+
+ul li i {
+    color: #F9A602;
+    font-size: 24px;
+
 }
