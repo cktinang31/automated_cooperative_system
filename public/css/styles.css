@@ -76,14 +76,25 @@ nav ul li a:after {
     background-color: #373f41;
     transform: scaleX(0);
     transform-origin: bottom right;
+    transition: transform 0.3s ease-in-out;
 }
 
-nav ul li a:hover::after {
+nav ul li a.active::after {
     transform: scaleX(1);
-    
+    transform-origin: bottom left;
+}
+
+nav ul li a:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+nav ul li a:hover ~ a.active::after {
+    transform: scaleX(0);
 }
 
 nav li {
+
     margin-right: 50px;
     list-style-type: none;
     margin-bottom: 20px;

@@ -11,7 +11,7 @@
             <img src="/images/coopslogo.png" alt="">
         </div>
         <ul>
-            <li><a href="/">HOME</a></li>
+            <li><a href="/" class="active">HOME</a></li>
             <li><a href="#about">ABOUT US</a></li>
             <li><a href="#service">SERVICES</a></li>
             <li><a href="#contact">CONTACT US</a></li>
@@ -165,6 +165,50 @@
     <footer>
         Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section');
+        
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        
+            window.addEventListener('scroll', () => {
+                let currentSection = '';
+        
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+        
+                    if (window.pageYOffset >= sectionTop - 50 && window.pageYOffset < sectionTop + sectionHeight - 50) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+        
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+        
+                if (window.pageYOffset === 0) {
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === '/') {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        
+    </script>
 
 </body>
 </html>
