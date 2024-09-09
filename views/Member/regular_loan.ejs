@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaCoop | <%= %></title>
+    <title>KaCoop | <%= title %></title>
     <link rel="stylesheet" href="/css/memberinfo.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -24,6 +24,7 @@
         </div>
     </div>
 </nav>
+
 <% if (loan) { %>
     <h2>
         <% if (loan.loan_type === 'medical') { %>
@@ -67,10 +68,6 @@
                             <td><%= loan.total_amount %> php</td>
                         </tr>
                         <tr>
-                            <td>Balance:</td>
-                            <td><%= loan.balance%> php</td>
-                        </tr>
-                        <tr>
                             <td>Loan Period:</td>
                             <td><%= loan.start_date %> to <%= loan.end_date %></td>
                         </tr>
@@ -85,7 +82,7 @@
 
                         <input type="hidden" id="user_id" name="user_id" value="<%= loan.User.user_id %>">
                         <input type="hidden" id="loan_id" name="loan_id" value="<%= loan.loan_id %>">
-                        <input type="hidden" id="loan_id" name="application_id" value="<%= loan.Loan_application.application_id %>">
+                        <input type="hidden" id="application_id" name="application_id" value="<%= loan.Loan_application.application_id %>">
 
                         <div class="form-group">
                             <label for="amount">Amount:</label>
@@ -100,42 +97,38 @@
             </div>
         </div>
     </section>
-<% } else { %>
-    <tr>
-        <td colspan="5"></td>
-    </tr>
 <% } %>
 
-
-
-
-
-            
-
-            <div class="service">
-                <i class="bi bi-cash-coin"></i>
-                <h4>Funds</h4>
-                <table>
-                    <tr>
-                        <td>CBU:</td>
-                        <td>100,000</td>
-                    </tr>
-                    <tr>
-                        <td>Savings:</td>
-                        <td>500,000</td>
-                    </tr>
-                    <tr>
-                        <td>Current Loan:</td>
-                        <td>Regular Loan</td>
-                    </tr>
-                    <tr>
-                        <td>Transaction History:</td>
-                        <td>Pending</td>
-                    </tr>
-                    <tr>
-                </table>
-            </div>
-        </div>
+<section id="loan-status">
+    <div class="service">
+        <i class="bi bi-cash-coin"></i>
+        <h4>Loan Status</h4>
+        <% if (loan_payment && loan_payment.length > 0) { %>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Number of Payments</th>
+                    <th>Balance</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% loan_payment.forEach(loan_payment => { %>
+                <tr>
+                    <td><%= loan_payment.number_of_payments %></td>
+                    <td><%= loan_payment.Loan.balance %></td>
+                    <td><%= loan_payment.amount %></td>
+                    <td><%= loan_payment.status %></td>
+                    <td><%= loan_payment.timestamp %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <p>No payments found.</p>
+        <% } %>
     </div>
 </section>
 

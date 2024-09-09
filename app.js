@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const session = require('express-session');
 const crypto = require('crypto');
 const morgan = require('morgan');
@@ -25,7 +26,7 @@ const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
-const Collected_payment = require('./models/collected_payment');
+
 
 // const Application = require('./models/application');
 
@@ -317,6 +318,25 @@ app.get('/Manager/membersdata', (req, res) => {
 app.get('/Manager/sidebarmanager', (req, res) => {
   res.render('Manager/memberinfo', { title: 'Sidebar Manager'});
 });
+
+//collector nako //
+
+app.get('/Collector/collector', (req, res) => {
+  res.render('Collector/collector', { title: 'collector'});
+}); 
+
+app.get('/Collector/paymentnotif', (req, res) => {
+  res.render('Collector/paymentnotif', { title: 'Payment Notification'});
+});
+
+app.get('/your-route', (req, res) => {
+  const user = {
+      name: 'Kristine Anne Cardosa',
+      email: 'kristineanne@gmail.com'
+  };
+  res.render('your-template', { user: user });
+});
+
 
 // 404 page
 app.use((req, res) => {

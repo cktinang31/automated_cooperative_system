@@ -51,6 +51,10 @@ const Loan_payment = sequelize.define('Loan_payment', {
         primaryKey: true,
 
     },
+    number_of_payments: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
     amount: {
         type: DataTypes.FLOAT(10, 2),
         allowNull: false,
