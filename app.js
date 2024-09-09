@@ -325,6 +325,10 @@ app.get('/Collector/collector', (req, res) => {
   res.render('Collector/collector', { title: 'collector'});
 }); 
 
+app.get('/Collector/paymentnotif', (req, res) => {
+  res.render('Collector/paymentnotif', { title: 'Payment Notification'});
+});
+
 app.get('/your-route', (req, res) => {
   const user = {
       name: 'Kristine Anne Cardosa',
@@ -339,6 +343,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
