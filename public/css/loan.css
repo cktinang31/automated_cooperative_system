@@ -1,11 +1,10 @@
 
-
 .applyloan { 
     position: absolute;
-    width: 637px;
+    width: 500px;
     height: 450px;
     left: 160px;
-    top: 155px;
+    top: 200px;
     background: #D9D9D9;
     border-radius: 10px;
 }
@@ -15,6 +14,19 @@
     color: #373f41;
     font-size: 20px;
     font-weight: 600;
+}
+
+#loan_type {
+    padding: 10px; 
+    /* border: 1px solid #373f41;  */
+    outline: none;
+    border: none;
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+    color: #373f41; 
+    width: 200px; 
+    font-size: 16px;
+    transition: border-color 0.3s ease; 
 }
 
 .loan-type {
@@ -27,11 +39,25 @@
     margin-left: 25px;
 }
 
-.loantypes label {
-    margin-left: 50px;
-    
-    
+#loan_type:focus {
+    border-color: #F9A602;
+    outline: none;
 }
+
+
+
+#loan_type option {
+    padding: 10px; 
+}
+
+.select-container {
+    margin: 20px 0; 
+    display: flex; 
+    justify-content: center;
+}
+
+
+
 
 .amount { 
    margin-top: 40px;
@@ -113,29 +139,70 @@ input[type="number"]:focus {
 
 
 .submit {
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    margin-top: 100px;        /* Space above the submit div */
+    display: flex;  
+    margin-top: 680px;  
+    margin-left: 350px;     
 }
 
-/* Styles for the button */
+
 .submit button {
-    background-color: #4CAF50; /* Green background */
-    border: none;              /* Remove default border */
-    color: white;              /* White text */
-    padding: 10px 20px;        /* Padding around the text */
-    text-align: center;        /* Center text */
-    text-decoration: none;     /* Remove underline */
-    display: inline-block;     /* Make the button inline with padding */
-    font-size: 16px;           /* Font size */
-    margin: 4px 2px;           /* Margin around the button */
-    cursor: pointer;           /* Pointer cursor on hover */
-    border-radius: 5px;        /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth background color change on hover */
+    background-color: #373f41; 
+    border: none;              
+    color: #F9A602;              
+    padding: 10px 20px;        
+    text-align: center;        
+    text-decoration: none;     
+    display: inline-block;   
+    font-size: 16px;           
+    margin: 4px 2px;           
+    cursor: pointer;           
+    border-radius: 5px;        
+    transition: background-color 0.3s ease; 
+    border: 1px solid #F9A602;
+
+}
+.submit button:hover {
+    border: 2px solid #F9A602;
+    background: #373f41;
+    color:#ffffff;
+    
 }
 
-/* Hover effect for the button */
-.submit button:hover {
-    background-color: #45a049; /* Darker green on hover */
+.loans {
+    width: 20px;
+    height:100%;
+    margin-top: -557px;
+    margin-left: 667px;
+    padding-top: 30px;
+    padding-left: 30px;
+  
+
+}
+
+#table {
+    width: 100%;
+    border-collapse: collapse;
+    position: fixed;
+    
+}
+  
+#table th,
+#table td {
+    border-bottom: 1px solid #dddddd;
+    font-size: 16px;
+    padding: 2px;
+    text-align: left;
+}
+
+#table th {
+    background-color: #373f41;
+    color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    padding: 8px;
+    text-align: center;
+}
+
+#table tbody tr:hover {
+    background-color: #D9D9D9;
 }
