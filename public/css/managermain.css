@@ -96,3 +96,16 @@ aside {
     background: #373F41;
 }
 
+ul {
+    width: 35px;
+    height: 427.17px;
+    position: absolute;
+    top: 147px;
+    left: 27px;
+    padding: 5px 0;
+    gap: 50px;
+    border-width: 0 2px 0 0;
+    border-style: solid;
+    opacity: 100;
+}
+
