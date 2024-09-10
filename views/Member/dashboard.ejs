@@ -1,17 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("head.ejs") %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
     <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Current Loan</h2>
 
-    <body>
+<table id="table">
+    <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% if (loans.length > 0) { %>
+        <% loans.forEach(loan => { %>
+          <tr data-loan-id="<%= loan.loan_id %>">
+            <td><%= loan.loan_id %></td>
+            <td>
+              <% if (loan.loan_type === 'medical') { %>
+                <p>Medical Loan</p>
+              <% } else if (loan.loan_type === 'emergency') { %>
+                <p>Emergency Loan</p>
+              <% } else { %>
+                <p>Regular Loan</p>
+              <% } %>
+            </td>
+            <td><%= loan.start_date %></td>
+            <td><%= loan.end_date %></td>
+        
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="8">No Loan at the moment...</td>
+        </tr>
+      <% } %>
+      
+    <%- include("head.ejs") %>
         <%- include("header.ejs") %>
         <%- include("sidebar_mem.ejs") %>
+        </tb
         
         <div class="container">
-            <div class="announcement-container">
-                <h3 class="announcement-title">Coop Advisory</h3>
-                <p>coop advisory</p>
-            </div>
+              <% if (contents.length > 0) { %>
+                <% contents.forEach(content => { %>
+                <div class="announcement-container">
+                    <h3 class="announcement-title"><%= content.content_title %></h3>
+                    <p><%= content.content %></p>
+                
+                </div>   </div>
+                <% }) %>
+            <% } else { %>
+                <p>There are no announcements to display...</p>
+            <% } %>
 
             <div class="welcome-container">
                 <h3 class="welcome-title">Welcome</h3>
@@ -48,8 +98,7 @@
             </div>
         </div>
 
+      </body>
+</table>
+<script>
 
-    </body>
-
-
-</html>
