@@ -20,22 +20,11 @@
                             <label class="title">
                                 Loan Type
                             </label>
-                            <div class="loantypes">
-                                <label>
-                                    <input type="radio" id="loan_type" name="loan_type" value="regular" required>
-                                    Regular Loan
-                                </label>
-        
-                                <label>
-                                    <input type="radio" id="loan_type" name="loan_type" value="medical" required>
-                                    Medical Loan
-                                </label>
-                                
-                                <label>
-                                    <input type="radio" id="loan_type" name="loan_type" value="emergency" required>
-                                    Emergency Loan
-                                </label>
-                            </div>          
+                            <select id="loan_type" name="loan_type" required>
+                                    <option value="regular">Regular Loan</option>
+                                    <option value="medical">Medical Loan</option>
+                                    <option value="18 months">Emergency Loan</option>
+                            </select>          
                         </div>
         
                         <div class="amount">
@@ -69,7 +58,9 @@
                     </div>
                     
                     <div class="submit">
-                        <button type="submit">Submit</button>
+                        <button type="submit">Apply Loan
+
+                        </button>
                     </div>
                 </div>
                 
@@ -77,6 +68,49 @@
             </form>
         </div>
         
+        <div class="loans">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr data-loan-id="">
+                        <td></td>
+                        <td>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+        
+                    <tr>
+                    <td colspan="8">No Loan at the moment...</td>
+                    </tr>
+                
+    
+            </table>
+        </div>       
+        
+        <script>
+            document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+        row.addEventListener('click', function() {
+            
+            const loanId = this.getAttribute('data-loan-id');
+            
+            
+            const destinationUrl = '/Member/regular_loan/' + loanId; 
+            window.location.href = destinationUrl;
+        });
+        });
+
+        </script>
+
+
         <script>
             function calculateMonthlyPayment() {
                 const amount = parseFloat(document.getElementById('amount').value);
