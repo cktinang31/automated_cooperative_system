@@ -371,9 +371,36 @@ router.get('/Manager/membersinfo', (req, res) => {
     res.render('Manager/memberinfo', { title: 'Member'});
   });
   
-router.get('/Member/dashboard', (req, res) => {
-    res.render('Member/dashboard', { title: 'Dashboard'});
- });
+  router.get('/Member/dashboard', (req, res, next) => {
+    console.log('Checking authentication status...');
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated()) {
+            console.log('User is authenticated.');
+            next(); // Proceed to the route handler
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+}, async (req, res) => {
+    try {
+        const contents = await Content.findAll({
+            order: [['createdAt', 'DESC']]
+        });
+        const user = req.user;
+        res.render('./Member/dashboard', { contents, title: 'Dashboard', user });
+    } catch (error) {
+        console.error('Error fetching contents:', error);
+        res.status(500).send('Error fetching contents.');
+    }
+});
 
 router.get('/Member/loans', (req, res) => {
     res.render('Member/loans', { title: 'Loans'});
