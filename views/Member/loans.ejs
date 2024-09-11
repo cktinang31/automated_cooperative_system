@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/loan.css">
+
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+
+        <div class="container">
+            <form action="" method="post" oninput="calculateMonthlyPayment()">
+
+                <div class="form-container">
+                    <div class="applyloan">
+                        <div class="form-group">
+                            <input type="hidden" id="user_id" name="user_id" value="">
+                        </div>
+                
+                        <div class="loan-type">
+                            <label class="title">
+                                Loan Type
+                            </label>
+                            <select id="loan_type" name="loan_type" required>
+                                    <option value="regular">Regular Loan</option>
+                                    <option value="medical">Medical Loan</option>
+                                    <option value="18 months">Emergency Loan</option>
+                            </select>          
+                        </div>
+        
+                        <div class="amount">
+                            <div class="amount-container">
+                                <label class="title">Amount</label>
+                                <input type="number" id="amount" name="amount" step="0.01" required>
+                            </div>
+                            <div class="amount-container">
+                                <label class="title">Interest</label>
+                                <input type="number" id="interest" name="interest" step="0.01" required>
+                            </div>
+        
+                           
+                        </div>
+                        
+                        <div class="terms">
+                            <div class="term-container">
+                                <label class="title">Loan Term</label>
+                                <select id="loan_term" name="loan_term" required>
+                                    <option value="6 months">6 months</option>
+                                    <option value="12 months">12 months</option>
+                                    <option value="18 months">18 months</option>
+                                    <option value="24 months">24 months</option>
+                                </select>
+                            </div>
+                            <div class="term-container">
+                                <label class="title">Monthly Payment</label>
+                                <span id="monthly_payment">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="submit">
+                        <button type="submit">Apply Loan
+
+                        </button>
+                    </div>
+                </div>
+                
+                
+            </form>
+        </div>
+        
+        <div class="loans">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr data-loan-id="">
+                        <td></td>
+                        <td>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+        
+                    <tr>
+                    <td colspan="8">No Loan at the moment...</td>
+                    </tr>
+                
+    
+            </table>
+        </div>       
+        
+        <script>
+            document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+        row.addEventListener('click', function() {
+            
+            const loanId = this.getAttribute('data-loan-id');
+            
+            
+            const destinationUrl = '/Member/regular_loan/' + loanId; 
+            window.location.href = destinationUrl;
+        });
+        });
+
+        </script>
+
+
+        <script>
+            function calculateMonthlyPayment() {
+                const amount = parseFloat(document.getElementById('amount').value);
+                const loanTerm = parseFloat(document.getElementById('loan_term').value.split(' ')[0]);
+                const interest = parseFloat(document.getElementById('interest').value);
+                
+                const monthlyInterestRate = interest / 12;
+                const numberOfPayments = loanTerm;
+                
+                const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+                    (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+                
+                document.getElementById('monthly_payment').textContent = 'PHP'+''+ monthlyPayment.toFixed(2);
+            }
+        </script>
+        </div>
+    </body>
+
+
+</html>

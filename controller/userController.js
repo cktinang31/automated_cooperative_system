@@ -57,7 +57,7 @@ const user_login = async (req, res) => {
           case 'collector': 
             return res.redirect('Collector/sidebarcollector');
           default:
-            return res.redirect('/Member/sidebar');
+            return res.redirect('/Member/dashboard');
         }
       });
     })(req, res);
