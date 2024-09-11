@@ -334,6 +334,38 @@ router.get('/Member/cbu_deposit', async (req, res, next) => {
     }
 });
 
+router.get('/Member/dashboard', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is regular.');
+            const user = req.user;
+
+            
+            try {
+                const cbu = await Cbu.findAll( {
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+                res.render('Member/dashboard', { cbu, title: 'Current Dashboard', user });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 router.get('/Member/sidebar', async (req, res, next) => {
     try {
