@@ -1,52 +1,58 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>KaCoop | <%=title %></title>
-        <link rel="stylesheet" href="/css/dashboardcollector.css">
-    </head>
-    
-    <body>
-        <%- include("../Collector/header.ejs") %>
-        <div class="dashboard">
-            <!-- First Row -->
-            <div class="card large-card">
-                <h2>Cooperative Advisory</h2>
-                <p>There are no announcements...</p>
-                <div class="icon"><span>💬</span></div>
-            </div>
-    
-            <div class="card medium-card">
-                <h2>Loans</h2>
-                <h1>45K <span>coins</span></h1>
-                <div class="icon"><span>💰</span></div>
-            </div>
-    
-            <div class="card medium-card empty-card"></div>
-    
-            <!-- Second Row -->
-            <div class="card large-card graph-card">
-                <h2>2024 COOP FUNDS</h2>
-                <ul class="legend">
-                    <li><span class="color green"></span> Cash and Equivalents</li>
-                    <li><span class="color red"></span> Expenses</li>
-                    <li><span class="color yellow"></span> Receivables</li>
-                    <li><span class="color blue"></span> Fixed Assets</li>
-                </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaCoop | <%=title %></title>
+    <link rel="stylesheet" href="/css/dashboardcollector.css">
+</head>
+
+<%- include("../Collector/header.ejs") %>
+
+<body>
+    <div class="dashboard">
+        <!-- First Row -->
+        <div class="card advisory-card">
+            <h2>Cooperative Advisory</h2>
+            <p>There are no announcements...</p>
+            <div class="icon">💬</div>
+        </div>
+
+        <div class="card loans-card">
+            <h2>Loans</h2>
+            <h1>45K <span>coins</span></h1>
+            <div class="icon">💰</div>
+        </div>
+
+        <div class="card empty-card"></div>
+
+        <!-- Second Row -->
+        <div class="card funds-card">
+            <h2>2024 COOP FUNDS</h2>
+            <ul class="legend">
+                <li><span class="color green"></span> Cash and Equivalents</li>
+                <li><span class="color red"></span> Expenses</li>
+                <li><span class="color yellow"></span> Receivables</li>
+                <li><span class="color blue"></span> Fixed Assets</li>
+            </ul>
+            <div class="graph-image">
                 <img src="chart-placeholder.png" alt="Graph">
             </div>
-    
-            <div class="card small-card">
-                <h2>Upcoming Collections</h2>
-                <div class="collection-item"></div>
-                <div class="collection-item"></div>
-            </div>
-    
-            <div class="card small-card">
+        </div>
+
+        <!-- Combined Inquiries and Upcoming Collections Card -->
+        <div class="card inquiries-collections-card">
+            <div class="inquiries">
                 <h2>Inquiries</h2>
                 <div class="inquiry-item"></div>
                 <div class="inquiry-item"></div>
             </div>
+
+            <div class="upcoming-collections">
+                <h2>Upcoming Collections</h2>
+                <div class="collection-item"></div>
+                <div class="collection-item"></div>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
