@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+}
+ 
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+    padding: 30px;
+}
+ 
+/* Card Styles */
+.card {
+    background-color: #333;
+    color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+ 
+/* Title Styles */
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ff9800;
+}
+ 
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+ 
+h1 span {
+    font-size: 1rem;
+    color: #f0f0f0;
+}
+ 
+/* Icon Style */
+.icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 30px;
+}
+ 
+/* Individual Card Styles */
+.advisory-card {
+    grid-column: 1 / 2;
+    height: 347px;
+    margin-left: 180px;
+    width: 610px;
+    background-color: #373F41;
+}
+ 
+.loans-card {
+    grid-column: 2 / 3;
+    height: 347px;
+    margin-left: -97px;
+    margin-right: 140px;
+    width: 400px;
+    background-color: #373F41;
+}
+ 
+.empty-card {
+    grid-column: 3 / 4;
+    background-color: #373F41;
+    height: 347px;
+    margin-left: -50px;
+    width: 400px;
+
+}
+ 
+.funds-card {
+    grid-column: 1 / 3;
+    height: 439px;
+    margin-right: 139px;
+    margin-left: 180px;
+    background-color: #373F41;
+}
+ 
+/* Combined Inquiries and Upcoming Collections Card */
+.inquiries-collections-card {
+    grid-column: 3 / 4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: -50px;
+    width: 400px;
+    background-color: #373F41;
+}
+ 
+.inquiries, .upcoming-collections {
+    background-color: #D9D9D9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+ 
+/* Inquiries & Collections Styles */
+.collection-item, .inquiry-item {
+    background-color: whitesmoke;
+    height: 40px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+ 
+/* Legend for Graph */
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+ 
+.legend li {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+ 
+.legend .color {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+ 
+.color.green { background-color: green; }
+.color.red { background-color: red; }
+.color.yellow { background-color: yellow; }
+.color.blue { background-color: blue; }
+ 
+.graph-image img {
+    width: 100%;
+}
+
+.title p {
+    position: absolute;
+    left: 100px;
+    top: 36px;
+    font-size: 40px;
+    line-height: 0px;
+    color: #373F41;
+}
+
+.user {
+    display: flex;
+    position: absolute;
+    left: 1700px;
+    top: 36px;
+    font-size: 20px;
+    color: #373F41;
+}
