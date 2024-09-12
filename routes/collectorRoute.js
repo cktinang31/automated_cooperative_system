@@ -6,7 +6,7 @@ const User = require ('../models/user');
 const router = express.Router();
 
 
-router.get('/Collector/paymentnotif', async (req, res, next) => {
+router.get('/Collector/paymentnotif', async (req, res) => {
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
@@ -136,5 +136,10 @@ router.get('/Collector/transactioncol', (req, res) => {
     }
     res.render('Collector/transactioncol', { title: 'Transaction History'});
   });
+
+
+router.get('/Collector/dashboard', (req, res) => {
+    res.render('Collector/dashboard', { title: 'Dashboard'});
+ });
 
 module.exports = router;
