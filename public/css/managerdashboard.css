@@ -78,7 +78,7 @@ body {
 
 .funds-container {
     position: absolute;
-    width: 1270px;
+    width: 1290px;
     height: 453px;
     left: 130px;
     top: 512px;
@@ -108,25 +108,27 @@ body {
 }
 
 .funds-container {
-    padding: 20px;
-    text-align: center; /* Center align text inside the container */
-    max-width: 800px; /* Optional: Set a max width for the container */
-    margin: 0 auto; /* Center the container horizontally */
+    position: absolute;
+    width: 1290px;
+    height: 453px; /* Adjusted height to be a bit smaller */
+    left: 130px;
+    top: 512px;
+    background: #f0ecec;
+    border-radius: 10px;
+    text-align: center;
+    padding: -5px; /* Ensure padding is applied */
 }
 
-.funds-title {
-    font-family: Poppins;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 36px;
-    margin: 0; /* Remove default margin if needed */
+.funds-container h1 {
+    color: #F9A602;
 }
 
 .funds-list {
-    list-style-type: none; /* Remove default bullets */
+    list-style-type: none;
     padding: 0;
-    margin-top: 20px; /* Add margin-top to lower the list from the title */
-    margin-left: 30px; /* Add margin-left to move the list to the right */
+    margin-top: 20px;
+    margin-left: 30px;
+    text-align: left; /* Ensure list items are aligned left within the container */
 }
 
 .funds-list li {
@@ -138,17 +140,16 @@ body {
     font-weight: 600;
     line-height: 36px;
     text-align: left;
-    padding-left: 30px; /* Add space to the left for the icon */
-    position: relative; /* Ensure the text aligns properly with the icons */
+    padding-left: 30px;
+    position: relative;
 }
 
 .funds-list i {
-    position: relative; /* Use relative positioning for icons */
-    margin-right: 10px; /* Space between icon and text */
-    font-size: 24px; /* Adjust size as needed */
+    position: relative;
+    margin-right: 10px;
+    font-size: 24px;
 }
 
-/* Add background color to the icons using pseudo-elements */
 .funds-list .first i::before {
     content: "";
     position: absolute;
@@ -158,8 +159,8 @@ body {
     width: 11px;
     height: 16px;
     background-color: #0DDF3D;
-    border-radius: 4px; /* Optional: Adjust border-radius for rounded corners */
-    z-index: -1; /* Place background behind the icon */
+    border-radius: 4px;
+    z-index: -1;
 }
 
 .funds-list .second i::before {
@@ -171,8 +172,8 @@ body {
     width: 11px;
     height: 15px;
     background-color: #F0152A;
-    border-radius: 4px; /* Optional: Adjust border-radius for rounded corners */
-    z-index: -1; /* Place background behind the icon */
+    border-radius: 4px;
+    z-index: -1;
 }
 
 .funds-list .third i::before {
@@ -184,8 +185,8 @@ body {
     width: 11px;
     height: 15px;
     background-color: #FFE500;
-    border-radius: 4px; /* Optional: Adjust border-radius for rounded corners */
-    z-index: -1; /* Place background behind the icon */
+    border-radius: 4px;
+    z-index: -1;
 }
 
 .funds-list .fourth i::before {
@@ -197,6 +198,6 @@ body {
     width: 11px;
     height: 14px;
     background-color: #173AB8;
-    border-radius: 4px; /* Optional: Adjust border-radius for rounded corners */
-    z-index: -1; /* Place background behind the icon */
+    border-radius: 4px;
+    z-index: -1;
 }
