@@ -2,14 +2,45 @@
 <html lang="en">
     <%- include("../Manager/managerhead.ejs") %>
     <link rel="stylesheet" href="/css/managerdashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <body>
         <%- include("../Manager/managerheader.ejs") %>
         <%- include("../Manager/managersidebar.ejs") %>
     </body>
-    
-    <div class="">
-        
+
+    <div class="container">
+    <div class="cooperative_advisory">
+        <h1 class="coop_ad">Cooperative Advisory</h1>
+        <p class="announcements">There are no announcements...</p>
+        <i class="fa-regular fa-comments"></i>
+    </div>
+
+    <div class="member-container">
+        <h1 class="member-title">Members</h1>
+        <i class="fa-regular fa-user"></i>
+    </div>
+
+    <div class="message-container">
+        <!-- <h1 class="message-title">Message</h1>  -->
+    </div>
+
+    <div class="funds-container">
+        <h1 class="funds-title">2024 Coop Funds</h1> 
+        <ul class="funds-list">
+            <li><i class="fa-solid fa-box"></i> Cash and Equivalents</li>
+            <li><i class="fa-solid fa-box"></i> Expenses</li>
+            <li><i class="fa-solid fa-box"></i> Receivables</li>
+            <li><i class="fa-solid fa-box"></i> Fixed Assets</li>
+        </ul>
     </div>
     
+
+    <div class="request-container">
+    <h1 class="request-title">Request</h1> 
+</div>
+
+
+
+</div>
 </html>
