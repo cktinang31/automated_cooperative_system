@@ -1,0 +1,209 @@
+h3 {
+    color: #F9A602;
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+}
+ 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.container {
+    display: flex;
+    position: relative;
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 80px auto 20px;
+    padding: 50px;
+}
+.savings-container {
+    box-sizing: border-box;
+    width: 427px;
+    height: 109px;
+    background: #373f41;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+ 
+.savings-container:hover {
+    border: 2px solid #FFFFFF;
+    box-shadow: 10px 10px 4px #373F41;
+}
+ 
+h3 {
+    color: #F9A602;
+    font-size: 24px;
+    margin: 0;
+    margin-left: 15px;
+    line-height: 36px;
+    font-weight: 700;
+}
+ 
+.savings-amount {
+    color: #F9A602;
+    font-size: 36px;
+    margin-top: 40px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 54px;
+}
+ 
+.balance-container {
+    background-color: #ffb144;
+    color: #2f3435;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 370px;
+}
+ 
+.balance-container:hover {
+     box-shadow: 10px 10px 4px #373F41;
+}
+ 
+.balance-container button {
+    background: none;
+    border: none;
+    color: #373F41;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    padding: 15px;
+    text-align: center;
+}
+ 
+.form-container {
+    width: 867px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    background-color: #d9d9d9;
+    height: 480px;
+    top: 272px;
+    margin-right: 1px;
+}
+ 
+.deposit-btn, .withdraw-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+}
+ 
+.deposit-btn {
+    background-color: #373f41;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    width: 330px;
+    height: 74px;
+    margin-left: 50px;
+}
+ 
+.withdraw-btn {
+    background-color: #ffffff;
+    color: #373f41;
+    border: 1px solid #646a6c;
+    border-radius: 10px;
+    width: 330px;
+    height: 74px;
+    margin-left: 100px;
+}
+ 
+.header button {
+    transition: background-color 0.3s ease;
+}
+ 
+.header button:hover {
+    opacity: 0.8;
+}
+ 
+.amount-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+ 
+.amount-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #646a6c;
+    border-radius: 10px;
+    width: 215px;
+    height: 65px;
+   
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+}
+ 
+.custom-amount {
+    margin-bottom: 10px;
+}
+ 
+.mode-of-payment {
+    margin-bottom: 20px;
+}
+
+.amount-wrapper {
+    margin-top: 20px; /* Space between buttons and amount selection */
+}
+
+.amount-selection p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Adjusting the gap and layout of the amount buttons */
+.amount-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.amount-buttons button {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.amount-buttons button:hover {
+    background-color: #ddd;
+}
+
+/* Style for manual input */
+.manual-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.manual-input label {
+    margin-bottom: 5px;
+}
+
+.manual-input input,
+.manual-input select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.manual-input input::placeholder {
+    color: #999;
+}

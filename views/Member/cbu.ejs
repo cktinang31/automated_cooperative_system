@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/cbu.css">
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+        <body>
+            <%- include("header.ejs") %>
+            <%- include("sidebar_mem.ejs") %>
+     
+            <div class="container">
+                <div class="savings-container">
+                  <h3>Savings</h3>
+                  <p class="savings-amount">Php 500</p>
+                </div>
+                <div class="balance-container">
+                  <button class="balance-button">Check your CBU<br> balance here.</button>
+                </div>
+              </div>                  
+     
+              <div class="form-container">
+                <div class="header">
+                    <button class="deposit-btn">Deposit</button>
+                    <button class="withdraw-btn">Withdraw</button>
+                </div>
+                <div class="amount-wrapper">
+                    <div class="amount-selection">
+                        <p>Choose Your Amount</p>
+                        <div class="amount-buttons">
+                            <button>PHP 1000</button>
+                            <button>PHP 2000</button>
+                            <button>PHP 3000</button>
+                            <button>PHP 4000</button>
+                            <button>PHP 5000</button>
+                            <button>PHP 6000</button>
+                        </div>
+                <div class="custom-amount">
+                    <label for="amount">Amount:</label>
+                    <input type="text" id="amount" name="amount">
+                </div>
+                <div class="mode-of-payment">
+                    <label for="payment-mode">Mode of Payment:</label>
+                    <select id="payment-mode" name="payment-mode">
+                        <option value="cash">Cash</option>
+                        <option value="card">Card</option>
+                        <option value="bank-transfer">Bank  
+         Transfer</option>
+                    </select>
+                </div>
+            </div>  
+       
+        </body>
+     
+     
+    </html>
