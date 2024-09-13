@@ -31,22 +31,31 @@
             <div class="funds-container">
                
                 <li>
+
+                    
                     <a href="/Member/loans" class="funds-btn">
-                        <p>Php 0.00</p>
+                        <% loans.forEach(loan => { %>
+                            
+                        <p>Php<%= loan.balance %></p>
+                        <% }) %>
                         <h3>Loan Balance</h3>
                     </a>
                    
                 </li>
                 <li>
                     <a href="#" class="funds-btn">
-                        <p>Php 0.00</p>
+                        <% savings.forEach(savings => { %>
+                        <p>Php <%= savings.amount %>.00</p>
+                        <% }) %>
                         <h3>Savings</h3>
                     </a>
                    
                 </li>
                 <li>
                     <a href="#" class="funds-btn">
-                        <p>Php 0.00</p>
+                        <% cbu.forEach(cbu => { %>
+                        <p>Php<%= cbu.amount %>.00</p>
+                        <% }) %>
                         <h3>CBU</h3>
                     </a>
                    
@@ -61,4 +70,3 @@
  
 </html>
  
-has context menu
