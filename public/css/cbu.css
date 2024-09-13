@@ -86,7 +86,7 @@ h3 {
     background-color: #d9d9d9;
     height: 480px;
     top: 272px;
-    margin-right: 1px;
+    margin-right: auto;
 }
  
 .deposit-btn, .withdraw-btn {
@@ -158,7 +158,7 @@ h3 {
 }
 
 .amount-wrapper {
-    margin-top: 20px; /* Space between buttons and amount selection */
+    margin-top: 20px; 
 }
 
 .amount-selection p {
@@ -166,7 +166,7 @@ h3 {
     margin-bottom: 10px;
 }
 
-/* Adjusting the gap and layout of the amount buttons */
+
 .amount-buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -185,7 +185,6 @@ h3 {
     background-color: #ddd;
 }
 
-/* Style for manual input */
 .manual-input {
     display: flex;
     flex-direction: column;
