@@ -404,4 +404,8 @@ router.get('/Manager/cburequestupdate/:applicationId', async (req, res, next) =>
     }
 });
 
+router.get('/Manager/managerdashboard', (req, res) => {
+    res.render('Manager/managerdashboard', { title: 'Dashboard' });
+});
+
 module.exports = router;

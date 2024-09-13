@@ -143,6 +143,14 @@ th {
     color: white;
 }
 
+.button-group button[type="submit"] {
+    background-color: #FFA900;
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border-radius: 10px; 
+}
+
 #table th {
     text-align: center;
     padding: 10px;
@@ -150,4 +158,24 @@ th {
 
 #table th:nth-child(n+2), #table td:nth-child(n+2) {
     width: 25%; 
+}
+
+#create-announcement-form .form-group input[type="text"] {
+    background: #e7e7e7;
+    width: 100%;
+    padding: 15px;
+    border-radius: 45px;
+    border: 1px solid #d4d4d4;
+    outline: none;
+    margin-bottom: 60px;
+}
+
+#create-announcement-form .form-group textarea {
+    background: #e7e7e7;
+    width: 100%;
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid #d4d4d4;
+    outline: none;
+    margin-bottom: 60px;
 }
