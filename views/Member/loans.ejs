@@ -8,12 +8,12 @@
         <%- include("sidebar_mem.ejs") %>
 
         <div class="container">
-            <form action="" method="post" oninput="calculateMonthlyPayment()">
+            <form action="/apply_loan" method="post" oninput="calculateMonthlyPayment()">
 
                 <div class="form-container">
                     <div class="applyloan">
                         <div class="form-group">
-                            <input type="hidden" id="user_id" name="user_id" value="">
+                            <input type="hidden" id="user_id" name="user_id" value="<%= user.user_id %>">
                         </div>
                 
                         <div class="loan-type">
@@ -96,18 +96,29 @@
                 </thead>
                 <tbody>
     
-                    <tr data-loan-id="">
-                        <td></td>
-                        <td>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-        
-                    <tr>
-                    <td colspan="8">No Loan at the moment...</td>
-                    </tr>
-                
+                    <% if (loans.length > 0) { %>
+        <% loans.forEach(loan => { %>
+          <tr data-loan-id="<%= loan.loan_id %>">
+            <td><%= loan.loan_id %></td>
+            <td>
+              <% if (loan.loan_type === 'medical') { %>
+                <p>Medical Loan</p>
+              <% } else if (loan.loan_type === 'emergency') { %>
+                <p>Emergency Loan</p>
+              <% } else { %>
+                <p>Regular Loan</p>
+              <% } %>
+            </td>
+            <td><%= loan.start_date %></td>
+            <td><%= loan.end_date %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="8">No Loan at the moment...</td>
+        </tr>
+      <% } %>
+      
     
             </table>
         </div>       
