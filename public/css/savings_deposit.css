@@ -472,7 +472,7 @@ label[for="amount"] {
     padding: 14px; 
     font-size: 20px;
     border-radius: 10px;
-    color: rgba(55, 63, 65, 0.5); /* Default color for the placeholder */
+    color: rgba(55, 63, 65, 0.5); 
     font-family: 'Poppins', sans-serif;
     text-align: center;
     -moz-appearance: none; 
