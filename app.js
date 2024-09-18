@@ -344,6 +344,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3001, () => {
-  console.log('Server running on port 3001');
+app.listen(8080, () => {
+  console.log('Server running on port 8080');
 });
