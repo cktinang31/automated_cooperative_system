@@ -408,4 +408,8 @@ router.get('/Manager/managerdashboard', (req, res) => {
     res.render('Manager/managerdashboard', { title: 'Dashboard' });
 });
 
+router.get('/Manager/member', (req, res) => {
+    res.render('Manager/member', { title: 'Members' });
+});
+
 module.exports = router;
