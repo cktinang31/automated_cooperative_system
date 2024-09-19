@@ -2,55 +2,77 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-nav {
+.navbar {
     background-color: #373F41;
-    color: #FFA900;
-    padding: 20px 20px; 
+    color: #ffa900;
+    max-width: 100%;
     display: flex;
-    justify-content: space-between; 
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
 }
 
-.member-title{
-    padding-left: 1300px;
+.nav ul {
+    background: #dbdbdb;
+    height: 100%;
+    width: 100%;
+    list-style: none;
 }
 
-.title h1,
-.member-title {
-    margin: 0; 
+.site-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 20px);
+    padding: 0 10px; 
 }
 
-nav ul {
-    list-style-type: none; 
+.site-title h1 {
     margin: 0;
-    padding: 0; 
-    display: flex;
+    margin-left: 10px;
+    font-size: 45px;
+    font-weight: 800;
 }
 
-nav ul li {
-    margin-left: 20px; 
-}
-
-nav ul li:first-child {
-    margin-left: 0; 
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none; 
-}
-        
-.home-icon {
+.site-title span {
+    color: #ffa900;
     display: flex;
     align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: italic;
 }
 
-.home-icon img {
-    width: 20px;
-    height: auto;
-    margin-right: 5px;
+.site-title span i {
+    color: #ffa900;
+    margin-left: 20px; 
+    margin-right: 0;
+    font-size: 32px;
+    transition: color 0.3s ease;
+}
+
+.site-title span i:hover {
+    color: #ffffff;
+}
+
+.logout-icon {
+    cursor: pointer;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
 .sidebar-icon {
@@ -78,7 +100,7 @@ nav ul li a {
 }
 
 .sidebar {
-    width: 300; 
+    width: 300px; 
     background-color: #D9D9D9;
     padding: 20px;
     height: 93vh;
@@ -116,7 +138,6 @@ nav ul li a {
         padding: 10px; 
     }
 }
-
 
 .sidebar-menu.active {
     display: block; 
@@ -184,16 +205,16 @@ nav ul li a {
     margin-left: 100px;
 }
 
-.savings-section {
+.dividend-section {
     display: flex;
     align-items: center; 
 }
 .adjusted {
-    margin-top: 20px; 
+    margin-top: 100px; 
 }
 
-.savings-container {
-    margin-top: 30px; 
+.dividend-container {
+    margin-top: 100px; 
     width: 1450px;
     height: 89px;
     gap: 0px;
@@ -207,8 +228,8 @@ nav ul li a {
     margin-left: 30px;
 }
 
-.savings-container h3 {
-    font-family: Poppins;
+.dividend-container h3 {
+    font-family: Poppins, sans-serif;
     font-size: 31px;
     font-weight: 400;
     line-height: 46.5px;
@@ -217,10 +238,11 @@ nav ul li a {
     padding: 10px; 
 }
 
-.savings-container p {
+.dividend-container p.dividend-amount {
     font-size: 31px; 
     margin-left: 1050px; 
-  }
+}
+
 #deposit-withdraw {
     display: flex;
     margin-left: 100px;
@@ -311,21 +333,40 @@ nav ul li a {
     align-items: center;
     justify-content: center;
     margin: 9px 0;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 34px;
     font-weight: 400;
     line-height: 51px;
     text-align: left;
-  }
+}
+
+.price-button {
+    width: 300px;
+    height: 63px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 9px 0;
+    font-family: Poppins, sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 51px;
+    text-align: left;
+    border: none; /* Removes the default button border */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s; /* Adds transition effect on hover */
+}
+
+.price-button:hover {
+    background-color: #BFBFBF; /* Changes background color on hover */
+}
+
   .form-group {
     margin-bottom: 15px;
     position: relative;
     margin-left: 400px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0px;
   }
   
   input,
@@ -339,8 +380,8 @@ nav ul li a {
   
   button[type="submit"] {
     width: 745px;
-    height: 63px;
-    top: 860px;
+    height: 80px;
+    top: 800px;
     left: 50%; 
     transform: translateX(-50%); 
     gap: 0px;
@@ -358,97 +399,84 @@ nav ul li a {
     line-height: 63px; 
     text-align: center; 
 }
-  label[for="amount"] {
-    width: 311px;
-    height: 47px;
-    top: 642px;
-    left: 204px;
-    font-family: Poppins;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 30px;
-    text-align: left;
-    padding: 10px;
-    color: rgba(55, 63, 65, 0.5);
-}
-  
-  #amount {
-    width: 1027px;
-    height: 52px;
-    top: 673px;
-    left: 201 px;
-    gap: 0px;
-    border: 2px solid #373F41;
-    box-shadow: 0px 4px 4px 0px #00000040;
+.flex-container {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start;
+    margin-left: 190px;
+    margin-top: 70px;
 }
 
-label[for="account-number"] {
-    width: 310px;
-    height: 46px;
-    top: 747px;
-    left: 202px;
-    gap: 0px;
-    font-family: Poppins;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 30px;
-    text-align: left;
-    color: rgba(55, 63, 65, 0.5);
+.amount-container {
+    position: relative; 
+    width: 999px; 
 }
 
-#account-number {
-    width: 587px;
+#amount {
+    width: 100%;
+    outline: 2px solid #373F41;
+    border-radius: 10px;
     height: 53px;
-    top: 776px;
-    left: 202px;
-    gap: 0px;
-    border: 2px solid #373F41;
-    box-shadow: 0px 4px 4px 0px #00000040;
+    font-size: 35px;
+    color: #373F41;
+    text-align: center;
 }
 
-.dropdown-container {
-    position: absolute;
-    bottom: 0px; 
-    left: 660px;
-    width: 370px;
-}
-
-.dropdown-container label {
-    position: absolute;
-    top: 50%; 
-    left: 10px;
-    transform: translateY(-50%);
+label[for="amount"] {
+    position: absolute; 
+    top: -30px; 
+    left: 0;
+    font-size: 20px;
+    text-align: left;
     color: rgba(55, 63, 65, 0.5);
-    font-family: Poppins;
-    font-size: 16px;
+    font-family: 'Poppins', sans-serif; 
+    margin: 0; 
 }
 
+.custom-dropdown {
+    margin-left: 20px; 
+}
 
 #mode-of-payment {
-    width: 370px;
+    width: 470px;
     height: 53px;
-    gap: 0px;
-    border: 2px solid #373F41;
+    border: 1px solid #373F41;
+    outline: 0.5px solid #373F41;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px 0px #00000040;
+    padding: 14px; 
+    font-size: 20px;
+    border-radius: 10px;
+    color: rgba(55, 63, 65, 0.5); /* Default color for the placeholder */
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    -moz-appearance: none; 
+    -webkit-appearance: none; 
+    appearance: none;
+    position: relative;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"><path fill="%23373F41" d="M1 0l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px 8px;
+}
+
+#mode-of-payment:focus {
+    border: 1px solid #373F41;
+    outline: 0.5px solid #373F41;
 }
 
 #mode-of-payment option {
-    display: none;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #373F41;
 }
 
-#mode-of-payment:focus option {
-    display: block;
+/* Ensure the selected option is displayed in the desired color */
+#mode-of-payment:not([value=""]) {
+    color: #373F41;
 }
-.custom-dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-icon {
-    position: absolute;
-    top: 50%;
-    left: 10px; 
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
+
+/* Specific styles to handle initial selected placeholder */
+#mode-of-payment option[value=""][disabled][selected] {
+    display: none;
+}
