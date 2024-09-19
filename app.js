@@ -172,14 +172,6 @@ app.get('/Manager/sidebarmanager', (req, res) => {
 app.get('/Manager/req', (req, res) => {
   res.render('Manager/req', { title: 'Req'});
 });
-
-app.get('/Collector/Dashboard', (req, res) => {
-  res.render('Collector/Dashboard', { title: 'Dashboard'});
-});
-
-app.get('/Collector/header', (req, res) => {
-  res.render('Collector/header', { title: 'Header'});
-});
  
 app.post('/user_reg', async (req, res) => {
   try {
