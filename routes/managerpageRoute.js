@@ -403,9 +403,43 @@ router.get('/Manager/cburequestupdate/:applicationId', async (req, res, next) =>
         res.status(500).send('Internal server error');
     }
 });
+// router.get('/Manager/mannouncement', (req, res, next) => {
+//     console.log('Checking authentication status...');
+//     try {
+//         console.log('Session ID:', req.sessionID);
+//         console.log('Session:', req.session);
+//         console.log('Authenticated:', req.isAuthenticated());
 
+//         if (req.isAuthenticated()) {
+//             console.log('User is authenticated.');
+//             next(); // Proceed to the route handler
+//         } else {
+//             console.log('User is not authenticated. Redirecting to login page.');
+//             res.redirect('/login');
+//         }
+//     } catch (error) {
+//         console.error('Error in isAuthenticated middleware:', error);
+//         res.status(500).send('Internal server error');
+//     }
+// }, async (req, res) => {
+//     try {
+//         const contents = await Content.findAll({
+//             order: [['createdAt', 'DESC']]
+//         });
+//         const user = req.user;
+//         res.render('./Manager/manager-announcement', { contents, title: 'Announcement', user });
+//     } catch (error) {
+//         console.error('Error fetching contents:', error);
+//         res.status(500).send('Error fetching contents.');
+//     }
+// });
+router.get('/Manager/managerprofile', (req, res) => {
+    res.render('Manager/managerprofile', { title: 'Members Information' });
+});
+router.get('/Manager/mannouncement', (req, res) => {
+    res.render('Manager/mannouncement', { title: 'Announcement' });
+});
 router.get('/Manager/managerdashboard', (req, res) => {
     res.render('Manager/managerdashboard', { title: 'Dashboard' });
 });
-
 module.exports = router;
