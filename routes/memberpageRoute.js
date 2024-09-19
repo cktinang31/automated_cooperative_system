@@ -436,6 +436,12 @@ router.get('/Member/dashboard', (req, res, next) => {
     }
     
 });
+//cbu
+router.get('/Member/cbu', (req, res) => {
+    res.render('Member/cbu', { title: 'cbu'});
+  });
+
+
 
 router.get('/Member/loans', async (req, res, next) => {
     try {

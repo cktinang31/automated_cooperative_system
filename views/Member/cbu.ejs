@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/cbu.css">
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+        <body>
+            <%- include("header.ejs") %>
+            <%- include("sidebar_mem.ejs") %>
+     
+            <div class="container">
+                <div class="savings-container">
+                  <h3>Check your savings</h3>
+                  <p class="savings-amount">balance here.</p>
+                </div>
+                <div class="balance-container">
+                    <h4>CBU</h4>
+                  <button class="balance-button"><CBU>Php 1000.00</button>
+                </div>
+              </div>                  
+     
+              <div class="form-container">
+                <div class="header">
+                    <button class="deposit-btn">Deposit</button>
+                    <button class="withdraw-btn">Withdraw</button>
+                </div>
+                <div class="amount-wrapper">
+                    <div class="amount-selection">
+                        <p>CHOOSE YOUR AMOUNT</p>
+                        <div class="amount-buttons">
+                            <button>PHP 1000</button>
+                            <button>PHP 2000</button>
+                            <button>PHP 3000</button>
+                            <button>PHP 4000</button>
+                            <button>PHP 5000</button>
+                            <button>PHP 6000</button>
+                        </div>
+                <div class="custom-amount">
+                    <label for="amount">AMOUNT</label>
+                    <input type="text" id="amount" name="amount">
+                </div>
+                <div class="manual-input">
+                    <select id="payment-method">
+                        <option value="credit-card">MODE OF PAYMENT</option>
+                        <option value="credit-card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank-transfer">Bank Transfer</option>
+                        <option value="cash">Cash</option>
+                    </select>
+                </div>
+                <div class="confirm-button-container">
+                    <button class="confirm-btn">CONFIRM</button>
+                </div>
+            </div>      
+        </body>
+</html>

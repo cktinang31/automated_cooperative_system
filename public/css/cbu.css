@@ -1,0 +1,280 @@
+h3 {
+    color: #F9A602;
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+}
+ 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.container {
+    display: flex;
+    position: relative;
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 80px auto 20px;
+    padding: 50px;
+}
+.savings-container {
+   box-sizing: border-box;
+    width: 427px;
+    height: 109px;
+    background: #373f41;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    font-family: 'Poppins', sans-serif;;
+    
+    
+}
+ 
+.savings-container:hover {
+    border: 2px solid #FFFFFF;
+    box-shadow: 10px 10px 4px #373F41;
+}
+ 
+h3 {
+    color: #F9A602;
+    font-size: 20px;
+    margin: 0;
+    margin-left: 15px;
+    line-height: 36px;
+    font-weight: 700;
+}
+ 
+.savings-amount {
+    color: #F9A602;
+    font-size: 20px;
+    margin-top: 40px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 54px;
+}
+ 
+.balance-container {
+    box-sizing: border-box;
+    width: 427px;
+    height: 110px;
+    background-color: #ffb144;
+    color: #2f3435;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 370px;
+}
+ 
+.balance-container:hover {
+    border: 2px solid #FFFFFF;
+     box-shadow: 10px 10px 4px #373F41;
+}
+
+h4{
+    color: #373F41;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    margin-right: 90%;
+    line-height: 36px;
+    font-weight: 700;
+}
+ 
+.balance-container button {
+    background: none;
+    border: none;
+    color: #373F41;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 30px;
+    padding: 15px;
+    font-family: 'Poppins', sans-serif;
+    
+}
+.form-container {
+    width: 880px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    background-color: #d9d9d9;
+    position: absolute; 
+    top: 51%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    box-sizing: border-box; 
+}
+ 
+.deposit-btn, .withdraw-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+}
+ 
+.deposit-btn {
+    background-color: #373f41;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    width: 330px;
+    height: 74px;
+    margin-left: 50px;
+}
+ 
+.withdraw-btn {
+    background-color: #ffffff;
+    color: #373f41;
+    border: 1px solid #646a6c;
+    border-radius: 10px;
+    width: 330px;
+    height: 74px;
+    margin-left: 100px;
+}
+ 
+.header button {
+    transition: background-color 0.3s ease;
+}
+ 
+.header button:hover {
+    opacity: 0.8;
+}
+ 
+.amount-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+ 
+.custom-amount {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-bottom: -63px; 
+    width: 319px;
+}
+
+.custom-amount label {
+    color: #777777;
+    font-size: 20px; 
+    margin-bottom: 5px; 
+    
+}
+
+.custom-amount input {
+    width: 319px; 
+    height: 63px;
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #373F41; 
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+
+
+ 
+.mode-of-payment {
+    margin-bottom: 20px;
+    margin-right:auto;
+}
+ 
+.amount-wrapper {
+    margin-top: 20px;
+}
+ 
+.amount-selection p {
+    color: #777777;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+ 
+ 
+.amount-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    border: 1px;
+
+}
+ 
+.amount-buttons button {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 215px;
+    height:65px;
+    border: 1px;
+    border-radius: 1px;
+    border: 1px solid #646a6c;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+}
+ 
+.amount-buttons button:hover {
+    background-color: #ddd;
+}
+ 
+.manual-input {
+    display: flex;
+    flex-direction: column;
+}
+ 
+.manual-input label {
+    margin-bottom: 5px;
+}
+ 
+.manual-input input,
+.manual-input select {
+    color: #777777;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #777777;
+    margin-left: 450px;
+    border-radius: 10px;
+    width: 330px;
+    height: 74px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    
+}
+ 
+.manual-input input::placeholder {
+    color: #777777;
+}
+ 
+.confirm-btn {
+    color: orange;
+    border: none;
+    padding: 20px 70px;
+    font-size: 35px;
+    border-radius: 10px;
+    background-color: #373f41;
+    width: 440px;
+    height: 83px;
+    text-align: center;
+    margin-left: 230px;
+    font-family: 'Poppins', sans-serif;
+    position: absolute; /* Remove the `top` property */
+    bottom: -110px; /* Adjust this value to control the distance from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-100%); /* Center horizontally */
+
+}
+.confirm-btn:hover {
+    background-color:whitesmoke; 
+    color: orange; 
+   
+   
+}
+
