@@ -45,7 +45,7 @@
 }
 
 .site-title span {
-    color: #ffffff;
+    color: #ffa900;
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -241,7 +241,7 @@
     height: 80px; 
     appearance: none;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #373F41;
     border-radius: 15px;
     position: relative;
     z-index: 1;
@@ -253,9 +253,11 @@
     text-align-last: center; 
     color: #373F41; 
     margin-left: 680px;
+    transition: border-color 0.3s ease;
 }
 
 .form-group select:focus {
+    border-color: #333; /* Darken the border color when focused */
     outline: none;
 }
 
@@ -279,7 +281,7 @@ select.has-value::after {
     position: relative;
     margin-bottom: 20px;
     width: 76%; 
-    margin-top: 30px;
+    margin-top: 60px;
     margin-left: 9%;
 }
 
@@ -302,12 +304,17 @@ select.has-value::after {
     border-radius: 15px;
     width: 120%; 
     height: 80px;
-    padding-left: 1020px; 
+    padding-left: 1200px; 
     position: relative; 
     color: #373F41; 
     font-size: 35px; 
     margin-left: 39px;
     outline: 1px solid #373F41; 
+}
+
+.loan-details input[type="number"]:focus {
+    border-color: #333; /* Darken the border color when focused */
+    outline-color: #333; /* Optionally, darken the outline color as well */
 }
 
 .loan-details input[type="number"]::-webkit-inner-spin-button,
@@ -319,28 +326,10 @@ select.has-value::after {
 .loan-terms {
     margin-bottom: 20px;
     width: 60%; 
-    margin-left: 190px;
+    margin-left: 181px;
     margin-top: 50px;
     border-radius: 10px;
-    position: relative; /* Ensure position relative for absolute positioning of the outline */
-}
-
-.loan-terms::before {
-    content: '';
-    position: absolute;
-    top: -1px; /* Adjust as needed */
-    left: -1px; /* Adjust as needed */
-    right: -1px; /* Adjust as needed */
-    bottom: -1px; /* Adjust as needed */
-    border: 1px solid #373F41; /* Apply the same outline style */
-    border-radius: 10px; /* Apply the same border radius */
-    pointer-events: none; /* Ensure the outline doesn't interfere with interactions */
-    width: 90%;
-    height: 80px;
-}
-
-.loan-terms-input {
-    position: relative;
+    position: relative; 
 }
 
 .loan-terms-label {
@@ -349,12 +338,10 @@ select.has-value::after {
     font-size: 35px;
     color: #373F41;
     position: absolute;
-    left: 11%;
-    top: 50%;
+    left: 13%; 
+    top: 50%; 
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 0 5px;
-    z-index: 1;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
@@ -365,12 +352,22 @@ select.has-value::after {
 
 .custom-select {
     position: relative;
-    border: 1px solid #ccc;
+    border: 1px solid #373F41;
     border-radius: 15px;
     padding: 20px;
     cursor: pointer;
-    width: calc(100% - 100px); 
+    width: 989px; 
     height: 80px; 
+    margin-left: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.custom-select:focus {
+    border-color: #333; /* Change border color when custom select is focused */
+}
+
+.custom-select.dark-border {
+    border-color: #333; /* Darken the border color */
 }
 
 .select-trigger {
@@ -396,7 +393,7 @@ select.has-value::after {
     left: 0;
     right: 0;
     border: 1px solid #ccc;
-    border-radius: 15px;
+    border-radius: 10px;
     background: #fff;
     z-index: 2;
     overflow: hidden;
@@ -430,7 +427,6 @@ select.has-value::after {
     left: 6%; 
     transform: translateY(-50%);
     margin: 0 auto;
-    outline: 1px solid #373F41; 
 }
 
 .hide {
@@ -457,28 +453,27 @@ select.has-value::after {
 }
 
 .interest-details input[type="number"] {
-    padding: 20px 20px; 
-    border: 1px solid #ccc;
+    border: 1px solid #373F41;
     border-radius: 15px;
     width: calc(100% - 100px); 
     height: 80px;
     font-size: 35px;
     color: #373F41;
-    margin-left: 200px; 
+    margin-left: 220px; 
     text-align: center;
-    position: relative; /* Added */
+    position: relative; 
 }
 
 .interest-details .placeholder-label {
     position: absolute;
     top: 50%;
-    left: 111%;
+    left: 75%;
     transform: translate(-50%, -50%); 
     pointer-events: none;
     color: #373F41; 
     transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     font-size: 35px;
-    white-space: nowrap; /* Ensures label stays on one line */
+    white-space: nowrap; 
 }
 
 .interest-details input[type="number"]:focus + .placeholder-label,
@@ -487,7 +482,7 @@ select.has-value::after {
     font-size: 12px; 
     color: #333; 
     top: 30%;
-    left: 76%; /* Changed */
+    left: 43%; 
 }
 
 .main-content {
@@ -504,8 +499,8 @@ select.has-value::after {
     width: 1500px; 
     background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    margin-top: 50px; 
-    margin-left: 200px;
+    margin-top: 70px; 
+    margin-left: 225px;
 }
 
 .paymentpercollection-container {
@@ -517,7 +512,7 @@ select.has-value::after {
     font-size: 35px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 button[type="submit"] {
@@ -535,8 +530,8 @@ button[type="submit"] {
     display: inline-block;
     text-align: center;
     box-sizing: border-box;
-    margin-top: 199px;
-    margin-left: 25%;
+    margin-top: 190px;
+    margin-left: 30%;
 }
 
 button[type="submit"]:hover {

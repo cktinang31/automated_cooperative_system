@@ -1,37 +1,32 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>KaCoop | <%=title %></title>
-        <link rel="stylesheet" href="/css/savings_deposit.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </head>
-   
-    <body>
- 
-<nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaCoop | <%= title %></title>
+  <link rel="stylesheet" href="/css/dividend_deposit.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
     <div class="site-title">
-        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
+        <h1>KACooP</h1>
+        <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
     </div>
-    </div>
-    <div class="member-title">
-        <h1>Member</h1>
-    </div>
-    <div class="home-icon">
-        <a href="/">
-            <img src="/svg/icons8-home.svg" alt="Home Icon">
-        </a>
 </nav>
+
 <div class="main-content">
-    <div class="content-wrapper">
-        <img src="/images/image.png" alt="Justice Icon" class="adjusted">
-        <div class="savings-section">
-            <div class="savings-container">
-                <h3>Dividend</h3>
-                <p class="savings-amount">PHP 3000.00</p>
-            </div>
-        </div>
-    </div>
+  <div class="content-wrapper">
+      <img src="/images/image.png" alt="Justice Icon" class="adjusted">
+      <div class="dividend-section">
+          <div class="dividend-container">
+              <h3>Dividend</h3>
+              <p class="dividend-amount">PHP 3000.00</p>
+          </div>
+      </div>
+  </div>
 </div>
 
 <div id="deposit-withdraw">
@@ -44,6 +39,7 @@
 </div>
 
 <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
+
 <div id="price-labels">
   <div class="column">
     <button class="price-button" onclick="updateAmount(1000)">PHP 1000</button>
@@ -60,29 +56,22 @@
 </div>
 
 <form id="transaction-form" onsubmit="return redirectToPayment()">
-  <div class="form-group">
-    <label for="amount">AMOUNT:</label>
-    <input type="number" id="amount" name="amount" required>
-  </div>
-  <div class="form-group-horizontal">
-    <div class="form-group">
-      <label for="account-number">ACCOUNT NUMBER:</label>
-      <input type="text" id="account-number" name="account-number" required>
+  <div class="flex-container">
+    <div class="amount-container">
+        <label for="amount">Amount</label>
+        <input type="text" id="amount">
     </div>
-    <div class="form-group dropdown-container">
-      <label for="mode-of-payment" id="mode-label">MODE OF PAYMENT:</label>
-      <select id="mode-of-payment" name="mode-of-payment" required>
-        <option value="" disabled selected hidden></option>
-        <option value="cash">Cash</option>
-        <option value="credit-card">Credit Card</option>
-        <option value="debit-card">Debit Card</option>
-        <option value="gcash">Gcash</option>
-        <option value="maya">Maya</option>
-        <option value="paypal">PayPal</option>
-      </select>
-    </div>
-  </div>
+<div class="custom-dropdown">
+  <select id="mode-of-payment">
+      <option value="" disabled selected>Mode of Payment</option>
+      <option value="credit">Credit Card</option>
+      <option value="debit">Debit Card</option>
+      <option value="paypal">PayPal</option>
+      <option value="bank">Bank Transfer</option>
+  </select>
+</div>  
   <button type="submit">CONFIRM</button>
+</div>
 </form>
 
 <script>
