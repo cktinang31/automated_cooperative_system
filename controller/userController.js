@@ -53,7 +53,7 @@ const user_login = async (req, res) => {
           case 'admin':
             return res.redirect('/SystemAdmin/systemadmin');
           case 'manager':
-            return res.redirect('/Manager/sidebarmanager');
+            return res.redirect('/Manager/managerdashboard');
           case 'collector': 
             return res.redirect('Collector/sidebarcollector');
           default:
