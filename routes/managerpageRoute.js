@@ -410,4 +410,9 @@ router.get('/Manager/member', (req, res) => {
     res.render('Manager/member', { title: 'Members' });
 });
 
+router.get('/Manager/re_quest', (req, res) => {
+    res.render('Manager/re_quest', { title: 'Request' });
+});
+
+
 module.exports = router;
