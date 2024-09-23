@@ -46,6 +46,10 @@ body {
     text-align: center;
 }
 
+.member-title {
+    color: #f9a602;
+}
+
 .member-container .fa-regular.fa-user {
     font-size: 50px;
     color: #ffd200;
