@@ -498,3 +498,25 @@ router.get('/Member/savings', (req,res, next) =>{
 });
 module.exports = router;
 
+router.get('/Member/loan_payment_details', (req,res, next) =>{
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated a regular.');
+            const user = req.user;
+            res.render('./Member/loan_payment_details', { title: 'Loan_Payment_Details', user });
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+        
+});
+module.exports = router;
