@@ -32,8 +32,7 @@ body {
     justify-content: center;
     align-items:  center;
     font-family: 'Poppins', sans-serif;;
-    
-    
+    margin-left: 55px;    
 }
  
 .savings-container:hover {
@@ -97,7 +96,8 @@ h4{
     
 }
 .form-container {
-    width: 880px;
+    width: 45%;
+    height: 50%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -109,6 +109,7 @@ h4{
     left: 50%; 
     transform: translate(-50%, -50%); 
     box-sizing: border-box; 
+    
 }
  
 .deposit-btn, .withdraw-btn {
@@ -157,24 +158,23 @@ h4{
     display: flex;
     flex-direction: column; 
     align-items: flex-start; 
-    margin-bottom: -63px; 
+    margin-bottom: -71px; 
     width: 319px;
 }
 
 .custom-amount label {
     color: #777777;
     font-size: 20px; 
-    margin-bottom: 5px; 
+    margin-bottom: 16px; 
     
 }
 
 .custom-amount input {
-    width: 319px; 
-    height: 63px;
-    padding: 10px; 
+    width: 314px; 
+    height: 68px; 
     font-size: 16px; 
-    border: 1px solid #373F41; 
-    border-radius: 5px;
+    border: 1px solid #777777; 
+    border-radius: 10px;
     box-sizing: border-box; 
 }
 
@@ -252,7 +252,7 @@ h4{
 .manual-input input::placeholder {
     color: #777777;
 }
- 
+
 .confirm-btn {
     color: orange;
     border: none;
@@ -265,11 +265,10 @@ h4{
     text-align: center;
     margin-left: 230px;
     font-family: 'Poppins', sans-serif;
-    position: absolute; /* Remove the `top` property */
-    bottom: -110px; /* Adjust this value to control the distance from the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-100%); /* Center horizontally */
-
+    position: absolute; 
+    bottom: -110px; 
+    left: 50%;
+    transform: translateX(-100%); 
 }
 .confirm-btn:hover {
     background-color:whitesmoke; 
