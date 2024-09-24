@@ -29,11 +29,13 @@ body {
     position: absolute;
     left: 40%; 
     transform: translateX(-50%); 
-    max-width: 100%; 
+    max-width: 100%;
+    border: 1px solid #373f41; 
+    transition: box-shadow 0.1s ease, outline 0.1s ease; 
 }
 
 .savings-container:hover {
-    border: 2px solid #FFFFFF;
+    outline: 2px solid #FFFFFF; 
     box-shadow: 10px 10px 4px #373F41;
 }
 
@@ -62,10 +64,13 @@ h3 {
     padding: 9px; 
     width: 370px;
     margin-left: 450px;
+    border: 1px solid #ffb144; 
+    transition: box-shadow 0.1s ease, outline 0.1s ease; 
 }
 
 .balance-container:hover {
-     box-shadow: 10px 10px 4px #373F41;
+    outline: 2px solid #FFFFFF; 
+    box-shadow: 10px 10px 4px #373F41; 
 }
 
 .balance-container button {
@@ -271,14 +276,15 @@ h3 {
   }
   .mode-of-payment::after {
     content: '\25BC';
-    font-size: 14px;
+    font-size: 21px;  
     color: #333;
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-  }  
+}
+  
   .confirm-button {
     width: 466px;
     height: 74px;
