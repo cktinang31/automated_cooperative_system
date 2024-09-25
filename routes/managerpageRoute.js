@@ -402,12 +402,36 @@ router.get('/Manager/cburequestupdate/:applicationId', async (req, res, next) =>
     }
 });
 
-router.get('/Manager/managerdashboard', (req, res) => {
-    res.render('Manager/managerdashboard', { title: 'Dashboard' });
+router.get(['/Manager/dashboard', '/Manager/managerdashboard/'],(req,res, next) =>{
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
+            console.log('User is authenticated as manager.');
+            const user = req.user;
+            res.render('./Manager/managerdashboard', { title: 'Dashboard', user });
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+        
 });
+
 
 router.get('/Manager/member', (req, res) => {
     res.render('Manager/member', { title: 'Members' });
 });
+
+router.get('/Manager/re_quest', (req, res) => {
+    res.render('Manager/re_quest', { title: 'Request' });
+});
+
 
 module.exports = router;
