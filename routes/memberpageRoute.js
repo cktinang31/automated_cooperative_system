@@ -9,6 +9,8 @@ const Cbu = require('../models/cbu');
 const { title } = require('process');
 
 
+
+
 const router = express.Router();
 
 router.get('/Member/announcement', (req, res, next) => {
@@ -399,4 +401,127 @@ router.get('/Member/dashboard', (req,res, next) =>{
         
 });
   
+router.get('/Member/dashboard', (req, res, next) => {
+    console.log('Checking authentication status...');
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated()) {
+            console.log('User is authenticated.');
+            next(); // Proceed to the route handler
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+}, async (req, res) => {
+    try {
+
+        const user = req.user;
+        // announcement
+        const contents = await Content.findAll({
+            order: [['createdAt', 'DESC']]
+        });
+        // loan balance
+        const loans = await Loan.findAll( {
+            where: {
+                loan_status : 'active',
+                user_id: user.user_id
+              },
+              include: [{
+                model: User, 
+                attributes: ['user_id'], 
+              }],
+              order: [['createdAt', 'DESC']], 
+              limit: 1 
+            });
+        // savings 
+        const savings = await Savings.findAll({
+            where: {
+              user_id: user.user_id,
+            },
+            include: [{
+              model: User, 
+              attributes: ['user_id'], 
+            }],
+          });
+        //   cbu
+        const cbu = await Cbu.findAll( {
+            where: {
+                user_id: user.user_id,
+            },
+        });
+        
+        res.render('./Member/dashboard', { contents, loans, savings, cbu, title: 'Dashboard', user });
+    } catch (error) {
+        console.error('Error fetching contents:', error);
+        res.status(500).send('Error fetching contents.');
+    }
+    
+});
+
+router.get('/Member/loans', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated as a regular.');
+
+            
+            const loans = await Loan.findAll({
+                where: {
+                    loan_status: 'active',
+                    user_id: req.user.user_id  
+                },
+                include: [{
+                    model: User,
+                    attributes: ['user_id'],  
+                }]
+            });
+
+            
+            res.render('./Member/loans', { title: 'Loans', user: req.user, loans });
+
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;  
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+
+        
+});
+
+router.get('/Member/savings', (req,res, next) =>{
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated a regular.');
+            const user = req.user;
+            res.render('./Member/savings', { title: 'Savings', user });
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+        
+});
 module.exports = router;
