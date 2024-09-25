@@ -34,7 +34,7 @@ router.get('/Manager/create_announcement', (req, res, next) => {
  
 });
 
-router.get(['/Manager/announcement', '/Manager/managerannouncement'], (req, res, next) => {
+router.get(['/Manager/managerannouncement'], (req, res, next) => {
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
@@ -64,6 +64,35 @@ router.get(['/Manager/announcement', '/Manager/managerannouncement'], (req, res,
     }
 });
 
+router.get(['/Manager/announcement', '/Manager/mannouncement'], (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated()) {
+            console.log('User is authenticated.');
+            next(); 
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+}, async (req, res) => {
+    try {
+        const contents = await Content.findAll({
+            order: [['createdAt', 'DESC']]
+        });
+        const user = req.user;
+        res.render('./Manager/mannouncement', { contents, title: 'Announcement', user });
+    } catch (error) {
+        console.error('Error fetching contents:', error);
+        res.status(500).send('Error fetching contents.');
+    }
+});
 
 router.get('/Manager/sidebarmanager', (req,res, next) =>{
     try {
@@ -87,49 +116,7 @@ router.get('/Manager/sidebarmanager', (req,res, next) =>{
         
 });
 
-router.get('/Manager/membersdata', (req,res, next) =>{
-    try {
-        console.log('Session ID:', req.sessionID);
-        console.log('Session:', req.session);
-        console.log('Authenticated:', req.isAuthenticated());
 
-        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
-            console.log('User is authenticated as manager.');
-            const user = req.user;
-            res.render('./Manager/membersdata', { title: 'Mmembers Data', user });
-        } else {
-            console.log('User is not authenticated. Redirecting to login page.');
-            req.session.returnTo = req.originalUrl;
-            res.redirect('/login');
-        }
-    } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
-        res.status(500).send('Internal server error');
-    }
-        
-});
-
-router.get('/Manager/memberinfo', (req,res, next) =>{
-    try {
-        console.log('Session ID:', req.sessionID);
-        console.log('Session:', req.session);
-        console.log('Authenticated:', req.isAuthenticated());
-
-        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
-            console.log('User is authenticated as manager.');
-            const user = req.user;
-            res.render('./Manager/memberinfo', { title: 'Member Info', user });
-        } else {
-            console.log('User is not authenticated. Redirecting to login page.');
-            req.session.returnTo = req.originalUrl;
-            res.redirect('/login');
-        }
-    } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
-        res.status(500).send('Internal server error');
-    }
-        
-});
 
 router.get('/Manager/loanrequest', async (req, res, next) => {
     try {
@@ -432,10 +419,32 @@ router.get(['/Manager/dashboard', '/Manager/managerdashboard/'],(req,res, next) 
         
 });
 
+router.get(['/Manager/membersprofile', '/Manager/profile', '/Manager/membersinfo'],(req,res, next) =>{
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
 
-router.get('/Manager/member', (req, res) => {
+        if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
+            console.log('User is authenticated as manager.');
+            const user = req.user;
+            res.render('./Manager/membersprofile', { title: 'Members Information', user });
+        } else {2
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+        
+});
+
+router.get(['/Manager/member', '/Manager/members'], (req, res) => {
     res.render('Manager/member', { title: 'Members' });
 });
+
 
 router.get(['/Manager/request', '/Manager/re_quest'], (req, res) => {
     try {
