@@ -49,7 +49,7 @@ button:hover {
     color: white;
 }
 
-/* Modal Styles */
+/* Modal Styles for membership application */
 .modal {
     display: none; 
     position: fixed; 
@@ -139,3 +139,5 @@ button:hover {
 .decline-button:hover {
     opacity: 0.8;
 }
+
+/* Modal styles for Loan Application */

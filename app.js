@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
-const connectionString = 'postgresql://postgres:Ctugk3nd3s@192.168.56.1:5432/Cooperativedb'
+const connectionString = 'postgresql://postgres:Ctugk3nd3s@ 172.31.32.1:5432/Cooperativedb'
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
@@ -319,6 +319,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000, '192.168.56.1', () => {
-  console.log('Server running on port 3000');
+app.listen(3000, '172.31.32.1', () => {
+  console.log('Server running on http://172.31.32.1:3000');
 });

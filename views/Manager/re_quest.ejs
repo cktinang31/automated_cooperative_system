@@ -20,15 +20,23 @@
                 <tbody>
                     <tr onclick="openModal('0069', 'Ariel Berongan', 'Additional Details', '09-11-24');">
                         <td>0069</td>
-                        <td>Loan Application (Utang)</td>
+                        <td>Membership</td>
                         <td>Ariel Berongan has...</td>
                         <td>09-11-24</td>
                     </tr>
                 </tbody>
+                <tbody>
+                    <tr onclick="openLoanModal();">
+                        <td>0070</td>
+                        <td>Loan Application (Utang)</td>
+                        <td>Ariel Berongan has...</td>
+                        <td>09-11-24</td>
+                    </tr>                    
+                </tbody>
             </table>
         </div>
 
-        <!-- The Modal -->
+        <!-- The Modal for Membership Request -->
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
@@ -93,6 +101,52 @@
             </div>
         </div>
 
+        <!-- The Loan Modal -->
+<div id="loanModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLoanModal()">&times;</span>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="loan-modal-name"></td>
+            </tr>
+            <tr>
+                <td>User ID:</td>
+                <td id="loan-modal-userid"></td>
+            </tr>
+            <tr>
+                <td>Loan Type:</td>
+                <td id="loan-modal-loanType"></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td id="loan-modal-amount"></td>
+            </tr>
+            <tr>
+                <td>Interest:</td>
+                <td id="loan-modal-interest"></td>
+            </tr>
+            <tr>
+                <td>Loan Term:</td>
+                <td id="loan-modal-term"></td>
+            </tr>
+            <tr>
+                <td>Monthly Payment:</td>
+                <td id="loan-modal-monthlyPayment"></td>
+            </tr>
+            <tr>
+                <td>Number of Payments:</td>
+                <td id="loan-modal-numPayments"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button class="approve-button">Approve</button>
+            <button class="decline-button">Decline</button>
+        </div>
+    </div>
+</div>
+
+
         <script>
             function openModal(requestId, details, additionalDetails, date) {
                 // Set values in the modal
@@ -120,6 +174,25 @@
                     closeModal();
                 }
             }
+           
+            function openLoanModal() {
+    document.getElementById('loan-modal-name').innerText = 'Ariel Berongan'; // Example data
+    document.getElementById('loan-modal-userid').innerText = 'UID-0070'; // Example data
+    document.getElementById('loan-modal-loanType').innerText = 'Loan Application (Utang)'; // Example data
+    document.getElementById('loan-modal-amount').innerText = '50,000 PHP'; // Example data
+    document.getElementById('loan-modal-interest').innerText = '5%'; // Example data
+    document.getElementById('loan-modal-term').innerText = '12 Months'; // Example data
+    document.getElementById('loan-modal-monthlyPayment').innerText = '4,300 PHP'; // Example data
+    document.getElementById('loan-modal-numPayments').innerText = '12'; // Example data
+
+    document.getElementById('loanModal').style.display = 'block';
+}
+
+function closeLoanModal() {
+    document.getElementById('loanModal').style.display = 'none';
+}
+
+
         </script>
     </body>
 </html>
