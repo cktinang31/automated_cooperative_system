@@ -1,46 +1,53 @@
 
 .applyloan { 
-    position: fixed;
-    width: 964px;
-    height: 378px;
-    left: 499px;
-    top: 155px;
+    position: absolute;
+    width: 500px;
+    height: 450px;
+    left: 160px;
+    top: 200px;
     background: #D9D9D9;
     border-radius: 10px;
-    z-index: 999;
 }
+
 
 .title {
     color: #373f41;
     font-size: 20px;
     font-weight: 600;
-    margin-left: 6px;
-}
-.title2, .title3, .title4 {
-    color: #373f41;
-    font-size: 20px;
-    font-weight: 600;
-    margin-left: -16px;
 }
 
-.loan-options label {
-    color: #373f41;
-    margin-right: 165px;
-    margin-top: 20px;
-    display: inline-block;
-}
-
-.loan-options input[type="radio"] {
-    margin-right: 10px; 
-}
-
-.loan-options input[type="radio"]:checked + label {
-    font-weight: bold; 
+#loan_type {
+    padding: 10px; 
+    /* border: 1px solid #373f41;  */
+    outline: none;
+    border: none;
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+    color: #373f41; 
+    width: 200px; 
+    font-size: 16px;
+    transition: border-color 0.3s ease; 
 }
 
 .loan-type {
     padding-top: 40px;
     margin-left: 20px;
+}
+
+.loantypes {
+    color:#373f41;
+    margin-left: 25px;
+}
+
+#loan_type:focus {
+    border-color: #F9A602;
+    outline: none;
+}
+
+
+
+#loan_type option {
+    padding: 10px; 
 }
 
 .select-container {
@@ -49,25 +56,34 @@
     justify-content: center;
 }
 
-.amount {
-    display: flex;
-    gap: 35px; 
-    margin-left: 20px;
-    margin-top: 20px;
+
+
+
+.amount { 
+   margin-top: 40px;
+   margin-left: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
 }
+
 
 .amount-container {
     display: flex;
-    flex-direction: column; 
+    flex-direction: row;
+    gap: 15px;
 }
 
+
 input[type="number"] {
-    width: 431px;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 18px;
-    margin-left: -20px;
+    width: 350px;
+    padding: 8px;
+    outline: none;
+    border: none;
+    /* border: 0.5px solid #373f41;  */
+    border-radius: 5px; 
+    font-size: 20px; 
+    color:#373f41;
 }
 
 input[type="number"]:focus {
@@ -76,55 +92,40 @@ input[type="number"]:focus {
 }
 
 .terms {
+
     margin-top: 30px;
     margin-left: 20px;
     display: flex;
-    flex-direction: row; 
-    gap: 35px;
+    flex-direction: column;
+    gap: 38px;
 }
 
 .term-container {
-    flex-direction: column; 
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
 }
-.term-container select {
-    appearance: none; 
-    -webkit-appearance: none; 
-    -moz-appearance: none; 
-    background: transparent; 
-    border: 1px solid #ccc; 
-    padding: 8px 12px; 
-    font-size: 16px; 
-    border-radius: 4px; 
-    padding-right: 30px;
-}
-.term-container::after {
-    content: '▼'; 
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    transform: translateY(-50%);
-    pointer-events: none; 
-    font-size: 16px; 
-    color: #373f41; 
-}
+
+
 #loan_term {
-    padding: 12px; 
+    padding: 10px; 
+    /* border: 1px solid #373f41;  */
     outline: none;
     border: none;
-    border-radius: 10px; 
+    border-radius: 5px; 
     background-color: #f9f9f9; 
     color: #373f41; 
-    width: 431px; 
+    width: 200px; 
     font-size: 16px;
     transition: border-color 0.3s ease; 
-    margin-left: -20px;
 }
 
 #loan_term:focus {
     border-color: #F9A602;
     outline: none;
 }
+
+
 
 #loan_term option {
     padding: 10px; 
@@ -136,34 +137,37 @@ input[type="number"]:focus {
     justify-content: center;
 }
 
+
+.submit {
+    display: flex;  
+    margin-top: 680px;  
+    margin-left: 350px;     
+}
+
+
 .submit button {
-    background-color: #373f41;              
-    color: #F9A602;                                   
-    font-size: 32px;                               
-    border-radius: 10px;   
-    width: 458px; 
-    margin-top: 95px;
-    margin-left: 240px;
-    box-shadow: 0px 4px 4px 0px #00000080;
-    border: none;
-    padding: 10px;
+    background-color: #373f41; 
+    border: none;              
+    color: #F9A602;              
+    padding: 10px 20px;        
+    text-align: center;        
+    text-decoration: none;     
+    display: inline-block;   
+    font-size: 16px;           
+    margin: 4px 2px;           
+    cursor: pointer;           
+    border-radius: 5px;        
+    transition: background-color 0.3s ease; 
+    border: 1px solid #F9A602;
+
 }
-.current-loan {
-    width: 746px;
-    height: 129px;
-    position: absolute; 
-    font-family: Poppins, sans-serif; 
-    font-size: 32px;
-    font-weight: 800;
-    line-height: 48px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    color: #373F41;
-    margin-left: 85px;
-    margin-top: -20px;
+.submit button:hover {
+    border: 2px solid #F9A602;
+    background: #373f41;
+    color:#ffffff;
+    
 }
+
 .loans {
     width: 20px;
     height:100%;
@@ -171,61 +175,38 @@ input[type="number"]:focus {
     margin-left: 667px;
     padding-top: 30px;
     padding-left: 30px;
-}
+  
 
-.input-like-box {
-    display: inline-block;
-    padding: 10px;
-    width: 431px; 
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    color: #373f41;
-    text-align: center; 
-}
-
-#payment_method {
-    padding: 10px;
-    width: 220px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    color: #373f41;
-    font-size: 16px;
 }
 
 #table {
-    width: 1800px; 
+    width: 60%;
     border-collapse: collapse;
-    position: absolute;
-    top: 700px;
-    left: 1000px;
-    transform: translateX(-50%); 
-    background-color: white;
-    table-layout: auto; 
+    position: fixed;
+    
 }
-
+  
 #table th,
 #table td {
     border-bottom: 1px solid #dddddd;
     font-size: 16px;
     padding: 2px;
     text-align: left;
-    background-color: #d9d9d9;
-    min-width: 100%; 
 }
 
+
+#table td p {
+    text-align: center;
+}
 #table th {
     background-color: #373f41;
-    color: #ffffff;
+    color: #F9A602;
     border-bottom: 1px solid #ddd;
     font-size: 18px;
     padding: 8px;
     text-align: center;
 }
 
-#table, #table th, #table td {
-    border-spacing: 0;
-    margin: 0;
+#table tbody tr:hover {
+    background-color: #D9D9D9;
 }
