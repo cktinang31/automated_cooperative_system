@@ -28,11 +28,27 @@
                 <tbody>
                     <tr onclick="openLoanModal();">
                         <td>0070</td>
-                        <td>Loan Application (Utang)</td>
+                        <td>Loan Application</td>
                         <td>Ariel Berongan has...</td>
                         <td>09-11-24</td>
                     </tr>                    
                 </tbody>
+                <tbody>
+                <tr onclick="openSavingsModal();">
+                    <td>0070</td>
+                    <td>Savings</td>
+                    <td>Ariel Berongan has...</td>
+                    <td>09-11-24</td>
+                </tr> 
+                </tbody>
+                <tbody>
+                    <tr onclick="openCBUModal();">
+                        <td>0070</td>
+                        <td>CBU</td>
+                        <td>Ariel Berongan has...</td>
+                        <td>09-11-24</td>
+                    </tr> 
+                </tbody>                  
             </table>
         </div>
 
@@ -146,6 +162,71 @@
     </div>
 </div>
 
+<!-- The Savings Modal -->
+<div id="savingsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeSavingsModal()">&times;</span>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="savings-modal-name"></td>
+            </tr>
+            <tr>
+                <td>User ID:</td>
+                <td id="savings-modal-userid"></td>
+            </tr>
+            <tr>
+                <td>Request Type:</td>
+                <td id="savings-modal-requestType"></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td id="savings-modal-amount"></td>
+            </tr>
+            <tr>
+                <td>Mode of Payment:</td>
+                <td id="savings-modal-modeOfPayment"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button class="approve-button">Approve</button>
+            <button class="decline-button">Decline</button>
+        </div>
+    </div>
+</div>
+
+<!-- The CBU Modal -->
+<div id="cbuModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCBUModal()">&times;</span>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="cbu-modal-name"></td>
+            </tr>
+            <tr>
+                <td>User ID:</td>
+                <td id="cbu-modal-userid"></td>
+            </tr>
+            <tr>
+                <td>Request Type:</td>
+                <td id="cbu-modal-requestType"></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td id="cbu-modal-amount"></td>
+            </tr>
+            <tr>
+                <td>Mode of Payment:</td>
+                <td id="cbu-modal-modeOfPayment"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button class="approve-button">Approve</button>
+            <button class="decline-button">Decline</button>
+        </div>
+    </div>
+</div>
 
         <script>
             function openModal(requestId, details, additionalDetails, date) {
@@ -192,7 +273,50 @@ function closeLoanModal() {
     document.getElementById('loanModal').style.display = 'none';
 }
 
+function openSavingsModal() {
+    document.getElementById('savings-modal-name').innerText = 'Ariel Berongan'; // Example data
+    document.getElementById('savings-modal-userid').innerText = 'UID-0070'; // Example data
+    document.getElementById('savings-modal-requestType').innerText = 'Savings'; // Example data
+    document.getElementById('savings-modal-amount').innerText = '1,000 PHP'; // Example data
+    document.getElementById('savings-modal-modeOfPayment').innerText = 'GCash'; // Example data
 
-        </script>
+    document.getElementById('savingsModal').style.display = 'block';
+}
+
+function closeSavingsModal() {
+    document.getElementById('savingsModal').style.display = 'none';
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const savingsModal = document.getElementById('savingsModal');
+    if (event.target === savingsModal) {
+        closeSavingsModal();
+    }
+}
+
+function openCBUModal() {
+    document.getElementById('cbu-modal-name').innerText = 'Ariel Berongan'; // Example data
+    document.getElementById('cbu-modal-userid').innerText = 'UID-0070'; // Example data
+    document.getElementById('cbu-modal-requestType').innerText = 'CBU'; // Example data
+    document.getElementById('cbu-modal-amount').innerText = '1,500 PHP'; // Example data
+    document.getElementById('cbu-modal-modeOfPayment').innerText = 'Gcash'; // Example data
+
+    document.getElementById('cbuModal').style.display = 'block';
+}
+
+function closeCBUModal() {
+    document.getElementById('cbuModal').style.display = 'none';
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const cbuModal = document.getElementById('cbuModal');
+    if (event.target === cbuModal) {
+        closeCBUModal();
+    }
+}
+
+    </script>
     </body>
 </html>
