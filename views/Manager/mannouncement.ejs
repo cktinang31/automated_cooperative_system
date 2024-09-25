@@ -9,16 +9,54 @@
         <%- include("../Manager/managersidebar.ejs") %>
     </body>
 
-    <div class="container" contenteditable="true">
-    <div class="announcement-container">
-        <p class="announcement-title">Title</p>
-       
-    </div>
+    <div class="container" >
+        <div class="announcement-container" contenteditable="true" id="announcementContainer">
+            <p class="announcement-title" id="defaultText">Title</p>
+        </div>
+    
+        <script>
+            const announcementContainer = document.getElementById('announcementContainer');
+            const announcementTitle = document.getElementById('defaultText');
+    
+            announcementContainer.addEventListener('click', function() {
+                // Hide the default paragraph when the container is clicked
+                if (announcementTitle) {
+                    announcementTitle.style.display = 'none';
+                    // Set focus to the editable container
+                    announcementContainer.focus();
+                }
+            });
+    
+            announcementContainer.addEventListener('blur', function() {
+                // Check if there is any text entered in the container
+                if (!announcementContainer.textContent.trim()) {
+                    announcementTitle.style.display = 'block'; // Show the paragraph if empty
+                }
+            });
+    
+            // Optional: Show the title if the page loads with no text
+            window.addEventListener('load', function() {
+                if (!announcementContainer.textContent.trim()) {
+                    announcementTitle.style.display = 'block';
+                }
+            });
+        </script>
 
-    <div class="write-container" contenteditable="true">
-        <p class="write-title">Write announcements...</p>
+    <div class="write-container" contenteditable="true" id="writeContainer">
+        <p class="write-title" id="defaulttext">Write announcements...</p>
        
     </div>
+    <script>
+        const writeContainer = document.getElementById('writeContainer');
+        const writeTitle = document.getElementById('defaulttext');
+
+        writeContainer.addEventListener('click', function() {
+            // Hide the default paragraph when the container is clicked
+            if (writeTitle) {
+                writeTitle.style.display = 'none';
+            }
+        });
+    </script>
 
     <div class="post-container">
         <p class="post-title">POST</p>

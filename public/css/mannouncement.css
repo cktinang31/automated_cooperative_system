@@ -13,13 +13,14 @@ body {
     border-radius: 10px;
     border: 1px solid #373F41;
     cursor: text;
-
+    padding-left: 10px;  /* Apply padding to the container */
+    padding-top: 14px;  
+    box-sizing: border-box; /* Ensure padding doesn’t affect the total width/height */
+    overflow: hidden; /* Prevent content overflow */
 }
-.announcement-container p{
-
-    color:   #373F41;
-    padding-left: 12px;
-    
+.announcement-title {
+    color: #373F41;
+    margin: 0; 
 }
 .write-container {
     position: absolute;
@@ -31,13 +32,17 @@ body {
     border-radius: 10px;
     border: 1px solid #373F41;
    cursor:text;
+   padding-left: 10px;  /* Apply padding to the container */
+   padding-top: 14px;  
+   box-sizing: border-box; /* Ensure padding doesn’t affect the total width/height */
+   overflow: hidden;
 
 }
-.write-container p{
+.write-title{
 
     color:   #373F41;
-    padding-left:  12px;
-
+    /* padding-left:  12px; */
+    margin: 0;
 }
 .post-container {
     position: absolute;
