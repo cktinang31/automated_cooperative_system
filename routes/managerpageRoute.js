@@ -5,6 +5,10 @@ const Loan_application = require('../models/loan_application.js');
 const Application = require ('../models/application.js');
 const Savtransaction = require ('../models/savtransaction');
 const Cbutransaction = require ('../models/cbutransaction');
+const Cbu = require('../models/cbu.js');
+const Savings = require('../models/savings.js');
+const Loan = require('../models/loan.js');
+const Loan_payment = require('../models/loan_payment.js');
 const router = express.Router();
 
 
@@ -419,7 +423,49 @@ router.get(['/Manager/dashboard', '/Manager/managerdashboard/'],(req,res, next) 
         
 });
 
-router.get(['/Manager/membersprofile', '/Manager/profile', '/Manager/membersinfo'],(req,res, next) =>{
+router.get('/Manager/membersprofile/:userId', async (req,res, next) =>{
+   try {
+
+        const userId =req.params.userId;
+        console.log('request userId:', userId);
+        const user = await User.findOne({
+            where: { user_id: userId },
+            include: [
+                { model: Loan_application, required: true },
+                { model: Savings, required: true },
+                { model: Cbu, required: true },
+                { model: Savtransaction, required: true },
+                { model: Cbutransaction, required: true },
+                { model: Loan, required: true },
+                { model: Loan_payment, required: true },
+            ]
+        });
+
+        if (!user) {
+            console.log('user not found');
+            return res.status(404).send('user not found');
+        };
+
+        console.log('Member:', user);
+        res.render('./Manager/membersprofile', {user,
+            savings: user.Savings,
+            cbu: user.Cbu,
+            loans: user.Loan,
+            loan_application: user.Loan_application,
+            savtransaction: user.Savtransaction,
+            cbu_transaction: user.Cbutransaction,
+            loan_payment: user.Loan_payment,
+            title: 'Members Information' })
+
+    } catch (error) {
+        console.error('error fetching member:', error);
+        res.status (500).send('Error fetching Member.🧛')
+    } 
+        
+});
+
+
+router.get(['/Manager/members', '/Manager/member', ],async (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
@@ -428,8 +474,20 @@ router.get(['/Manager/membersprofile', '/Manager/profile', '/Manager/membersinfo
         if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
             console.log('User is authenticated as manager.');
             const user = req.user;
-            res.render('./Manager/membersprofile', { title: 'Members Information', user });
-        } else {2
+
+            try {
+                const users = await User.findAll({
+                    where: {
+                        role : 'regular',
+                    },
+                });
+                res.render('./Manager/member', { users, title: 'Members', user });
+            } catch (error) {
+                console.error('error fetching users:', error);
+                res.status(500).send('error fetching users.');
+            }
+            
+        } else {
             console.log('User is not authenticated. Redirecting to login page.');
             req.session.returnTo = req.originalUrl;
             res.redirect('/login');
@@ -441,9 +499,6 @@ router.get(['/Manager/membersprofile', '/Manager/profile', '/Manager/membersinfo
         
 });
 
-router.get(['/Manager/member', '/Manager/members'], (req, res) => {
-    res.render('Manager/member', { title: 'Members' });
-});
 
 
 router.get(['/Manager/request', '/Manager/re_quest'], (req, res) => {

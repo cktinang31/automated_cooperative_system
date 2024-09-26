@@ -11,67 +11,68 @@ const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
 const User = require('../models/user'); 
 const Application = require('../models/application');
 
-const Savings = sequelize.define('Savings', {
-    savings_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        primaryKey: true,
-        unique:true,
-    },
-    application_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Application,  
-            key: 'application_id'
+
+const SavingsModel = (sequelize) => {
+    const Savings = sequelize.define('Savings', {
+        savings_id: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            primaryKey: true,
+            unique:true,
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: User,
-            key: 'user_id'
+        application_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: Application,  
+                key: 'application_id'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    },
-    amount: {
-        type: DataTypes.FLOAT(10, 2),
-        allowNull: false
-    },
-    interest: {
-        type: DataTypes.FLOAT(10, 2),
-        allowNull: true
-    },
-    timestamp: {
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW
-    }
-});
-
-
-Savings.belongsTo(Application, {
-    foreignKey: 'application_id',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
-
-Savings.belongsTo(User, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
-
-
-Savings.sync()
-    .then(() => {
-        console.log('Savings tables synchronized successfully');
-    })
-    .catch((error) => {
-        console.error('Error synchronizing tables:', error);
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: User,
+                key: 'user_id'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        },
+        amount: {
+            type: DataTypes.FLOAT(10, 2),
+            allowNull: false
+        },
+        interest: {
+            type: DataTypes.FLOAT(10, 2),
+            allowNull: true
+        },
+        timestamp: {
+            type: DataTypes.DATE,
+            defaultValue: Sequelize.NOW
+        }
     });
+    
+    
+    const associate = (models) => {
+        Savings.belongsTo(models.Application, {
+            foreignKey: 'application_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
 
-module.exports = Savings;
+        Savings.belongsTo(models.User, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+    };
+
+    Savings.associate = associate;
+
+    return Savings;
+};
+
+
+module.exports = SavingsModel;

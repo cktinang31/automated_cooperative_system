@@ -28,13 +28,12 @@
             });
     
             announcementContainer.addEventListener('blur', function() {
-                // Check if there is any text entered in the container
                 if (!announcementContainer.textContent.trim()) {
-                    announcementTitle.style.display = 'block'; // Show the paragraph if empty
+                    announcementTitle.style.display = 'block'; 
                 }
             });
     
-            // Optional: Show the title if the page loads with no text
+           
             window.addEventListener('load', function() {
                 if (!announcementContainer.textContent.trim()) {
                     announcementTitle.style.display = 'block';
@@ -51,7 +50,6 @@
         const writeTitle = document.getElementById('defaulttext');
 
         writeContainer.addEventListener('click', function() {
-            // Hide the default paragraph when the container is clicked
             if (writeTitle) {
                 writeTitle.style.display = 'none';
             }
@@ -65,7 +63,6 @@
     <div class="cooperative_advisory">
         <h1 class="coop_ad">Cooperative Advisory</h1>
         <p class="announcements">The online transactions in September 12, 2024 is not available.</p>
-        <!-- <i class="fa-regular fa-comments"></i> -->
     </div>
 
     

@@ -20,7 +20,15 @@ const memberpageRoutes = require('./routes/memberpageRoute');
 const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
 const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
-const User = require('./models/user');
+const {Application, 
+  Cbu, 
+  Cbutransaction, 
+  Loan_application, 
+  Loan_payment, 
+  Loan, 
+  Savings, 
+  Savtransaction,
+  User,} = require('./models/sync');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
