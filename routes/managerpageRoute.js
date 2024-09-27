@@ -1,14 +1,14 @@
 const express = require('express');
-const User = require('../models/user');
 const Content = require('../models/content');
-const Loan_application = require('../models/loan_application.js');
-const Application = require ('../models/application.js');
-const Savtransaction = require ('../models/savtransaction');
-const Cbutransaction = require ('../models/cbutransaction');
-const Cbu = require('../models/cbu.js');
-const Savings = require('../models/savings.js');
-const Loan = require('../models/loan.js');
-const Loan_payment = require('../models/loan_payment.js');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 const router = express.Router();
 
 
@@ -423,46 +423,6 @@ router.get(['/Manager/dashboard', '/Manager/managerdashboard/'],(req,res, next) 
         
 });
 
-router.get('/Manager/membersprofile/:userId', async (req,res, next) =>{
-   try {
-
-        const userId =req.params.userId;
-        console.log('request userId:', userId);
-        const user = await User.findOne({
-            where: { user_id: userId },
-            include: [
-                { model: Loan_application, required: true },
-                { model: Savings, required: true },
-                { model: Cbu, required: true },
-                { model: Savtransaction, required: true },
-                { model: Cbutransaction, required: true },
-                { model: Loan, required: true },
-                { model: Loan_payment, required: true },
-            ]
-        });
-
-        if (!user) {
-            console.log('user not found');
-            return res.status(404).send('user not found');
-        };
-
-        console.log('Member:', user);
-        res.render('./Manager/membersprofile', {user,
-            savings: user.Savings,
-            cbu: user.Cbu,
-            loans: user.Loan,
-            loan_application: user.Loan_application,
-            savtransaction: user.Savtransaction,
-            cbu_transaction: user.Cbutransaction,
-            loan_payment: user.Loan_payment,
-            title: 'Members Information' })
-
-    } catch (error) {
-        console.error('error fetching member:', error);
-        res.status (500).send('Error fetching Member.🧛')
-    } 
-        
-});
 
 
 router.get(['/Manager/members', '/Manager/member', ],async (req,res, next) =>{
@@ -499,9 +459,59 @@ router.get(['/Manager/members', '/Manager/member', ],async (req,res, next) =>{
         
 });
 
+router.get('/Manager/membersprofile/:userId', async (req, res, next) => {
+    const userId = req.params.userId;
+    console.log('Request userId:', userId);
+
+    try {
+        const user = await User.findAll({
+            where: { user_id: userId },
+            include: [
+                { model: Loan_application, required: false },
+                { model: Savings, required: false },
+                { model: Cbu, required: false },
+                { model: Savtransaction, required: false },
+                { model: Cbutransaction, required: false },
+                { model: Loan, required: false },
+                { model: Loan_payment, required: false },
+            ]
+        });
+
+        if (!user || user.length === 0) {
+            console.log('User not found');
+            return res.status(404).send('User not found');
+        }
+
+        // Assuming user is an array of results; get the first user
+        const currentUser = user[0]; 
+        console.log('Member:', currentUser);
+
+        // Log the savings and cbu data
+        console.log('Savings:', currentUser.Savings);
+        console.log('CBU:', currentUser.Cbus);
+
+        res.render('./Manager/membersprofile', {
+            user: currentUser,
+            savings: currentUser.Savings,
+            cbu: currentUser.Cbus,
+            loans: currentUser.Loans,
+            loan_application: currentUser.Loan_applications,
+            savtransaction: currentUser.Savtransactions,
+            cbu_transaction: currentUser.Cbutransactions,
+            loan_payment: currentUser.Loan_payments,
+            title: 'Members Information'
+        });
+    } catch (error) {
+        console.error('Error fetching member:', error);
+        res.status(500).send('Error fetching member data.');
+    }
+});
 
 
-router.get(['/Manager/request', '/Manager/re_quest'], (req, res) => {
+
+
+
+router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
@@ -510,7 +520,43 @@ router.get(['/Manager/request', '/Manager/re_quest'], (req, res) => {
         if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
             console.log('User is authenticated as manager.');
             const user = req.user;
-            res.render('./Manager/re_quest', { title: 'Request', user });
+
+            try {
+                const applications = await Application.findAll({
+                    where: { application_status: 'pending' },
+                    include: User
+                });
+
+                const savtransactions = await Savtransaction.findAll({
+                    where: { status: 'pending' },
+                    include: User
+                });
+
+                const cbutransactions = await Cbutransaction.findAll({
+                    where: { status: 'pending' },
+                    include: User
+                });
+
+                const loanApplications = await Loan_application.findAll({ 
+                    where: { application_status: 'pending' },
+                    include: User
+                });
+
+               
+                res.render('./Manager/re_quest', {
+                    applications,
+                    loanApplications,
+                    savtransactions,
+                    cbutransactions,
+                    title: 'Request',
+                    user
+                });
+
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
+
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
             req.session.returnTo = req.originalUrl;

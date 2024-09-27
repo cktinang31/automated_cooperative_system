@@ -180,7 +180,7 @@ input[type="number"]:focus {
 }
 
 #table {
-    width: 60%;
+    width: 1810px; 
     border-collapse: collapse;
     position: fixed;
     
