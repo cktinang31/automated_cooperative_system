@@ -1,11 +1,14 @@
 const express = require('express');
-const User = require('../models/user');
 const Content = require('../models/content');
-const Loan_payment = require('../models/loan_payment');
-const Loan = require('../models/loan');
-const Loan_application = require ('../models/loan_application');
-const Savings = require ('../models/savings');
-const Cbu = require('../models/cbu');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 const { title } = require('process');
 
 
@@ -358,12 +361,24 @@ router.get('/Member/dashboard', async (req, res, next) => {
 
             
             try {
+
+                const contents = await Content.findAll ();
+                const savings = await Savings.findAll ({
+                    where: {
+                        user_id: user.user_id,
+                    }
+                });
                 const cbu = await Cbu.findAll( {
                     where: {
                         user_id: user.user_id,
                     },
                 });
-                res.render('Member/dashboard', { cbu, title: 'Current Dashboard', user });
+                const loans = await Loan.findAll( {
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+                res.render('Member/dashboard', { loans,contents, savings, cbu, title: 'Dashboard', user });
             } catch (error) {
                 console.error('Error fetching requests:', error);
                 res.status(500).send('Error fetching requests.');

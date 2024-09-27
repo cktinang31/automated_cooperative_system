@@ -1,6 +1,14 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const User = require ('../models/user');
+const {Application, 
+  Cbu, 
+  Cbutransaction, 
+  Loan_application, 
+  Loan_payment, 
+  Loan, 
+  Savings, 
+  Savtransaction,
+  User,} = require('../models/sync');
 
 
 const user_reg = async (req, res) => {

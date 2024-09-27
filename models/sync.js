@@ -28,7 +28,14 @@ const Savtransaction = SavModel(sequelize);
 const Cbutransaction = CModel(sequelize);
 
 Application.associate({User});
-User.associate({ Application, Loan_application });
+User.associate({ Application, 
+    Loan_application, 
+    Savings, 
+    Cbu, 
+    Savtransaction, 
+    Cbutransaction, 
+    Loan, 
+    Loan_payment });
 Loan_application.associate({ User });
 Cbu.associate({User, Application});
 Savings.associate({User, Application});

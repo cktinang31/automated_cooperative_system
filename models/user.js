@@ -11,6 +11,13 @@ const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
 
 const Application = require('../models/application')(sequelize);
 const Loan_application = require('../models/loan_application')(sequelize);
+const Savings = require('../models/savings')(sequelize);
+const Cbu = require('../models/cbu')(sequelize);
+const Savtransaction = require('../models/savtransaction')(sequelize);
+const Cbutransaction =require('../models/cbutransaction')(sequelize);
+const Loan = require ('../models/loan')(sequelize);
+const Loan_payment = require ('../models/loan_payment')(sequelize);
+
 
 const UserModel = (sequelize) => {
     const User = sequelize.define('User', {
@@ -91,7 +98,42 @@ const UserModel = (sequelize) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });
+
+        User.hasMany(models.Savings, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+
+        User.hasMany(models.Cbu, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+
+        User.hasMany(models.Savtransaction, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
         
+        User.hasMany(models.Cbutransaction, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+
+        User.hasMany(models.Loan, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+        
+        User.hasMany(models.Loan_payment, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
     };
 
     User.beforeCreate(async (user) => {
