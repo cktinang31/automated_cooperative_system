@@ -131,6 +131,8 @@ router.get('/Member/transaction', (req,res, next) =>{
         
 });
 
+
+
 router.get('/Member/dividend_deposit', (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
@@ -480,6 +482,13 @@ router.get('/Member/loans', async (req, res, next) => {
 
         
 });
+//transaction_history
+
+router.get('/Member/transaction_history', (req, res) => {
+    res.render('Member/transaction_history', { title: 'transaction_history'});
+  });
+
+  
 
 router.get('/Member/savings', (req,res, next) =>{
     try {
