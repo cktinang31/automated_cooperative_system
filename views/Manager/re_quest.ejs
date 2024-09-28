@@ -8,27 +8,65 @@
         <%- include("../Manager/managersidebar.ejs") %>
 
         <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Request ID</th>
-                        <th>Request Type</th>
-                        <th>Details</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Request Type</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
                     
-                </tbody>
+                    <tbody>
+                        <% if (requests.length > 0) { %>
+                            <% requests.forEach(req => { %>
+                                <tr onclick="openModal('<%= req.id %>', '<%= req.type %>', '<%= req.fname %>', '<%= req.lname %>', '<%= req.details %>', '<%= req.amount %>', '<%= req.loantype %>', '<%= req.interest %>', '<%= req.date %>')">
+                                    <td><%= req.id %></td>
+                                    <td><%= req.type %></td>
+                                    <td>
+                                        <% if (req.type === 'Application') { %>
+                                            <%= req.fname %> <%= req.lname %> has sent a membership request.
+                                        <% } else if (req.type === 'Savings Transaction') { %>
+                                            <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
+                                        <% } else if (req.type === 'CBU Transaction') { %>
+                                            <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
+                                        <% } else if (req.type === 'Loan Application') { %>
+                                            <%= req.details %> has applied for a <%= req.loantype %> loan of Php <%= req.amount %> with <%= req.interest %>% interest.
+                                        <% } %>
+                                    </td>
+                                    <td><%= new Date(req.date).toLocaleDateString() %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No pending requests</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                    
+                    
+                </table>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Request Type</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                
+                
                 <tbody>
-                    <tr onclick="openModal('0069', 'Ariel Berongan', 'Additional Details', '09-11-24');">
+                    <!-- <tr onclick="openModal('0069', 'Ariel Berongan', 'Additional Details', '09-11-24');"></tr>
                         <td>0069</td>
                         <td>Membership</td>
                         <td>Ariel Berongan has...</td>
                         <td>09-11-24</td>
-                    </tr>
-                </tbody>
-                <tbody>
+                    </tr> -->
                     <tr onclick="openLoanModal();">
                         <td>0070</td>
                         <td>Loan Application</td>
@@ -55,71 +93,112 @@
             </table>
         </div>
 
-        <!-- The Modal for Membership Request -->
-        <div id="myModal" class="modal">
+        
+
+        
+        <div id="applicationModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
-                <table>
-                    <tr>
-                        <td>First Name:</td>
-                        <td id="modal-fname"></td>
-                    </tr>
-                    <tr>
-                        <td>Middle Name:</td>
-                        <td id="modal-mname"></td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td id="modal-lname"></td>
-                    </tr>
-                    <tr>
-                        <td>Date of Birth:</td>
-                        <td id="modal-dob"></td>
-                    </tr>
-                    <tr>
-                        <td>Place of Birth:</td>
-                        <td id="modal-pob"></td>
-                    </tr>
-                    <tr>
-                        <td>Address:</td>
-                        <td id="modal-address"></td>
-                    </tr>
-                    <tr>
-                        <td>Email Add:</td>
-                        <td id="modal-email"></td>
-                    </tr>
-                    <tr>
-                        <td>Contact Number:</td>
-                        <td id="modal-contact"></td>
-                    </tr>
-                    <tr>
-                        <td>Charges</td>
-                        <td id="Php 1, 000.00"
-                    </tr>
-                    <tr>
-                        <td>Capital Build-Up:</td>
-                        <td>1000.00 php</td>
-                    </tr>
-                    <tr>
-                        <td>Savings:</td>
-                        <td>500.00 php</td>
-                    </tr>
-                    <tr>
-                        <td>Service Fee:</td>
-                        <td>100.00 php</td>
-                    </tr>
-                    <tr>
-                        <td>Total Charges:</td>
-                        <td>1600.00 php</td>
-                    </tr>
-                </table>
-                <div class="button-container">
-                    <button class="approve-button">Approve</button>
-                    <button class="decline-button">Decline</button>
+                <div class="form-container">
+                    <form id="updateForm" method="POST">
+                        <table>
+                            <tr>
+                                <td>First Name:</td>
+                                <td id=" modal-fname"></td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name:</td>
+                                <td id="modal-mname"></td>
+                            </tr>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td id="modal-lname"></td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth:</td>
+                                <td id="modal-dob"></td>
+                            </tr>
+                            <tr>
+                                <td>Place of Birth:</td>
+                                <td id="modal-pob"></td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td id="modal-address"></td>
+                            </tr>
+                            <tr>
+                                <td>Email Add:</td>
+                                <td id="modal-email"></td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number:</td>
+                                <td id="modal-contact"></td>
+                            </tr>
+                            <tr>
+                                <td>Charges</td>
+                                <td id=""></td>
+                            </tr>
+                            <tr>
+                                <td>Capital Build-Up:</td>
+                                <td><input type="number" id="modal-capital" placeholder="Enter Capital Build-Up" value="cbu.amount" step="0.01"></td>
+                            </tr>
+                            <tr>
+                                <td>Savings:</td>
+                                <td><input type="number" id="modal-savings" placeholder="Enter Savings" value="savings.amount" step="0.01"></td>
+                            </tr>
+                            <tr>
+                                <td>Service Fee:</td>
+                                <td><input type="number" id="modal-service-fee" placeholder="Enter Service Fee" value="100.00" step="0.01"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Charges:</td>
+                                <td id="modal-total-charges"></td>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <button class="approve-button">Approve</button>
+                            <button class="decline-button">Decline</button>
+                        </div>
+                    </form>
                 </div>
+                
+                
+               
             </div>
         </div>
-
+        <script>
+            function openModal(id, type, details) {
+               
+                if (type === 'Application') {
+                    document.getElementById('modal-fname').innerText = requests.fname; 
+                    document.getElementById('modal-mname').innerText = requests.mname;
+                    document.getElementById('modal-lname').innerText = requests.lname;
+                    document.getElementById('modal-dob').innerText = requests.dob;
+                    document.getElementById('modal-pob').innerText = requests.pob;
+                    document.getElementById('modal-email').innerText = requests.email;
+                    document.getElementById('modal-contact').innerText = requests.contact;
+                    document.getElementById('modal-capital').innerText = requests.Cbu.amount;
+                    document.getElementById('modal-savings').innerText = requests.Savings.amount;
+                    document.getElementById('modal-service-fee').innerText = requests.servicefee;
+                    document.getElementById('modal-total-charges').innerText = requests.totalcharges;
+                    document.getElementById('applicationModal').style.display = 'block';
+                } else if (type === 'Loan Application') {
+                    document.getElementById('loan-modal-name').innerText = `${details.fname} ${details.lname}`;
+                    document.getElementById('loan-modal-amount').innerText = details.amount;
+                    document.getElementById('loan-modal-interest').innerText = details.interest;
+                    document.getElementById('loanModal').style.display = 'block';
+                }
+                
+            }
+        
+            function closeModal() {
+                document.getElementById('applicationModal').style.display = 'none';
+            }
+        
+            function closeLoanModal() {
+                document.getElementById('loanModal').style.display = 'none';
+            }
+        </script>
         <!-- The Loan Modal -->
 <div id="loanModal" class="modal">
     <div class="modal-content">
@@ -230,7 +309,7 @@
         </div>
     </div>
 </div>
-
+<!-- 
         <script>
             function openModal(requestId, details, additionalDetails, date) {
                 // Set values in the modal
@@ -284,12 +363,12 @@ function openSavingsModal() {
     document.getElementById('savings-modal-modeOfPayment').innerText = 'GCash'; // Example data
 
     document.getElementById('savingsModal').style.display = 'block';
-}
-
+} -->
+<!-- 
 function closeSavingsModal() {
     document.getElementById('savingsModal').style.display = 'none';
-}
-
+} -->
+<!-- 
 // Close the modal if the user clicks outside of it
 window.onclick = function(event) {
     const savingsModal = document.getElementById('savingsModal');
@@ -320,6 +399,6 @@ window.onclick = function(event) {
     }
 }
 
-    </script>
+    </script> -->
     </body>
 </html>

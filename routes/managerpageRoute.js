@@ -524,30 +524,68 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
             try {
                 const applications = await Application.findAll({
                     where: { application_status: 'pending' },
-                    include: User
+                    
                 });
 
                 const savtransactions = await Savtransaction.findAll({
                     where: { status: 'pending' },
-                    include: User
+                    include: [{ model: User, as: 'User' }]  
                 });
 
                 const cbutransactions = await Cbutransaction.findAll({
                     where: { status: 'pending' },
-                    include: User
+                    include: [{ model: User, as: 'User' }]  
                 });
 
                 const loanApplications = await Loan_application.findAll({ 
                     where: { application_status: 'pending' },
-                    include: User
+                    include: [{ model: User, as: 'User' }]  
                 });
 
-               
+                const requests = [
+                    ...applications.map(app => ({ 
+                       id: app.application_id,
+                       fname: app.fname,
+                       mname: app.mname,
+                       lname: app.lname,
+                       dob: app.date_of_birth,
+                       pob: app.place_of_birth,
+                       address: app.address,
+                       email: app.email,
+                       contact: app.contact,
+                       date: app.date_sent,
+                       type: 'Application' })),
+                       
+
+                    ...savtransactions.map(savtrans => ({ 
+                        id: savtrans.savtransaction_id,
+                        details: `${savtrans.User.fname} ${savtrans.User.lname}`, 
+                        amount: savtrans.amount,
+                        transaction_type: savtrans.transaction_type,
+                        date: savtrans.date_sent,
+                        type: 'Savings Transaction' })),
+
+                    ...cbutransactions.map(cbutrans => ({ 
+                        id: cbutrans.cbutransaction_id,
+                        details: `${cbutrans.User.fname} ${cbutrans.User.lname}`, 
+                        amount: cbutrans.amount,
+                        transaction_type: cbutrans.transaction_type,
+                        date: cbutrans.date_sent,
+                        type: 'CBU Transaction' })),
+
+                    ...loanApplications.map(loanapp => ({ 
+                        id: loanapp.application_id,
+                        details: `${loanapp.User.fname} ${loanapp.User.lname}`, 
+                        amount: loanapp.amount,
+                        loantype: loanapp.loan_type,
+                        interest: loanapp.interest,
+                        date: loanapp.date_sent,
+                        type: 'Loan Application' })),
+                ];
+
+                console.log('Requests:', requests);
                 res.render('./Manager/re_quest', {
-                    applications,
-                    loanApplications,
-                    savtransactions,
-                    cbutransactions,
+                    requests,
                     title: 'Request',
                     user
                 });
