@@ -560,6 +560,8 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
                     ...savtransactions.map(savtrans => ({ 
                         id: savtrans.savtransaction_id,
                         details: `${savtrans.User.fname} ${savtrans.User.lname}`, 
+                        user_id: savtrans.User.user_id,
+                        mode: savtrans.mode,
                         amount: savtrans.amount,
                         transaction_type: savtrans.transaction_type,
                         date: savtrans.date_sent,
@@ -568,6 +570,8 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
                     ...cbutransactions.map(cbutrans => ({ 
                         id: cbutrans.cbutransaction_id,
                         details: `${cbutrans.User.fname} ${cbutrans.User.lname}`, 
+                        user_id: cbutrans.User.id,
+                        mode: cbutrans.mode,
                         amount: cbutrans.amount,
                         transaction_type: cbutrans.transaction_type,
                         date: cbutrans.date_sent,
@@ -576,6 +580,10 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
                     ...loanApplications.map(loanapp => ({ 
                         id: loanapp.application_id,
                         details: `${loanapp.User.fname} ${loanapp.User.lname}`, 
+                        user_id: loanapp.User.user_id,
+                        loanterm: loanapp.loan_term,
+                        monthlypayment: loanapp.monthly_payment,
+                        numberofpayments: loanapp.number_of_payments,
                         amount: loanapp.amount,
                         loantype: loanapp.loan_type,
                         interest: loanapp.interest,
@@ -585,6 +593,8 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
 
                 console.log('Requests:', requests);
                 res.render('./Manager/re_quest', {
+
+
                     requests,
                     title: 'Request',
                     user
