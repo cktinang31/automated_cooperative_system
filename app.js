@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const {Pool,Client} = require ('pg')
-const connectionString = 'postgressql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
+const connectionString = 'postgresql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
 const { Sequelize } = require('sequelize');
 const bcrypt = require ('bcrypt')
 const passport = require('passport');
@@ -20,7 +20,15 @@ const memberpageRoutes = require('./routes/memberpageRoute');
 const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
 const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
-const User = require('./models/user');
+const {Application, 
+  Cbu, 
+  Cbutransaction, 
+  Loan_application, 
+  Loan_payment, 
+  Loan, 
+  Savings, 
+  Savtransaction,
+  User,} = require('./models/sync');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
@@ -110,6 +118,7 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   console.log('Request body:', req.body);
   next();
@@ -164,7 +173,6 @@ passport.use(new LocalStrategy({
   }
 ));
 
-
 app.post('/logout', logout);
 
 app.use(memApplicationRoutes); 
@@ -206,27 +214,6 @@ app.get('/application', (req, res) => {
 
 app.get('/savings', (req, res) => {
   res.render('savings', { title: 'savings'});
-});
-
-app.post('/savings', async (req, res) => {
-  try {
-    const { user_id, amount, interest, loan_id } = req.body;
-    const newSavingsData = {
-      user_id,
-      amount: amount || 500, 
-      interest,
-      loan_id,
-      timestamp: new Date()
-    };
-
-    const newSavings = await Savings.create(newSavingsData);
-
-    console.log('New Savings:', newSavings);
-    res.send('Savings created successfully.');
-  } catch (error) {
-    console.error('Error creating savings:', error);
-    res.status(500).send('Error creating savings.');
-  }
 });
 
 app.post('/savings', async (req, res) => {
@@ -297,8 +284,6 @@ app.get('/Member/profile', (req, res) => {
   res.render('Member/profile', { title: 'Profile '});
 });
 
-
-
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
 });
@@ -338,12 +323,11 @@ app.get('/your-route', (req, res) => {
   res.render('your-template', { user: user });
 });
 
-
 // 404 page
 app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
 app.listen(3000, () => {
-  console.log('Server running on port 3000');
+  console.log('Server running on http://localhost:3000');
 });

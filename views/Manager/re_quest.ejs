@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../Manager/managerhead.ejs") %>
+    <link rel="stylesheet" href="/css/re_quest.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <body>
+        <%- include("../Manager/managerheader.ejs") %>
+        <%- include("../Manager/managersidebar.ejs") %>
+
+        <div class="container">
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Request Type</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <% if (requests.length > 0) { %>
+                            <% requests.forEach(req => { %>
+                                <tr onclick="openModal('<%= req.id %>', '<%= req.type %>', '<%= req.fname %>', '<%= req.lname %>', '<%= req.details %>', '<%= req.amount %>', '<%= req.loantype %>', '<%= req.interest %>', '<%= req.date %>')">
+                                    <td><%= req.id %></td>
+                                    <td><%= req.type %></td>
+                                    <td>
+                                        <% if (req.type === 'Application') { %>
+                                            <%= req.fname %> <%= req.lname %> has sent a membership request.
+                                        <% } else if (req.type === 'Savings Transaction') { %>
+                                            <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
+                                        <% } else if (req.type === 'CBU Transaction') { %>
+                                            <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
+                                        <% } else if (req.type === 'Loan Application') { %>
+                                            <%= req.details %> has applied for a <%= req.loantype %> loan of Php <%= req.amount %> with <%= req.interest %>% interest.
+                                        <% } %>
+                                    </td>
+                                    <td><%= new Date(req.date).toLocaleDateString() %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No pending requests</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                    
+                    
+                </table>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Request Type</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                
+                
+                <tbody>
+                    <!-- <tr onclick="openModal('0069', 'Ariel Berongan', 'Additional Details', '09-11-24');"></tr>
+                        <td>0069</td>
+                        <td>Membership</td>
+                        <td>Ariel Berongan has...</td>
+                        <td>09-11-24</td>
+                    </tr> -->
+                    <tr onclick="openLoanModal();">
+                        <td>0070</td>
+                        <td>Loan Application</td>
+                        <td>Ariel Berongan has...</td>
+                        <td>09-11-24</td>
+                    </tr>                    
+                </tbody>
+                <tbody>
+                <tr onclick="openSavingsModal();">
+                    <td>0070</td>
+                    <td>Savings</td>
+                    <td>Ariel Berongan has...</td>
+                    <td>09-11-24</td>
+                </tr> 
+                </tbody>
+                <tbody>
+                    <tr onclick="openCBUModal();">
+                        <td>0070</td>
+                        <td>CBU</td>
+                        <td>Ariel Berongan has...</td>
+                        <td>09-11-24</td>
+                    </tr> 
+                </tbody>                  
+            </table>
+        </div>
+
+        
+
+        
+        <div id="applicationModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="form-container">
+                    <form id="updateForm" method="POST">
+                        <table>
+                            <tr>
+                                <td>First Name:</td>
+                                <td id=" modal-fname"></td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name:</td>
+                                <td id="modal-mname"></td>
+                            </tr>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td id="modal-lname"></td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth:</td>
+                                <td id="modal-dob"></td>
+                            </tr>
+                            <tr>
+                                <td>Place of Birth:</td>
+                                <td id="modal-pob"></td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td id="modal-address"></td>
+                            </tr>
+                            <tr>
+                                <td>Email Add:</td>
+                                <td id="modal-email"></td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number:</td>
+                                <td id="modal-contact"></td>
+                            </tr>
+                            <tr>
+                                <td>Charges</td>
+                                <td id=""></td>
+                            </tr>
+                            <tr>
+                                <td>Capital Build-Up:</td>
+                                <td><input type="number" id="modal-capital" placeholder="Enter Capital Build-Up" value="cbu.amount" step="0.01"></td>
+                            </tr>
+                            <tr>
+                                <td>Savings:</td>
+                                <td><input type="number" id="modal-savings" placeholder="Enter Savings" value="savings.amount" step="0.01"></td>
+                            </tr>
+                            <tr>
+                                <td>Service Fee:</td>
+                                <td><input type="number" id="modal-service-fee" placeholder="Enter Service Fee" value="100.00" step="0.01"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Charges:</td>
+                                <td id="modal-total-charges"></td>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <button class="approve-button">Approve</button>
+                            <button class="decline-button">Decline</button>
+                        </div>
+                    </form>
+                </div>
+                
+                
+               
+            </div>
+        </div>
+        <script>
+            function openModal(id, type, details) {
+               
+                if (type === 'Application') {
+                    document.getElementById('modal-fname').innerText = requests.fname; 
+                    document.getElementById('modal-mname').innerText = requests.mname;
+                    document.getElementById('modal-lname').innerText = requests.lname;
+                    document.getElementById('modal-dob').innerText = requests.dob;
+                    document.getElementById('modal-pob').innerText = requests.pob;
+                    document.getElementById('modal-email').innerText = requests.email;
+                    document.getElementById('modal-contact').innerText = requests.contact;
+                    document.getElementById('modal-capital').innerText = requests.Cbu.amount;
+                    document.getElementById('modal-savings').innerText = requests.Savings.amount;
+                    document.getElementById('modal-service-fee').innerText = requests.servicefee;
+                    document.getElementById('modal-total-charges').innerText = requests.totalcharges;
+                    document.getElementById('applicationModal').style.display = 'block';
+                } else if (type === 'Loan Application') {
+                    document.getElementById('loan-modal-name').innerText = `${details.fname} ${details.lname}`;
+                    document.getElementById('loan-modal-amount').innerText = details.amount;
+                    document.getElementById('loan-modal-interest').innerText = details.interest;
+                    document.getElementById('loanModal').style.display = 'block';
+                }
+                
+            }
+        
+            function closeModal() {
+                document.getElementById('applicationModal').style.display = 'none';
+            }
+        
+            function closeLoanModal() {
+                document.getElementById('loanModal').style.display = 'none';
+            }
+        </script>
+        <!-- The Loan Modal -->
+<div id="loanModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLoanModal()">&times;</span>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="loan-modal-name"></td>
+            </tr>
+            <tr>
+                <td>User ID:</td>
+                <td id="loan-modal-userid"></td>
+            </tr>
+            <tr>
+                <td>Loan Type:</td>
+                <td id="loan-modal-loanType"></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td id="loan-modal-amount"></td>
+            </tr>
+            <tr>
+                <td>Interest:</td>
+                <td id="loan-modal-interest"></td>
+            </tr>
+            <tr>
+                <td>Loan Term:</td>
+                <td id="loan-modal-term"></td>
+            </tr>
+            <tr>
+                <td>Monthly Payment:</td>
+                <td id="loan-modal-monthlyPayment"></td>
+            </tr>
+            <tr>
+                <td>Number of Payments:</td>
+                <td id="loan-modal-numPayments"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button class="approve-button">Approve</button>
+            <button class="decline-button">Decline</button>
+        </div>
+    </div>
+</div>
+
+<!-- The Savings Modal -->
+<div id="savingsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeSavingsModal()">&times;</span>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="savings-modal-name"></td>
+            </tr>
+            <tr>
+                <td>User ID:</td>
+                <td id="savings-modal-userid"></td>
+            </tr>
+            <tr>
+                <td>Request Type:</td>
+                <td id="savings-modal-requestType"></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td id="savings-modal-amount"></td>
+            </tr>
+            <tr>
+                <td>Mode of Payment:</td>
+                <td id="savings-modal-modeOfPayment"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button class="approve-button">Approve</button>
+            <button class="decline-button">Decline</button>
+        </div>
+    </div>
+</div>
+
+<!-- The CBU Modal -->
+<div id="cbuModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCBUModal()">&times;</span>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td id="cbu-modal-name"></td>
+            </tr>
+            <tr>
+                <td>User ID:</td>
+                <td id="cbu-modal-userid"></td>
+            </tr>
+            <tr>
+                <td>Request Type:</td>
+                <td id="cbu-modal-requestType"></td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td id="cbu-modal-amount"></td>
+            </tr>
+            <tr>
+                <td>Mode of Payment:</td>
+                <td id="cbu-modal-modeOfPayment"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button class="approve-button">Approve</button>
+            <button class="decline-button">Decline</button>
+        </div>
+    </div>
+</div>
+<!-- 
+        <script>
+            function openModal(requestId, details, additionalDetails, date) {
+                // Set values in the modal
+                document.getElementById('modal-fname').innerText = 'Ariel'; // Example data
+                document.getElementById('modal-mname').innerText = 'Redila'; // Example data
+                document.getElementById('modal-lname').innerText = 'Berongan'; // Example data
+                document.getElementById('modal-dob').innerText = '10-28-2002'; // Example data
+                document.getElementById('modal-pob').innerText = 'Sa Ecoil'; // Example data
+                document.getElementById('modal-address').innerText = 'Dapit sa ka RoEv'; // Example data
+                document.getElementById('modal-email').innerText = 'ariel.berongan@gmail.com'; // Example data
+                document.getElementById('modal-contact').innerText = '09663629002'; // Example data
+
+                // Show the modal
+                document.getElementById('myModal').style.display = 'block';
+            }
+
+            function closeModal() {
+                document.getElementById('myModal').style.display = 'none';
+            }
+
+            // Close the modal if the user clicks outside of it
+            window.onclick = function(event) {
+                const modal = document.getElementById('myModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            }
+           
+            function openLoanModal() {
+    document.getElementById('loan-modal-name').innerText = 'Ariel Berongan'; // Example data
+    document.getElementById('loan-modal-userid').innerText = 'UID-0070'; // Example data
+    document.getElementById('loan-modal-loanType').innerText = 'Loan Application (Utang)'; // Example data
+    document.getElementById('loan-modal-amount').innerText = '50,000 PHP'; // Example data
+    document.getElementById('loan-modal-interest').innerText = '5%'; // Example data
+    document.getElementById('loan-modal-term').innerText = '12 Months'; // Example data
+    document.getElementById('loan-modal-monthlyPayment').innerText = '4,300 PHP'; // Example data
+    document.getElementById('loan-modal-numPayments').innerText = '12'; // Example data
+
+    document.getElementById('loanModal').style.display = 'block';
+}
+
+function closeLoanModal() {
+    document.getElementById('loanModal').style.display = 'none';
+}
+
+function openSavingsModal() {
+    document.getElementById('savings-modal-name').innerText = 'Ariel Berongan'; // Example data
+    document.getElementById('savings-modal-userid').innerText = 'UID-0070'; // Example data
+    document.getElementById('savings-modal-requestType').innerText = 'Savings'; // Example data
+    document.getElementById('savings-modal-amount').innerText = '1,000 PHP'; // Example data
+    document.getElementById('savings-modal-modeOfPayment').innerText = 'GCash'; // Example data
+
+    document.getElementById('savingsModal').style.display = 'block';
+} -->
+<!-- 
+function closeSavingsModal() {
+    document.getElementById('savingsModal').style.display = 'none';
+} -->
+<!-- 
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const savingsModal = document.getElementById('savingsModal');
+    if (event.target === savingsModal) {
+        closeSavingsModal();
+    }
+}
+
+function openCBUModal() {
+    document.getElementById('cbu-modal-name').innerText = 'Ariel Berongan'; // Example data
+    document.getElementById('cbu-modal-userid').innerText = 'UID-0070'; // Example data
+    document.getElementById('cbu-modal-requestType').innerText = 'CBU'; // Example data
+    document.getElementById('cbu-modal-amount').innerText = '1,500 PHP'; // Example data
+    document.getElementById('cbu-modal-modeOfPayment').innerText = 'Gcash'; // Example data
+
+    document.getElementById('cbuModal').style.display = 'block';
+}
+
+function closeCBUModal() {
+    document.getElementById('cbuModal').style.display = 'none';
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const cbuModal = document.getElementById('cbuModal');
+    if (event.target === cbuModal) {
+        closeCBUModal();
+    }
+}
+
+    </script> -->
+    </body>
+</html>
