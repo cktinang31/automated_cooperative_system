@@ -1,5 +1,13 @@
 const express = require('express');
-const User = require('../models/user');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 
 const router = express.Router();
 
