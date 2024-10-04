@@ -63,10 +63,11 @@ nav ul li a {
     font-weight: 800;
     font-size: 1.2rem;
     padding: 2px 25px;
+    position: relative;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-nav ul li a:after {
+nav ul li a::after {
     content: "";
     position: absolute;
     left: 0;
@@ -84,7 +85,7 @@ nav ul li a.active::after {
     transform-origin: bottom left;
 }
 
-nav ul li a:hover::after{
+nav ul li a:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
@@ -94,7 +95,6 @@ nav ul li a:hover ~ a.active::after {
 }
 
 nav li {
-
     margin-right: 50px;
     list-style-type: none;
     margin-bottom: 20px;
@@ -122,7 +122,7 @@ nav a {
     background-color: #f9a602; 
     color: #373f41;
     border: none;
-    top: 28px;
+    top: 25px;
     border-radius: 50px;
     text-decoration: none;
     font-family: 'Poppins';
@@ -130,6 +130,10 @@ nav a {
     font-weight: 600;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login::after {
+    content: none;
 }
 
 .login:hover {

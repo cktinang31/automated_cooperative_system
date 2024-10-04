@@ -19,13 +19,32 @@
         </ul>
     </nav>
     
-    <div>
-        <img class="background1" src="/images/back.jpg" alt="background1" />
-        
-        <div class="application-button">
-            <a href="/application" class="button-link">Apply for Membership</a>
+    <div id="herocarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-    </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="..." class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
     <section id="about">
         <h3>About Us</h3>
@@ -168,45 +187,46 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('nav ul li a');
-            const sections = document.querySelectorAll('section');
-        
-            navLinks.forEach(link => {
-                link.addEventListener('click', function () {
-                    navLinks.forEach(navLink => navLink.classList.remove('active'));
-                    this.classList.add('active');
-                });
+        const navLinks = document.querySelectorAll('nav ul li a');
+        const sections = document.querySelectorAll('section');
+
+        // Add click event listener to each nav link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                this.classList.add('active');
             });
-        
-            window.addEventListener('scroll', () => {
-                let currentSection = '';
-        
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-        
-                    if (window.pageYOffset >= sectionTop - 50 && window.pageYOffset < sectionTop + sectionHeight - 50) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-        
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', () => {
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+
+                if (window.pageYOffset >= sectionTop - 50 && window.pageYOffset < sectionTop + sectionHeight - 50) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+
+            if (window.pageYOffset === 0) {
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSection}`) {
+                    if (link.getAttribute('href') === '/') {
                         link.classList.add('active');
                     }
                 });
-        
-                if (window.pageYOffset === 0) {
-                    navLinks.forEach(link => {
-                        if (link.getAttribute('href') === '/') {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
+            }
         });
-        
+    });
         
     </script>
 
