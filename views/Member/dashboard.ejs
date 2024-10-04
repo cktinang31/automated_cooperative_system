@@ -9,7 +9,7 @@
        
         <div class="container">
             <div class="announcement-container">
-
+ 
               <% if (contents.length > 0) { %>
                 <% contents.forEach(content => { %>
                 <h3 class="announcement-title"><%= content.content_title %></h3>
@@ -31,11 +31,11 @@
             <div class="funds-container">
                
                 <li>
-
-                    
+ 
+                   
                     <a href="/Member/loans" class="funds-btn">
                         <% loans.forEach(loan => { %>
-                            
+                           
                         <p>Php<%= loan.balance %></p>
                         <% }) %>
                         <h3>Loan Balance</h3>
@@ -69,4 +69,3 @@
  
  
 </html>
- 
