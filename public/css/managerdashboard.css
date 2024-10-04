@@ -32,14 +32,14 @@ body {
     opacity: 1;
     position: absolute;
     top: 275px;
-    left: 650px;
+    left: 665px;
 }
 
 .member-container {
     position: absolute;
     width: 485px;
     height: 341px;
-    left: 930px;
+    left: 935px;
     top: 127px;
     background: #373f41;
     border-radius: 10px;
@@ -204,4 +204,8 @@ body {
     background-color: #173AB8;
     border-radius: 4px;
     z-index: -1;
+}
+
+.fa-box {
+    color: #F9A602;
 }
