@@ -548,6 +548,7 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
                        fname: app.fname,
                        mname: app.mname,
                        lname: app.lname,
+                       application_status: app.application_status,
                        dob: app.date_of_birth,
                        pob: app.place_of_birth,
                        address: app.address,
