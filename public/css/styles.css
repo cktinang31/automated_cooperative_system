@@ -144,17 +144,14 @@ nav a {
     text-decoration: none;
 }
 
-.background1 {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 100%;
-    max-height: 100%;
-    position: relative;
-    width: 100%;
+.c-item {
+    height: 480px;
+}
+
+.c-img {
     height: 100%;
-    background-size: contain;
-    background-position: center;
-    background-attachment: fixed;
+    width: 100%;
+    object-fit: cover;
 }
 
 .button-link {
