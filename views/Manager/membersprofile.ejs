@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../Manager/managerhead.ejs") %>
+    <link rel="stylesheet" href="/css/managerprofile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <body>
+        <%- include("../Manager/managerheader.ejs") %>
+        <%- include("../Manager/managersidebar.ejs") %>
+
+        <div class="container">
+          <% if (user) { %>
+              <div class="prof1-container"></div>
+              <div class="prof2-container"></div>
+              <div class="prof3-container">
+                  <img src="/images/download.jpg" alt="Description of Image">
+              </div>
+      
+              <div class="details-container">
+                  <h1 class="details"><i class="fa-solid fa-crown"></i> <%= user.fname %> <%= user.lname %></h1>
+                  <h4 class="details2"><%= user.user_id %></h4>
+                  <p class="contact">E-mail Add: <%= user.email %></p>
+                  <p class="add">Address: <%= user.address %></p>
+                  <p class="pb">Place of Birth: <%= user.place_of_birth %></p>
+                  <p class="db">Date of Birth: <%= user.date_of_birth || 'N/A' %></p>
+              </div>
+      
+              <div class="saving1-container">  
+                <h2 class="savings">Php <%= savings[0]?.amount || '0' %>.00</h2>
+            </div>
+            <div class="saving2-container">  
+                <p class="savingss">Savings</p>
+            </div>
+            <div class="cbu1-container">  
+                <h2 class="savings">Php <%= cbu[0]?.amount || '0' %>.00</h2>
+            </div>
+            <div class="cbu2-container">  
+                <p class="savingss">CBU</p>
+            </div>
+            <div class="loan-container">
+                <h1 class="cbu">Current Loans</h1>
+                <% if (user.Loans.length > 0) { %> <!-- Ensure you're using 'Loans' here -->
+                    <% user.Loans.forEach(loan => { %>
+                        <div class="loan-details">
+                            <p class="lt">Current Loan: <%= loan.loan_type || 'N/A' %></p>
+                            <p class="amount">Amount: Php <%= loan.amount || '0' %>.00</p>
+                            <p class="interest">Interest: <%= loan.interest || '0' %> %</p>
+                            <p class="balance">Balance: Php <%= loan.balance || '0' %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No loans available</p>
+                <% } %>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Amount</th>
+                            <th>Transaction Type</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% const allTransactions = [
+                            ...loan_application.map(app => ({
+                                id: app.id,
+                                amount: app.amount,
+                                type: 'Loan Application',
+                                status: app.status,
+                                date: app.createdAt
+                            })),
+                            ...loan_payment.map(payment => ({
+                                id: payment.id,
+                                amount: payment.amount,
+                                type: 'Loan Payment',
+                                status: payment.status,
+                                date: payment.createdAt
+                            })),
+                            ...savtransaction.map(sav => ({
+                                id: sav.id,
+                                amount: sav.amount,
+                                type: 'Savings Transaction',
+                                status: sav.status,
+                                date: sav.createdAt
+                            })),
+                            ...cbu_transaction.map(cbu => ({
+                                id: cbu.id,
+                                amount: cbu.amount,
+                                type: 'CBU Transaction',
+                                status: cbu.status,
+                                date: cbu.createdAt
+                            }))
+                        ]; %>
+            
+                        <% if (allTransactions.length > 0) { %>
+                            <% allTransactions.forEach(transaction => { %>
+                                <tr>
+                                    <td><%= transaction.id %></td>
+                                    <td>PHP <%= transaction.amount.toFixed(2) %></td>
+                                    <td><%= transaction.type %></td>
+                                    <td><%= transaction.status ? '&#10004;' : '&#10008;' %></td> 
+                                    <td><%= new Date(transaction.date).toLocaleDateString() %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5">No transactions available</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+            
+          <% } %> 
+      </div>
+      
+    </body>
+
+    
+</html>

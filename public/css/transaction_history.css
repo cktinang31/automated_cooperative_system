@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+.transaction-container {
+    width: 89%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+    margin-left: -2%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+
+
+.transaction-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -160px;
+    width: -70%;
+    
+}
+
+.filter-button {
+    padding: 30px 50px;
+    background-color: #4e4e4e;
+    color:white;
+    border: 1px;
+    border-radius: 1px;
+    width: 20px;
+    height: 80px;
+    margin-top: 80px;
+    
+}
+
+.filter-button .dropdown-arrow {
+    margin-left: 14.52px;
+    margin-bottom: 10px;
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 110%;
+    margin-left: 102px;
+   margin-top: 102px;
+}
+
+.transaction-table thead {
+    background-color: #333;
+    color: white;
+}
+
+.transaction-table th, .transaction-table td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-weight: normal;
+
+}
+
+.transaction-table th {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.transaction-table td {
+    font-size: 14px;
+    color: #373f41;
+}
+
+.transaction-table .status {
+    text-align: center;
+}
+
+.status-icon {
+    color: green;
+    font-size: 18px;
+    margin-left: -74%;
+}

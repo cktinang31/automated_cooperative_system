@@ -9,7 +9,7 @@ body {
 .cooperative_advisory {
     box-sizing: border-box;
     position: absolute;
-    width: 755px;
+    width: 765px;
     height: 341px;
     left: 130px;
     top: 127px;
@@ -37,13 +37,17 @@ body {
 
 .member-container {
     position: absolute;
-    width: 475px;
+    width: 485px;
     height: 341px;
     left: 930px;
     top: 127px;
     background: #373f41;
     border-radius: 10px;
     text-align: center;
+}
+
+.member-title {
+    color: #f9a602;
 }
 
 .member-container .fa-regular.fa-user {
@@ -78,7 +82,7 @@ body {
 
 .funds-container {
     position: absolute;
-    width: 1290px;
+    width: 1100px;
     height: 453px;
     left: 130px;
     top: 512px;
@@ -110,13 +114,13 @@ body {
 .funds-container {
     position: absolute;
     width: 1290px;
-    height: 453px; /* Adjusted height to be a bit smaller */
+    height: 453px;
     left: 130px;
     top: 512px;
     background: #f0ecec;
     border-radius: 10px;
     text-align: center;
-    padding: -5px; /* Ensure padding is applied */
+    padding: -5px;
 }
 
 .funds-container h1 {
@@ -128,7 +132,7 @@ body {
     padding: 0;
     margin-top: 20px;
     margin-left: 30px;
-    text-align: left; /* Ensure list items are aligned left within the container */
+    text-align: left;
 }
 
 .funds-list li {

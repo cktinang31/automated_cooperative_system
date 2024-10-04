@@ -20,15 +20,45 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>0069</td>
-                        <td>Palautang</td>
-                        <td>Ariel Berongan</td>
-                        <td>ariel.berongan@gmail.com</td>
-                        <td>09260391014</td>
-                    </tr>
+                    <% if (users.length > 0) { %>
+                        <% users.forEach(user => { %>
+                            <tr data-user-id="<%= user.user_id%>">
+                                <td><%= user.user_id %></td>
+                                <td><% if (user.category === 'gold') { %>
+                                    <p>Gold</p>
+                                    <% } else if (user.category === 'silver') { %>
+                                        <p>Silver</p>
+                                    <% } else if (user.category === 'bronze') { %>
+                                        <p>Bronze</p>
+                                    <% } else { %>
+                                        <p>New Member</p>
+                                    <% } %>
+                                </td>
+                                <td><%= user.fname %> <%= user.lname %></td>
+                                <td><%= user.email %></td>
+                                <td><%= user.contact %></td>
+                            </tr>
+                            <% }) %>
+                        <% } else { %>
+                        <tr>
+                            <td colspan="8">No Members to show.</td>
+                        </tr>}
+                    <% } %>
                 </tbody>
             </table>
+            <script>
+                document.querySelectorAll('tr[data-user-id]').forEach(row => {
+              row.addEventListener('click', function() {
+                  
+                  const userId = this.getAttribute('data-user-id');
+                  
+                  
+                  const destinationUrl = '/Manager/membersprofile/' + userId; 
+                  window.location.href = destinationUrl;
+              });
+            });
+            
+            </script>
         </div>
     </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/transaction_history.css">
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+
+        
+    <div class="transaction-container">
+        <div class="transaction-header">
+            <div class="filter-button">
+                All
+                <span class="dropdown-arrow">▼</span>
+        </div>
+    </div>
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Requested Id</th>
+                    <th>Amount</th>
+                    <th>Transaction Type</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10101010</td>
+                    <td>600.00</td>
+                    <td>Savings Deposit</td>
+                    <td class="status"><span class="status-icon">✔</span></td>
+                    <td>09-03-24</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

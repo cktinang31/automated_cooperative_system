@@ -12,6 +12,24 @@ const bcrypt = require ('bcrypt')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
+const memApplicationRoutes = require('./routes/mem_applicationRoute');
+const userRoutes = require('./routes/userRoute');
+const contentRoutes = require('./routes/contentRoute');
+const loan_applicationRoutes = require('./routes/loan_applicationRoute');
+const loanRoutes = require('./routes/loanRoute');
+const memberpageRoutes = require('./routes/memberpageRoute');
+const managerpageRoutes = require('./routes/managerpageRoute');
+const systemadminRoutes = require('./routes/systemadminRoute');
+const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
+const User = require('./models/user');
+const cbuRoutes = require('./routes/cbuRoute');
+const savingsRoutes = require('./routes/savingsRoute');
+const savtransactionRoutes = require('./routes/savtransactionRoute');
+const cbutransactionRoutes = require('./routes/cbutransactionRoute');
+const collectorRoutes = require('./routes/collectorRoute');
+
+
+// const Application = require('./models/application');
 
  
 const isAuthenticated = (req, res, next) => {
@@ -69,6 +87,11 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  console.log('Request body:', req.body);
+  next();
+});
+
 const upload = multer({ dest: 'uploads/' });
 app.use(passport.initialize());
 app.use(passport.session());
@@ -585,5 +608,5 @@ app.use((req, res) => {
 });
  
 app.listen(3000, () => {
-    console.log('Server running on port 3000');
-})
+  console.log('Server running on port 3000');
+});

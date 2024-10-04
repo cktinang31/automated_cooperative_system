@@ -1,5 +1,4 @@
-
-.applyloan { 
+.applyloan {
     position: fixed;
     width: 964px;
     height: 378px;
@@ -9,7 +8,7 @@
     border-radius: 10px;
     z-index: 999;
 }
-
+ 
 .title {
     color: #373f41;
     font-size: 20px;
@@ -22,45 +21,45 @@
     font-weight: 600;
     margin-left: -16px;
 }
-
+ 
 .loan-options label {
     color: #373f41;
     margin-right: 165px;
     margin-top: 20px;
     display: inline-block;
 }
-
+ 
 .loan-options input[type="radio"] {
-    margin-right: 10px; 
+    margin-right: 10px;
 }
-
+ 
 .loan-options input[type="radio"]:checked + label {
-    font-weight: bold; 
+    font-weight: bold;
 }
-
+ 
 .loan-type {
     padding-top: 40px;
     margin-left: 20px;
 }
-
+ 
 .select-container {
-    margin: 20px 0; 
-    display: flex; 
+    margin: 20px 0;
+    display: flex;
     justify-content: center;
 }
-
+ 
 .amount {
     display: flex;
-    gap: 35px; 
+    gap: 35px;
     margin-left: 20px;
     margin-top: 20px;
 }
-
+ 
 .amount-container {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 }
-
+ 
 input[type="number"] {
     width: 431px;
     padding: 10px;
@@ -69,79 +68,79 @@ input[type="number"] {
     font-size: 18px;
     margin-left: -20px;
 }
-
+ 
 input[type="number"]:focus {
-    border-color:  #F9A602; 
-    outline: none; 
+    border-color:  #F9A602;
+    outline: none;
 }
-
+ 
 .terms {
     margin-top: 30px;
     margin-left: 20px;
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     gap: 35px;
 }
-
+ 
 .term-container {
-    flex-direction: column; 
+    flex-direction: column;
     position: relative;
 }
 .term-container select {
-    appearance: none; 
-    -webkit-appearance: none; 
-    -moz-appearance: none; 
-    background: transparent; 
-    border: 1px solid #ccc; 
-    padding: 8px 12px; 
-    font-size: 16px; 
-    border-radius: 4px; 
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
     padding-right: 30px;
 }
 .term-container::after {
-    content: '▼'; 
+    content: '▼';
     position: absolute;
     top: 50px;
     right: 10px;
     transform: translateY(-50%);
-    pointer-events: none; 
-    font-size: 16px; 
-    color: #373f41; 
+    pointer-events: none;
+    font-size: 16px;
+    color: #373f41;
 }
 #loan_term {
-    padding: 12px; 
+    padding: 12px;
     outline: none;
     border: none;
-    border-radius: 10px; 
-    background-color: #f9f9f9; 
-    color: #373f41; 
-    width: 431px; 
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    color: #373f41;
+    width: 431px;
     font-size: 16px;
-    transition: border-color 0.3s ease; 
+    transition: border-color 0.3s ease;
     margin-left: -20px;
 }
-
+ 
 #loan_term:focus {
     border-color: #F9A602;
     outline: none;
 }
-
+ 
 #loan_term option {
-    padding: 10px; 
+    padding: 10px;
 }
-
+ 
 .select-container {
-    margin: 20px 0; 
-    display: flex; 
+    margin: 20px 0;
+    display: flex;
     justify-content: center;
 }
-
+ 
 .submit button {
     background-color: #373f41;              
-    color: #F9A602;                                   
-    font-size: 32px;                               
-    border-radius: 10px;   
-    width: 458px; 
+    color: #F9A602;                                  
+    font-size: 32px;                              
+    border-radius: 10px;  
+    width: 458px;
     margin-top: 95px;
     margin-left: 240px;
     box-shadow: 0px 4px 4px 0px #00000080;
@@ -151,15 +150,15 @@ input[type="number"]:focus {
 .current-loan {
     width: 746px;
     height: 129px;
-    position: absolute; 
-    font-family: Poppins, sans-serif; 
+    position: absolute;
+    font-family: Poppins, sans-serif;
     font-size: 32px;
     font-weight: 800;
     line-height: 48px;
     text-align: left;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     color: #373F41;
     margin-left: 85px;
     margin-top: -20px;
@@ -172,19 +171,19 @@ input[type="number"]:focus {
     padding-top: 30px;
     padding-left: 30px;
 }
-
+ 
 .input-like-box {
     display: inline-block;
     padding: 10px;
-    width: 431px; 
+    width: 431px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
     color: #373f41;
-    text-align: center; 
+    text-align: center;
 }
-
+ 
 #payment_method {
     padding: 10px;
     width: 220px;
@@ -194,18 +193,18 @@ input[type="number"]:focus {
     color: #373f41;
     font-size: 16px;
 }
-
+ 
 #table {
-    width: 1800px; 
+    width: 1800px;
     border-collapse: collapse;
     position: absolute;
     top: 700px;
     left: 1000px;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     background-color: white;
-    table-layout: auto; 
+    table-layout: auto;
 }
-
+ 
 #table th,
 #table td {
     border-bottom: 1px solid #dddddd;
@@ -213,9 +212,9 @@ input[type="number"]:focus {
     padding: 2px;
     text-align: left;
     background-color: #d9d9d9;
-    min-width: 100%; 
+    min-width: 100%;
 }
-
+ 
 #table th {
     background-color: #373f41;
     color: #ffffff;
@@ -224,7 +223,7 @@ input[type="number"]:focus {
     padding: 8px;
     text-align: center;
 }
-
+ 
 #table, #table th, #table td {
     border-spacing: 0;
     margin: 0;
