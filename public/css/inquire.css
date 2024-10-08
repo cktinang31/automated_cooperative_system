@@ -367,16 +367,10 @@
     content: "";
     position: absolute;
     top: 0;
-    right: -12px;
+    left: -12px; /* Change right to left */
     width: 20px;
     height: 20px;
-    background: linear-gradient(
-        135deg,
-        #fff 0%,
-        #fff 50%,
-        transparent 50%,
-        transparent 
-    );
+    background: linear-gradient(225deg, #fff 0%, #fff 50%, transparent 50%, transparent); /* Change gradient direction */
 }
 
 .chatbox_input 
@@ -432,12 +426,11 @@
 
 .floating-icon {
     position: absolute;
-    bottom: 50px;
-    right: 80px;
+    bottom: 18px;
+    right: 25px;
     font-size: 60px;
     color: #e9a511;
     cursor: pointer;
     z-index: 100;
     border-radius: 40%;
 }
-
