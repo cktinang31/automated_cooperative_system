@@ -17,11 +17,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="openModal()">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <% if (loan_payment.length > 0) { %>
+                        <% loan_payment.forEach(loan_payment => { %>
+                            <tr onclick="openModal()">
+                                <td><%= loan_payment.payment_id %></td>
+                                <td><%= loan_payment.User.fname %> <%= loan_payment.User.fname %> wants to pay.</td>
+                                <td><%= loan_payment.createdAt %></td>
+                            </tr>
+                            <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4">No pending requests</td>
+                                </tr>
+                            <% } %>
                 </tbody>
             </table>
 
