@@ -90,8 +90,10 @@ router.get(['/Manager/announcement', '/Manager/mannouncement'], (req, res, next)
         const contents = await Content.findAll({
             order: [['createdAt', 'DESC']]
         });
+        console.log('Fetched contents:', contents);
         const user = req.user;
         res.render('./Manager/mannouncement', { contents, title: 'Announcement', user });
+        
     } catch (error) {
         console.error('Error fetching contents:', error);
         res.status(500).send('Error fetching contents.');

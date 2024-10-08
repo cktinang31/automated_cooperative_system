@@ -142,4 +142,29 @@ router.get('/Collector/dashboard', (req, res) => {
     res.render('Collector/dashboard', { title: 'Dashboard'});
  });
 
+
+router.get('/Collector/dashboard', (req, res) => {
+try {
+    console.log('Session ID:', req.sessionID);
+    console.log('Session:', req.session);
+    console.log('Authenticated:', req.isAuthenticated());
+
+    if (req.isAuthenticated()) {
+        console.log('User is authenticated.');
+    } else {
+        console.log('User is not authenticated. Redirecting to login page.');
+        res.redirect('/login');
+    }
+} catch (error) {
+    console.error('Error in isAuthenticated middleware:', error);
+    res.status(500).send('Internal server error');
+}
+res.render('Collector/dashboard', { title: 'Dashboard'});
+});
+
+
+router.get(['/Collector/request', '/Collector/payment', '/Collector/paymentrequest'], (req, res) => {
+    res.render('Collector/paymentrequest', { title: 'Payment Requests'});
+ });
+
 module.exports = router;
