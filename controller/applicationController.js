@@ -40,32 +40,36 @@ const mem_application = async (req, res) => {
 
 
 const mem_application_update = async (req, res) => {
-    const applicationId = req.params.applicationId;
+    const id = req.params.id;
     const { application_status } = req.body; 
 
     try {
         console.log('Request Body:', req.body);
-        console.log('Application ID:', applicationId);
-        
-        
-        const application = await Application.findByPk(applicationId);
-
+        console.log('Application ID:', id);
+       
+        const application = await Application.findByPk(id);
         if (!application) {
-            console.log('Application not found');
-            return res.status(404).send('Application not found');
+            if (!application) {
+                console.log('Application not found for ID:', id);
+                return res.status(404).send('Application not found'); 
+            }
+            return res.status(404).send('Application not found'); 
         }
 
-        if (application_status !== 'approved' && application_status !== 'decline') {
+        if (!['approved', 'decline'].includes(application_status)) {
             console.log('Invalid application status:', application_status);
             return res.status(400).send('Invalid application status');
         }
 
+        
         application.application_status = application_status;
         await application.save();
 
+        console.log('Updated application status:', application.application_status);
+
         if (application_status === 'approved') {
             const newUserDetails = {
-                application_id: applicationId,
+                application_id: id,
                 fname: application.fname,
                 lname: application.lname,
                 place_of_birth: application.place_of_birth,
@@ -82,12 +86,10 @@ const mem_application_update = async (req, res) => {
             }
 
             console.log('New user created:', newUser.user_id);
+            await create_cbu(id, newUser.user_id);
+            await create_savings(id, newUser.user_id);
 
-            await create_cbu(applicationId, newUser.user_id);
-            await create_savings(applicationId, newUser.user_id);
-
-
-            return res.redirect('/Manager/request');
+            return res.redirect('/Manager/re_quest');
         } else {
             await application.destroy();
             return res.send('Membership application declined');
@@ -97,8 +99,6 @@ const mem_application_update = async (req, res) => {
         return res.status(500).send('Error updating application status');
     }
 };
-
-
 
 
 

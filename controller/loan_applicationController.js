@@ -1,8 +1,13 @@
 const {loanpayment} = require ('../controller/paymentController');
-const Loan_application = require ('../models/loan_application.js');
-const Loan = require ('../models/loan.js');
-const Loan_payment = require ('../models/loan');
-const User = require ('../models/user');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 const { v4: uuidv4 } = require('uuid');
 
 
