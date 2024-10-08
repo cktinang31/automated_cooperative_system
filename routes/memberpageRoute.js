@@ -2,7 +2,8 @@ const express = require('express');
 const Content = require('../models/content');
 const {Application, 
     Cbu, 
-    Cbutransaction, 
+    Cbutransaction,
+    transaction_history, 
     Loan_application, 
     Loan_payment, 
     Loan, 
@@ -15,10 +16,10 @@ const {Application,
 const { title } = require('process');
  
  
- 
- 
 const router = express.Router();
- 
+
+ //Member announcement route
+
 router.get('/Member/announcement', (req, res, next) => {
     console.log('Checking authentication status...');
     try {
@@ -28,7 +29,7 @@ router.get('/Member/announcement', (req, res, next) => {
  
         if (req.isAuthenticated()) {
             console.log('User is authenticated.');
-            next(); // Proceed to the route handler
+            next(); 
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
             res.redirect('/login');
@@ -49,7 +50,9 @@ router.get('/Member/announcement', (req, res, next) => {
         res.status(500).send('Error fetching contents.');
     }
 });
- 
+
+ //Member sidebar route
+
 router.get('/Member/sidebar', (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
@@ -72,6 +75,8 @@ router.get('/Member/sidebar', (req,res, next) =>{
        
 });
  
+//Member inquire route
+
 router.get('/Member/inquire', (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
@@ -93,7 +98,9 @@ router.get('/Member/inquire', (req,res, next) =>{
     }
        
 });
- 
+
+ //Member transaction route
+
 router.get('/Member/transaction', (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
@@ -114,8 +121,10 @@ router.get('/Member/transaction', (req,res, next) =>{
         res.status(500).send('Internal server error');
     }
 });
- 
-router.get('/Member/transaction', (req,res, next) =>{
+
+ //transaction_history route
+
+router.get('/Member/transaction_history', (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
@@ -124,7 +133,7 @@ router.get('/Member/transaction', (req,res, next) =>{
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
             console.log('User is authenticated a regular.');
             const user = req.user;
-            res.render('./Member/transaction', { title: 'Transaction', user });
+            res.render('./Member/transaction_history', { title: 'transaction_history', user });
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
             req.session.returnTo = req.originalUrl;
@@ -319,14 +328,18 @@ router.get('/Member/cbu_deposit', async (req, res, next) => {
             console.log('User is regular.');
             const user = req.user;
  
-           
             try {
                 const cbu = await Cbu.findAll( {
                     where: {
-                        user_id: user.user_id,
-                    },
-                });
-                res.render('Member/cbu_deposit', { cbu, title: 'Current Loan', user });
+                        loan_status : 'active',
+                        user_id: user.user_id
+                      },
+                      include: [{
+                        model: User,
+                        attributes: ['user_id'],
+                      }],
+                    });
+                res.render('Member/cbu_deposit', { Cbu, title: 'cbu_deposit', user });
             } catch (error) {
                 console.error('Error fetching requests:', error);
                 res.status(500).send('Error fetching requests.');
@@ -341,8 +354,46 @@ router.get('/Member/cbu_deposit', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
+//cbu route
+
+router.get('/Member/cbu', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
  
+       
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated as a regular.');
  
+          
+            const cbu = await Cbu.findAll({
+                where: {
+                    user_id: req.user.user_id  
+                },
+                include: [{
+                    model: User,
+                    attributes: ['user_id'],  
+                }]
+            });
+ 
+           
+            res.render('./Member/cbu', { title: 'Cbu', user: req.user, cbu });
+ 
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;  
+            res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
+    }
+ 
+       
+});
+ //sidebar route
+
 router.get('/Member/sidebar', async (req, res, next) => {
     try {
         console.log('Session ID:', req.sessionID);
@@ -374,74 +425,70 @@ router.get('/Member/sidebar', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
- 
+
+ //Manager membersinfo route
+
 router.get('/Manager/membersinfo', (req, res) => {
     res.render('Manager/memberinfo', { title: 'Member'});
   });
- 
-router.get('/Member/dashboard', (req, res, next) => {
-    console.log('Checking authentication status...');
+
+ //dashboard route
+
+  router.get('/Member/dashboard', async (req, res, next) => {
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
         console.log('Authenticated:', req.isAuthenticated());
- 
-        if (req.isAuthenticated()) {
-            console.log('User is authenticated.');
-            next(); // Proceed to the route handler
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is regular.');
+            const user = req.user;
+
+            try {
+                const contents = await Content.findAll();
+                const savings = await Savings.findAll({
+                    where: {
+                        user_id: user.user_id,
+                    }
+                });
+                //loans
+                const loans = await Loan.findAll({
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+                //cbu
+                const cbu = await Cbu.findAll({
+                    where: {
+                        user_id: user.user_id,
+                    },
+                });
+
+                
+
+                res.render('Member/dashboard', {
+                    loans, 
+                    contents, 
+                    savings, 
+                    cbu,  
+                    title: 'Dashboard', 
+                    user 
+                });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
             res.redirect('/login');
         }
     } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
+        console.error('Error in route handler:', error);
         res.status(500).send('Internal server error');
     }
-}, async (req, res) => {
-    try {
- 
-        const user = req.user;
-        // announcement
-        const contents = await Content.findAll({
-            order: [['createdAt', 'DESC']]
-        });
-        // loan balance
-        const loans = await Loan.findAll( {
-            where: {
-                loan_status : 'active',
-                user_id: user.user_id
-              },
-              include: [{
-                model: User,
-                attributes: ['user_id'],
-              }],
-              order: [['createdAt', 'DESC']],
-              limit: 1
-            });
-        // savings
-        const savings = await Savings.findAll({
-            where: {
-              user_id: user.user_id,
-            },
-            include: [{
-              model: User,
-              attributes: ['user_id'],
-            }],
-          });
-        //   cbu
-        const cbu = await Cbu.findAll( {
-            where: {
-                user_id: user.user_id,
-            },
-        });
-       
-        res.render('./Member/dashboard', { contents, loans, savings, cbu, title: 'Dashboard', user });
-    } catch (error) {
-        console.error('Error fetching contents:', error);
-        res.status(500).send('Error fetching contents.');
-    }
-   
 });
+
  
 router.get('/Member/loans', async (req, res, next) => {
     try {
@@ -489,6 +536,18 @@ router.get('/Member/savings', (req,res, next) =>{
  
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
             console.log('User is authenticated a regular.');
+
+            const savings = await.findAll({
+                where: {
+                    loan_status: 'active',
+                    user_id: req.user.user_id  
+                },
+                include: [{
+                    model: User,
+                    attributes: ['user_id'],  
+                }]
+            });
+
             const user = req.user;
             res.render('./Member/savings', { title: 'Savings', user });
         } else {
