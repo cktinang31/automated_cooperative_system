@@ -144,38 +144,105 @@ nav a {
     text-decoration: none;
 }
 
-.c-item {
-    height: 480px;
+#hero-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative; 
+}
+
+.carousel-inner {
+    height: 100%;
+    margin-top: 14px;
+}
+
+.carousel-item {
+    transition: transform 0.5s ease-in-out;
 }
 
 .c-img {
+    object-fit: fill;
     height: 100%;
     width: 100%;
-    object-fit: cover;
 }
 
-.button-link {
+.carousel-indicators {
     position: absolute;
-    top: 90%;
+    bottom: 10px; 
     left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    background-color: #f9a602;
-    color: #fff;
-    padding: 12px 28px;
-    text-align: center;
-    text-decoration: none;
-    font-size: clamp(14px, 3vw, 16px);
-    cursor: pointer;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+    transform: translateX(-50%);
+    z-index: 55;
 }
 
-.button-link:hover {
-    background-color: #ff9800;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+.carousel-indicators button {
+    background-color: #ccd3d4; 
+    border: none;
+    border-radius: 50%;
+    width: 10px; 
+    height: 10px; 
+    margin: 0 3px; 
+    transition: background-color 0.3s; 
+}
+
+.carousel-indicators button.active {
+    background-color: #f9a602;
+}
+
+.carousel-indicators button:hover {
+    background-color: #e0ceaa;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px; 
+    height: 40px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    z-index: 10; 
+    transition: background-color 0.3s;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;    
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.carousel-control-prev i, .carousel-control-next i {
+    color: #fff; 
+    font-size: 1.5rem;
+}
+
+.carousel-control-prev span, .carousel-control-next span {
+    display: none;
+}
+
+.btn-apply {
+    margin-top: 7rem;
+    padding: 0.4rem 1.25rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: #f9a602;
+    border: none;
+    color: #373f41;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.btn-apply:hover {
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .mv-container {
