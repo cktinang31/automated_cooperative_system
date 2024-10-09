@@ -445,7 +445,12 @@ router.get('/Manager/membersinfo', (req, res) => {
             const user = req.user;
 
             try {
-                const contents = await Content.findAll();
+                const contents = await Content.findAll({
+                   
+                    order: [['createdAt', 'DESC']], 
+                    limit: 1
+                    
+                });
                 const savings = await Savings.findAll({
                     where: {
                         user_id: user.user_id,
