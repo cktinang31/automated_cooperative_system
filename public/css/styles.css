@@ -147,48 +147,31 @@ nav a {
 #hero-carousel {
     width: 100%;
     overflow: hidden;
+    object-fit: cover;
     position: relative; 
 }
 
 .carousel-inner {
     height: 100%;
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 .carousel-item {
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .c-img {
-    object-fit: fill;
     height: 100%;
     width: 100%;
 }
 
 .carousel-indicators {
-    position: absolute;
-    bottom: 10px; 
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 5px; 
     z-index: 55;
-}
-
-.carousel-indicators button {
-    background-color: #ccd3d4; 
-    border: none;
-    border-radius: 50%;
-    width: 10px; 
-    height: 10px; 
-    margin: 0 3px; 
-    transition: background-color 0.3s; 
 }
 
 .carousel-indicators button.active {
     background-color: #f9a602;
-}
-
-.carousel-indicators button:hover {
-    background-color: #e0ceaa;
 }
 
 .carousel-control-prev, .carousel-control-next {
@@ -229,7 +212,7 @@ nav a {
 }
 
 .btn-apply {
-    margin-top: 7rem;
+    margin-bottom: 10px;
     padding: 0.4rem 1.25rem;
     border-radius: 2rem;
     font-size: 1.2rem;
