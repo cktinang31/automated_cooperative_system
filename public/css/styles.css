@@ -167,7 +167,7 @@ nav a {
 
 .carousel-indicators {
     bottom: 5px; 
-    z-index: 55;
+    z-index: 1;
 }
 
 .carousel-indicators button.active {
@@ -230,12 +230,14 @@ nav a {
 
 .mv-container {
     max-width: 100%;
-    margin: 100px 50px 0;
+    margin: 50px 50px 0;
     font-family: "Poppins";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .mv-container .mv-block {
-    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -247,7 +249,6 @@ nav a {
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, .3);
-    line-height: 0;
 }
 
 .mv-container .mv-block .image img {
@@ -271,7 +272,7 @@ nav a {
 .mv-container .mv-block .content h2 {
     font-weight: 800;
     font-size: 42px;
-    color: #ff9800;
+    color: #f9a602;
     margin-bottom: 20px;
 }
 
@@ -300,92 +301,92 @@ nav a {
 }
 
 .container {
-    width: 90%;
-    height: 100vh;
-    padding: 0;
+    width: 100%;
+    height: auto;
+    padding: 0 5%;
     font-family: "Poppins";
 }
 
 h3 {
-    padding-top: 100px;
+    margin-top: 50px;
     color: #373f41;
     text-align: center;
-    margin-bottom: 10px;
     font-weight: 600;
-    font-size: 38px;
+    font-size: 50px;
     position: relative;
-    margin-top: 150px;
-}
-
-h3::after {
-    content: '';
-    background: #ffb951;
-    width: 120px;
-    height: 2px;
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 30px;
-    margin-left: 10%;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .service {
-    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .1);
     text-align: center;
-    padding: 40px 15px;
-    border-radius: 5px;
-    font-size: 24px;
-    cursor: pointer;
-    background: #dbdbdb;
-    transition: transform 0.5s, background 0.5s;
+    padding: 40px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    background: #ffffff;
+    transition: transform 0.5s, background 0.5s, color 0.5s;
 }
 
 .service:hover {
-    box-shadow: 0 10px 15px rgba(0, 0, 0, .3);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .2);
     transform: scale(1.05);
 }
 
 .service i {
-    font-size: 45px;
-    margin-bottom: 10px;
+    font-size: 50px;
+    margin-bottom: 20px;
     color: #373f41;
 }
 
 .service h4 {
     color: #ff9800;
     font-weight: 700;
-    font-size: 36;
-    font-family: 'Poppins' sans-serif;
+    font-size: 36px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
 }
 
 .service h5 {
     font-weight: 400;
     font-style: italic;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
-.service h6 {
-    font-weight: 200;
-    font-style: normal;
+.service:hover {
+    background: #373f41;
+    color: #dbdbdb;
+    transform: scale(1.05);
+}
+
+.service:hover i {
+    color: #ff9800;
+}
+
+.service:hover h4 {
+    color: #dbdbdb;
 }
 
 .service .btn {
-    margin-top: 10px;
+    margin-top: 15px;
     display: inline-block;
     color: #ffffff;
     background: #777;
     font-size: 18px;
     border-radius: 5px;
-    padding: 8px 25px;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    transition: background 0.3s, letter-spacing 0.3s;
 }
 
 .service .btn:hover {
+    background: #555;
     letter-spacing: 1px;
 }
 
@@ -424,8 +425,8 @@ h3::after {
 
 .contact {
     padding: 40px;
-    background: #dbdbdb;
-    box-shadow: 0 5px 35px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .1);
     border-radius: 5px;
     font-family: "Poppins";
 }
@@ -444,7 +445,7 @@ h3::after {
 
 .contact h5 {
     color: #222;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.3em;
     margin-bottom: 10px;
 }
@@ -475,7 +476,7 @@ h3::after {
     color: #373f41;
     margin-top: 10px;
     margin-bottom: 5px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .inputBox input {
@@ -483,8 +484,21 @@ h3::after {
     padding: 10px;
     font-size: 1em;
     outline: none;
-    border: 1px solid #777;
+    border: none;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s ease, font-weight 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputBox input:hover,
+.inputBox textarea:hover {
+    color: #373F41;
+    font-weight: bold;
+    box-shadow: 0 0 8px 2px rgba(249, 166, 2, 0.5);
+}
+
+.inputBox input:focus {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .inputBox textarea {
@@ -500,19 +514,19 @@ h3::after {
 }
 
 .inputBox input[type="submit"] {
-    background: #f9a702e1;
+    background: #f9a602;
     color: #222;
     border: none;
-    font-size: 1.1em;
-    max-width: 120px;
-    font-weight: 500;
+    font-size: 1em;
+    font-weight: 700;
     cursor: pointer;
-    padding: 10px 10px;
-    transition: background-color 0.5s, transform 80ms ease-in-out;
+    letter-spacing: 0;
+    border-radius: 50px;
+    transition: background-color 0.5s, transform 80ms ease-in-out, letter-spacing 0.3s ease; /* Smooth transition */
 }
 
 .inputBox input[type="submit"]:hover {
-    background: #ffbc04;
+    letter-spacing: 5px;
 }
 
 .inputBox::placeholder {
