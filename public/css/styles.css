@@ -515,6 +515,8 @@ h3 {
 }
 
 .inputBox input[type="submit"] {
+    align-items: center;
+    width: 150px;
     background: #f9a602;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     color: #222;

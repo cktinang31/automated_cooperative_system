@@ -150,11 +150,10 @@
                                 </div>
                             </div>
 
-                            <div class="row100">
-                                <div class="inputBox">
-                                    <input type="submit" value="Send">
-                                </div>
+                            <div class="inputBox">
+                                <input type="submit" value="Send">
                             </div>
+                            
                         </div>
                     </form>
                 </div>
@@ -201,8 +200,6 @@
                 const myCarousel = document.querySelector('#hero-carousel');
                 const carousel = new bootstrap.Carousel(myCarousel);
 
-                // If you want to add custom event listeners, you can do so here
-                // Example: Adding custom logic on slide change
                 myCarousel.addEventListener('slid.bs.carousel', function () {
                     console.log('Slide changed');
                 });
@@ -212,7 +209,6 @@
         const navLinks = document.querySelectorAll('nav ul li a');
         const sections = document.querySelectorAll('section');
 
-        // Add click event listener to each nav link
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
                 navLinks.forEach(navLink => navLink.classList.remove('active'));
@@ -220,7 +216,6 @@
             });
         });
 
-        // Add scroll event listener
         window.addEventListener('scroll', () => {
             let currentSection = '';
 
