@@ -4,15 +4,71 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>App | <%=title %></title>
         <link rel="stylesheet" href="/css/logpra.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <div class="container">
-            <form-box class="Login">
-                <h2>Login</h2>
+            <div class="curved-shape"></div>
+            <div class="curved-shape2"></div>
+            <div class="form-box Login">
+                <h2 class="animation">Login</h2>
                 <form action="#">
-                    
+                    <div class="input-box animation">
+                        <input type="text" required>
+                        <label for="">Username</label>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box animation">
+                        <input type="password" required>
+                        <label for="">Password</label>
+                        <i class='bx bxs-lock-alt'></i>
+                    </div>
+                    <div class="input-box animation">
+                        <button class="btn" type="submit">Login</button>
+                    </div>
+                    <div class="regi-lin animation">
+                        <p>Don't have an account? <a href="#" class="SignUpLink">Sign Up</a></p>
+                    </div>
                 </form>
-            </form-box>
+            </div>
+            <div class="info-content Login">
+                <h2 class="animation">WELCOME BACK !</h2>
+                <p class="animation">Stay on top of your transactions by logging in with your personal details—quick and secure!</p>
+            </div>
+            <div class="form-box Register">
+                <h2>Register</h2>
+                <form action="#">
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label for="">Username</label>
+                        <i class='bx bxs-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" required>
+                        <label for="">Password</label>
+                        <i class='bx bxs-lock-alt'></i>
+                    </div>
+                    <div class="input-box">
+                        <button class="btn" type="submit">Register</button>
+                    </div>
+                    <div class="regi-link">
+                        <p>Don't have an account? <a href="#" class="SignInLink">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="info-content Register">
+                <h2>WELCOME BACK !</h2>
+                <p>Stay on top of your transactions by logging in with your personal details—quick and secure!</p>
+            </div>
         </div>
+
+        <script>
+            const container=document.querySelector('.container');
+            const LoginLink=document.querySelector('.SignInLink')
+            const RegisterLink=document.querySelector('.SignUpLink')
+            RegisterLink.addEventListener('click', ()=>{
+                container.classList.add('active');
+            })
+        </script>
     </body>
 </html>
