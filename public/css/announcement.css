@@ -12,3 +12,34 @@ body {
     padding: 0;
     overflow: hidden;
 }
+
+.container{
+    padding-top: 10rem;
+    padding-left: 30rem;
+    text-align: center;
+}
+
+.table { 
+    text-align: center;
+}
+
+
+table {
+    border-collapse: separate; 
+    border-spacing: 2rem;
+    width: 80rem;
+}
+td {
+    background-color: #ffff;
+    border: 1px solid #dbdbdb;
+    
+
+}
+
+h1 {
+    color: #373f41;
+}
+
+p {
+    color: #373f41;
+}

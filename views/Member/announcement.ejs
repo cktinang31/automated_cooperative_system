@@ -6,54 +6,26 @@
     <body>
         <%- include("header.ejs") %>
         <%- include("sidebar_mem.ejs") %>   
-
-    <div class="main-content" id="main-content" style="display: none;">
-        <div class="content-wrapper">
-            <div class="announcement-section">
-                <h1>Create Announcement</h1>
-                <form id="create-announcement-form" action="/post_announcement" method="POST">
-                    <div class="form-group">
-                        <label for="announcement-title">Title:</label>
-                        <input type="text" id="content_title" name="content_title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="announcement-content">Content:</label>
-                        <textarea id="content" name="content" rows="10" required></textarea>
-                    </div>
-                    <div class="button-group">
-                        <button type="submit">Post</button>
-                    </div>
-                </form>
-            </div>
+        <div class="container">
+            <table>
+                <% if (contents && contents.length > 0) { %>
+                    <% contents.forEach(content => { %>
+                    <tr>
+                        <td class="cooperative_advisory">
+                            <h1 class="coop_ad"><%= content.content_title %></h1>
+                            <p class="announcements"><%= content.content %></p>
+                        </td>
+                    </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="2" class="no-announcements">There are no announcements to display...</td>
+                    </tr>
+                <% } %>
+            </table>
         </div>
-    </div>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.btn').click(function(){
-                $(this).toggleClass("click");
-                $('.sidebar').toggleClass("show");
-            });
-            
-            $('.fund-btn').click(function(e){
-                e.preventDefault();
-                $('.fund-show').toggleClass("show");
-                $(this).parent().toggleClass("active");
-            });
-    
-            $('.loan-btn').click(function(e){
-                e.preventDefault();
-                $('.loan-show').toggleClass("show");
-                $(this).parent().toggleClass("active");
-            });
-        });
 
-        document.getElementById("add-button").addEventListener("click", function() {
-            document.getElementById("announcement-section").style.display = "none";
-            document.getElementById("main-content").style.display = "block";
-        });
-    </script>
+   
 
-</body>
+    </body>
 </html>
