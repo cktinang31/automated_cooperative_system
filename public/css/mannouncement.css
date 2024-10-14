@@ -3,21 +3,12 @@ body {
     padding: 0;
     overflow: hidden;
 }
-.announcement-container {
-    position: absolute;
-    width: 245px;
-    height: 60px;
-    left: 135px;
-    top: 160px;
-    background: #F5F5F5;
-    border-radius: 10px;
-    border: 1px solid #373F41;
-    cursor: text;
-    padding-left: 10px;  
-    padding-top: 14px;  
-    box-sizing: border-box; 
-    overflow: hidden; 
+
+.container {
+    padding-top: 10rem;
+    padding-left: 18rem;
 }
+
 .announcement-title {
     color: #373F41;
     margin: 0; 
@@ -35,8 +26,6 @@ body {
     position: absolute;
     width: 864px;
     height: 60px;
-    left: 412px;
-    top: 160px;
     background: #ffffff;
     border-radius: 10px;
     border: 1px solid #373F41;

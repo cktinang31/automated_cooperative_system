@@ -403,27 +403,122 @@ router.get('/Manager/cburequestupdate/:applicationId', async (req, res, next) =>
 //         console.log('Session:', req.session);
 //         console.log('Authenticated:', req.isAuthenticated());
 
-router.get(['/Manager/dashboard', '/Manager/managerdashboard/'],(req,res, next) =>{
+router.get(['/Manager/dashboard','/Manager/managerdashboard' ],async (req, res, next) => {
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
         console.log('Authenticated:', req.isAuthenticated());
 
         if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
-            console.log('User is authenticated as manager.');
+            console.log('User is regular.');
             const user = req.user;
-            res.render('./Manager/managerdashboard', { title: 'Dashboard', user });
+
+            try {
+                const contents = await Content.findAll({
+                   
+                    order: [['createdAt', 'DESC']], 
+                    limit: 1
+                    
+                });
+
+                const totalRegularUsers = await User.count({
+                    where: {
+                        role: 'regular' 
+                    }
+                });
+
+                const applications = await Application.findAll({
+                    where: { application_status: 'pending' },
+                    
+                });
+
+                const savtransactions = await Savtransaction.findAll({
+                    where: { status: 'pending' },
+                    include: [{ model: User, as: 'User' }]  
+                });
+
+                const cbutransactions = await Cbutransaction.findAll({
+                    where: { status: 'pending' },
+                    include: [{ model: User, as: 'User' }]  
+                });
+
+                const loanApplications = await Loan_application.findAll({ 
+                    where: { application_status: 'pending' },
+                    include: [{ model: User, as: 'User' }]  
+                });
+
+                const requests = [
+                    ...applications.map(app => ({ 
+                       id: app.application_id,
+                       fname: app.fname,
+                       mname: app.mname,
+                       lname: app.lname,
+                       application_status: app.application_status,
+                       dob: app.date_of_birth,
+                       pob: app.place_of_birth,
+                       address: app.address,
+                       email: app.email,
+                       contact: app.contact,
+                       date: app.date_sent,
+                       type: 'Application' })),
+                       
+
+                    ...savtransactions.map(savtrans => ({ 
+                        id: savtrans.savtransaction_id,
+                        details: `${savtrans.User.fname} ${savtrans.User.lname}`, 
+                        user_id: savtrans.User.user_id,
+                        mode: savtrans.mode,
+                        amount: savtrans.amount,
+                        transaction_type: savtrans.transaction_type,
+                        date: savtrans.date_sent,
+                        type: 'Savings Transaction' })),
+
+                    ...cbutransactions.map(cbutrans => ({ 
+                        id: cbutrans.cbutransaction_id,
+                        details: `${cbutrans.User.fname} ${cbutrans.User.lname}`, 
+                        user_id: cbutrans.User.id,
+                        mode: cbutrans.mode,
+                        amount: cbutrans.amount,
+                        transaction_type: cbutrans.transaction_type,
+                        date: cbutrans.date_sent,
+                        type: 'CBU Transaction' })),
+
+                    ...loanApplications.map(loanapp => ({ 
+                        id: loanapp.application_id,
+                        details: `${loanapp.User.fname} ${loanapp.User.lname}`, 
+                        user_id: loanapp.User.user_id,
+                        loanterm: loanapp.loan_term,
+                        monthlypayment: loanapp.monthly_payment,
+                        numberofpayments: loanapp.number_of_payments,
+                        amount: loanapp.amount,
+                        loantype: loanapp.loan_type,
+                        interest: loanapp.interest,
+                        date: loanapp.date_sent,
+                        type: 'Loan Application' })),
+                ];
+
+                res.render('Manager/managerdashboard', {
+                    requests,
+                    totalRegularUsers,
+                    contents, 
+                    title: 'Dashboard', 
+                    user 
+                });
+            } catch (error) {
+                console.error('Error fetching requests:', error);
+                res.status(500).send('Error fetching requests.');
+            }
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
             req.session.returnTo = req.originalUrl;
             res.redirect('/login');
         }
     } catch (error) {
-        console.error('Error in isAuthenticated middleware:', error);
+        console.error('Error in route handler:', error);
         res.status(500).send('Internal server error');
     }
-        
 });
+
 
 
 
