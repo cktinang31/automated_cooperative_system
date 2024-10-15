@@ -3,13 +3,27 @@ body {
     padding: 0;
     overflow: hidden;
 }
+
+.container {
+    padding-top: 10rem;
+    padding-left: 20rem;
+    
+}
+.details {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0;
+}
+.profcontainer {
+    
+}
 .prof1-container{
     box-sizing: border-box;
     position: absolute;
     width: 236px;
     height: 236px;
-    left: 139px;
-    top: 147px;
+    margin-top: -1rem;
+    margin-left: 1rem;
     background:  #373F41;
 }
 .prof2-container{
@@ -17,8 +31,8 @@ body {
     position: absolute;
     width: 236px;
     height: 236px;
-    left: 158px;
-    top: 165px;
+    margin-left: 2rem;
+    margin-bottom:2rem;
     background:  #F9A602;
 }
 .prof3-container{
@@ -26,32 +40,37 @@ body {
     position: absolute;
     width: 217px;
     height: 217px;
-    left: 158px;
-    top: 165px;
+    margin-left: 2rem;
     background:  #ffffff;
     
 }
 .prof3-container img {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: auto;
     object-fit: cover;
 }
 .details-container{
-    box-sizing: border-box;
     position: absolute;
     width: 500px;
     height: 260px;
-    left: 420px;
-    top: 127px;
-    padding-left: 10px;
+    top: 9rem;
+    margin-left: 20rem;
+
    
 }
+
+
+.headcontainer {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+    
+}
+
 .fa-crown {
-    margin-right: 20px;
-    font-size: 24px; 
+    font-size: 20px; 
     color: gold; 
     text-shadow: 
         1px 1px 0 #d4af37, 
@@ -59,14 +78,14 @@ body {
         1px -1px 0 #d4af37,
        -1px 1px 0 #d4af37;
 }
-.details-container h1 {
-    color: #000000;  
+.headcontainer h1 {
+    color: #373F41;  
+    font-size: 20px;
+    text-decoration: underline;
     
 }
-.details-container h4 {
-    color: #000000;  
-    
-}
+
+
 .details-container p {
     color: #000000;  
     
@@ -76,7 +95,7 @@ body {
     position: absolute;
     width: 240px;
     height: 119px;
-    left: 1100px;
+    left: 78rem;
     top: 147px;
     background:  #F5F5F5;
     text-align: center;
@@ -87,7 +106,7 @@ body {
     position: absolute;
     width: 240px;
     height: 52px;
-    left: 1100px;
+    left: 78rem;
     top: 214px;
     background:  #373F41;
     border-bottom-left-radius: 10px; /* Rounded bottom-left corner */
@@ -102,7 +121,7 @@ body {
     position: absolute;
     width: 240px;
     height: 119px;
-    left: 1100px;
+    left: 78rem;
     top: 288px;
     background:  #F5F5F5;
     text-align: center;
@@ -113,7 +132,7 @@ body {
     position: absolute;
     width: 240px;
     height: 52px;
-    left: 1100px;
+    left: 78rem;
     top: 355px;
     background:  #373F41;
     border-bottom-left-radius: 10px; 
@@ -128,8 +147,8 @@ body {
     position: absolute;
     width: 350px;
     height: 262px;
-    left: 1400px;
-    top: 147px;
+    top: 9rem;
+    margin-left: 75rem;
     background:  #373F41;
     border-radius: 10px;
     padding-left: 20px;
@@ -143,17 +162,13 @@ body {
      
  }
 
- .table-container {
-    width: 100%;
-    margin: 20px auto;
+.table-container {
+    width: 96%;
     padding: 10px;
-    /* border: 1px solid #ccc; */
     border-radius: 8px;
     max-width: 1745px;
-    font-family: 'Poppins', sans-serif;
-    left: 30px;
-    margin-top: 455px;
-    margin-left: 100px;
+    margin-top: 20rem;
+
     
   }
   

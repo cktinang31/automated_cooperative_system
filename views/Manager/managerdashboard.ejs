@@ -9,17 +9,21 @@
         <%- include("../Manager/managersidebar.ejs") %>
    
         <div class="container">
-            <div class="cooperative_advisory">
-                <% if (contents.length > 0) { %>
-                    <% contents.forEach(content => { %>
-                <h1 class="coop_ad"><%= content.content_title %></h1>
-                <p class="announcements"><%= content.content %></p>
-                <% }) %>
-              <% } else { %>
-                  <p>There are no announcements to display...</p>
-              <% } %>
-                <!-- <i class="fa-regular fa-comments"></i> -->
-            </div>
+
+            <a href="/Manager/mannouncement">
+                <div class="cooperative_advisory">
+                    <% if (contents.length > 0) { %>
+                        <% contents.forEach(content => { %>
+                    <h1 class="coop_ad"><%= content.content_title %></h1>
+                    <p class="announcements"><%= content.content %></p>
+                    <% }) %>
+                  <% } else { %>
+                      <p>There are no announcements to display...</p>
+                  <% } %>
+                    
+                </div>
+            </a>
+            
 
             
             <a href="/Manager/member">
