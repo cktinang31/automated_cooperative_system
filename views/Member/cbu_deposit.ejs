@@ -1,290 +1,121 @@
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaCoop | <%=title %></title>
-    <link rel="stylesheet" href="/css/savings_deposit.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  </head>
-  
-  <body>
-     
-    <nav class="navbar">
-      <div class="site-title">
-        <h1>KACooP</h1>
-        <span>You are now signed as a Member<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
-      </div>
-    </nav>  
-
-<% if (cbu.length > 0) { %>
-  <% cbu.forEach(cbu => { %>
-    <div class="main-content">
-      <div class="content-wrapper">
-        <img src="/images/image.png" alt="Justice Icon" class="adjusted">
-        <div class="savings-section">
-          <div class="savings-container">
-            <h3>CBU</h3>
-            <p id="savings-amount" class="savings-amount">PHP <%= cbu.amount %>.00</p>
-          </div>
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/cbu_deposit.css">
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+ 
+        <div class="container">
+            <form action="/cbu_deposit" method="post" oninput="calculateMonthlyPayment()">
+ 
+                <div class="form-container">
+                    <div class="cbu_deposit">
+                        <div class="form-group">
+                            <input type="hidden" id="user_id" name="user_id" value="<%= user.user_id %>">
+                        </div>
+               
+                        <div class="loan-type">
+                            <label class="title">
+                                Loan Type
+                            </label>
+                            <div class="loan-options">
+                                <label>
+                                    <input type="radio" id="regular_loan" name="loan_type" value="regular" required>
+                                    Regular Loan
+                                </label>
+                                <label>
+                                    <input type="radio" id="medical_loan" name="loan_type" value="medical">
+                                    Medical Loan
+                                </label>
+                                <label>
+                                    <input type="radio" id="emergency_loan" name="loan_type" value="emergency">
+                                    Emergency Loan
+                                </label>
+                            </select>          
+                        </div>
+       
+                        <div class="amount">
+                            <div class="amount-container">
+                                <label class="title2">Amount</label>
+                                <input type="number" id="amount" name="amount" step="0.01" required>
+                            </div>
+                            <div class="amount-container">
+                                <label class="title3">Interest Rate (%)</label>
+                                <input type="number" id="interest" name="interest" step="0.01" required>
+                            </div>
+       
+                           
+                        </div>
+                       
+                        <div class="terms">
+                            <div class="term-container">
+                                <label class="title4">Loan Terms</label>
+                                <select id="loan_term" name="loan_term" required>
+                                    <option value="6 months">6 months</option>
+                                    <option value="12 months">12 months</option>
+                                    <option value="18 months">18 months</option>
+                                    <option value="24 months">24 months</option>
+                                </select>
+                            </div>
+                            <div class="term-container2">
+                                <label class="title">Payment Per Collection</label>
+                                <div class="input-like-box">
+                                <span id="monthly_payment">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div class="submit">
+                        <button type="submit">Apply
+ 
+                        </button>
+                    </div>
+                    <div class="current-loan">
+                        <p>Current Loan</p>
+                    </div>
+                </div>
+               
+               
+            </form>
         </div>
-      </div>
-    </div>
-  <% }) %>
-<% } else { %>
-  <p>No funds available.</p>
-<% } %>   
-
-<div class="form-container">
-  <form action="/cbu_transaction" method="post" id="transaction-form">
-    <div class="button-container" id="deposit-withdraw">
-      <input type="radio" id="deposit-button" name="transaction_type" value="deposit">
-      <label for="deposit-button"><i class="fas fa-piggy-bank"></i> Deposit</label>
-  
-      <input type="radio" id="withdraw-button" name="transaction_type" value="withdraw">
-      <label for="withdraw-button"><i class="fas fa-wallet"></i> Withdraw</label>
-  </div>
-  
-    <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
-    <div id="price-labels">
-      <div class="column">
-        <button class="price-button" onclick="updateAmount(1000)">PHP 1000</button>
-        <button class="price-button" onclick="updateAmount(4000)">PHP 4000</button>
-      </div>
-      <div class="column">
-        <button class="price-button" onclick="updateAmount(2000)">PHP 2000</button>
-        <button class="price-button" onclick="updateAmount(5000)">PHP 5000</button>
-      </div>
-      <div class="column">
-        <button class="price-button" onclick="updateAmount(3000)">PHP 3000</button>
-        <button class="price-button" onclick="updateAmount(6000)">PHP 6000</button>
-      </div>
-    </div>
-    
-    <div class="flex-container">
-      <div class="amount-container">
-          <label for="amount">Amount</label>
-          <input type="text" id="amount">
-      </div>
-  <div class="custom-dropdown">
-    <select id="mode-of-payment">
-        <option value="" disabled selected>Mode of Payment</option>
-        <option value="credit">Credit Card</option>
-        <option value="debit">Debit Card</option>
-        <option value="paypal">PayPal</option>
-        <option value="bank">Bank Transfer</option>
-    </select>
-</div>  
-    <button type="submit">CONFIRM</button>
-</div>
-</form>
-
-<script>
-function setTransactionType(type) {
-  document.getElementById('transaction-type').value = type;
-  console.log("Transaction type set to:", type);
-}
-
-function updateAmount(amount) {
-  var amountInput = document.getElementById("amount");
-  var currentAmount = parseFloat(amountInput.value) || 0;
-  var updatedAmount = currentAmount + amount;
-  amountInput.value = updatedAmount;
-}
-</script>
-
-
-<script>
-  function toggleModeLabel() {
-    var modeLabel = document.getElementById("mode-label");
-    modeLabel.style.display = "none";
-  }
-
-  function updateAmount(amount) {
-    var amountInput = document.getElementById("amount");
-    var currentAmount = parseFloat(amountInput.value) || 0;
-    var updatedAmount = currentAmount + amount;
-    amountInput.value = updatedAmount;
-  }
-
-  function clearFormInputs() {
-    document.getElementById("amount").value = '';
-    document.getElementById("user_id").value = '';
-    document.getElementById("mode").value = '';
-    document.getElementById("mode-label").style.display = 'block';
-  }
-
-  document.getElementById("deposit-button").addEventListener("click", function() {
-    document.getElementById("transaction-type").value = "deposit";
-    document.getElementById("deposit-button").classList.add("deposit-active");
-    document.getElementById("withdraw-button").classList.remove("withdraw-active");
-    depositButton.style.backgroundColor = "#373F41";
-    withdrawButton.style.backgroundColor = "#D9D9D9";
-    depositButton.style.color = "white";
-    withdrawButton.style.color = "#373F41";
-    console.log("Deposit button clicked");
-  });
-
-  document.getElementById("withdraw-button").addEventListener("click", function() {
-    document.getElementById("transaction-type").value = "withdraw";
-    document.getElementById("withdraw-button").classList.add("withdraw-active");
-    document.getElementById("deposit-button").classList.remove("deposit-active");
-    depositButton.style.backgroundColor = "#D9D9D9";
-    withdrawButton.style.backgroundColor = "#373F41";
-    depositButton.style.color = "#373F41";
-    withdrawButton.style.color = "white";
-    console.log("Withdraw button clicked");
-  });
-
-  // document.getElementById("transaction-form").addEventListener("submit", function(event) {
-  //   event.preventDefault(); // Prevent default form submission
-  //   var transactionType = document.getElementById("transaction-type").value;
-  //   var savingsAmountElement = document.getElementById("savings-amount");
-  //   var amountInput = document.getElementById("amount");
-  //   var currentSavings = parseFloat(savingsAmountElement.innerText.split(" ")[1]);
-  //   var transactionAmount = parseFloat(amountInput.value);
-
-  //   if (transactionType === "deposit") {
-  //     var updatedSavings = currentSavings + transactionAmount;
-  //     savingsAmountElement.innerText = "PHP " + updatedSavings.toFixed(2);
-  //     alert("Deposit successful!");
-  //     clearFormInputs();
-  //   } else if (transactionType === "withdraw") {
-  //     if (transactionAmount > 0 && transactionAmount <= currentSavings) {
-  //       var updatedSavings = currentSavings - transactionAmount;
-  //       savingsAmountElement.innerText = "PHP " + updatedSavings.toFixed(2);
-  //       alert("Withdrawal successful!");
-  //       clearFormInputs();
-  //     } else {
-  //       alert("Invalid withdrawal amount or insufficient funds!");
-  //     }
-  //   }
-  // });
-</script>
-<script>
-
-  var depositButton = document.getElementById("deposit-button");
-  var withdrawButton = document.getElementById("withdraw-button");
-
-
-  depositButton.addEventListener("click", function() {
-  
-    depositButton.style.backgroundColor = "#373F41";
-    withdrawButton.style.backgroundColor = "#D9D9D9";
-  
-    depositButton.style.color = "white";
-    withdrawButton.style.color = "#373F41";
-  });
-
-  withdrawButton.addEventListener("click", function() {
-  
-    depositButton.style.backgroundColor = "#D9D9D9";
-    withdrawButton.style.backgroundColor = "#373F41";
-
-    depositButton.style.color = "#373F41";
-    withdrawButton.style.color = "white";
-  });
-</script>
-<script>
-  // Get the deposit and withdraw buttons
-  var depositButton = document.getElementById('deposit-button');
-  var withdrawButton = document.getElementById('withdraw-button');
-  
-  // Get the confirm button
-  var confirmButton = document.querySelector('button[type="submit"]');
-  
-  // Add event listener to deposit button
-  depositButton.addEventListener('click', function() {
-    // Update the text of the confirm button to 'CONFIRM DEPOSIT'
-    confirmButton.textContent = 'CONFIRM DEPOSIT';
-  });
-  
-  // Add event listener to withdraw button
-  withdrawButton.addEventListener('click', function() {
-    // Update the text of the confirm button to 'CONFIRM WITHDRAWAL'
-    confirmButton.textContent = 'CONFIRM WITHDRAWAL';
-  });
-</script>
-<script>
-// Get the select element
-var modeOfPaymentSelect = document.getElementById('mode');
-
-// Add event listener to detect changes in the select element
-modeOfPaymentSelect.addEventListener('change', function() {
-    // Get the selected option
-    var selectedOption = modeOfPaymentSelect.options[modeOfPaymentSelect.selectedIndex];
-
-    // Get the label element
-    var modeLabel = document.getElementById('mode-label');
-
-    // Check if an option is selected
-    if (selectedOption.value !== "") {
-        // If an option is selected, hide the mode label
-        modeLabel.style.display = 'none';
-    } else {
-        // If no option is selected, show the mode label
-        modeLabel.style.display = 'block';
-    }
-});
-</script>
-
-<script>
-  // Remove event listeners from price buttons
-  var priceButtons = document.querySelectorAll('.price-button');
-  priceButtons.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent default button behavior
-      var amount = parseFloat(button.textContent.split(' ')[1]); // Extract amount from button text
-      updateAmount(amount); // Update amount input
-    });
-  });
-
-  // Get the confirm button
-  var confirmButton = document.querySelector('button[type="submit"]');
-
-  // Add event listener to confirm button
-  confirmButton.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent default button behavior
-    var transactionType = document.querySelector('input[name="transaction_type"]:checked');
-    var amountInput = document.getElementById('amount');
-    var amount = parseFloat(amountInput.value);
-
-    // Check if transaction type and amount are selected/filled
-    if (transactionType && amount) {
-      // Submit the form
-      document.getElementById('transaction-form').submit();
-    } else {
-      // Notify the user to fill in all necessary fields
-      alert('Please select transaction type and enter amount before confirming.');
-    }
-  });
-</script>  
-
-<script>
-  document.getElementById('mode-of-payment').addEventListener('change', function() {
-    var selectedOption = this.options[this.selectedIndex];
-    var selectedText = selectedOption.text;
-    
-    // Calculate font size based on text length
-    var fontSize = 20; // Initial font size
-    var maxWidth = 420; // Maximum width of the input box
-    var textWidth = getTextWidth(selectedText, '20px Poppins'); // Function to get text width
-    if (textWidth > maxWidth) {
-      fontSize = Math.floor(fontSize * (maxWidth / textWidth)); // Adjust font size
-    }
-    
-    // Update style of input box
-    this.style.fontSize = fontSize + 'px';
-    this.style.color = '#373F41';
-  });
-  
-  // Function to calculate text width
-  function getTextWidth(text, font) {
-    var canvas = document.createElement('canvas');
-    var context = canvas.getContext('2d');
-    context.font = font;
-    var metrics = context.measureText(text);
-    return metrics.width;
-  }
-  </script> 
-</body>
-</html>
+       
+        <div class="loans">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Loan Type</th>
+                        <th>Amount</th>
+                        <th>Interest Rate</th>
+                        <th>Loan Term</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+   
+                    <% if (loans.length > 0) { %>
+        <% loans.forEach(loan => { %>
+          <tr data-loan-id="<%= loan.loan_id %>">
+            <td><%= loan.loan_id %></td>
+            <td>
+              <% if (loan.loan_type === 'medical') { %>
+                <p>Medical Loan</p>
+              <% } else if (loan.loan_type === 'emergency') { %>
+                <p>Emergency Loan</p>
+              <% } else { %>
+                <p>Regular Loan</p>
+              <% } %>
+            </td>
+            <td><%= loan.start_date %></td>
+            <td><%= loan.end_date %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="8">No Loan at the moment...</td>
+        </tr>
+      <% } %>
+     

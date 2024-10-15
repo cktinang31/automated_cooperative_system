@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../Collector/head.ejs") %>
+    <link rel="stylesheet" href="/css/paymentrequest.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <body>
+        <%- include("../Collector/header.ejs") %>
+        <%- include("../Collector/sidebar.ejs") %>
+
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (loan_payment.length > 0) { %>
+                        <% loan_payment.forEach(loan_payment => { %>
+                            <tr onclick="openModal()">
+                                <td><%= loan_payment.payment_id %></td>
+                                <td><%= loan_payment.User.fname %> <%= loan_payment.User.fname %> wants to pay.</td>
+                                <td><%= loan_payment.createdAt %></td>
+                            </tr>
+                            <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4">No pending requests</td>
+                                </tr>
+                            <% } %>
+                </tbody>
+            </table>
+
+        </div>
+        <div id="Modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <form id="updateForm" method="POST">
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                        </tr>
+                        <tr>
+                            <td>User ID:</td>
+                        </tr>
+                        <tr></tr>
+                    </table>
+                    <div class="button-container">
+                        <button type="button" class="approve-button">Approve</button>
+                        <button type="button" class="decline-button">Decline</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+           
+            var modal = document.getElementById("Modal");
+            
+           
+            function openModal() {
+                modal.style.display = "block";
+            }
+            
+            
+            function closeModal() {
+                modal.style.display = "none";
+            }
+            
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+        </script>
+            
+    </body>
+</html>

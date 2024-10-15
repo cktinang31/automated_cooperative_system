@@ -3,47 +3,55 @@ body {
     padding: 0;
     overflow: hidden;
 }
-.announcement-container {
-    position: absolute;
-    width: 245px;
-    height: 60px;
-    left: 135px;
-    top: 160px;
-    background: #F5F5F5;
-    border-radius: 10px;
-    border: 1px solid #373F41;
-    cursor: text;
-    padding-left: 10px;  /* Apply padding to the container */
-    padding-top: 14px;  
-    box-sizing: border-box; /* Ensure padding doesn’t affect the total width/height */
-    overflow: hidden; /* Prevent content overflow */
+
+.container {
+    padding-top: 10rem;
+    padding-left: 18rem;
 }
+
 .announcement-title {
     color: #373F41;
     margin: 0; 
+    border: none;
+    background: none; 
+    outline: none;
+    
+}
+.announcement-title::placeholder {
+    color: #373F41;
+    font-size: 14px; 
+    font-weight: normal; 
 }
 .write-container {
     position: absolute;
     width: 864px;
     height: 60px;
-    left: 412px;
-    top: 160px;
     background: #ffffff;
     border-radius: 10px;
     border: 1px solid #373F41;
    cursor:text;
-   padding-left: 10px;  /* Apply padding to the container */
+   padding-left: 10px; 
    padding-top: 14px;  
-   box-sizing: border-box; /* Ensure padding doesn’t affect the total width/height */
+   box-sizing: border-box; 
    overflow: hidden;
 
 }
 .write-title{
 
     color:   #373F41;
-    /* padding-left:  12px; */
+
     margin: 0;
+    border: none;
+    background: none; 
+    outline: none;
 }
+
+.write-title::placeholder {
+    color: #373F41;
+    font-size: 16px; 
+    font-weight: normal; 
+}
+
 .post-container {
     position: absolute;
     width: 108px;
@@ -59,17 +67,20 @@ body {
     cursor: pointer;  
 }
 
-.post-container p {
-    font-size:24px; 
+.post-container button {
+    font-size:20px; 
     color: #373F41;
     font-weight: bold;
+    border: none;
+    background: none; 
+    outline: none;
 }
 .post-container:hover {
     border: 1px solid #FFFFFF;
     box-shadow: 10px 10px 3px  #373F41;
 
 }
-.cooperative_advisory {
+/* td {
     box-sizing: border-box;
     position: absolute;
     width: 1281px;
@@ -82,9 +93,44 @@ body {
     cursor: default;
     
 }
-.cooperative_advisory h1 {
+td h1 {
     color: #F9A602;
 }
-.cooperative_advisory p {
+td p {
     color: #f0ecec;
+} */
+
+
+.table-container {
+    width: 80%; /* Optional: Set a width for the table */
+    margin-top: 50%; /* Start at 50% from the top */
+    transform: translateY(-50%); /* Adjust upwards to center */
+    text-align: center; 
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse; 
+    width: 80%; }
+
+.cooperative_advisory {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.coop_ad {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.announcements {
+    font-size: 1em;
+    color: #666;
+}
+
+.no-announcements {
+    text-align: center;
+    font-style: italic;
+    color: #999;
 }

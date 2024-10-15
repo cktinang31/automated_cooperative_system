@@ -20,7 +20,15 @@ const memberpageRoutes = require('./routes/memberpageRoute');
 const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
 const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
-const User = require('./models/user');
+const {Application, 
+  Cbu, 
+  Cbutransaction, 
+  Loan_application, 
+  Loan_payment, 
+  Loan, 
+  Savings, 
+  Savtransaction,
+  User,} = require('./models/sync');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
@@ -320,6 +328,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+app.listen(3000, '192.168.0.45', () => {
+  console.log('Server running on http://192.168.0.45:3000');
 });

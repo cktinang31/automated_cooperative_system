@@ -60,6 +60,7 @@ h1 span {
     width: 610px;
     background-color: #373F41;
 }
+
  
 .loans-card {
     grid-column: 2 / 3;
@@ -135,13 +136,45 @@ h1 span {
     border-radius: 50%;
 }
  
-.color.green { background-color: green; }
-.color.red { background-color: red; }
-.color.yellow { background-color: yellow; }
-.color.blue { background-color: blue; }
- 
-.graph-image img {
-    width: 100%;
+.color.green {
+    background-color: green;
+    width: 20px;
+    height: 20px; 
+
+  }
+  
+  .legend {
+    flex-direction: column; /* Align items vertically */
+  }
+
+  .color.red {
+    background-color: red;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .color.yellow {
+    background-color: yellow;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .color.blue {
+    background-color: blue;
+    width: 20px;
+    height: 20px;
+  }
+  
+
+  .color.green, .color.red, .color.yellow, .color.blue {
+    border-radius: 0;
+  }
+  .graph-image img {
+    width: 56%;
+    height: auto;
+    margin-left: 308px;
+    position: absolute;
+    top: 102px;
 }
 
 .title p {

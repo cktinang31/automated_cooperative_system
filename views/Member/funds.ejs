@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/savings.css">
+
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+
+        <div class="container">
+            <div class="savings-container">
+                <% if (savings.length > 0) { %>
+                    <% savings.forEach(saving => { %>
+                <div class="savings-head">
+                    <div class="savings-title">
+                        <p>Savings</p>
+
+                        <h1>PHP <%= saving.amount %>.00</h1>
+                    </div>
+                </div>
+                    <form action="/savings_transaction" method="post" class="form-container" id="transaction-form">
+                        <div class="header">
+                            <label class="radio-label">
+                                <input type="radio" id="deposit-button" name="transaction_type" value="deposit" class="radio-input">
+                                <span class="radio-text">Deposit</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" id="withdraw-button" name="transaction_type" value="withdraw" class="radio-input">
+                                <span class="radio-text">Withdraw</span>
+                            </label>
+                        </div>
+                        <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
+                        <div class="amount-options">
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="1000">
+                                <span class="amount-btn">PHP 1000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="2000">
+                                <span class="amount-btn">PHP 2000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="3000">
+                                <span class="amount-btn">PHP 3000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="4000">
+                                <span class="amount-btn">PHP 4000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="5000">
+                                <span class="amount-btn">PHP 5000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="6000">
+                                <span class="amount-btn">PHP 6000</span>
+                            </label>
+                        </div>
+                        <div class="custom-amount">
+                            <label for="amount">AMOUNT</label>
+                            <input type="number" id="amount" name="amount">
+                        </div>
+                        <div class="mode-of-payment">
+                            <select id="mode-of-payment" name="payment-mode">
+                                <option value="" disabled selected hidden>MODE OF PAYMENT</option>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                                <option value="bank-transfer">Bank Transfer</option>
+                            </select>
+                            <button class="confirm-button" type="submit">CONFIRM</button>
+                        </div>
+                    </form>        
+                    <% }) %>
+                    <% } else { %>
+                      <p></p>
+                    <% } %>   
+                  
+                    
+            </div>
+            <div class="cbu-container">
+                <% if (cbu.length > 0) { %>
+                    <% cbu.forEach(cbu => { %>
+                <div class="savings-head">
+                    <div class="savings-title">
+                        <p>CBU</p>
+                        <h1>PHP <%= cbu.amount %>.00</h1>
+                    </div>
+                </div>
+                    <form action="/cbu_transaction" method="post" class="form-container">
+                        <div class="header">
+                            <label class="radio-label">
+                                <input type="radio" id="deposit-button" name="transaction_type" value="deposit" class="radio-input">
+                                <span class="radio-text">Deposit</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" id="withdraw-button" name="transaction_type" value="withdraw" class="radio-input">
+                                <span class="radio-text">Withdraw</span>
+                            </label>
+                        </div>
+                        <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
+                        <div class="amount-options">
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="1000">
+                                <span class="amount-btn">PHP 1000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="2000">
+                                <span class="amount-btn">PHP 2000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="3000">
+                                <span class="amount-btn">PHP 3000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="4000">
+                                <span class="amount-btn">PHP 4000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="5000">
+                                <span class="amount-btn">PHP 5000</span>
+                            </label>
+                            <label class="amount-option">
+                                <input type="radio" name="amount" value="6000">
+                                <span class="amount-btn">PHP 6000</span>
+                            </label>
+                        </div>
+                        <div class="custom-amount">
+                            <label for="amount">AMOUNT</label>
+                            <input type="text" id="amount" name="amount">
+                        </div>
+                        <div class="mode-of-payment">
+                            <select id="mode-of-payment" name="payment-mode">
+                                <option value="" disabled selected hidden>MODE OF PAYMENT</option>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                                <option value="bank-transfer">Bank Transfer</option>
+                            </select>
+                            <button class="confirm-button" type="submit">CONFIRM</button>
+                        </div>
+                    </form>        
+                    <% }) %>
+                    <% } else { %>
+                      <p></p>
+                    <% } %>   
+                  
+                    
+            </div>
+        </div>
+        <script>
+            // Function to handle radio button clicks for predefined amounts
+            document.querySelectorAll('.amount-option input').forEach((radio) => {
+                radio.addEventListener('click', function () {
+                    // Find the closest form and set the custom amount input within that form
+                    let form = this.closest('form');
+                    form.querySelector('#amount').value = this.value;
+                });
+            });
+        
+            // Handle manual input in the custom amount field
+            document.querySelectorAll('#amount').forEach((input) => {
+                input.addEventListener('input', function () {
+                    // Uncheck the radio buttons in the same form if custom amount is manually typed
+                    let form = this.closest('form');
+                    form.querySelectorAll('.amount-option input').forEach((radio) => {
+                        radio.checked = false;
+                    });
+                });
+            });
+        </script>
+        
+    </body>        
+
+            
+
+
+</html>
