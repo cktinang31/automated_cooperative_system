@@ -1,77 +1,85 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>App | <%=title %></title>
-        <link rel="stylesheet" href="/css/logpra.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
-        <div class="container">
-            <div class="curved-shape"></div>
-            <div class="curved-shape2"></div>
-            <div class="form-box Login">
-                <h2 class="animation" style="--D:0; --S:21">Login</h2>
-                <form action="#">
-                    <div class="input-box animation" style="--D:1; --S:22">
-                        <input type="text" required>
-                        <label for="">Username</label>
-                        <i class='bx bxs-user'></i>
-                    </div>
-                    <div class="input-box animation" style="--D:2; --S:23">
-                        <input type="password" required>
-                        <label for="">Password</label>
-                        <i class='bx bxs-lock-alt'></i>
-                    </div>
-                    <div class="input-box animation" style="--D:3; --S:24">
-                        <button class="btn" type="submit">Login</button>
-                    </div>
-                    <div class="regi-lin animation" style="--D:4; --S:25">
-                        <p>Don't have an account? <a href="#" class="SignUpLink">Sign Up</a></p>
-                    </div>
-                </form>
-            </div>
-            <div class="info-content Login">
-                <h2 class="animation" style="--D:0; --S:20">WELCOME BACK !</h2>
-                <p class="animation" style="--D:1; --S:21">Stay on top of your transactions by logging in with your personal details—quick and secure!</p>
-            </div>
-            <div class="form-box Register">
-                <h2 class="animation" style="--li:17; --S:0">Register</h2>
-                <form action="#">
-                    <div class="input-box animation" style="--li:18; --S:1">
-                        <input type="text" required>
-                        <label for="">Username</label>
-                        <i class='bx bxs-user'></i>
-                    </div>
-                    <div class="input-box animation" style="--li:19; --S:2">
-                        <input type="password" required>
-                        <label for="">Password</label>
-                        <i class='bx bxs-lock-alt'></i>
-                    </div>
-                    <div class="input-box animation" style="--li:20; --S:3">
-                        <button class="btn" type="submit">Register</button>
-                    </div>
-                    <div class="regi-link animation" style="--li:21; --S:4">
-                        <p>Don't have an account? <a href="#" class="SignInLink">Sign In</a></p>
-                    </div>
-                </form>
-            </div>
-            <div class="info-content Register">
-                <h2 class="animation" style="--li:17; --S:0;">WELCOME BACK !</h2>
-                <p class="animation" style="--li:18; --S:1;">Stay on top of your transactions by logging in with your personal details—quick and secure!</p>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App | <%=title %></title>
+    <link rel="stylesheet" href="/css/logpra.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <div class="curved-shape"></div>
+        <div class="curved-shape2"></div>
+
+        <!-- Login Form -->
+        <div class="form-box Login">
+            <h2 class="animation" style="--D:0; --S:21">LOGIN</h2>
+            <form action="/user_login" method="POST">
+                <div class="input-box animation" style="--D:1; --S:22">
+                    <input type="text" id="user_id" name="user_id" required>
+                    <label for="user_id">Username</label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box animation" style="--D:2; --S:23">
+                    <input type="password" id="password" name="password" required>
+                    <label for="password">Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="input-box animation" style="--D:3; --S:24">
+                    <button class="btn" type="submit" id="login">Login</button>
+                </div>
+                <div class="regi-link animation" style="--D:4; --S:25">
+                    <p>Don't have an account? <a href="#" class="SignUpLink">Sign Up</a></p>
+                </div>
+            </form>
         </div>
 
-        <script>
-            const container=document.querySelector('.container');
-            const LoginLink=document.querySelector('.SignInLink')
-            const RegisterLink=document.querySelector('.SignUpLink')
-            RegisterLink.addEventListener('click', ()=>{
-                container.classList.add('active');
-            })
-            LoginLink.addEventListener('click', ()=>{
-                container.classList.remove('active');
-            })
-        </script>
-    </body>
+        <div class="info-content Login">
+            <h2 class="animation" style="--D:0; --S:20">WELCOME BACK !</h2>
+            <p class="animation" style="--D:1; --S:21">Stay on top of your transactions by logging in with your personal details—quick and secure!</p>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-box Register">
+            <h2 class="animation" style="--li:17; --S:0">REGISTER</h2>
+            <form action="/user_reg" method="POST">
+                <div class="input-box animation" style="--li:18; --S:1">
+                    <input type="text" id="user_id" name="user_id" required>
+                    <label for="user_id">Username</label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box animation" style="--li:19; --S:2">
+                    <input type="password" id="password" name="password" required>
+                    <label for="password">Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="input-box animation" style="--li:20; --S:3">
+                    <button class="btn" type="submit" id="registered">Register</button>
+                </div>
+                <div class="regi-link animation" style="--li:21; --S:4">
+                    <p>Already have an account? <a href="#" class="SignInLink">Sign In</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-content Register">
+            <h2 class="animation" style="--li:17; --S:0;">Welcome Aboard!</h2>
+            <p class="animation" style="--li:18; --S:1;">To begin your journey, please complete your registration to access our resources, connect with fellow members, and participate in our upcoming events. </p>
+        </div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const LoginLink = document.querySelector('.SignInLink');
+        const RegisterLink = document.querySelector('.SignUpLink');
+
+        RegisterLink.addEventListener('click', () => {
+            container.classList.add('active');
+        });
+
+        LoginLink.addEventListener('click', () => {
+            container.classList.remove('active');
+        });
+    </script>
+</body>
 </html>
