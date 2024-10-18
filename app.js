@@ -216,10 +216,6 @@ app.get('/savings', (req, res) => {
   res.render('savings', { title: 'savings'});
 });
 
-app.get('/logpra', (req, res) => {
-  res.render('logpra', { title: 'Login Trial'});
-});
-
 app.post('/savings', async (req, res) => {
   try {
     const { user_id, amount, interest, loan_id } = req.body;
