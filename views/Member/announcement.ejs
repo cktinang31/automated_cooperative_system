@@ -1,67 +1,31 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>KaCoop | <%=title %></title>
-        <link rel="stylesheet" href="/css/announcement.css">
-    </head>
-<body>
-    <nav>
-        <div class="site-title">
-            <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-        </div>
-        <div class="member-title">
-            <h1>Member</h1>
-        </div>
-        <div class="home-icon">
-            <a href="/">
-                <img src="/svg/icons8-home.svg" alt="Home Icon">
-            </a>
-        </div>
-    </nav>
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/announcement.css">
 
-    
-    <div class="main-content">
-        <div class="content-wrapper">
-            <div class="announcement-section">
-                <img src="/images/marketing.png" alt="Megaphone Icon" class="adjusted">
-                <h1>Announcement</h1>
-            </div>
-    
-            <% if (contents.length > 0) { %>
-                <% contents.forEach(content => { %>
-                    <div class="announcement-content">
-                        <i class="custom-announcement-icon"></i>
-                        <div class="content-text">
-                            <h3 class="title"><%= content.content_title %></h3>
-                            <p class="content"><%= content.content %></p>
-                            <img src="/images/NicePng_american-football-png_5625275 (1).png" alt="NicePng_american-football-png_5625275">
-                        </div>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>There are no announcements to display...</p>
-            <% } %>
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>   
+        <div class="container">
+            <table>
+                <% if (contents && contents.length > 0) { %>
+                    <% contents.forEach(content => { %>
+                    <tr>
+                        <td class="cooperative_advisory">
+                            <h1 class="coop_ad"><%= content.content_title %></h1>
+                            <p class="announcements"><%= content.content %></p>
+                        </td>
+                    </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="2" class="no-announcements">There are no announcements to display...</td>
+                    </tr>
+                <% } %>
+            </table>
         </div>
-    </div>
-    
 
-    <div class="main-content">
-        <div class="content-wrapper">
-            <div class="announcement-section">
-                <img src="/images/megaphone.jpg" alt="Megaphone Icon" class="adjusted">
-                <h1>Announcement</h1>
-            </div>
-                <div class="announcement-content">
-                    <i class="custom-announcement-icon"></i>
-                    <div class="content-text">
-                        <h3 class="title"></h3>
-                        <p class="content"></p>
-                        <img src="/images/comment.jpg" alt="NicePng_american-football-png_5625275">
-                    </div>
-                </div>
-                <p>There are no announcements to display...</p>
-        </div>
-    </div>
-</body>
+   
+
+    </body>
 </html>

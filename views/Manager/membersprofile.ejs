@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../Manager/managerhead.ejs") %>
+    <link rel="stylesheet" href="/css/managerprofile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <body>
+        <%- include("../Manager/managerheader.ejs") %>
+        <%- include("../Manager/managersidebar.ejs") %>
+
+        <div class="container">
+          <% if (user) { %>
+            <div class="details">
+                <div class="profcontainer">
+                    <div class="prof1-container"></div>
+                    <div class="prof2-container"></div>
+                    <div class="prof3-container">
+                        <img src="/images/download.jpg" alt="Description of Image">
+                    </div>
+                </div>
+                  
+          
+                  <div class="details-container">
+                    <div class="headcontainer">
+                        <i class="fa-solid fa-crown"></i>
+                        <h1 class="details"><%= user.fname %> <%= user.lname %></h1>
+                    </div>
+                     
+                   
+                      <p class="details2">User Id: <%= user.user_id %></p>
+                      <p class="contact">E-mail Add: <%= user.email %></p>
+                      <p class="add">Address: <%= user.address %></p>
+                      <p class="pb">Place of Birth: <%= user.place_of_birth %></p>
+                      <p class="db">Date of Birth: <%= user.date_of_birth || 'N/A' %></p>
+                  </div>
+          
+                  <div class="saving1-container">  
+                    <h2 class="savings">Php <%= savings[0]?.amount || '0' %>.00</h2>
+                </div>
+                <div class="saving2-container">  
+                    <p class="savingss">Savings</p>
+                </div>
+                <div class="cbu1-container">  
+                    <h2 class="savings">Php <%= cbu[0]?.amount || '0' %>.00</h2>
+                </div>
+                <div class="cbu2-container">  
+                    <p class="savingss">CBU</p>
+                </div>
+                <div class="loan-container">
+                    <h1 class="cbu">Current Loans</h1>
+                    <% if (Array.isArray(user.Loans) && user.Loans.length > 0) { %> 
+                        <% user.Loans.forEach(loan => { %>
+                            <div class="loan-details">
+                                <p class="lt">Current Loan: <%= loan.loan_type || 'N/A' %></p>
+                                <p class="amount">Amount: Php <%= loan.amount ? loan.amount.toLocaleString() : '0' %>.00</p>
+                                <p class="interest">Interest: <%= loan.interest ? loan.interest + '%' : '0%' %></p>
+                                <p class="balance">Balance: Php <%= loan.balance ? loan.balance.toLocaleString() : '0' %></p>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No loans available</p>
+                    <% } %>
+                    
+                </div>
+                
+            </div>
+           
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Amount</th>
+                            <th>Transaction Type</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <tbody>
+                            <% if (transactions.length > 0) { %>
+                                <% transactions.forEach(trans => { %>
+                                    <tr>
+                                        <td><%= trans.id %></td>
+                                        <td><%= trans.amount %></td>
+                                        <td>
+                                            <% if (trans.type === 'CBU Transactions') { %>
+                                                <%= trans.type %> - <%= trans.transaction_type %>
+                                            <% } else if (trans.type === 'Savings Transactions') { %> 
+                                                <%= trans.type %> - <%= trans.transaction_type %>
+                                            <% } else if (trans.type === 'Loan Application') { %>
+                                                <%= trans.type %> 
+                                            <% } else if (trans.type === 'Loan Payment') { %>
+                                                <%= trans.type %> 
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <% if (trans.status === 'approved') { %>
+                                                <i class='bx bx-check' style="color:green"></i>
+                                            <% } else if (trans.status === 'pending') { %>
+                                                <i class='bx bx-loader-alt' style="color:orange"></i>
+                                            <% } else { %>
+                                                <i class='bx bx-x' style="color:red"></i>
+                                            <% } %>
+                                        </td>
+                                        <td><%= new Date(trans.date).toLocaleDateString() %></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">No transactions</td> 
+                                </tr>
+                            <% } %>
+                        </tbody>
+                        
+                     
+                    </tbody>
+                </table>
+            </div>
+            
+          <% } %> 
+      </div>
+      
+    </body>
+
+    
+</html>

@@ -1,13 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("head.ejs") %>
-    <link rel="stylesheet" href="/css/loan.css">
-
+    <link rel="stylesheet" href="/css/dashboard.css">
+ 
     <body>
         <%- include("header.ejs") %>
         <%- include("sidebar_mem.ejs") %>
+       
+        <div class="container">
+            <div class="announcement-container">
+ 
+              <% if (contents.length > 0) { %>
+                <% contents.forEach(content => { %>
+                <h3 class="announcement-title"><%= content.content_title %></h3>
+                <p><%= content.content %></p>
+              <% }) %>
+              <% } else { %>
+                  <p>There are no announcements to display...</p>
+              <% } %>
+            </div>
+ 
+            <div class="welcome-container">
+               
+                <h3 class="welcome-title">Welcome KA-Coop, <%= user.fname %> <%= user.lname %> !</h3>
+                <p>We're glad to see you again. As always, we're here to support you with your financial needs. Check your dashboard for the latest updates on your savings, loans, and other services.
 
+                    Thank you for being a valued member of our cooperative!</p>
+            </div>
+ 
+            <div class="coopfunds-container">
+                <h3>Coop Funds</h3>
+            </div>
+ 
+            <div class="funds-container">
+               
+                <li>
+ 
+                   
+                    <a href="/Member/loans" class="funds-btn">
+                        <% if (loans.length > 0) { %>
+                            <% loans.forEach(loan => { %>
+                                <p>Php <%= loan.balance %></p>
+                            <% }) %>
+                            <h3>Loan Balance</h3>
+                        <% } else { %>
+                            <p>No current Loan.</p>
+                            <h3>Apply for Loan</h3>
+                        <% } %>
+                    </a>
+                    
+                   
+                </li>
+                <li>
+                    <a href="/Member/funds" class="funds-btn">
+                        <% savings.forEach(savings => { %>
+                        <p>Php <%= savings.amount %>.00</p>
+                        <% }) %>
+                        <h3>Savings</h3>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a href="/Member/funds" class="funds-btn">
+                        <% cbu.forEach(cbu => { %>
+                        <p>Php<%= cbu.amount %>.00</p>
+                        <% }) %>
+                        <h3>CBU</h3>
+                    </a>
+                   
+                </li>
+           
+            </div>
+        </div>
+ 
+ 
     </body>
-
-
+ 
+ 
 </html>
