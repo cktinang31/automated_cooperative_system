@@ -800,20 +800,32 @@ router.get(['/Manager/managerhistory', '/Manager/transaction', '/Manager/history
 
             try {
                 const application = await Application.findAll({
+                    where: {
+                        application_status: ['approved', 'decline']  
+                    }
 
                 });
                 const cbu_transaction = await Cbutransaction.findAll({
-                    include: [{ model: User, as: 'User' }]  
+                    include: [{ model: User, as: 'User' }] ,
+                    where: {
+                        status: ['approved', 'decline'] 
+                    }
                 });
 
-                // Fetch Savings transactions
+                
                 const savings_transaction = await Savtransaction.findAll({
-                    include: [{ model: User, as: 'User' }]  
+                    include: [{ model: User, as: 'User' }]  ,
+                    where: {
+                        status: ['approved', 'decline'] 
+                    }
                 });
 
-                // Fetch Loan applications
+                
                 const loan_application = await Loan_application.findAll({
-                    include: [{ model: User, as: 'User' }]  
+                    include: [{ model: User, as: 'User' }]  ,
+                    where: {
+                        application_status: ['approved', 'declined'] 
+                    }
                 });
 
                 

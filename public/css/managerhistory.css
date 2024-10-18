@@ -6,7 +6,7 @@ body {
 
 .container {
     padding-top: 10rem;
-    padding-left: 45rem;
+    padding-left: 50rem;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -19,7 +19,7 @@ body {
 
 table {
     width: 100%;
-    margin-left: -100rem;
+    margin-left: -20rem;
     margin-top: 5rem;
     border-collapse: collapse; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
