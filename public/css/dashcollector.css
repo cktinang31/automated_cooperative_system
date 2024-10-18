@@ -7,10 +7,14 @@
 
  
 body {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f0f0;
 }
- 
+
+
 .dashboard {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
