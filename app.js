@@ -328,6 +328,6 @@ app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log('Server running on http://192.168.0.45:3001');
 });
