@@ -92,7 +92,7 @@ header i {
 
 aside {
     top: 87px;
-    width: 95px;
+    width: 80px;
     height: 100%;
     background: #373F41;
     position: fixed;
@@ -104,7 +104,7 @@ ul {
     list-style-type: none;
     margin-top: 50px;
     margin-left: 0;
-    padding-left: 30px;
+    padding-left: 25px;
 }
 
 ul li {
@@ -113,7 +113,16 @@ ul li {
 }
 
 ul li i {
-    color: #F9A602;
+    /* color: #F9A602; */
+    color: #F5F5F5; 
     font-size: 24px;
-
+    transition: color 0.1s ease, transform 0.1s ease;
 }
+
+
+ul li:hover i {
+    /* color: #F5F5F5;  */
+    color: #F9A602;
+    transform: scale(1.1); 
+}
+

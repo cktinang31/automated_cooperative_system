@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/loan_payment_details.css">
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+
+        <div class="loan-details-container">
+            <h2>Loan Details</h2>
+            <div class="loan-details">
+              <div class="left-column">
+                <p><strong>Name:</strong> <span class="highlight">Regular User</span></p>
+                <p><strong>Loan Amount:</strong> <span class="highlight">70000.00 php</span></p>
+                <p><strong>Loan Interest Rate:</strong> <span class="highlight">2</span></p>
+                <p><strong>Total Amount to be Paid:</strong> <span class="highlight">116003.40 php</span></p>
+              </div>
+              <div class="right-column">
+                <p><strong>Loan Type:</strong> <span class="highlight">Regular Loan</span></p>
+                <p><strong>Monthly Payment:</strong> <span class="highlight">19333.9 php</span></p>
+                <p><strong>Loan Term:</strong> <span class="highlight">6 months</span></p>
+                <p><strong>Loan Period:</strong> <span class="highlight">2024-03-03 to 2024-09-03</span></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="payment-container">
+            <h3>Add Payment</h3>
+            <div class="payment-inputs">
+              <input type="text" placeholder="Amount" class="payment-input" />
+              <div class="payment-select-wrapper">
+                <select class="payment-select">
+                    <option>Mode of Payment</option>
+                    <option>Credit Card</option>
+                    <option>Bank Transfer</option>
+                    <option>Cash</option>
+                </select>
+            </div>
+            
+            </div>
+          </div>
+
+          <div class="submit">
+            <button type="submit">Pay
+                </div>
+
+                <div class="table-container">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Number of Payment</th>
+                              <th>Balance</th>
+                              <th>Amount</th>
+                              <th>Status</th>
+                              <th>Date</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td colspan="5"></td> <!-- Empty row -->
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          

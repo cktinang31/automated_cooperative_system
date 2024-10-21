@@ -1,6 +1,12 @@
-const Application = require('../models/application.js');
-const User = require ('../models/user.js')
-const Cbu = require('../models/cbu.js')
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 const {create_cbu} = require ('../controller/cbuController');
 const {create_savings} = require ('../controller/savingsController');
 

@@ -1,6 +1,14 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const User = require ('../models/user');
+const {Application, 
+  Cbu, 
+  Cbutransaction, 
+  Loan_application, 
+  Loan_payment, 
+  Loan, 
+  Savings, 
+  Savtransaction,
+  User,} = require('../models/sync');
 
 
 const user_reg = async (req, res) => {
@@ -53,7 +61,7 @@ const user_login = async (req, res) => {
           case 'admin':
             return res.redirect('/SystemAdmin/systemadmin');
           case 'manager':
-            return res.redirect('/Manager/sidebarmanager');
+            return res.redirect('/Manager/dashboard');
           case 'collector': 
             return res.redirect('Collector/sidebarcollector');
           default:
