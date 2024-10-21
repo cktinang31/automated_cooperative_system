@@ -195,57 +195,7 @@
         Copyright &copy; AUTOMATED COOPERATIVE SYSTEM 2024
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-                const myCarousel = document.querySelector('#hero-carousel');
-                const carousel = new bootstrap.Carousel(myCarousel);
-
-                myCarousel.addEventListener('slid.bs.carousel', function () {
-                    console.log('Slide changed');
-                });
-            });
-
-        document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('nav ul li a');
-        const sections = document.querySelectorAll('section');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                navLinks.forEach(navLink => navLink.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            let currentSection = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-
-                if (window.pageYOffset >= sectionTop - 50 && window.pageYOffset < sectionTop + sectionHeight - 50) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection}`) {
-                    link.classList.add('active');
-                }
-            });
-
-            if (window.pageYOffset === 0) {
-                navLinks.forEach(link => {
-                    if (link.getAttribute('href') === '/') {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    });
-        
-    </script>
+    <script src="/js/index.js"></script>
 
 </body>
 </html>
