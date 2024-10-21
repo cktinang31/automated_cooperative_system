@@ -19,7 +19,7 @@ router.get('/application', (req, res) => {
 
 
 
-router.post('/mem_application_update/:applicationId', applicationController.mem_application_update);
+router.put('/mem_application_update/:id', applicationController.mem_application_update);
 
 
 

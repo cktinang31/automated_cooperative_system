@@ -1,7 +1,14 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh; 
+    overflow: hidden; 
+}
+
+
+.container {
+    padding-top: 10rem;
+    padding-left: 18rem;
+    
 }
 
 

@@ -1,6 +1,13 @@
-const User = require ('../models/user');
-const Cbu = require ('../models/cbu');
-const Cbutransaction = require ('../models/cbutransaction');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
+
 const { v4: uuidv4 } = require('uuid');
 
 const cbu_transaction = async (req, res) => {

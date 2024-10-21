@@ -3,88 +3,133 @@ body {
     padding: 0;
     overflow: hidden;
 }
-.announcement-container {
-    position: absolute;
-    width: 245px;
-    height: 60px;
-    left: 135px;
-    top: 160px;
-    background: #F5F5F5;
-    border-radius: 10px;
-    border: 1px solid #373F41;
-    cursor: text;
-    padding-left: 10px;  /* Apply padding to the container */
-    padding-top: 14px;  
-    box-sizing: border-box; /* Ensure padding doesn’t affect the total width/height */
-    overflow: hidden; /* Prevent content overflow */
+
+.container {
+    padding-top: 10rem;
+    padding-left: 30rem;
+    
+}
+
+.form-container {
+    width: 70rem;
+    height:3rem;
+    display: flex;
+    flex-wrap: nowrap;
 }
 .announcement-title {
     color: #373F41;
     margin: 0; 
-}
-.write-container {
-    position: absolute;
-    width: 864px;
-    height: 60px;
-    left: 412px;
-    top: 160px;
-    background: #ffffff;
-    border-radius: 10px;
-    border: 1px solid #373F41;
-   cursor:text;
-   padding-left: 10px;  /* Apply padding to the container */
-   padding-top: 14px;  
-   box-sizing: border-box; /* Ensure padding doesn’t affect the total width/height */
-   overflow: hidden;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background: none; 
+    outline: none;
+    font-size: 20px;
+    width: 12rem;
+    height: 3rem;
 
+    
 }
+.announcement-title::placeholder {
+    color: #373F41;
+    font-size: 14px; 
+    font-weight: 200; 
+}
+
 .write-title{
-
-    color:   #373F41;
-    /* padding-left:  12px; */
-    margin: 0;
+    color: #373F41;
+    margin: 0; 
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background: none; 
+    outline: none;
+    font-size: 20px;
+    width: 48rem;
+    height: 3rem;
+    margin-left: 1rem;
 }
+
+.write-title::placeholder {
+    color: #373F41;
+    font-size: 14px; 
+    font-weight: 200; 
+}
+
 .post-container {
+    right: 20rem;
+    top: 10rem;
     position: absolute;
     width: 108px;
-    height: 60px;
-    left: 1308px;
-    top: 160px;
-    border-radius: 10px;
+    height: 3rem;
+    border-radius: 8px;
     text-align: center;
-    background: #F9A602;
+    background: #333;
     display: flex;        
     justify-content: center; 
     align-items: center;   
     cursor: pointer;  
+   
 }
 
-.post-container p {
-    font-size:24px; 
-    color: #373F41;
+.post-container button {
+    font-size:20px; 
+    color: #F9A602;
     font-weight: bold;
+    border: none;
+    background: none; 
+    outline: none;
 }
 .post-container:hover {
     border: 1px solid #FFFFFF;
-    box-shadow: 10px 10px 3px  #373F41;
+    box-shadow: 4px 4px 1px  #373F41;
 
 }
-.cooperative_advisory {
-    box-sizing: border-box;
-    position: absolute;
-    width: 1281px;
-    height: 455px;
-    left: 135px;
-    top: 268px;
-    background:  #373F41;
+
+
+table {
+    width: 50rem;
+    margin-left: 10rem;
+    margin-top: 2rem;
+    border-spacing: 2rem;
+    border-collapse: separate; 
+
+ }
+
+
+td {
+    padding: 10px;
+    border: 1px solid #dbdbdb;
     border-radius: 8px;
-    text-align: center;
-    cursor: default;
+    background-color: #FFFFFF;
     
+   
 }
-.cooperative_advisory h1 {
+
+.announcement {
+    text-align: center;
+}
+
+td i {
+   margin-left: 50rem;
+   color: rgb(203, 8, 8);
+}
+.delete-btn {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+h1 {
     color: #F9A602;
+    font-size: 24px;
 }
-.cooperative_advisory p {
-    color: #f0ecec;
+
+p {
+    color: #373F41;
+}
+.no-announcements {
+    text-align: center;
+    font-style: italic;
+    color: #999;
 }

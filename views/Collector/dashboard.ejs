@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("head.ejs") %>
+    <%- include("dashhead.ejs") %>
     <link rel="stylesheet" href="/css/dashcollector.css">
 
     <body>
-        <%- include("sidebar.ejs") %>
+        <%- include("dashheader.ejs") %>
+        <%- include("dashsidebar.ejs") %>         
+        <div class="dashboard">
+            <!-- First Row -->
+            <div class="card advisory-card">
+                <h2>Cooperative Advisory</h2>
+                <p>There are no announcements...</p>
+                <i class="fa-regular fa-comments" style="color: #ffd200;"></i>
+            </div>
         
+            <div class="card loans-card">
+                <h2>Loans</h2>
+                <h1>45K <span>coins</span></h1>
+                <i class="fa-solid fa-coins fa-2xl" style="color: #F9a602;"></i>
+            </div>
+        
+            <div class="card empty-card"></div>
+        
+            <!-- Second Row -->
 
-        <header>
-   
-            <div class="logo">
-                <img src="/images/preview.jpg"  alt="logo">
-            </div>
-            <div class="title">
-                <p><%=title %></p>
-            </div>
-            <div class="notif-bell">
-                <i class="fas fa-bell"></i>
-            </div>
-            <div class="profile">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="user">
-                <p>Collector</p>
-            </div>
-          
-        </header>
-                
-        <div class="container">
-            <div class="announcement-container">
-                <h3 class="announcement-title">Coop Advisory</h3>
-                <p>coop advisory</p>
-            </div>
-
-            <div class="welcome-container">
-                <h3 class="welcome-title">Welcome</h3>
-            </div>
-            <html>
             
-                <body>
-                   
-                    <div class="dashboard">
-                        <!-- First Row -->
-                        <div class="card advisory-card">
-                            <h2>Cooperative Advisory</h2>
-                            <p>There are no announcements...</p>
-                            <div class="icon">💬</div>
-                        </div>
-                 
-                        <div class="card loans-card">
-                            <h2>Loans</h2>
-                            <h1>45K <span>coins</span></h1>
-                            <div class="icon">💰</div>
-                        </div>
-                 
-                        <div class="card empty-card"></div>
-                 
-                        <!-- Second Row -->
-                        <div class="card funds-card">
-                            <h2>2024 COOP FUNDS</h2>
-                            <ul class="legend">
-                                <li><span class="color green"></span> Cash and Equivalents</li>
-                                <li><span class="color red"></span> Expenses</li>
-                                <li><span class="color yellow"></span> Receivables</li>
-                                <li><span class="color blue"></span> Fixed Assets</li>
-                            </ul>
-                            <div class="graph-image">
-                                <img src="chart-placeholder.png" alt="Graph">
-                            </div>
-                        </div>
-                 
-                        <!-- Combined Inquiries and Upcoming Collections Card -->
-                        <div class="card inquiries-collections-card">
-                            <div class="inquiries">
-                                <h2>Inquiries</h2>
-                                <div class="inquiry-item"></div>
-                                <div class="inquiry-item"></div>
-                            </div>
-                 
-                            <div class="upcoming-collections">
-                                <h2>Upcoming Collections</h2>
-                                <div class="collection-item"></div>
-                                <div class="collection-item"></div>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-            </html>
-            
+            <div class="card funds-card">
+                <h2>2024 COOP FUNDS</h2>
+                <ul class="legend">
+                    <li><span class="color green"></span> Cash and Equivalents</li>
+                    <li><span class="color red"></span> Expenses</li>
+                    <li><span class="color yellow"></span> Receivables</li>
+                    <li><span class="color blue"></span> Fixed Assets</li>
+                </ul>
+                <div class="graph-image">
+                    <img src="/images/graph-image.jpg" alt="">
+                </div>
+            </div>
+        
+            <!-- Combined Inquiries and Upcoming Collections Card -->
+            <div class="card inquiries-collections-card">
+                <div class="inquiries">
+                    <h2>Upcoming Collections</h2>
+                    <div class="inquiry-item"></div>
+                    <div class="inquiry-item"></div>
+                </div>
+        
+                <div class="upcoming-collections">
+                    <h2>Inquiries</h2>
+                    <div class="collection-item"></div>
+                    <div class="collection-item"></div>
+                </div>
             </div>
         </div>
+
+
+
 
 
     </body>
