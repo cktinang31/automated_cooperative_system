@@ -147,7 +147,7 @@ router.get('/Collector/transactioncol', (req, res) => {
 
 
 
-router.get('/Collector/dashboard', (req, res) => {
+router.get('/Collector/dashboardcollector', (req, res) => {
 try {
     console.log('Session ID:', req.sessionID);
     console.log('Session:', req.session);
@@ -163,7 +163,7 @@ try {
     console.error('Error in isAuthenticated middleware:', error);
     res.status(500).send('Internal server error');
 }
-res.render('Collector/dashboard', { title: 'Dashboard'});
+res.render('Collector/dashboardcollector', { title: 'Dashboard'});
 });
 
 

@@ -15,25 +15,36 @@ body {
 }
 
 
-.dashboard {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 20px;
-    padding: 30px;
-    margin-top: 85px;
+.container {
+    padding-top: 8rem;
+    padding-left: 18rem;
 }
  
 /* Card Styles */
 .card {
-    background-color: #333;
-    color: #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
+    box-sizing: border-box;
+    position: absolute;
+    width: 900px;
+    height: 330px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    padding-top: 1rem;
 }
- 
-/* Title Styles */
+
+.card:hover {
+    border: 2px solid #f5f5f5;
+    box-shadow: 10px 10px 4px #373F41;
+}
+
+
+.announcement-title {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #373F41;
+}
 h2 {
     font-size: 29px;
     font-weight: bold;

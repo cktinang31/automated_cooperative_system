@@ -49,14 +49,11 @@ const mem_application_update = async (req, res) => {
        
         const application = await Application.findByPk(id);
         if (!application) {
-            if (!application) {
-                console.log('Application not found for ID:', id);
-                return res.status(404).send('Application not found'); 
-            }
-            return res.status(404).send('Application not found'); 
+            console.log('Application not found for ID:', id);
+            return res.status(404).send('Application not found');
         }
-
-        if (!['approved', 'decline'].includes(application_status)) {
+        
+        if (!['approve', 'decline'].includes(application_status)) {
             console.log('Invalid application status:', application_status);
             return res.status(400).send('Invalid application status');
         }

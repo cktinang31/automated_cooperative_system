@@ -12,5 +12,6 @@
         "midddleware",
         "systemadmin",
         "tablekey"
-    ]
+    ],
+    "files.autoSave": "afterDelay"
 }
