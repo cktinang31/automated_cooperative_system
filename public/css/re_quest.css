@@ -1,19 +1,18 @@
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
     margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .container {
-    padding: 20px;
+    padding-top: 10rem;
+    padding-left: 25rem;
 }
 
 table {
     width: 90%;
     border-collapse: collapse;
-    margin: 80px 0;
-    margin-left: 145px;
     cursor: pointer;
 }
 
@@ -34,6 +33,10 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background-color: #ddd; 
+}
+
+.hidden {
+    display: none;
 }
 
 button {

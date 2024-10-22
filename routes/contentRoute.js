@@ -7,6 +7,7 @@ const router = express.Router();
 
 
 router.post('/post_announcement', contentController.post_announcement);
+router.post('/delete_content', contentController.delete_content);
 
 
 module.exports = router;

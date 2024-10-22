@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("managerhead.ejs") %>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/managerhistory.css">
+ 
+    <body>
+        <%- include("managerheader.ejs") %>
+        <%- include("managersidebar.ejs") %>
+
+        <div class="container">
+            <div class="filter-button">
+                All
+            </div>
+
+            <table >
+                <thead>
+                    <tr>
+                        <th>Requested Id</th>
+                        <th>Transaction Type</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (transactions.length > 0) { %>
+                        <% transactions.forEach(trans => { %>
+                            <tr>
+                                <td><%= trans.id %></td>
+                                <td>
+                                    <% if (trans.type === 'CBU Transactions') { %>
+                                        <%= trans.type %> - <%= trans.transaction_type %>
+                                    <% } else if (trans.type === 'Savings Transaction') { %>
+                                        <%= trans.type %> - <%= trans.transaction_type %>
+                                    <% } else if (trans.type === 'Loan Application') { %>
+                                        <%= trans.type %> 
+                                    <% } else if (trans.type === 'Loan Payment') { %>
+                                        <%= trans.type %> 
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if (trans.status === 'approved') { %>
+                                        <i class='bx bx-check' style="color:green"></i>
+                                    <% } else if (trans.status === 'pending') { %>
+                                        <i class='bx bx-loader-alt' style="color:orange"></i>
+                                    <% } else { %>
+                                        <i class='bx bx-x' style="color:red"></i>
+                                    <% } %>
+                                </td>
+                                <td><%= new Date(trans.date).toLocaleDateString() %></td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4">No transactions</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+                
+            </table>
+               
+       
+        </div>
+
+        
+
+</body>
+</html>
