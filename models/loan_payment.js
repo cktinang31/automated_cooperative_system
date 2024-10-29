@@ -1,11 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
-const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
-    host: 'localhost',
+const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
+const sequelize = new Sequelize(connectionString, {
     dialect: 'postgres',
-    port: 5432,
-    logging: console.log 
+    logging: console.log,
 });
 
 
