@@ -45,7 +45,7 @@ body {
     opacity: 1;
     position: absolute;
     top: 275px;
-    left: 650px;
+    left: 665px;
 }
 
 a {
@@ -258,4 +258,8 @@ tbody tr:hover {
     background-color: #173AB8;
     border-radius: 4px;
     z-index: -1;
+}
+
+.fa-box {
+    color: #F9A602;
 }

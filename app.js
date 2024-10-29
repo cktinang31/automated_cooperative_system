@@ -4,10 +4,20 @@ const session = require('express-session');
 const crypto = require('crypto');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const {Pool,Client} = require ('pg')
-const connectionString = 'postgresql://postgres:Ctugk3nd3s@localhost:5432/Cooperativedb'
+const cors = require('cors');
+const { Pool } = require('pg');
+const knex = require('knex')(require('./knexfile').development);
+const { createClient } = require('@supabase/supabase-js'); 
+const supabaseUrl = 'https://wktdygngpenuvshfxnam.supabase.co'; // Replace with your project ref
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrdGR5Z25ncGVudXZzaGZ4bmFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0NzgwOTIsImV4cCI6MjA0NTA1NDA5Mn0.d7sxmS9PRJpz4k1UUEvpg0CIsXkD8UfnaB8dDndCgao'; // Replace with your key
+const supabase = createClient(supabaseUrl, supabaseKey); // Initialize Supabase client
+const dotenv = require('dotenv');
+dotenv.config();
+
+
+const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
 const { Sequelize } = require('sequelize');
-const bcrypt = require ('bcrypt')
+const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
@@ -19,16 +29,8 @@ const loanRoutes = require('./routes/loanRoute');
 const memberpageRoutes = require('./routes/memberpageRoute');
 const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
-const loan_paymentRoutes = require ('./routes/loan_paymentRoute');
-const {Application, 
-  Cbu, 
-  Cbutransaction, 
-  Loan_application, 
-  Loan_payment, 
-  Loan, 
-  Savings, 
-  Savtransaction,
-  User,} = require('./models/sync');
+const loan_paymentRoutes = require('./routes/loan_paymentRoute');
+const { Application, Cbu, Cbutransaction, Loan_application, Loan_payment, Loan, Savings, Savtransaction, User } = require('./models/sync');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
@@ -36,7 +38,6 @@ const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
 
 
-// const Application = require('./models/application');
 
 
 const isAuthenticated = (req, res, next) => {
@@ -88,6 +89,7 @@ const app = express();
 
 const secretKey = crypto.randomBytes(64).toString('hex');
 
+app.use(cors());
 app.use(session({
   secret: secretKey, 
   re_save: false,
@@ -189,6 +191,23 @@ app.use(savtransactionRoutes);
 app.use(cbutransactionRoutes);
 app.use(collectorRoutes);
 app.use(loan_paymentRoutes);
+
+
+app.get('/tables', async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT table_name 
+      FROM information_schema.tables 
+      WHERE table_schema = 'public'
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching tables:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Landing'});
@@ -327,6 +346,14 @@ app.get('/your-route', (req, res) => {
 app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
+
+
+// Test the connection
+knex.raw('SELECT 1')
+  .then(() => console.log('Connected to Supabase!'))
+  .catch(err => console.error('Connection failed:', err))
+  .finally(() => knex.destroy());
+
 
 app.listen(3000, () => {
   console.log('Server running on http://192.168.0.45:3001');
