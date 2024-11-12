@@ -15,11 +15,9 @@
                     <form id="create-announcement-form" action="/post_announcement" method="POST">
                         
                             <input type="text" class="announcement-title" id="content_title" name="content_title" placeholder="Title" required>
-        
 
-                        <div class="write-container" id="writeContainer">
-                            <textarea id="content" class="write-title" name="content" rows="10" placeholder="Write announcement.." required></textarea>
-                        </div>
+                            <input type="text" id="content" class="write-title" name="content" rows="10" placeholder="Write announcement.." required></textarea>
+                    
 
                         <div class="post-container">
                             <button type="submit" class="post-title">POST</button>
@@ -31,9 +29,20 @@
                         <% if (contents && contents.length > 0) { %>
                             <% contents.forEach(content => { %>
                             <tr>
-                                <td class="cooperative_advisory">
-                                    <h1 class="coop_ad"><%= content.content_title %></h1>
-                                    <p class="announcements"><%= content.content %></p>
+                                <td>
+                                    
+                                    <div class="announcement">
+                                        <form action="/delete_content" method="POST" class="delete-content-form">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="user_id" value="<%= content.content_id %>">
+                                        </form>
+                                        <h1><%= content.content_title %></h1>
+                                        <p><%= content.content %></p>
+                                    </div>
+                                    <button type="button" class="delete-btn" data-user-id="<%= content.content_id %>">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    
                                 </td>
                             </tr>
                             <% }) %>
@@ -52,67 +61,18 @@
                 
             <script>
 
-                document.getElementById('create-announcement-form').addEventListener('submit', async function(e) {
-                    e.preventDefault(); 
-                    
-                    const content_title = document.getElementById('content_title').value;
-                    const content = document.getElementById('content').value;
-                    
-                    try {
-                        const response = await fetch('/post_announcement', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ content_title, content }),
-                        });
-                        
-                        if (response.ok) {
-                            alert('Announcement Posted Successfully');
-                            
-                        } else {
-                            alert('Error Posting Announcement');
+                document.querySelectorAll('.delete-btn').forEach(button => {
+        
+                    button.addEventListener('click', function() {
+                       
+                        const form = this.closest('td').querySelector('form');
+                   
+                        if (confirm('Are you sure you want to delete this announcement?')) {
+                            form.submit();
                         }
-                    } catch (error) {
-                        console.error('Error posting announcement:', error);
-                    }
+                    });
                 });
-
-                const announcementContainer = document.getElementById('announcementContainer');
-                        const announcementTitle = document.getElementById('defaultText');
-                
-                        announcementContainer.addEventListener('click', function() {
-                        
-                            if (announcementTitle) {
-                                announcementTitle.style.display = 'none';
                                 
-                                announcementContainer.focus();
-                            }
-                        });
-                
-                        announcementContainer.addEventListener('blur', function() {
-                            if (!announcementContainer.textContent.trim()) {
-                                announcementTitle.style.display = 'block'; 
-                            }
-                        });
-                
-                    
-                        window.addEventListener('load', function() {
-                            if (!announcementContainer.textContent.trim()) {
-                                announcementTitle.style.display = 'block';
-                            }
-                        });
-
-                const writeContainer = document.getElementById('writeContainer');
-                const writeTitle = document.getElementById('defaulttext');
-
-                writeContainer.addEventListener('click', function() {
-                    if (writeTitle) {
-                        writeTitle.style.display = 'none';
-                    }
-                });
-
-                        
             </script>
 
             

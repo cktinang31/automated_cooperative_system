@@ -13,23 +13,15 @@ body {
     max-width: 100%;
     margin: 89px auto;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Poppins";
     max-width: 100%;
 }
 
-h1,
-a,
 ul {
     margin: 0;
     padding: 0;
     text-decoration: none;
     color: #222;
-}
-
-.nav-yellow {
-    height: 10px;
-    background-color: #f9a602 !important;
-    width: 1000%;
 }
 
 nav {
@@ -38,17 +30,23 @@ nav {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    background-color: #373f41;
-    border-bottom: 1px solid #f9a602;
+    background-color: #ffffff;
     position: fixed;
     z-index: 8;
     top: 0;
     left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.site-title img{
+    margin-left: 60px;
+    height: 100px;
+    width: auto;
+    display: block;
 }
 
 nav a {
     position: relative;
-    color: black;
     text-decoration: none;
 }
 
@@ -56,22 +54,22 @@ nav ul {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    color: #ffffff;
-    margin-bottom: 9px;
+    margin-bottom: 14px;
 }
 
 nav ul li a {
-    color: #ffffff;
+    color: #373f41;
     font-family: 'Poppins';
-    font-weight: 600;
-    font-size: medium;
+    font-weight: 800;
+    font-size: 1.2rem;
     padding: 2px 25px;
+    position: relative;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
+nav ul li a.active, 
 nav ul li a:hover {
-    color: #ffb951; 
-    text-decoration: underline;
+    color: #f9a602;
 }
 
 nav li {
@@ -85,7 +83,7 @@ nav h1 {
     position: relative;
     margin-left: 50px;
     font-size: 3.5em;
-    color: #f9a602;
+    color: #373f41;
 }
 
 nav p,
@@ -102,7 +100,7 @@ nav a {
     background-color: #f9a602; 
     color: #373f41;
     border: none;
-    top: 28px;
+    top: 25px;
     border-radius: 50px;
     text-decoration: none;
     font-family: 'Poppins';
@@ -110,6 +108,10 @@ nav a {
     font-weight: 600;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login::after {
+    content: none;
 }
 
 .login:hover {
@@ -120,51 +122,99 @@ nav a {
     text-decoration: none;
 }
 
-.background1 {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 100%;
-    max-height: 100%;
-    position: relative;
+#hero-carousel {
     width: 100%;
+    overflow: hidden;
+    object-fit: cover;
+    position: relative; 
+}
+
+.carousel-inner {
     height: 100%;
-    background-size: contain;
-    background-position: center;
-    background-attachment: fixed;
+    margin-top: 10px;
 }
 
-.button-link {
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.carousel-item {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.c-img {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-indicators {
+    bottom: 5px; 
     z-index: 1;
-    background-color: #f9a602;
-    color: #fff;
-    padding: 12px 28px;
-    text-align: center;
-    text-decoration: none;
-    font-size: clamp(14px, 3vw, 16px);
-    cursor: pointer;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.3s;
 }
 
-.button-link:hover {
-    background-color: #ff9800;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+.carousel-indicators button.active {
+    background-color: #f9a602;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 50%;
+    width: 50px; 
+    height: 50px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    z-index: 10; 
+    transition: background-color 0.3s;
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;    
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.carousel-control-prev i, .carousel-control-next i {
+    color: #fff; 
+    font-size: 1.5rem;
+}
+
+.carousel-control-prev span, .carousel-control-next span {
+    display: none;
+}
+
+.btn-apply {
+    margin-bottom: 10px;
+    padding: 0.4rem 1.25rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: #f9a602;
+    border: none;
+    color: #373f41;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.btn-apply:hover {
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .mv-container {
     max-width: 100%;
-    margin: 100px 50px 0;
+    margin: 50px 50px 0;
     font-family: "Poppins";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .mv-container .mv-block {
-    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -176,7 +226,6 @@ nav a {
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, .3);
-    line-height: 0;
 }
 
 .mv-container .mv-block .image img {
@@ -200,7 +249,7 @@ nav a {
 .mv-container .mv-block .content h2 {
     font-weight: 800;
     font-size: 42px;
-    color: #ff9800;
+    color: #f9a602;
     margin-bottom: 20px;
 }
 
@@ -229,92 +278,92 @@ nav a {
 }
 
 .container {
-    width: 90%;
-    height: 100vh;
-    padding: 0;
+    width: 100%;
+    height: auto;
+    padding: 0 5%;
     font-family: "Poppins";
 }
 
 h3 {
-    padding-top: 100px;
+    margin-top: 50px;
     color: #373f41;
     text-align: center;
-    margin-bottom: 10px;
     font-weight: 600;
-    font-size: 38px;
+    font-size: 50px;
     position: relative;
-    margin-top: 150px;
-}
-
-h3::after {
-    content: '';
-    background: #ffb951;
-    width: 120px;
-    height: 2px;
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 30px;
-    margin-left: 10%;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .service {
-    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .1);
     text-align: center;
-    padding: 40px 15px;
-    border-radius: 5px;
-    font-size: 24px;
-    cursor: pointer;
-    background: #dbdbdb;
-    transition: transform 0.5s, background 0.5s;
+    padding: 40px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    background: #ffffff;
+    transition: transform 0.5s, background 0.5s, color 0.5s;
 }
 
 .service:hover {
-    box-shadow: 0 10px 15px rgba(0, 0, 0, .3);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .2);
     transform: scale(1.05);
 }
 
 .service i {
-    font-size: 45px;
-    margin-bottom: 10px;
+    font-size: 50px;
+    margin-bottom: 20px;
     color: #373f41;
 }
 
 .service h4 {
     color: #ff9800;
     font-weight: 700;
-    font-size: 36;
-    font-family: 'Poppins' sans-serif;
+    font-size: 36px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
 }
 
 .service h5 {
     font-weight: 400;
     font-style: italic;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
-.service h6 {
-    font-weight: 200;
-    font-style: normal;
+.service:hover {
+    background: #373f41;
+    color: #dbdbdb;
+    transform: scale(1.05);
+}
+
+.service:hover i {
+    color: #ff9800;
+}
+
+.service:hover h4 {
+    color: #dbdbdb;
 }
 
 .service .btn {
-    margin-top: 10px;
+    margin-top: 15px;
     display: inline-block;
     color: #ffffff;
     background: #777;
     font-size: 18px;
     border-radius: 5px;
-    padding: 8px 25px;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    transition: background 0.3s, letter-spacing 0.3s;
 }
 
 .service .btn:hover {
+    background: #555;
     letter-spacing: 1px;
 }
 
@@ -353,8 +402,8 @@ h3::after {
 
 .contact {
     padding: 40px;
-    background: #dbdbdb;
-    box-shadow: 0 5px 35px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .1);
     border-radius: 5px;
     font-family: "Poppins";
 }
@@ -373,7 +422,7 @@ h3::after {
 
 .contact h5 {
     color: #222;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.3em;
     margin-bottom: 10px;
 }
@@ -404,7 +453,7 @@ h3::after {
     color: #373f41;
     margin-top: 10px;
     margin-bottom: 5px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .inputBox input {
@@ -412,8 +461,21 @@ h3::after {
     padding: 10px;
     font-size: 1em;
     outline: none;
-    border: 1px solid #777;
+    border: none;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s ease, font-weight 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputBox input:hover,
+.inputBox textarea:hover {
+    color: #373F41;
+    font-weight: bold;
+    box-shadow: 0 0 8px 2px rgba(249, 166, 2, 0.5);
+}
+
+.inputBox input:focus {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .inputBox textarea {
@@ -421,27 +483,32 @@ h3::after {
     padding: 10px;
     font-size: 1em;
     outline: none;
-    border: 1px solid #777;
+    border: none;
     border-radius: 5px;
-    resize: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     min-height: 220px;
     margin-bottom: 10px;
+    resize: none;
+    transition: color 0.3s ease, font-weight 0.3s ease, box-shadow 0.3s ease;
 }
 
 .inputBox input[type="submit"] {
-    background: #f9a702e1;
+    align-items: center;
+    width: 150px;
+    background: #f9a602;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     color: #222;
     border: none;
-    font-size: 1.1em;
-    max-width: 120px;
-    font-weight: 500;
+    font-size: 1em;
+    font-weight: 700;
     cursor: pointer;
-    padding: 10px 10px;
-    transition: background-color 0.5s, transform 80ms ease-in-out;
+    letter-spacing: 0;
+    border-radius: 50px;
+    transition: background-color 0.5s, transform 80ms ease-in-out, letter-spacing 0.3s ease; /* Smooth transition */
 }
 
 .inputBox input[type="submit"]:hover {
-    background: #ffbc04;
+    letter-spacing: 5px;
 }
 
 .inputBox::placeholder {
@@ -488,8 +555,9 @@ h3::after {
 }
 
 .sci {
-   margin-top: 40px;
-   display: flex; 
+    margin-left: 10px;
+    margin-top: 40px;
+    display: flex; 
 }
 
 .sci li {

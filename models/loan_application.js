@@ -2,8 +2,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
 
-const sequelize = new Sequelize('Cooperativedb', 'postgres', 'Ctugk3nd3s', {
-    host: 'localhost',
+const sequelize = new Sequelize('postgres', 'postgres', '@CoopM0B1L3--', {
+    host: 'aws-0-ap-southeast-1.pooler.supabase.com',
     dialect: 'postgres',
     port: 5432,
     logging: console.log
