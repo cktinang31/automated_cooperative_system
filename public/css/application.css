@@ -34,25 +34,25 @@ body::before {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    justify-content: space-between;
 }
 
 .column1 {
-    flex: 30%;
+    flex: 1;
     font-size: 80px;
     font-weight: 700;
     font-style: italic;
-    text-align: center;
+    text-align: left;
     color: #F9A602;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.77);
 }
 
 .column2 {
-    flex: 25%;
-    margin: .5% 10%;
+    flex: 1;
     padding: 2px;
     background-color: transparent;
-    border-radius: 10px;
-    box-shadow: 0 0 25px #373F41;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(55, 63, 65, 0.8);
     color: #ffffff;
 }
 
@@ -76,6 +76,7 @@ body::before {
     text-align: center;
     word-wrap: break-word;
     color: #ffffff;
+    margin-bottom: 20px;
 }
 
 .form-group {
@@ -92,17 +93,24 @@ body::before {
     left: 15px;
     transform: translateY(-50%);
     color: #ffffff;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     pointer-events: none;
     transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
     text-transform: capitalize;
 }
 
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 14px;
+    color: #F9A602;
+}
+
 .form-group input {
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     padding: 20px 15px 10px;
     border: none;
@@ -119,39 +127,11 @@ body::before {
     box-shadow: 2px 2px #F9A602;
 }
 
-.form-group input:focus,
-.form-group input:valid {
-    background: rgba(255, 255, 255, 0.2);
-    border-bottom: 2px solid #f9a602;
-}
 
-.form-group input:focus ~ label,
-.form-group input:valid ~ lel {
-    top: -10px;
-    color: #f9a602;
-    font-size: 10px;
-    font-weight: 600;
-}
 
-#date_of_birth::-webkit-datetime-edit-text,
-#date_of_birth::-webkit-datetime-edit-month-field,
-#date_of_birth::-webkit-datetime-edit-day-field,
-#date_of_birth::-webkit-datetime-edit-year-field {
-    color: transparent;
-}
-
-#date_of_birth::-webkit-inner-spin-button,
-#date_of_birth::-webkit-clear-button {
-    display: none;
-}
-
-#date_of_birth::-webkit-calendar-picker-indicator {
-    opacity: 1; 
-    cursor: pointer;
-}
-
-button {
-    position: relative;
+button.submit {
+    display: block;
+    margin: 20px auto;
     width: auto;
     height: 45px;
     padding: 10px 20px;
@@ -161,11 +141,14 @@ button {
     font-size: 16px;
     font-weight: 600;
     border: 1px solid #f9a602;
+    color: #ffffff;
     overflow: hidden;
     z-index: 1;
+    position: relative;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-button::before {
+button.submit::before {
     content: "";
     position: absolute;
     height: 300%;
@@ -177,11 +160,11 @@ button::before {
     transition: .5s;
 }
 
-button:focus {
-    outline: 2px solid #f9a602; 
-    outline-offset: 2px;
+button.submit:hover {
+    color: #373F41;
+    border-color: none;
 }
 
-button:hover:before {
+button.submit:hover::before {
     top: 0;
 }
