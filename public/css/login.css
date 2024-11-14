@@ -137,6 +137,7 @@ body::before {
     top: -10px;
     color: #f9a602;
     font-weight: 600;
+    font-size: 12px;
 }
 
 .input-box i {
