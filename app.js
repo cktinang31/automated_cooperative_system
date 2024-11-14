@@ -8,11 +8,12 @@ const cors = require('cors');
 const { Pool } = require('pg');
 const knex = require('knex')(require('./knexfile').development);
 const { createClient } = require('@supabase/supabase-js'); 
-const supabaseUrl = 'https://wktdygngpenuvshfxnam.supabase.co'; // Replace with your project ref
+const supabaseUrl = 'https://wktdygngpenuvshfxnam.supabase.com'; // Replace with your project ref
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrdGR5Z25ncGVudXZzaGZ4bmFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0NzgwOTIsImV4cCI6MjA0NTA1NDA5Mn0.d7sxmS9PRJpz4k1UUEvpg0CIsXkD8UfnaB8dDndCgao'; // Replace with your key
 const supabase = createClient(supabaseUrl, supabaseKey); // Initialize Supabase client
 const dotenv = require('dotenv');
 dotenv.config();
+
 
 
 const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
@@ -36,8 +37,6 @@ const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
-
-
 
 
 const isAuthenticated = (req, res, next) => {
@@ -92,7 +91,7 @@ const secretKey = crypto.randomBytes(64).toString('hex');
 app.use(cors());
 app.use(session({
   secret: secretKey, 
-  re_save: false,
+  resave: false,
   saveUninitialized: false
 }));
 
@@ -355,6 +354,41 @@ knex.raw('SELECT 1')
   .finally(() => knex.destroy());
 
 
-app.listen(3000, () => {
-  console.log('Server running on http://192.168.0.45:3001');
-});
+
+
+
+  const fs = require('fs');
+  const https = require('https');
+
+  
+
+  
+  const PORT = 3000;
+  let key, cert;
+  
+  try {
+    key = fs.readFileSync('server.key');
+    cert = fs.readFileSync('server.cert');
+    console.log("Key and Certificate files loaded successfully.");
+  } catch (error) {
+    console.error("Error loading key or cert file:", error);
+    process.exit(1); // Exit if there's an error loading the files
+  }
+  
+  const options = {
+    key: key,
+    cert: cert
+  };
+  
+  app.get('/', (req, res) => {
+    res.send('Hello, HTTPS world!');
+  });
+  
+  https.createServer(options, app).listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on https://192.168.0.54:${PORT}`);
+  });
+  
+
+  
+  
+  
