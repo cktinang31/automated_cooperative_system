@@ -26,8 +26,7 @@ header {
     gap: 20px;
     padding: 30px;
 }
- 
-/* Card Styles */
+
 .card {
     background-color: #333;
     color: #f0f0f0;
@@ -36,8 +35,7 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
- 
-/* Title Styles */
+
 h2 {
     font-size: 1.5rem;
     font-weight: bold;
@@ -55,7 +53,6 @@ h1 span {
     color: #f0f0f0;
 }
  
-/* Icon Style */
 .icon {
     position: absolute;
     bottom: 20px;
@@ -63,16 +60,14 @@ h1 span {
     font-size: 30px;
 }
  
-/* Individual Card Styles */
 .advisory-card {
     grid-column: 1 / 2;
     height: 347px;
-    margin-left: 180px;
-    width: 610px;
+    margin-left: 253px;
+    width: 550px;
     background-color: #373F41;
     margin-top: 105px;
 }
- 
  
 .loans-card {
     grid-column: 2 / 3;
@@ -98,11 +93,10 @@ h1 span {
     grid-column: 1 / 3;
     height: 439px;
     margin-right: 145px;
-    margin-left: 180px;
+    margin-left: 253px;
     background-color: #373F41;
 }
  
-/* Combined Inquiries and Upcoming Collections Card */
 .inquiries-collections-card {
     grid-column: 3 / 4;
     display: flex;
@@ -121,7 +115,6 @@ h1 span {
     margin-top: 20px;
 }
  
-/* Inquiries & Collections Styles */
 .collection-item, .inquiry-item {
     background-color: whitesmoke;
     height: 40px;
@@ -129,11 +122,11 @@ h1 span {
     border-radius: 5px;
 }
  
-/* Legend for Graph */
 .legend {
     display: flex;
     flex-wrap: wrap;
     margin-top: 10px;
+    flex-direction: column;
 }
  
 .legend li {
@@ -158,7 +151,7 @@ h1 span {
   }
  
   .legend {
-    flex-direction: column; /* Align items vertically */
+    flex-direction: column; 
   }
  
   .color.red {
@@ -193,11 +186,12 @@ h1 span {
  
 .title p {
     position: absolute;
-    left: 98px;
-    top: 36px;
+    left: 107px;
+    top: 47px;
     font-size: 40px;
     line-height: 0px;
     color: #373F41;
+    margin-left: 161px;
 }
  
 .user {
@@ -207,4 +201,140 @@ h1 span {
     top: 36px;
     font-size: 20px;
     color: #373F41;
+}
+
+h3 {
+    color: #F9A602;
+    font-size: 30px;
+    left: 7px;
+}
+ 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.container {
+        padding-top: 8rem;
+        padding-left: 18rem;
+
+}
+.announcement-container {
+    box-sizing: border-box;
+    position: absolute;
+    width: 900px;
+    height: 330px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    padding-top: 1rem;
+   
+}
+.announcement-title {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #373F41;
+}
+ 
+.welcome-container {
+    position: absolute;
+    width: 30rem;
+    height: 19rem;
+    left: 1300px;
+    top: 127px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    justify-content: center;
+    padding: 0;
+   
+}
+ 
+.welcome-title {
+    margin-top: 0;
+    color:#373F41;
+    background-color: #F9A602;
+    font-size: 24px;
+    padding: 1rem;
+}
+
+.welcome-container p {
+    color: #373F41;
+    font-size: 16px;
+    padding: 1rem;
+
+
+}
+ 
+.funds-container {
+    box-sizing: border-box;
+    position: absolute;
+    width: 397px;
+    height: 466px;
+    left: 1300px;
+    top: 512px;
+    text-align:center;
+}
+ 
+.funds-container li {
+    border-top: 0.5px solid #748589;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 40px;
+    list-style-type: none;
+    width: 100%;
+    height: 100px;
+}
+
+.funds-container li a{
+    text-decoration: none;
+   
+}
+ 
+ .funds-container li p {
+    background-color: #f0ecec;
+    color: #373F41;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    height: 50px;
+ 
+}
+ 
+.funds-container li h3 {
+    background-color: #373F41;
+    margin: 0;
+    padding: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 50px;
+    font-size: 24px;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 69px;
+    margin-left: 0;
+    padding-left: 0;
+    text-decoration: none;
+}
+
+aside {
+    margin-top: 87px;
+    width: 16rem;
+    height: 100%;
+    background: #ffff;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+    position: fixed;
+}
+
+.graph-image img {
+    width: 600px;
+    height: 300px;
+    object-fit: contain;
+    margin-top: -329px;
+    margin-left: 267px;
 }
