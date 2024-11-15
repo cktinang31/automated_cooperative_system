@@ -47,9 +47,9 @@ const ApplicationModel = (sequelize) => {
             allowNull: false,
         },
         application_status: {
-            type: DataTypes.ENUM ('pending', 'approved', 'decline'),
+            type: DataTypes.ENUM('pending', 'approved', 'declined'),
             allowNull: false,
-            
+            defaultValue: 'pending', // Add default value
         },
     
         date_sent: {
