@@ -122,8 +122,6 @@ router.get('/Manager/sidebarmanager', (req,res, next) =>{
         
 });
 
-
-
 router.get('/Manager/loanrequest', async (req, res, next) => {
     try {
         console.log('Session ID:', req.sessionID);
@@ -133,7 +131,6 @@ router.get('/Manager/loanrequest', async (req, res, next) => {
         if (req.isAuthenticated() && req.user && req.user.role === 'manager') {
             console.log('User is authenticated as manager.');
             const user = req.user;
-
             
             try {
                 const loan_applications = await Loan_application.findAll( {
@@ -156,7 +153,6 @@ router.get('/Manager/loanrequest', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
-
 
 router.get('/Manager/loanrequestupdate/:applicationId', async (req, res, next) =>  {
     try {
@@ -225,8 +221,6 @@ router.get('/Manager/_request', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
-
-
 
 router.get('/Manager/req/:applicationId', async (req, res, next) =>  {
     try {
@@ -329,8 +323,6 @@ router.get('/Manager/savingsrequestupdate/:applicationId', async (req, res, next
         res.status(500).send('Internal server error');
     }
 });
-
-
 
 router.get('/Manager/cburequest', async (req, res, next) => {
     try {
@@ -519,9 +511,6 @@ router.get(['/Manager/dashboard','/Manager/managerdashboard' ],async (req, res, 
     }
 });
 
-
-
-
 router.get(['/Manager/members', '/Manager/member', ],async (req,res, next) =>{
     try {
         console.log('Session ID:', req.sessionID);
@@ -677,10 +666,6 @@ router.get('/Manager/membersprofile/:userId', async (req, res, next) => {
     }
 });
 
-
-
-
-
 router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
     try {
         console.log('Session ID:', req.sessionID);
@@ -786,7 +771,6 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
-
 
 router.get(['/Manager/managerhistory', '/Manager/transaction', '/Manager/history'], async (req, res, next) => {
     try {
