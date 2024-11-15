@@ -13,12 +13,12 @@
                 <div class="cooperative_advisory">
                     <% if (contents.length > 0) { %>
                         <% contents.forEach(content => { %>
-                    <h1 class="coop_ad"><%= content.content_title %></h1>
-                    <p class="announcements"><%= content.content %></p>
-                    <% }) %>
-                  <% } else { %>
-                      <p>There are no announcements to display...</p>
-                  <% } %>
+                            <h1 class="coop_ad"><%= content.content_title %></h1>
+                            <p class="announcements"><%= content.content %></p>
+                            <% }) %>
+                            <% } else { %>
+                                <p>There are no announcements to display...</p>
+                                <% } %>
                 </div>
             </a>
             
@@ -28,8 +28,7 @@
                     <p><%= totalRegularUsers %></p>
                     <i class="bi bi-people"></i>
                 </div>
-            </a>
-            
+            </a>            
 
             <div class="message-container">
                 <h1 class="message-title">Welcome, Manager <%= user.fname %> <%= user.lname %> ! </h1> 
@@ -46,77 +45,76 @@
                 </ul>
             </div>
             
-
             <div class="request-container">
-            <h1 class="request-title">Request</h1> 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Request ID</th>
-                        <th>Request Type</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    <% if (requests.length > 0) { %>
-                        <% requests.forEach(req => { %>
-                            <!-- <pre><%= JSON.stringify(req, null, 2) %> </pre> -->
-                            <tr onclick="openModal(
-                                '<%= req.id %>', 
-                                '<%= req.type %>', 
-                                '<%= req.fname %>', 
-                                '<%= req.lname %>', 
-                                '<%= req.mname %>',
-                                '<%= req.details %>', 
-                                '<%= req.amount %>', 
-                                '<%= req.loantype %>', 
-                                '<%= req.interest %>', 
-                                '<%= req.date %>', 
-                                '<%= req.dob %>', 
-                                '<%= req.pob %>', 
-                                '<%= req.address %>', 
-                                '<%= req.email %>', 
-                                '<%= req.contact %>', 
-                                '<%= req.user_id %>', 
-                                '<%= req.mode %>', 
-                                '<%= req.loanterm %>', 
-                                '<%= req.monthlypayment %>', 
-                                '<%= req.numberofpayments %>',
-                                '<%= req.application_status %>'
-                            )">
-
-                                <td><%= req.id %></td>
-                                <td><%= req.type || '' %></td>
-                                <td style="display: none;"><%= req.fname %></td>
-                                <td style="display: none;"><%= req.lname %> </td>
-                                <td style="display: none;"><%= req.details %>  </td>
-                                <td style="display: none;"><%= req.transaction_type %></td>
-                                <td style="display: none;"><%= req.amount %></td> 
-                                <td style="display: none;"><%= req.loantype %></td>
-                                <td style="display: none;"><%= req.interest %></td>
-                                <td style="display: none;"><%= new Date(req.date).toLocaleDateString() %></td>
-                                <td style="display:none;"><%= req.mname || '' %></td>
-                                <td style="display:none;"><%= req.dob || '' %></td>
-                                <td style="display:none;"><%= req.pob || '' %></td>
-                                <td style="display:none;"><%= req.address || '' %></td>
-                                <td style="display:none;"><%= req.email || '' %></td>
-                                <td style="display:none;"><%= req.contact || '' %></td>
-                                <td style="display:none;"><%= req.mode || '' %></td>
-                                <td style="display:none;"><%= req.user_id || '' %></td>
-                                <td style="display:none;"><%= req.loanterm || '' %></td>
-                                <td style="display:none;"><%= req.monthlypayments || '' %></td>
-                                <td style="display:none;"><%= req.numberofpayments || '' %></td>
-                                <td style="display:none;"><%= req.application_status || '' %></td>
-                            </tr>
-                        <% }) %>
-                    <% } else { %>
+                <h1 class="request-title">Request</h1> 
+                 <table>
+                    <thead>
                         <tr>
-                            <td colspan="4">No pending requests</td>
+                            <th>Request ID</th>
+                            <th>Request Type</th>
                         </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    
+                    <tbody>
+                        <% if (requests.length > 0) { %>
+                            <% requests.forEach(req => { %>
+                                <!-- <pre><%= JSON.stringify(req, null, 2) %> </pre> -->
+                                <tr onclick="openModal(
+                                    '<%= req.id %>', 
+                                    '<%= req.type %>', 
+                                    '<%= req.fname %>', 
+                                    '<%= req.lname %>', 
+                                    '<%= req.mname %>',
+                                    '<%= req.details %>', 
+                                    '<%= req.amount %>', 
+                                    '<%= req.loantype %>', 
+                                    '<%= req.interest %>', 
+                                    '<%= req.date %>', 
+                                    '<%= req.dob %>', 
+                                    '<%= req.pob %>', 
+                                    '<%= req.address %>', 
+                                    '<%= req.email %>', 
+                                    '<%= req.contact %>', 
+                                    '<%= req.user_id %>', 
+                                    '<%= req.mode %>', 
+                                    '<%= req.loanterm %>', 
+                                    '<%= req.monthlypayment %>', 
+                                    '<%= req.numberofpayments %>',
+                                    '<%= req.application_status %>'
+                                )">
+
+                                    <td><%= req.id %></td>
+                                    <td><%= req.type || '' %></td>
+                                    <td style="display: none;"><%= req.fname %></td>
+                                    <td style="display: none;"><%= req.lname %> </td>
+                                    <td style="display: none;"><%= req.details %>  </td>
+                                    <td style="display: none;"><%= req.transaction_type %></td>
+                                    <td style="display: none;"><%= req.amount %></td> 
+                                    <td style="display: none;"><%= req.loantype %></td>
+                                    <td style="display: none;"><%= req.interest %></td>
+                                    <td style="display: none;"><%= new Date(req.date).toLocaleDateString() %></td>
+                                    <td style="display:none;"><%= req.mname || '' %></td>
+                                    <td style="display:none;"><%= req.dob || '' %></td>
+                                    <td style="display:none;"><%= req.pob || '' %></td>
+                                    <td style="display:none;"><%= req.address || '' %></td>
+                                    <td style="display:none;"><%= req.email || '' %></td>
+                                    <td style="display:none;"><%= req.contact || '' %></td>
+                                    <td style="display:none;"><%= req.mode || '' %></td>
+                                    <td style="display:none;"><%= req.user_id || '' %></td>
+                                    <td style="display:none;"><%= req.loanterm || '' %></td>
+                                    <td style="display:none;"><%= req.monthlypayments || '' %></td>
+                                    <td style="display:none;"><%= req.numberofpayments || '' %></td>
+                                    <td style="display:none;"><%= req.application_status || '' %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No pending requests</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </body>
 </html>

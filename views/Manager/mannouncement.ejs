@@ -7,78 +7,53 @@
     <body>
         <%- include("../Manager/managerheader.ejs") %>
         <%- include("../Manager/managersidebar.ejs") %>
-   
-
-            <div class="container">
-
-                <div class="form-container"> 
-                    <form id="create-announcement-form" action="/post_announcement" method="POST">
-                        
-                            <input type="text" class="announcement-title" id="content_title" name="content_title" placeholder="Title" required>
-
-                            <input type="text" id="content" class="write-title" name="content" rows="10" placeholder="Write announcement.." required></textarea>
-                    
-
-                        <div class="post-container">
-                            <button type="submit" class="post-title">POST</button>
-                        </div>
-                    </form>
-
-                </div>
-                    <table>
-                        <% if (contents && contents.length > 0) { %>
-                            <% contents.forEach(content => { %>
-                            <tr>
-                                <td>
-                                    
-                                    <div class="announcement">
-                                        <form action="/delete_content" method="POST" class="delete-content-form">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="user_id" value="<%= content.content_id %>">
-                                        </form>
-                                        <h1><%= content.content_title %></h1>
-                                        <p><%= content.content %></p>
-                                    </div>
-                                    <button type="button" class="delete-btn" data-user-id="<%= content.content_id %>">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    
-                                </td>
-                            </tr>
-                            <% }) %>
-                        <% } else { %>
-                            <tr>
-                                <td colspan="2" class="no-announcements">There are no announcements to display...</td>
-                            </tr>
-                        <% } %>
-                    </table>
-                    
-                    
-                    
-                    
-             
-                
-                
-            <script>
-
-                document.querySelectorAll('.delete-btn').forEach(button => {
         
+        <div class="container">
+            <div class="form-container"> 
+                <form id="create-announcement-form" action="/post_announcement" method="POST">
+                        <input type="text" class="announcement-title" id="content_title" name="content_title" placeholder="Title" required>
+                        <input type="text" id="content" class="write-title" name="content" rows="10" placeholder="Write announcement.." required></textarea>
+                    <div class="post-container">
+                        <button type="submit" class="post-title">POST</button>
+                    </div>
+                </form>
+            </div>
+            <table>
+                <% if (contents && contents.length > 0) { %>
+                    <% contents.forEach(content => { %>
+                    <tr>
+                        <td>
+                            <div class="announcement">
+                                <form action="/delete_content" method="POST" class="delete-content-form">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="user_id" value="<%= content.content_id %>">
+                                </form>
+                                <h1><%= content.content_title %></h1>
+                                <p><%= content.content %></p>
+                            </div>
+                            <button type="button" class="delete-btn" data-user-id="<%= content.content_id %>">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="2" class="no-announcements">There are no announcements to display...</td>
+                    </tr>
+                <% } %>
+            </table>
+            
+            <script>
+                document.querySelectorAll('.delete-btn').forEach(button => {
                     button.addEventListener('click', function() {
-                       
                         const form = this.closest('td').querySelector('form');
-                   
                         if (confirm('Are you sure you want to delete this announcement?')) {
                             form.submit();
                         }
                     });
-                });
-                                
+                });   
             </script>
-
-            
-
-
         </div>
-
     </body>
 </html>
