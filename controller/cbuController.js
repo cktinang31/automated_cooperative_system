@@ -1,20 +1,26 @@
-const Cbu = require('../models/cbu');
-const Application = require('../models/application');
-const User = require('../models/user');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 const { v4: uuidv4 } = require('uuid');
 
-const create_cbu = async (application_id, user_id) => {
+const create_cbu = async (id, user_id) => {
     try {
         console.log('Inside create_cbu function');
-        const application = await Application.findByPk(application_id);
+        const application = await Application.findByPk(id);
 
         if (!application) {
-            throw new Error(`Related data not found for application ID: ${application_id}`);
+            throw new Error(`Related data not found for application ID: ${id}`);
         }
 
         const amount = 1000.00;
 
-        console.log('Creating new Cbu with Application ID:', application.application_id);
+        console.log('Creating new Cbu with Application ID:', application.id);
         console.log('Creating new Cbu with User ID:', user_id);
 
         const newCbu = await Cbu.create({

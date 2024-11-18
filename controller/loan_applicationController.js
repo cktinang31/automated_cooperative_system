@@ -13,6 +13,8 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const apply_loan = async (req, res) => {
+
+
     try {
         const { loan_type, amount, loan_term, interest } = req.body;
         console.log('Request Body:', req.body);
@@ -53,6 +55,16 @@ const apply_loan = async (req, res) => {
 };
 
 const update_loan_request = async (req, res) => {
+    const id = req.params.id;
+    const { application_status } = req.body;
+
+    console.log("Received ID:", id);
+    console.log("Received Status:", application_status);
+
+    if (!['approved', 'declined'].includes(application_status)) {
+        console.log('Invalid application status:', application_status);
+        return res.status(400).send('Invalid application status');
+    }
     try {
         const { application_id, application_status } = req.body;
 
@@ -123,7 +135,7 @@ const update_loan_request = async (req, res) => {
         // Decline the loan
         else if (application_status === 'declined') {
             console.log('Declining loan application for ID:', application_id);
-            await updatedLoanApplication.destroy();
+            await updatedLoanApplication.save();
             return res.send('Loan application declined');
         } 
         // Handle unexpected status
