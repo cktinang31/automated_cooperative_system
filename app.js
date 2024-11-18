@@ -8,9 +8,9 @@ const cors = require('cors');
 const { Pool } = require('pg');
 const knex = require('knex')(require('./knexfile').development);
 const { createClient } = require('@supabase/supabase-js'); 
-const supabaseUrl = 'https://wktdygngpenuvshfxnam.supabase.co'; // Replace with your project ref
+const supabaseUrl = 'https://wktdygngpenuvshfxnam.supabase.co'; 
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrdGR5Z25ncGVudXZzaGZ4bmFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0NzgwOTIsImV4cCI6MjA0NTA1NDA5Mn0.d7sxmS9PRJpz4k1UUEvpg0CIsXkD8UfnaB8dDndCgao'; // Replace with your key
-const supabase = createClient(supabaseUrl, supabaseKey); // Initialize Supabase client
+const supabase = createClient(supabaseUrl, supabaseKey); 
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -86,6 +86,16 @@ const logout = (req, res) => {
 
 //express app
 const app = express();
+
+
+const corsOptions = {
+  origin: '*', // Allow all origins, or specify a list of allowed origins
+  methods: 'GET,POST',
+  allowedHeaders: 'Content-Type',
+};
+
+app.use(cors(corsOptions));
+
 
 const secretKey = crypto.randomBytes(64).toString('hex');
 
@@ -334,13 +344,13 @@ app.get('/Collector/paymentnotif', (req, res) => {
 });
 
 
-app.get('/your-route', (req, res) => {
-  const user = {
-      name: 'Kristine Anne Cardosa',
-      email: 'kristineanne@gmail.com'
-  };
-  res.render('your-template', { user: user });
-});
+// app.get('/your-route', (req, res) => {
+//   const user = {
+//       name: 'Kristine Anne Cardosa',
+//       email: 'kristineanne@gmail.com'
+//   };
+//   res.render('your-template', { user: user });
+// });
 
 // 404 page
 app.use((req, res) => {
@@ -355,6 +365,6 @@ knex.raw('SELECT 1')
   .finally(() => knex.destroy());
 
 
-app.listen(3001, () => {
-  console.log('Server running on http://192.168.0.45:3001');
-});
+  app.listen(3000, '192.168.0.133', () => {
+    console.log('Server running on http://0.0.0.0:3000');
+  });
