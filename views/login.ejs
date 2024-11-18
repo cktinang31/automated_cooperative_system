@@ -5,6 +5,7 @@
     <title>App | <%=title %></title>
     <link rel="stylesheet" href="/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -17,7 +18,7 @@
             <form action="/user_login" method="POST">
                 <div class="input-box animation" style="--D:1; --S:22">
                     <input type="text" id="user_id" name="user_id" required>
-                    <label for="user_id">Username</label>
+                    <label for="user_id">User ID</label>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box animation" style="--D:2; --S:23">
@@ -28,9 +29,10 @@
                 <div class="input-box animation" style="--D:3; --S:24">
                     <button class="btn" type="submit" id="login">Login</button>
                 </div>
-                <div class="regi-link animation" style="--D:4; --S:25">
+                <div class="regi-link animation" style="--D:5; --S:26;">
                     <p>Don't have an account? <a href="#" class="SignUpLink">Sign Up</a></p>
-                </div>
+                    <p><a href="/" class="back-to-home"><< Back to Home</a></p> 
+                </div>                                        
             </form>
         </div>
 
@@ -45,7 +47,7 @@
             <form action="/user_reg" method="POST">
                 <div class="input-box animation" style="--li:18; --S:1">
                     <input type="text" id="user_id" name="user_id" required>
-                    <label for="user_id">Username</label>
+                    <label for="user_id">User ID</label>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box animation" style="--li:19; --S:2">
@@ -58,6 +60,7 @@
                 </div>
                 <div class="regi-link animation" style="--li:21; --S:4">
                     <p>Already have an account? <a href="#" class="SignInLink">Sign In</a></p>
+                    <p><a href="/" class="back-to-home"><< Back to Home</a></p>
                 </div>
             </form>
         </div>
@@ -68,7 +71,6 @@
         </div>
     </div>
 
-    <script src="/js/script.js"></script>
-
+    <script src="/js/login.js"></script>
 </body>
 </html>

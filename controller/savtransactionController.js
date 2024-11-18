@@ -54,64 +54,65 @@ const update_savings_request = async (req, res) => {
     try {
         const { savtransaction_id, status } = req.body;
 
+        // Validate inputs
         if (!savtransaction_id || !status) {
-            console.log('Transaction ID and status are required');
-            return res.status(400).send('Transaction ID and status are required');
+            return res.status(400).json({ message: 'Transaction ID and status are required' });
         }
 
+        console.log(`Processing request for transaction ID: ${savtransaction_id} with status: ${status}`);
+
+        // Fetch the savings transaction
         const savtransaction = await Savtransaction.findByPk(savtransaction_id, {
             include: [{ model: User, as: 'User' }]
         });
 
         if (!savtransaction) {
             console.log(`Transaction not found for ID: ${savtransaction_id}`);
-            return res.status(404).send('Transaction not found');
+            return res.status(404).json({ message: `Transaction not found for ID: ${savtransaction_id}` });
         }
 
-        console.log('Savtransaction found:', savtransaction);
+        console.log('Transaction found:', savtransaction);
 
+        // Update the transaction status or delete
         savtransaction.status = status;
         await savtransaction.save();
-
-        console.log('Updated Savtransaction status:', savtransaction.status);
 
         if (status === 'approved') {
             const user_id = savtransaction.user_id;
             const amount = savtransaction.amount;
-            const transaction_type = savtransaction.transaction_type; 
+            const transaction_type = savtransaction.transaction_type;
 
             const userSavings = await Savings.findOne({ where: { user_id } });
 
             if (!userSavings) {
                 console.log(`User savings not found for user ID: ${user_id}`);
-                return res.status(404).send('User savings not found');
+                return res.status(404).json({ message: `User savings not found for user ID: ${user_id}` });
             }
 
             console.log('User savings found:', userSavings);
 
+            // Adjust savings balance based on transaction type
             if (transaction_type === 'deposit') {
-                userSavings.amount += amount; 
+                userSavings.amount += amount;
             } else if (transaction_type === 'withdraw') {
-                userSavings.amount -= amount; 
+                userSavings.amount -= amount;
             }
 
             await userSavings.save();
-
-            console.log('Updated user savings:', userSavings);
-
-            return res.redirect('/Manager/savingsrequest');
-        } else {
+            console.log('User savings updated:', userSavings);
+            return res.json({ message: 'Savings transaction approved successfully' });
+        } else if (status === 'declined') {
+            console.log('Declining transaction, deleting it from database');
             await savtransaction.destroy();
-            console.log('Transaction declined and deleted:', savtransaction_id);
-            return res.send('Request declined');
+            console.log('Transaction deleted:', savtransaction_id);
+            return res.json({ message: 'Savings transaction declined and deleted' });
         }
+
     } catch (error) {
-        console.error('Error updating request status:', error);
-        return res.status(500).send('Error updating request status');
+        console.error('Error updating savings request:', error);
+        return res.status(500).json({ message: 'Error updating savings request' });
     }
 };
-
-
 
 
   
