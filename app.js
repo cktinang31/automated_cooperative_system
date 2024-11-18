@@ -364,29 +364,31 @@ knex.raw('SELECT 1')
 
   
   const PORT = 3000;
-  let key, cert;
+  // let key, cert;
   
-  try {
-    key = fs.readFileSync('server.key');
-    cert = fs.readFileSync('server.cert');
-    console.log("Key and Certificate files loaded successfully.");
-  } catch (error) {
-    console.error("Error loading key or cert file:", error);
-    process.exit(1); // Exit if there's an error loading the files
-  }
+  // try {
+  //   key = fs.readFileSync('server.key');
+  //   cert = fs.readFileSync('server.cert');
+  //   console.log("Key and Certificate files loaded successfully.");
+  // } catch (error) {
+  //   console.error("Error loading key or cert file:", error);
+  //   process.exit(1); // Exit if there's an error loading the files
+  // }
   
-  const options = {
-    key: key,
-    cert: cert
-  };
+  // const options = {
+  //   key: key,
+  //   cert: cert
+  // };
   
   app.get('/', (req, res) => {
-    res.send('Hello, HTTPS world!');
+    res.send('Coop');
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Express server running at http://0.0.0.0:${PORT}/`);
   });
   
-  https.createServer(options, app).listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on https://192.168.0.54:${PORT}`);
-  });
+
   
 
   
