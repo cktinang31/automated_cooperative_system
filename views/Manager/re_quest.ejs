@@ -97,8 +97,8 @@
             <div class="modal-content">
 
                 <span class="close" onclick="closeModal()">&times;</span>
-                <form id="updateForm" method="POST" action="/mem_application_update">
-                    <input type="hidden" name="_zmethod" value="PUT">
+                <form id="updateForm" method="POST">
+                    <input type="hidden" name="_method" value="PUT">
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="application_status" id="application_status">
                     <table>
@@ -157,124 +157,141 @@
                         </tr>
                     </table>
                     <div class="button-container">
-                        <button class="approve-button">Approve</button>
-                        <button class="decline-button">Decline</button>
+                        <button type="button" class="approve-button">Approve</button>
+                        <button type="button" class="decline-button">Decline</button>
                     </div>
                 </form>
                 
             </div>
         </div>
 
-        <!-- The Loan Modal -->
 <div id="loanModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeLoanModal()">&times;</span>
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td id="loan-modal-name"></td>
-            </tr>
-            <tr>
-                <td>User ID:</td>
-                <td id="loan-modal-userid"></td>
-            </tr>
-            <tr>
-                <td>Loan Type:</td>
-                <td id="loan-modal-loanType"></td>
-            </tr>
-            <tr>
-                <td>Amount:</td>
-                <td id="loan-modal-amount"></td>
-            </tr>
-            <tr>
-                <td>Interest:</td>
-                <td id="loan-modal-interest"></td>
-            </tr>
-            <tr>
-                <td>Loan Term:</td>
-                <td id="loan-modal-term"></td>
-            </tr>
-            <tr>
-                <td>Monthly Payment:</td>
-                <td id="loan-modal-monthlyPayment"></td>
-            </tr>
-            <tr>
-                <td>Number of Payments:</td>
-                <td id="loan-modal-numPayments"></td>
-            </tr>
-        </table>
-        <div class="button-container">
-            <button class="approve-button">Approve</button>
-            <button class="decline-button">Decline</button>
-        </div>
+        <form id="loanForm" action="/update_loan_request" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="id" id="application-id">
+
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td id="loan-modal-name"></td>
+                </tr>
+                <tr>
+                    <td>User ID:</td>
+                    <td id="loan-modal-userid"></td>
+                </tr>
+                <tr>
+                    <td>Loan Type:</td>
+                    <td id="loan-modal-loanType"></td>
+                </tr>
+                <tr>
+                    <td>Amount:</td>
+                    <td id="loan-modal-amount"></td>
+                </tr>
+                <tr>
+                    <td>Interest:</td>
+                    <td id="loan-modal-interest"></td>
+                </tr>
+                <tr>
+                    <td>Loan Term:</td>
+                    <td id="loan-modal-term"></td>
+                </tr>
+                <tr>
+                    <td>Monthly Payment:</td>
+                    <td id="loan-modal-monthlyPayment"></td>
+                </tr>
+                <tr>
+                    <td>Number of Payments:</td>
+                    <td id="loan-modal-numPayments"></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="button" class="approve-button" onclick="handleApproval('approved')">Approve</button>
+                <button type="button" class="decline-button" onclick="handleApproval('declined')">Decline</button>
+            </div>
+            
+        </form>
     </div>
 </div>
 
-<!-- The Savings Modal -->
+
 <div id="savingsModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeSavingsModal()">&times;</span>
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td id="savings-modal-name"></td>
-            </tr>
-            <tr>
-                <td>User ID:</td>
-                <td id="savings-modal-userid"></td>
-            </tr>
-            <tr>
-                <td>Request Type:</td>
-                <td id="savings-modal-requestType"></td>
-            </tr>
-            <tr>
-                <td>Amount:</td>
-                <td id="savings-modal-amount"></td>
-            </tr>
-            <tr>
-                <td>Mode of Payment:</td>
-                <td id="savings-modal-modeOfPayment"></td>
-            </tr>
-        </table>
-        <div class="button-container">
-            <button class="approve-button">Approve</button>
-            <button class="decline-button">Decline</button>
-        </div>
+        <form id="savingsForm" action="/update_savings_request" method="POST">
+           <input type="hidden" name="savtransaction_id" id="application-id" value="">
+          
+
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td id="savings-modal-name"></td>
+                </tr>
+                <tr>
+                    <td>User ID:</td>
+                    <td id="savings-modal-userid"></td>
+                </tr>
+                <tr>
+                    <td>Request Type:</td>
+                    <td id="savings-modal-requestType"></td>
+                </tr>
+                <tr>
+                    <td>Amount:</td>
+                    <td id="savings-modal-amount"></td>
+                </tr>
+                <tr>
+                    <td>Mode of Payment:</td>
+                    <td id="savings-modal-modeOfPayment"></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" name="status" value="approved" class="approve-button">Approve</button>
+                <button type="submit" name="status" value="declined" class="decline-button">Decline</button>
+            </div>
+            
+        </form>
     </div>
 </div>
 
-<!-- The CBU Modal -->
+
 <div id="cbuModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeCBUModal()">&times;</span>
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td id="cbu-modal-name"></td>
-            </tr>
-            <tr>
-                <td>User ID:</td>
-                <td id="cbu-modal-userid"></td>
-            </tr>
-            <tr>
-                <td>Request Type:</td>
-                <td id="cbu-modal-requestType"></td>
-            </tr>
-            <tr>
-                <td>Amount:</td>
-                <td id="cbu-modal-amount"></td>
-            </tr>
-            <tr>
-                <td>Mode of Payment:</td>
-                <td id="cbu-modal-modeOfPayment"></td>
-            </tr>
-        </table>
-        <div class="button-container">
-            <button class="approve-button">Approve</button>
-            <button class="decline-button">Decline</button>
-        </div>
+        <form id="cbuForm" action="/update_cbu_request" method="POST">
+            <input type="hidden" name="Hid" id="application-Gid">
+            <input type="hidden" name="applicationd_status" id="applicatiodn_status">
+
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td id="cbu-modal-name"></td>
+                </tr>
+                <tr>
+                    <td>User ID:</td>
+                    <td id="cbu-modal-userid"></td>
+                </tr>
+                <tr>
+                    <td>Request Type:</td>
+                    <td id="cbu-modal-requestType"></td>
+                </tr>
+                <tr>
+                    <td>Amount:</td>
+                    <td id="cbu-modal-amount"></td>
+                </tr>
+                <tr>
+                    <td>Mode of Payment:</td>
+                    <td id="cbu-modal-modeOfPayment"></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="approve-button">Approve</button>
+                <button type="submit" class="decline-button">Decline</button>
+            </div>
+        </form>
     </div>
 </div>
+
 
 <script>
     function openModal(id, type, fname, lname, mname, details,
@@ -288,6 +305,7 @@
 
    
     if (type === 'Loan Application') {
+        console.log("Opening modal for request ID:", id);
         document.getElementById('loan-modal-name').innerText = details;
         document.getElementById('loan-modal-userid').innerText = user_id;  
         document.getElementById('loan-modal-loanType').innerText = loanType; 
@@ -296,12 +314,17 @@
         document.getElementById('loan-modal-term').innerText = loanterm; 
         document.getElementById('loan-modal-monthlyPayment').innerText = monthlypayments; 
         document.getElementById('loan-modal-numPayments').innerText = numberofpayments; 
+        document.getElementById('application-id').value = id;
+
         document.getElementById('loanModal').style.display = 'block'; 
     } else if (type === 'Savings Transaction') {
+        console.log("Opening modal for request ID:", id);
         document.getElementById('savings-modal-name').innerText = `${fname} ${lname}`;
         document.getElementById('savings-modal-requestType').innerText = 'Savings';
         document.getElementById('savings-modal-amount').innerText = amount + ' PHP';
-        document.getElementById('savings-modal-modeOfPayment').innerText = details; 
+        document.getElementById('savings-modal-modeOfPayment').innerText = details;
+        document.getElementById('application-id').value = id;
+
         document.getElementById('savingsModal').style.display = 'block';
     } else if (type === 'CBU Transaction') {
         document.getElementById('cbu-modal-name').innerText = `${fname} ${lname}`;
@@ -322,7 +345,6 @@
         document.getElementById('modal-contact').innerText = application_status || 'N/A';
         document.getElementById('modal-contact').innerText = id || 'N/A';
         document.getElementById('myModal').style.display = 'block';
-       
                 
         var formAction = "/mem_application_update/" + id; 
         console.log('Form action:', formAction); 
@@ -330,82 +352,142 @@
 
         document.getElementById("id").value = id; 
         
-        // Update the click listeners for buttons
-       // Attach event listeners for both buttons
-       document.querySelector('.approve-button').addEventListener('click', function(event) {
-    handleRequest(event, 'approve');
-});
+        document.querySelector('.approve-button').addEventListener('click', () => updateApplicationStatus('approved'));
+        document.querySelector('.decline-button').addEventListener('click', () => updateApplicationStatus('declined'));
 
-document.querySelector('.decline-button').addEventListener('click', function(event) {
-    handleRequest(event, 'decline');
-});
+async function updateApplicationStatus(status) {
+    const applicationId = document.getElementById('id').value;
+    console.log('Application ID:', applicationId); 
+    
+    const url = `/mem_application_update/${applicationId}`;
 
-// Reusable function to handle approve/decline actions
-function handleRequest(event, status) {
-    event.preventDefault();
-    document.getElementById("application_status").value = status; // No uppercase conversion
-    console.log("Application Status Before Submit:", document.getElementById("application_status").value); // Debugging
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ application_status: status })
+        });
 
-    submitForm();
-}
-
-function submitForm() {
-    const form = document.getElementById("updateForm");
-    const formData = new FormData(form);
-
-    console.log('Submitting form with status:', formData.get('application_status')); // Debug
-
-    fetch(form.action, {
-        method: 'PUT',
-        body: formData,
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log("Form submitted successfully.");
-            window.location.href = '/Manager/request';
-        } else {
-            return response.text().then(text => {
-                console.error('Error response text:', text); // Log server error response
-                throw new Error(text);
-            });
+        console.log('Response Status:', response.status); 
+        const result = await response.text();
+        console.log('Response Body:', result); 
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
         }
-    })
-    .catch(error => {
-        console.error('Error submitting form:', error);
-        alert('An error occurred: ' + error.message);
-    });
-}
 
-// Modal close functions
-function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
-}
-
-function closeLoanModal() {
-    document.getElementById('loanModal').style.display = 'none';
-}
-
-function closeSavingsModal() {
-    document.getElementById('savingsModal').style.display = 'none';
-}
-
-function closeCBUModal() {
-    document.getElementById('cbuModal').style.display = 'none';
-}
-
-// Close modals when clicking outside of them
-window.onclick = function(event) {
-    const modals = ['myModal', 'loanModal', 'savingsModal', 'cbuModal'];
-    modals.forEach(modalId => {
-        const modal = document.getElementById(modalId);
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-};
-
+        console.log(`Application ${status}:`, result);
+        document.getElementById('myModal').style.display = 'none';
+        window.location.reload();
+    } catch (error) {
+        console.error('Error updating application status:', error);
     }
 }
+    }
+}
+
+
+function handleApproval(status) {
+    const applicationId = document.getElementById('application-id').value;
+    const url = '/update_loan_request';
+
+    if (!applicationId) {
+        alert('Application ID is missing.');
+        return;
+    }
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            application_id: applicationId,
+            application_status: status
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then(data => {
+        alert(`Loan application ${status}: ${data}`);
+        closeLoanModal();
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Error updating loan status:', error);
+        alert('Error updating loan status. Please try again.');
+    });
+}
+    
+
+
+document.querySelectorAll('.approve-button, .decline-button').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault(); 
+        const status = this.value; // Should be "approved" or "declined"
+        const form = document.getElementById('savingsForm');
+        const savtransactionId = document.getElementById('application-id').value;
+
+        console.log('Button clicked:', status); // Added log for button click
+        console.log('Transaction ID:', savtransactionId);
+
+        fetch(`/update_savings_request/${savtransactionId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                savtransaction_id: savtransactionId,
+                status: status 
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); 
+            closeSavingsModal(); 
+            location.reload(); 
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while processing the request.');
+        });
+    });
+});
+
+
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    function closeLoanModal() {
+        document.getElementById('loanModal').style.display = 'none';
+    }
+
+    function closeSavingsModal() {
+        document.getElementById('savingsModal').style.display = 'none';
+    }
+
+    function closeCBUModal() {
+        document.getElementById('cbuModal').style.display = 'none';
+    }
+
+    // Close modals when clicking outside of them
+    window.onclick = function(event) {
+        const modals = ['myModal', 'loanModal', 'savingsModal', 'cbuModal'];
+        modals.forEach(modalId => {
+            const modal = document.getElementById(modalId);
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    };
+
 </script>
 
 

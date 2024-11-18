@@ -56,31 +56,36 @@ const update_loan_request = async (req, res) => {
     try {
         const { application_id, application_status } = req.body;
 
+        // Validate input
         if (!application_id || !application_status) {
+            console.error('Application ID and status are required.');
             return res.status(400).send('Application ID and status are required');
         }
 
+        // Find existing loan application
         const updatedLoanApplication = await Loan_application.findByPk(application_id);
-
         if (!updatedLoanApplication) {
+            console.error('Loan application not found for ID:', application_id);
             return res.status(404).send('Loan application not found');
         }
 
         const user_id = updatedLoanApplication.user_id;
         updatedLoanApplication.application_status = application_status;
-        await updatedLoanApplication.save();
 
+        // Approve the loan
         if (application_status === 'approved') {
+            console.log('Approving loan for application ID:', application_id);
+
             const monthlyPayment = parseFloat(updatedLoanApplication.monthly_payment);
             const loanTerm = parseInt(updatedLoanApplication.loan_term);
-
             if (isNaN(monthlyPayment) || isNaN(loanTerm)) {
+                console.error('Invalid monthly payment or loan term value');
                 return res.status(400).send('Invalid monthly payment or loan term value');
             }
 
             const total_amount = monthlyPayment * loanTerm;
-            const startDate = calculateStartDate(updatedLoanApplication);
-            const endDate = calculateEndDate(updatedLoanApplication, startDate);
+            const startDate = calculateStartDate(updatedLoanApplication); // Ensure these functions exist
+            const endDate = calculateEndDate(updatedLoanApplication, startDate); // Ensure these functions exist
 
             const approvedLoan = {
                 loan_id: uuidv4(),
@@ -98,25 +103,40 @@ const update_loan_request = async (req, res) => {
                 timestamp: new Date(),
             };
 
-            const newLoan = await Loan.create(approvedLoan);
+            console.log('Creating new loan record:', approvedLoan);
 
-            if (!newLoan) {
-                throw new Error('Failed to create new Loan record');
+            try {
+                const newLoan = await Loan.create(approvedLoan);
+                if (!newLoan) {
+                    throw new Error('Failed to create new Loan record');
+                }
+                console.log('Loan approved and record created successfully.');
+
+                // Save the updated application status here
+                await updatedLoanApplication.save();
+                return res.redirect('/Manager/loanrequest'); // Ensure the client can handle redirects
+            } catch (err) {
+                console.error('Error creating loan record:', err);
+                return res.status(500).send('Failed to create new Loan record');
             }
-
-            return res.redirect('/Manager/loanrequest');
-        } else {
+        } 
+        // Decline the loan
+        else if (application_status === 'declined') {
+            console.log('Declining loan application for ID:', application_id);
             await updatedLoanApplication.destroy();
             return res.send('Loan application declined');
+        } 
+        // Handle unexpected status
+        else {
+            console.error('Invalid application status:', application_status);
+            return res.status(400).send('Invalid application status');
         }
+
     } catch (error) {
         console.error('Error updating loan status:', error);
         return res.status(500).send('Error updating loan status');
     }
 };
-
-
-
 
 function calculateStartDate(loanApplication) {
     const currentDate = new Date();
