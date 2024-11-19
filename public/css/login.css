@@ -332,3 +332,23 @@ body::before {
 .btn, .registr-link a {
     cursor: pointer;
 }
+
+
+.error {
+    color: #f9a602; 
+    background-color: #7a0101; 
+    border: 1px solid #ebccd1; /* Red border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; 
+    margin-top: 10px; 
+    display: none; /* Initially hidden */
+    font-weight: bold; /* Make the text bold */
+    animation: fadeIn 0.5s; /* Optional animation */
+   
+}
+
+/* Optional fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

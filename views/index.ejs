@@ -119,39 +119,40 @@
                 <!-- Form -->
                 <div class="contact form">
                     <h5>Send a Message</h5>
-                    <form>
+                    <form action="/messages" method="POST">
                         <div class="formBox">
                             <div class="row50">
                                 <div class="inputBox">
                                     <span>First Name</span>
-                                    <input type="text" placeholder="Kristine">
+                                    <input type="text" id="fname" name="fname" placeholder="Kristine" required>
                                 </div>
                                 <div class="inputBox">
                                     <span>Last Name</span>
-                                    <input type="text" placeholder="Cardosa">
+                                    <input type="text" id="lname" name="lname" placeholder="Cardosa" required>
                                 </div>
                             </div>
 
                             <div class="row50">
                                 <div class="inputBox">
                                     <span>Email</span>
-                                    <input type="text" placeholder="kristinecardosa@gmail.com">
+                                    <input type="text" id="email" name="email" placeholder="kristinecardosa@gmail.com" required>
                                 </div>
                                 <div class="inputBox">
                                     <span>Mobile</span>
-                                    <input type="text" placeholder="+63 912 345 6789">
+                                    <input type="text" id="contact" name="contact" placeholder="+63 912 345 6789" required>
                                 </div>
                             </div>
 
                             <div class="row100">
                                 <div class="inputBox">
                                     <span>Message</span>
-                                    <textarea placeholder="Write your message here..."></textarea>
+                                    <textarea id="message" name="message" placeholder="Write your message here..."></textarea>
                                 </div>
                             </div>
 
                             <div class="inputBox">
-                                <input type="submit" value="Send">
+                                <!-- <input type="submit" value="Send"> -->
+                                <button type="submit" class="submit">Send</button>
                             </div>
                             
                         </div>

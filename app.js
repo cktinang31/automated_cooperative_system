@@ -30,12 +30,14 @@ const memberpageRoutes = require('./routes/memberpageRoute');
 const managerpageRoutes = require('./routes/managerpageRoute');
 const systemadminRoutes = require('./routes/systemadminRoute');
 const loan_paymentRoutes = require('./routes/loan_paymentRoute');
-const { Application, Cbu, Cbutransaction, Loan_application, Loan_payment, Loan, Savings, Savtransaction, User } = require('./models/sync');
+const { Application, Cbu, Cbutransaction, Loan_application, Loan_payment, 
+  Loan, Savings, Savtransaction, User, VMessage } = require('./models/sync');
 const cbuRoutes = require('./routes/cbuRoute');
 const savingsRoutes = require('./routes/savingsRoute');
 const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
+const vmessageRoutes = require('./routes/vmessageRoute');
 
 
 
@@ -201,6 +203,7 @@ app.use(savtransactionRoutes);
 app.use(cbutransactionRoutes);
 app.use(collectorRoutes);
 app.use(loan_paymentRoutes);
+app.use(vmessageRoutes);
 
 
 app.get('/tables', async (req, res) => {
