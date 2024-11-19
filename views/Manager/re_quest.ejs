@@ -259,8 +259,8 @@
     <div class="modal-content">
         <span class="close" onclick="closeCBUModal()">&times;</span>
         <form id="cbuForm" action="/update_cbu_request" method="POST">
-            <input type="hidden" name="Hid" id="application-Gid">
-            <input type="hidden" name="applicationd_status" id="applicatiodn_status">
+            <input type="hidden" name="application_status" id="application-id">
+          
 
             <table>
                 <tr>
@@ -285,12 +285,13 @@
                 </tr>
             </table>
             <div class="button-container">
-                <button type="submit" class="approve-button">Approve</button>
-                <button type="submit" class="decline-button">Decline</button>
+                <button type="button" class="approve-button" onclick="approveCBUTransaction()">Approve</button>
+                <button type="button" class="decline-button" onclick="declineCBUTransaction()">Decline</button>
             </div>
         </form>
     </div>
 </div>
+
 
 
 <script>
@@ -327,11 +328,14 @@
 
         document.getElementById('savingsModal').style.display = 'block';
     } else if (type === 'CBU Transaction') {
-        document.getElementById('cbu-modal-name').innerText = `${fname} ${lname}`;
-        document.getElementById('cbu-modal-requestType').innerText = 'CBU';
-        document.getElementById('cbu-modal-amount').innerText = amount + ' PHP';
-        document.getElementById('cbu-modal-modeOfPayment').innerText = details; 
-        document.getElementById('cbuModal').style.display = 'block';
+            console.log("Opening modal for request ID:", id);
+            document.getElementById('cbu-modal-name').innerText = `${fname} ${lname}`;
+            document.getElementById('cbu-modal-requestType').innerText = 'CBU';
+            document.getElementById('cbu-modal-amount').innerText = amount + ' PHP';
+            document.getElementById('cbu-modal-modeOfPayment').innerText = details; 
+            document.getElementById('application-id').value = id;
+            document.getElementById('cbuModal').style.display = 'block';
+
     } else if (type === 'Application') {
         console.log("Opening modal for request ID:", id);
         document.getElementById('modal-fname').innerText = fname;
@@ -426,39 +430,103 @@ function handleApproval(status) {
     
 
 
-document.querySelectorAll('.approve-button, .decline-button').forEach(button => {
-    button.addEventListener('click', function (e) {
-        e.preventDefault(); 
-        const status = this.value; // Should be "approved" or "declined"
-        const form = document.getElementById('savingsForm');
-        const savtransactionId = document.getElementById('application-id').value;
+document.querySelector('#savingsModal').addEventListener('click', (e) => {
 
-        console.log('Button clicked:', status); // Added log for button click
-        console.log('Transaction ID:', savtransactionId);
+if (e.target.classList.contains('approve-button') || e.target.classList.contains('decline-button')) {
 
-        fetch(`/update_savings_request/${savtransactionId}`, {
+    const status = e.target.classList.contains('approve-button') ? 'approved' : 'declined';
+    const savtransactionId = document.getElementById('application-id').value;
+
+    console.log('Button clicked:', status); 
+    console.log('Transaction ID:', savtransactionId); 
+
+    e.preventDefault();
+
+    fetch(`/update_savings_request/${savtransactionId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            savtransaction_id: savtransactionId,
+            status: status
+        })
+    })
+    .then(response => {
+        console.log('Response status:', response.status); 
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response data:', data);
+        alert(data.message);
+        closeSavingsModal();
+        location.reload(); 
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while processing the request.');
+    });
+}
+});
+
+
+const approveCBUTransaction = async () => {
+        const cbuTransactionId = document.getElementById('application-id').value;
+        try {
+            const response = await fetch(`/update_cbu_request/${cbuTransactionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    status: 'approved',  // Approve the CBU transaction
+                }),
+            });
+
+            if (response.ok) {
+                alert('CBU transaction approved successfully!');
+                location.reload(); 
+            } else {
+                alert('Failed to approve CBU transaction');
+            }
+        } catch (error) {
+            console.error('Error approving CBU transaction:', error);
+            alert('Error approving CBU transaction');
+        }
+    };
+
+const declineCBUTransaction = async () => {
+    const cbuTransactionId = document.getElementById('application-id').value;
+    if (!cbuTransactionId) {
+        alert('Transaction ID is missing');
+        return;
+    }
+
+    console.log('Declining CBU Transaction with ID:', cbuTransactionId);
+    try {
+        const response = await fetch(`/update_cbu_request/${cbuTransactionId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                savtransaction_id: savtransactionId,
-                status: status 
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message); 
-            closeSavingsModal(); 
-            location.reload(); 
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while processing the request.');
+                status: 'declined',
+            }),
         });
-    });
-});
 
+        if (response.ok) {
+            alert('CBU transaction declined successfully!');
+            location.reload();
+        } else {
+            const errorText = await response.text();
+            console.error('Server responded with error:', errorText);
+            alert(`Failed to decline CBU transaction: ${errorText}`);
+        }
+    } catch (error) {
+        console.error('Error declining CBU transaction:', error);
+        alert('Error declining CBU transaction');
+    }
+};
 
 
     function closeModal() {
