@@ -9,14 +9,24 @@ body {
     background-color: #f0f0f0;
 }
  
+header {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 87px;
+    left: 0px;
+    top: -1px;
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .dashboard {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 20px;
     padding: 30px;
 }
- 
-/* Card Styles */
+
 .card {
     background-color: #333;
     color: #f0f0f0;
@@ -25,8 +35,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
- 
-/* Title Styles */
+
 h2 {
     font-size: 1.5rem;
     font-weight: bold;
@@ -44,7 +53,6 @@ h1 span {
     color: #f0f0f0;
 }
  
-/* Icon Style */
 .icon {
     position: absolute;
     bottom: 20px;
@@ -52,16 +60,14 @@ h1 span {
     font-size: 30px;
 }
  
-/* Individual Card Styles */
 .advisory-card {
     grid-column: 1 / 2;
     height: 347px;
-    margin-left: 180px;
-    width: 610px;
+    margin-left: 253px;
+    width: 550px;
     background-color: #373F41;
     margin-top: 105px;
 }
- 
  
 .loans-card {
     grid-column: 2 / 3;
@@ -87,11 +93,10 @@ h1 span {
     grid-column: 1 / 3;
     height: 439px;
     margin-right: 145px;
-    margin-left: 180px;
+    margin-left: 253px;
     background-color: #373F41;
 }
  
-/* Combined Inquiries and Upcoming Collections Card */
 .inquiries-collections-card {
     grid-column: 3 / 4;
     display: flex;
@@ -110,7 +115,6 @@ h1 span {
     margin-top: 20px;
 }
  
-/* Inquiries & Collections Styles */
 .collection-item, .inquiry-item {
     background-color: whitesmoke;
     height: 40px;
@@ -118,11 +122,11 @@ h1 span {
     border-radius: 5px;
 }
  
-/* Legend for Graph */
 .legend {
     display: flex;
     flex-wrap: wrap;
     margin-top: 10px;
+    flex-direction: column;
 }
  
 .legend li {
@@ -147,7 +151,7 @@ h1 span {
   }
  
   .legend {
-    flex-direction: column; /* Align items vertically */
+    flex-direction: column; 
   }
  
   .color.red {
@@ -172,21 +176,23 @@ h1 span {
   .color.green, .color.red, .color.yellow, .color.blue {
     border-radius: 0;
   }
+  
   .graph-image img {
-    width: 56%;
-    height: auto;
-    margin-left: 308px;
-    position: absolute;
-    top: 102px;
+    width: 600px;
+    height: 300px;
+    object-fit: contain;
+    margin-top: -270px;
+    margin-left: 267px;
 }
  
 .title p {
     position: absolute;
-    left: 100px;
-    top: 36px;
+    left: 107px;
+    top: 47px;
     font-size: 40px;
     line-height: 0px;
     color: #373F41;
+    margin-left: 161px;
 }
  
 .user {
@@ -197,3 +203,91 @@ h1 span {
     font-size: 20px;
     color: #373F41;
 }
+
+h3 {
+    color: #F9A602;
+    font-size: 30px;
+    left: 7px;
+}
+ 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.container {
+        padding-top: 8rem;
+        padding-left: 18rem;
+
+}
+.announcement-container {
+    box-sizing: border-box;
+    position: absolute;
+    width: 900px;
+    height: 330px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    padding-top: 1rem;
+   
+}
+.announcement-title {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #373F41;
+}
+ 
+.welcome-container {
+    position: absolute;
+    width: 30rem;
+    height: 19rem;
+    left: 1300px;
+    top: 127px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    justify-content: center;
+    padding: 0;
+   
+}
+ 
+.welcome-title {
+    margin-top: 0;
+    color:#373F41;
+    background-color: #F9A602;
+    font-size: 24px;
+    padding: 1rem;
+}
+
+.welcome-container p {
+    color: #373F41;
+    font-size: 16px;
+    padding: 1rem;
+}
+
+aside {
+    margin-top: 87px;
+    width: 16rem;
+    height: 100%;
+    background: #ffff;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+    position: fixed;
+}
+
+.graph-image img {
+    width: 600px;
+    height: 300px;
+    object-fit: contain;
+    margin-top: -329px;
+    margin-left: 267px;
+}
+
+.legend li:hover {
+    background-color: transparent;
+    height: auto;         
+    border-radius: 0;           
+    transform: none;
+}
+

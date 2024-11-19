@@ -353,7 +353,7 @@
         document.getElementById("id").value = id; 
         
         document.querySelector('.approve-button').addEventListener('click', () => updateApplicationStatus('approved'));
-        document.querySelector('.decline-button').addEventListener('click', () => updateApplicationStatus('declined'));
+        document.querySelector('.decline-button').addEventListener('click', () => updateApplicationStatus('decline'));
 
 async function updateApplicationStatus(status) {
     const applicationId = document.getElementById('id').value;

@@ -38,7 +38,6 @@ const mem_application = async (req, res) => {
     }
 };
 
-
 const mem_application_update = async (req, res) => {
     const id = req.params.id;
     const { application_status } = req.body;
@@ -46,65 +45,63 @@ const mem_application_update = async (req, res) => {
     console.log("Received ID:", id);
     console.log("Received Status:", application_status);
 
-   
-    if (!['approved', 'declined'].includes(application_status)) {
+    if (!['approved', 'decline'].includes(application_status)) {
         console.log('Invalid application status:', application_status);
         return res.status(400).send('Invalid application status');
     }
 
     try {
-       
-        const application = await Application.findByPk(id);
+        console.log('Request Body:', req.body);
+        console.log('Application ID:', id);
+        
+        
+        const application = await Application.findByPk( id );
+
         if (!application) {
-            console.log('Application not found for ID:', id);
+            console.log('Application not found');
             return res.status(404).send('Application not found');
         }
 
-       
-        if (application_status === 'declined') {
-            await application.destroy();
-            console.log(`Application with ID ${id} declined and deleted`);
-            return res.send('Membership application declined');
+        if (application_status !== 'approved' && application_status !== 'decline') {
+            console.log('Invalid application status:', application_status);
+            return res.status(400).send('Invalid application status');
         }
 
-       
         application.application_status = application_status;
-
-      
-        const newUserDetails = {
-            application_id: id,
-            fname: application.fname,
-            lname: application.lname,
-            place_of_birth: application.place_of_birth,
-            address: application.address,
-            email: application.email,
-            contact: application.contact,
-            timestamp: new Date(),
-        };
-
-       
-        const newUser = await User.create(newUserDetails);
-
-        if (!newUser) {
-            throw new Error('Failed to create new user record');
-        }
-
-        console.log('New user created:', newUser.user_id);
-
-        
-        await create_cbu(id, newUser.user_id);
-        await create_savings(id, newUser.user_id);
-
-       
         await application.save();
 
-        console.log(`Application with ID ${id} approved`);
+        if (application_status === 'approved') {
+            const newUserDetails = {
+                application_id: id,
+                fname: application.fname,
+                lname: application.lname,
+                place_of_birth: application.place_of_birth,
+                address: application.address,
+                email: application.email,
+                contact: application.contact,
+                timestamp: new Date(),
+            };
 
-      
-        res.send('Application approved and new user created successfully');
+            const newUser = await User.create(newUserDetails);
+
+            if (!newUser) {
+                throw new Error('Failed to create new user record');
+            }
+
+            console.log('New user created:', newUser.user_id);
+
+            await create_cbu( id , newUser.user_id);
+            await create_savings( id , newUser.user_id);
+
+
+            return res.redirect('/Manager/request');
+        } else {
+            await application.destroy();
+            return res.send('Membership application declined');
+        }
     } catch (error) {
         console.error('Error updating application status:', error);
-        res.status(500).send('Error updating application status');
+        return res.status(500).send('Error updating application status');
     }
 };
 
