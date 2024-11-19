@@ -16,7 +16,7 @@ const user_reg = async (req, res) => {
     const { user_id, password } = req.body;
     console.log('Request Body:', req.body);
 
-    const existingUser = await User.findOne({ where: { user_id } });
+    const existingUser = await User.findOne({ where: { user_id, registered: false } });
 
     if (existingUser) {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,7 +26,7 @@ const user_reg = async (req, res) => {
       console.log('Account Updated:', existingUser);
       return res.redirect('/login');
     } else {
-      console.log('User not found. Cannot update password.');
+      console.log('User not found or this account is already registered. Cannot update password.');
       return res.status(404).send('User not found. Cannot update password.');
     }
   } catch (error) {
