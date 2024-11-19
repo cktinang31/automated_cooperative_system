@@ -520,16 +520,26 @@ router.get('/Manager/membersinfo', (req, res) => {
                     limit: 1
                     
                 });
+                
                 const savings = await Savings.findAll({
                     where: {
                         user_id: user.user_id,
                     }
                 });
+
+               
                 //loans
                 const loans = await Loan.findAll({
                     where: {
                         user_id: user.user_id,
                     },
+                        order: [
+                            ['timestamp', 'DESC'], // Order by 'timestamp' in descending order
+                        ],
+                        limit: 1, 
+                        
+                        
+                    
                 });
                 //cbu
                 const cbu = await Cbu.findAll({
@@ -548,6 +558,7 @@ router.get('/Manager/membersinfo', (req, res) => {
                     title: 'Dashboard', 
                     user 
                 });
+                console.log(savings);
             } catch (error) {
                 console.error('Error fetching requests:', error);
                 res.status(500).send('Error fetching requests.');

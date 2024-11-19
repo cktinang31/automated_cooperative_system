@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../Manager/managerhead.ejs") %>
-    <link rel="stylesheet" href="/css/managermain.css">
+    <link rel="stylesheet" href="/css/re_quest.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <body>
         <%- include("../Manager/managerheader.ejs") %>
@@ -350,7 +350,7 @@
         document.getElementById("id").value = id; 
         
         document.querySelector('.approve-button').addEventListener('click', () => updateApplicationStatus('approved'));
-        document.querySelector('.decline-button').addEventListener('click', () => updateApplicationStatus('declined'));
+        document.querySelector('.decline-button').addEventListener('click', () => updateApplicationStatus('decline'));
 
 async function updateApplicationStatus(status) {
     const applicationId = document.getElementById('id').value;

@@ -1,6 +1,12 @@
-const Savings = require('../models/savings');
-const Application = require('../models/application');
-const User = require('../models/user');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User,} = require('../models/sync');
 const { v4: uuidv4 } = require('uuid');
 
 const create_savings = async (application_id, user_id) => {
