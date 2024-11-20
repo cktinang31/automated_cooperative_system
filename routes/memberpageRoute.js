@@ -653,4 +653,31 @@ router.get('/Member/funds', async (req, res, next) => {
     }
 });
 
+router.get('/Member/notif', asyns (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated as a regular.');
+            const user = req.user;
+
+            try {
+                const cbu_transaction = await Cbutransaction.findAll({
+                    where: {
+                        user_id: user.user_id,
+                        status
+                    },
+                    include: [{
+                        model: User,
+                        attributes: ['user_id'],
+                    }],
+                });
+
+            }
+        }
+    }
+    res.render('Member/notif', { title: 'Notifications'});
+  });
 module.exports = router;
