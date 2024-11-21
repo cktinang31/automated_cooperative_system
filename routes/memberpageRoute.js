@@ -14,6 +14,7 @@ const {Application,
  
  
 const { title } = require('process');
+const { Op } = require('sequelize');
  
  
 const router = express.Router();
@@ -653,31 +654,97 @@ router.get('/Member/funds', async (req, res, next) => {
     }
 });
 
-router.get('/Member/notif', asyns (req, res, next) => {
+router.get('/Member/notif', async (req, res, next) => {
     try {
+        // Checking session details (could be removed in production)
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
         console.log('Authenticated:', req.isAuthenticated());
 
+        // Ensure the user is authenticated and has a regular role
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
-            console.log('User is authenticated as a regular.');
+            console.log('User is authenticated as regular.');
+
             const user = req.user;
 
-            try {
-                const cbu_transaction = await Cbutransaction.findAll({
-                    where: {
-                        user_id: user.user_id,
-                        status
-                    },
-                    include: [{
-                        model: User,
-                        attributes: ['user_id'],
-                    }],
-                });
+            // Helper function to fetch transactions
+            const findTransactions = async (model, userId, statuses = [], statusField = 'status') => {
+                const whereClause = { user_id: userId };
+                whereClause[statusField] = statuses;
 
+                return model.findAll({
+                    where: whereClause,
+                    include: [{ model: User, attributes: ['user_id'] }],
+                });
+            };
+
+            try {
+                // Fetching transactions in parallel
+                const [cbuTransaction, savingsTransaction, loanApplication, loanPayment] = await Promise.all([
+                    findTransactions(Cbutransaction, user.user_id, ['approved', 'decline']),
+                    findTransactions(Savtransaction, user.user_id, ['approved', 'decline']),
+                    findTransactions(Loan_application, user.user_id, ['approved', 'decline'], 'application_status'),
+                    findTransactions(Loan_payment, user.user_id, ['approved', 'decline'])
+                ]);
+
+                // Combine all transactions into a single array of notifications
+                const notifications = [
+                    ...cbuTransaction.map(cbu => ({
+                        id: cbu.cbutransaction_id,
+                        amount: cbu.amount,
+                        transaction_type: cbu.transaction_type,
+                        status: cbu.status,
+                        date: cbu.date_sent,
+                        type: 'CBU Transactions'
+                    })),
+                    ...savingsTransaction.map(savings => ({
+                        id: savings.savtransaction_id,
+                        amount: savings.amount,
+                        transaction_type: savings.transaction_type,
+                        status: savings.status,
+                        date: savings.date_sent,
+                        type: 'Savings Transactions'
+                    })),
+                    ...loanApplication.map(loanApp => ({
+                        id: loanApp.application_id,
+                        amount: loanApp.amount,
+                        status: loanApp.application_status,
+                        date: loanApp.date_sent,
+                        type: 'Loan Application'
+                    })),
+                    ...loanPayment.map(payment => ({
+                        id: payment.payment_id,
+                        amount: payment.amount,
+                        status: payment.status,
+                        date: payment.date_sent,
+                        type: 'Loan Payment'
+                    }))
+                ];
+
+                console.log('Notifications:', notifications);
+
+                // Sort notifications by date in descending order
+                notifications.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Render the notifications to the page
+                res.render('Member/notif', { notifications, user, title: 'Notifications' });
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+                res.status(500).send('Error fetching transactions.');
             }
+        } else {
+            // If user is not authenticated, redirect to login page
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl;
+            res.redirect('/login');
         }
+    } catch (error) {
+        console.error('Error in isAuthenticated middleware:', error);
+        res.status(500).send('Internal server error');
     }
-    res.render('Member/notif', { title: 'Notifications'});
-  });
+});
+
+
+
+
 module.exports = router;
