@@ -9,6 +9,8 @@ const {Application,
     User, VMessage} = require('../models/sync');
 const { v4: uuidv4 } = require('uuid');
 
+
+
     const messages = async (req, res) => {
         const { fname, lname, email, contact,  message} = req.body;
         const messageDate = new Date();
