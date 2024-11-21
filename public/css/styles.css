@@ -191,15 +191,14 @@ nav a {
 @keyframes pulse {
     0%, 100% {
         transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 15px rgba(249, 166, 2, 0.75);
+        box-shadow: 0 0 5px rgba(249, 166, 2, 0.75);
     }
     50% {
         transform: translateX(-50%) scale(1.1);
-        box-shadow: 0 0 25px rgba(255, 204, 0, 1);
+        box-shadow: 0 0 10px rgba(255, 204, 0, 1);
     }
 }
 
-/* Apply styles to the button */
 .carousel-caption .btn-apply {
     position: absolute;
     bottom: 20px;
@@ -215,24 +214,17 @@ nav a {
     font-size: 18px;
     font-weight: bold; 
     text-transform: uppercase; 
-    border: none;
-    box-shadow: 0 0 15px rgba(249, 166, 2, 0.75); 
-    animation: pulse 2s infinite; /* Add animation */
+    border: 1px solid #373f41;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+    animation: pulse 2s infinite; 
     transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect for interaction */
 .carousel-caption .btn-apply:hover {
     background: #ffcc00; 
     color: #333;
-    box-shadow: 0 0 30px rgba(255, 204, 0, 1); 
     transform: translateX(-50%) scale(1.1);
-}
-
-/* Focus styling for accessibility */
-.carousel-caption .btn-apply:focus {
-    outline: 3px solid #ffcc00;
-    outline-offset: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
