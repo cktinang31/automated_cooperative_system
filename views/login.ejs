@@ -24,7 +24,7 @@
                 <div class="input-box animation" style="--D:2; --S:23">
                     <input type="password" id="password" name="password" required>
                     <label for="password">Password</label>
-                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-lock-alt' onclick="togglePasswordVisibility('password', this)"></i>
                 </div>
                 <div class="input-box animation" style="--D:3; --S:24">
                     <button class="btn" type="submit" id="login">Login</button>
@@ -53,13 +53,13 @@
                 <div class="input-box animation" style="--li:19; --S:2">
                     <input type="password" id="password" name="password" required>
                     <label for="password">Password</label>
-                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-lock-alt' onclick="togglePasswordVisibility('password', this)"></i>
                     <div class="error" id="error-message" style="display:none;">Passwords do not match!</div>
                 </div>
                 <div class="input-box animation" style="--li:19; --S:2">
                     <input type="password" id="confirmPassword" name="confirmPassword" required>
                     <label for="confirmPassword">Confirm Password</label>
-                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-lock-alt' onclick="togglePasswordVisibility('confirmPassword', this)"></i>
                 </div>
                 <div class="input-box animation" style="--li:20; --S:3">
                     <button class="btn" type="submit" id="submitBtn">Register</button>
@@ -77,6 +77,23 @@
         </div>
         
         <script>
+            function togglePasswordVisibility(inputId, iconElement) {
+            const passwordInput = document.getElementById(inputId); // Get the input element
+            const icon = iconElement; // Get the icon that was clicked
+            
+            // Toggle the password visibility
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';  // Show password
+                icon.classList.remove('bxs-lock-alt');  // Change the icon to open lock
+                icon.classList.add('bxs-lock');  // Icon for visible password
+            } else {
+                passwordInput.type = 'password';  // Hide password
+                icon.classList.remove('bxs-lock');  // Change back to closed lock
+                icon.classList.add('bxs-lock-alt');  // Icon for hidden password
+            }
+        }
+
+
             document.getElementById('registrationForm').addEventListener('submit', function(event) {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
@@ -125,6 +142,7 @@
             }
         });
     </script> -->
+
 
 
     <script src="/js/login.js"></script>

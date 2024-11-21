@@ -64,7 +64,7 @@ h1 span {
     grid-column: 1 / 2;
     height: 347px;
     margin-left: 253px;
-    width: 550px;
+    width: 688px;
     background-color: #373F41;
     margin-top: 105px;
 }
@@ -72,7 +72,7 @@ h1 span {
 .loans-card {
     grid-column: 2 / 3;
     height: 347px;
-    margin-left: -97px;
+    margin-left: -42px;
     margin-right: 140px;
     width: 400px;
     background-color: #373F41;
