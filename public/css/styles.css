@@ -187,22 +187,54 @@ nav a {
     display: none;
 }
 
-.btn-apply {
-    margin-bottom: 10px;
-    padding: 0.4rem 1.25rem;
-    border-radius: 2rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    background-color: #f9a602;
-    border: none;
-    color: #373f41;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
+/* Add a pulsing effect */
+@keyframes pulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 15px rgba(249, 166, 2, 0.75);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 0 25px rgba(255, 204, 0, 1);
+    }
 }
 
-.btn-apply:hover {
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); 
+/* Apply styles to the button */
+.carousel-caption .btn-apply {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; 
+    width: auto;
+    padding: 10px 30px;
+    background: #f9a602; 
+    color: #373f41; 
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold; 
+    text-transform: uppercase; 
+    border: none;
+    box-shadow: 0 0 15px rgba(249, 166, 2, 0.75); 
+    animation: pulse 2s infinite; /* Add animation */
+    transition: all 0.3s ease-in-out;
 }
+
+/* Hover effect for interaction */
+.carousel-caption .btn-apply:hover {
+    background: #ffcc00; 
+    color: #333;
+    box-shadow: 0 0 30px rgba(255, 204, 0, 1); 
+    transform: translateX(-50%) scale(1.1);
+}
+
+/* Focus styling for accessibility */
+.carousel-caption .btn-apply:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
 
 .mv-container {
     max-width: 100%;
@@ -491,9 +523,10 @@ h3 {
     transition: color 0.3s ease, font-weight 0.3s ease, box-shadow 0.3s ease;
 }
 
-.inputBox input[type="submit"] {
+.inputBox .submit {
     align-items: center;
     width: 150px;
+    height: 40px;
     background: #f9a602;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     color: #222;
@@ -506,7 +539,7 @@ h3 {
     transition: background-color 0.5s, transform 80ms ease-in-out, letter-spacing 0.3s ease; /* Smooth transition */
 }
 
-.inputBox input[type="submit"]:hover {
+.inputBox .submit:hover {
     letter-spacing: 5px;
 }
 
