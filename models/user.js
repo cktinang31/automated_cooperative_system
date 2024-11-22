@@ -18,11 +18,12 @@ const Loan_payment = require ('../models/loan_payment')(sequelize);
 
 const UserModel = (sequelize) => {
     const User = sequelize.define('User', {
-        user_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
+        
+            user_id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                // Remove autoIncrement to handle the ID manually
+            },
         application_id: {
             type: DataTypes.INTEGER,
             allowNull: true,
@@ -137,35 +138,8 @@ const UserModel = (sequelize) => {
         const count = await User.count();
         user.user_id = 624197 + count;
     });
-
     return User;
 };
 
-const User = UserModel(sequelize);
-
-User.sync()
-    .then(async () => {
-        const count = await User.count();
-        if (count === 0) {
-            const hashedPassword = await bcrypt.hash('admin12345', 10);
-            try {
-                await User.create({
-                    user_id: 624197,
-                    fname: 'system',
-                    lname: 'admin',
-                    email: 'admin@gmail.com',
-                    password: hashedPassword,
-                    registered: true,
-                    role: 'admin'
-                });
-                console.log('Default admin user created successfully.');
-            } catch (error) {
-                console.error('Error creating default admin user:', error);
-            }
-        }
-    })
-    .catch(error => {
-        console.error('Error syncing User model:', error);
-    });
 
 module.exports = UserModel;
