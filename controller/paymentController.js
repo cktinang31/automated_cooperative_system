@@ -1,7 +1,12 @@
-const Loan = require ('../models/loan');
-const Loan_application = require ('../models/loan_application');
-const User = require ('../models/user');
-const Loan_payment = require ('../models/loan_payment');
+const {Application, 
+    Cbu, 
+    Cbutransaction, 
+    Loan_application, 
+    Loan_payment, 
+    Loan, 
+    Savings, 
+    Savtransaction,
+    User, VMessage} = require('../models/sync');
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -19,12 +24,17 @@ const loanpayment = async (req, res) => {
 
         const user_id = req.session.passport.user;
 
-        const loan = await Loan.findByPk(loan_id);
+       
+        const loan = await Loan.findOne({
+            where: { loan_id: loan_id }
+        }); 
+
         if (!loan) {
             console.error('Loan not found.');
             return res.status(404).send('Loan not found.');
         }
 
+      
         const loanPayment = await Loan_payment.create({
             payment_id: uuidv4(),
             loan_id,
@@ -42,6 +52,8 @@ const loanpayment = async (req, res) => {
         return res.status(500).send('Error submitting the payment.');
     }
 };
+
+
 const update_loanpayment = async (req, res) => {
     try {
         const { payment_id, status } = req.body;

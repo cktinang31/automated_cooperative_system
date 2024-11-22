@@ -81,7 +81,7 @@ const {Application,
             case 'manager':
               return res.redirect('/Manager/dashboard');
             case 'collector':
-              return res.redirect('/Collector/dashboard');
+              return res.redirect('/Collector/dashboardcollector');
             default:
               return res.redirect('/Member/dashboard');
           }
