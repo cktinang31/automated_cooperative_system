@@ -38,6 +38,7 @@ const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
 const vmessageRoutes = require('./routes/vmessageRoute');
+const { messages } = require('./controller/vmessageController');
 
 
 
@@ -270,7 +271,8 @@ app.post('/savings', async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login'});
+  const { error } = req.query;
+  res.render('login',  { title: 'Login', errorMessage: error},);
 });
 app.get('/application', (req, res) => {
     res.render('application', { title: 'Membership Application'});
