@@ -46,6 +46,23 @@ Loan_payment.associate({User, Loan, Loan_application});
 Savtransaction.associate({User, Savings});
 Cbutransaction.associate({User, Cbu});
 
+sequelize.sync({ force: false })  
+  .then(() => {
+    console.log('Database sync successful');
+  })
+  .catch((error) => {
+    console.error('Error syncing the database:', error);
+  });
+
+  sequelize.authenticate()
+  .then(() => {
+    console.log('Connection to the database has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+
 module.exports = { sequelize, 
     Application,
     User, 

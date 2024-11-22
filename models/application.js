@@ -11,7 +11,7 @@ const ApplicationModel = (sequelize) => {
         application_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            autoIncrement: true,
+            autoIncrement: true,  // Auto-increment behavior is sufficient
             primaryKey: true,
         },
         fname: {
@@ -49,17 +49,17 @@ const ApplicationModel = (sequelize) => {
         application_status: {
             type: DataTypes.ENUM('pending', 'approved', 'declined'),
             allowNull: false,
-            defaultValue: 'pending', // Add default value
+            defaultValue: 'pending',
         },
-    
         date_sent: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: DataTypes.NOW 
+            defaultValue: DataTypes.NOW,
         }
     },
     {timestamps: false,});
 
+    // Define associations
     Application.associate = (models) => {
         Application.hasOne(models.User, {
             foreignKey: 'application_id', 
@@ -68,19 +68,16 @@ const ApplicationModel = (sequelize) => {
         });
     };
 
-
-    
+   
     Application.beforeCreate(async (application) => {
-        const count = await Application.count();
-        application.application_id = 499710 + count;
+        const lastApplication = await Application.findOne({
+            order: [['application_id', 'DESC']]
+        });
+        const nextApplicationId = lastApplication ? lastApplication.application_id + 1 : 499710;
+        application.application_id = nextApplicationId;
     });
-    
-    return  Application;
 
+    return Application;
 };
-
-
-
-
 
 module.exports = ApplicationModel;
