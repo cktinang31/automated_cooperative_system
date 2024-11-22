@@ -171,7 +171,7 @@ ul li:hover i, ul li:hover span {
     margin-left: 250px;
     padding: 20px;
     width: 100%;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
 }
 
 .welcome-message {
@@ -185,7 +185,7 @@ ul li:hover i, ul li:hover span {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    flex-wrap: wrap; /* Ensures cards wrap on smaller screens */
+    flex-wrap: wrap;
 }
 
 .card {
@@ -195,7 +195,7 @@ ul li:hover i, ul li:hover span {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex: 1;
     margin: 0 10px;
-    min-width: 280px; /* Set a minimum width to avoid overcrowding */
+    min-width: 280px;
     box-sizing: border-box;
 }
 
@@ -226,7 +226,7 @@ ul li:hover i, ul li:hover span {
 
 .requests {
     margin-top: 20px;
-    overflow-x: hidden; /* Prevent horizontal scrolling in the requests section */
+    overflow-x: hidden; 
     max-width: 100%;
     max-height: 400px;
 }
@@ -250,7 +250,6 @@ ul li:hover i, ul li:hover span {
     background-color: #f1f1f1;
 }
 
-/* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
