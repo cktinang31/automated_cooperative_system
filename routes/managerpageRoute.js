@@ -704,44 +704,46 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
 
                 const requests = [
                     ...applications.map(app => ({ 
-                       id: app.application_id,
-                       fname: app.fname,
-                       mname: app.mname,
-                       lname: app.lname,
-                       application_status: app.application_status,
-                       dob: app.date_of_birth,
-                       pob: app.place_of_birth,
-                       address: app.address,
-                       email: app.email,
-                       contact: app.contact,
-                       date: app.date_sent,
-                       type: 'Application' })),
-                       
-
+                        id: app.application_id,
+                        fname: app.fname,
+                        mname: app.mname,
+                        lname: app.lname,
+                        application_status: app.application_status,
+                        dob: app.date_of_birth,
+                        pob: app.place_of_birth,
+                        address: app.address,
+                        email: app.email,
+                        contact: app.contact,
+                        date: app.date_sent,
+                        type: 'Application' 
+                    })),
+                
                     ...savtransactions.map(savtrans => ({ 
                         id: savtrans.savtransaction_id,
-                        details: `${savtrans.User.fname} ${savtrans.User.lname}`, 
-                        user_id: savtrans.User.user_id,
+                        details: `${savtrans.User ? savtrans.User.fname : 'N/A'} ${savtrans.User ? savtrans.User.lname : ''}`, 
+                        user_id: savtrans.User ? savtrans.User.user_id : null,
                         mode: savtrans.mode,
                         amount: savtrans.amount,
                         transaction_type: savtrans.transaction_type,
                         date: savtrans.date_sent,
-                        type: 'Savings Transaction' })),
-
+                        type: 'Savings Transaction' 
+                    })),
+                
                     ...cbutransactions.map(cbutrans => ({ 
                         id: cbutrans.cbutransaction_id,
-                        details: `${cbutrans.User.fname} ${cbutrans.User.lname}`, 
-                        user_id: cbutrans.User.id,
+                        details: `${cbutrans.User ? cbutrans.User.fname : 'N/A'} ${cbutrans.User ? cbutrans.User.lname : ''}`, 
+                        user_id: cbutrans.User ? cbutrans.User.id : null,
                         mode: cbutrans.mode,
                         amount: cbutrans.amount,
                         transaction_type: cbutrans.transaction_type,
                         date: cbutrans.date_sent,
-                        type: 'CBU Transaction' })),
-
+                        type: 'CBU Transaction' 
+                    })),
+                
                     ...loanApplications.map(loanapp => ({ 
                         id: loanapp.application_id,
-                        details: `${loanapp.User.fname} ${loanapp.User.lname}`, 
-                        user_id: loanapp.User.user_id,
+                        details: `${loanapp.User ? loanapp.User.fname : 'N/A'} ${loanapp.User ? loanapp.User.lname : ''}`, 
+                        user_id: loanapp.User ? loanapp.User.user_id : null,
                         loanterm: loanapp.loan_term,
                         monthlypayment: loanapp.monthly_payment,
                         numberofpayments: loanapp.number_of_payments,
@@ -749,7 +751,8 @@ router.get(['/Manager/request', '/Manager/re_quest'], async (req, res) => {
                         loantype: loanapp.loan_type,
                         interest: loanapp.interest,
                         date: loanapp.date_sent,
-                        type: 'Loan Application' })),
+                        type: 'Loan Application' 
+                    })),
                 ];
 
                 console.log('Requests:', requests);
