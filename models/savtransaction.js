@@ -53,8 +53,10 @@ const SavModel = (sequelize) => {
         },
         status: {
             type: DataTypes.ENUM('pending', 'approved', 'declined'),
-            allowNull: true
+            allowNull: false,
+            defaultValue: 'pending', 
         },
+        
         date_sent: {
             type: DataTypes.DATE,
             allowNull: false,

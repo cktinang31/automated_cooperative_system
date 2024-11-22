@@ -65,18 +65,19 @@ const cbu_transaction = async (req, res) => {
     }
 };
 
-
 const update_cbu_request = async (req, res) => {
+    const cbutransaction_id = req.params.id;  
+    const { status } = req.body;
+
+    if (!cbutransaction_id || !status) {
+        console.log('Transaction ID and status are required');
+        return res.status(400).send('Transaction ID and status are required');
+    }
+
     try {
-        const { cbutransaction_id, status } = req.body;
-
-        if (!cbutransaction_id || !status) {
-            console.log('Transaction ID and status are required');
-            return res.status(400).send('Transaction ID and status are required');
-        }
-
+       
         const cbutransaction = await Cbutransaction.findByPk(cbutransaction_id, {
-            include: [{ model: User, as: 'User' }]
+            include: [{ model: User, as: 'User' }],
         });
 
         if (!cbutransaction) {
@@ -88,44 +89,61 @@ const update_cbu_request = async (req, res) => {
 
         cbutransaction.status = status;
         await cbutransaction.save();
-
         console.log('Updated Cbutransaction status:', cbutransaction.status);
 
         if (status === 'approved') {
             const user_id = cbutransaction.user_id;
             const amount = cbutransaction.amount;
-            const transaction_type = cbutransaction.transaction_type; 
+            const transaction_type = cbutransaction.transaction_type;
 
             const userCbu = await Cbu.findOne({ where: { user_id } });
 
             if (!userCbu) {
-                console.log(`User cbuings not found for user ID: ${user_id}`);
-                return res.status(404).send('User cbu not found');
+                console.log(`User CBU account not found for user ID: ${user_id}`);
+                return res.status(404).send('User CBU account not found');
             }
 
-            console.log('User cbu found:', userCbu);
+            console.log('User CBU found:', userCbu);
 
             if (transaction_type === 'deposit') {
-                userCbu.amount += amount; 
+                userCbu.amount += amount;
             } else if (transaction_type === 'withdraw') {
-                userCbu.amount -= amount; 
+                userCbu.amount -= amount;
+                if (userCbu.amount < 0) {
+                    console.log('Cannot withdraw, insufficient balance');
+                    return res.status(400).send('Insufficient balance');
+                }
             }
 
             await userCbu.save();
+            console.log('Updated user CBU:', userCbu);
 
-            console.log('Updated user cbu:', userCbu);
-
-            return res.redirect('/Manager/cburequest');
+            return res.send('CBU Request approved and balance updated');
+        } 
+        
+        else if (status === 'declined') {
+            console.log('Attempting to delete CBU transaction...');
+            try {
+                console.log('CBU Transaction to delete:', cbutransaction);
+                await cbutransaction.destroy();
+                console.log(`Transaction ${cbutransaction_id} declined and deleted`);
+                return res.send('CBU Request declined and transaction deleted');
+            } catch (destroyError) {
+                console.error('Error destroying transaction:', destroyError);
+                return res.status(500).send('Error deleting declined transaction');
+            }
+        
         } else {
-            await cbutransaction.destroy();
-            console.log('Transaction declined and deleted:', cbutransaction_id);
-            return res.send('Request declined');
+            return res.status(400).send('Invalid status');
         }
     } catch (error) {
         console.error('Error updating request status:', error);
         return res.status(500).send('Error updating request status');
     }
 };
+
+
+
 
 
 

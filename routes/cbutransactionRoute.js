@@ -4,6 +4,6 @@ const cbutransactionController = require ('../controller/cbutransactionControlle
 const router = express.Router();
 
 router.post('/cbu_transaction', cbutransactionController.cbu_transaction);
-router.post('/update_cbu_request/:cbutransaction_id',cbutransactionController.update_cbu_request);
+router.post('/update_cbu_request/:id', cbutransactionController.update_cbu_request);
 
 module.exports = router;
