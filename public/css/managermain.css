@@ -12,6 +12,7 @@ body {
     user-select: none;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    padding-top: 120px;
 }
 
 header {
@@ -22,12 +23,21 @@ header {
     left: 0px;
     top: 0px;
     background: #ffffff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    position: fixed; 
+    z-index: 1000; 
+    padding: 10px 0;
 }
 
 header i {
     color: #373F41;
-    
+}
+
+.site-title img{
+    margin-left: 60px;
+    height: 100px;
+    width: auto;
+    display: block;
 }
 
 .title p {
@@ -74,7 +84,7 @@ header i {
 }
 
 .profile i {
-    font-size: 40px;
+    font-size: 50px;
     color: #333;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -153,4 +163,108 @@ ul li:hover {
 
 ul li:hover i, ul li:hover span {
     color: #ffffff;
+}
+
+/* DASHBOARD */
+/* Container Styles */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: 100%;
+}
+
+.welcome-message {
+    background-color: #f9a602;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    margin: 0 10px;
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    padding: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.card.members {
+    background-color: #ecf0f1;
+}
+
+.card.funds {
+    background-color: #34495e;
+    color: white;
+}
+
+.requests {
+    margin-top: 20px;
+}
+
+.requests table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.requests th, .requests td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.requests th {
+    background-color: #f9a602;
+}
+
+.requests tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .dashboard-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card {
+        flex: none;
+        width: 100%;
+    }
 }
