@@ -12,24 +12,40 @@ const { v4: uuidv4 } = require('uuid');
 
 const savings_transaction = async (req, res) => {
     try { 
-        const { amount, transaction_type, mode } = req.body;
+        let { amount, transaction_type, mode } = req.body;
 
         console.log('Request Body:', req.body);
-    
-        const user_id = req.session.passport.user;
 
+        // Ensure user_id is valid
+        const user_id = req.session.passport.user;
         if (!user_id) {
             console.error('User ID is null or undefined');
             return res.status(401).send('User ID is null or undefined');
         }
 
+        // Find the user's savings record
         const userSavings = await Savings.findOne({ where: { user_id } });
-
         if (!userSavings || !userSavings.savings_id) {
             console.error('Savings ID is null or undefined');
             return res.status(401).send('Savings ID is null or undefined');
         }
 
+        // Handle the case where amount is an array
+        if (Array.isArray(amount)) {
+            // Sum up the array of amounts, ensuring they're parsed as floats
+            amount = amount.reduce((total, num) => total + parseFloat(num), 0);
+        } else {
+            // Ensure the amount is a valid number
+            amount = parseFloat(amount);
+        }
+
+        // Check if the amount is a valid number
+        if (isNaN(amount)) {
+            console.error('Invalid amount value:', amount);
+            return res.status(400).send('Invalid amount.');
+        }
+
+        // Create the new savings transaction
         const newSavtransaction = await Savtransaction.create({
             savtransaction_id: uuidv4(),
             user_id,
@@ -38,9 +54,9 @@ const savings_transaction = async (req, res) => {
             transaction_type,
             mode,
             status: 'pending',
-            timestamp: new Date(),
+            date_sent: new Date(),  // Using date_sent as per your table definition
         });
-        
+
         console.log('Request Submitted:', newSavtransaction);
         res.send('Request Submitted.');
     } catch (error) {
@@ -48,6 +64,7 @@ const savings_transaction = async (req, res) => {
         return res.status(500).send('Error submitting the request');
     }
 };
+
 
 
 const update_savings_request = async (req, res) => {

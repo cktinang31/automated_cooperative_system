@@ -1,0 +1,20 @@
+<section></section>
+    <div class="notifications-container">
+        <% if (notifications.length > 0) { %>
+            <ul class="notifications-list">
+                <% notifications.forEach(function(notification) { %>
+                    <li class="notification-item">
+                        <div class="notification-type"><%= notification.type %></div>
+                        <div class="notification-details">
+                            <span class="notification-amount">Amount: <%= notification.amount %></span>
+                            <span class="notification-status">Status: <%= notification.status %></span>
+                            <span class="notification-date">Date: <%= new Date(notification.date).toLocaleDateString() %></span>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No notifications to display.</p>
+        <% } %>
+    </div>
+</section>

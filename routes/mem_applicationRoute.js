@@ -11,13 +11,6 @@ router.get('/application', (req, res) => {
 
 router.post('/mem_application', applicationController.mem_application);
 
-router.get('/application', (req, res) => {
-    
-    res.render('application', { title: 'Membership Application' });
-  });
-
-
-
 
 router.put('/mem_application_update/:id', applicationController.mem_application_update);
 

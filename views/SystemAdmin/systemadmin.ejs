@@ -8,12 +8,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WZ1L1A94+IaQtJAsrsi6o8Zs/j6izKTdOPcQ//DyTK0EC6sm8ZguCCX6XNhW1hHc8r8h5mOwI8eOyjF0zJo8Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <nav class="navbar">
+    <header>
         <div class="site-title">
-        <h1>KACooP</h1>
-        <span>You are now signed as an Admin<a href="/" class="logout-link"><i class="fas fa-sign-out-alt logout-icon"></i></a></span>
+            <img src="/images/coopslogo.png" alt="">
         </div>
-    </nav>  
+    
+        <div class="title">
+            <p><%=title%></p>
+        </div>
+    
+        <div class="users-info">
+            <div class="profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="logout-link">
+                <p><a href="/">Logout</a></p>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
         <div class="container">

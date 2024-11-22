@@ -79,6 +79,7 @@ const mem_application_update = async (req, res) => {
                 address: application.address,
                 email: application.email,
                 contact: application.contact,
+                role: 'regular',
                 timestamp: new Date(),
             };
 

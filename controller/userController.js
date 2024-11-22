@@ -43,45 +43,57 @@ const {Application,
   
 
 
-const user_login = async (req, res) => {
-  try {
-    const { user_id, password } = req.body;
-    console.log('Login Request Body:', req.body);
-
-    passport.authenticate('local', (err, user, info) => {
-      if (err) {
-        console.error('Error authenticating user:', err);
-        return res.status(500).send('Internal server error');
-      }
-      if (!user) {
-        console.log('User not found');
-        return res.status(404).send('User not found. Please register first.');
-      }
-      req.login(user, (err) => {
+  const user_login = async (req, res) => {
+    try {
+      const { user_id, password } = req.body;
+      console.log('Login Request Body:', req.body);
+  
+      passport.authenticate('local', (err, user, info) => {
         if (err) {
-          console.error('Error logging in:', err);
-          return res.status(500).send('Error logging in.');
+          console.error('Error authenticating user:', err);
+          return res.status(500).json({ message: 'Internal server error' });
         }
-        console.log('User logged in successfully:', user);
-       
-        switch (user.role) {
-          case 'admin':
-            return res.redirect('/SystemAdmin/systemadmin');
-          case 'manager':
-            return res.redirect('/Manager/dashboard');
-          case 'collector': 
-            return res.redirect('Collector/dashboard');
-          default:
-            return res.redirect('/Member/dashboard');
+  
+        if (!user) {
+          let errorMessage = '';
+          if (info && info.message === 'Incorrect password') {
+            console.log('Incorrect password for user:', user_id);
+            errorMessage = 'Incorrect password.';
+          } else {
+            console.log('User not registered with user_id:', user_id);
+            errorMessage = 'User not found. Please register first.';
+          }
+  
+          // Redirect to login with the error message as a query parameter
+          return res.redirect(`/login?error=${encodeURIComponent(errorMessage)}`);
         }
-      });
-    })(req, res);
-
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).send('Error logging in.');
-  }
-};
+  
+        req.login(user, (err) => {
+          if (err) {
+            console.error('Error logging in:', err);
+            return res.status(500).json({ message: 'Error logging in.' });
+          }
+          console.log('User logged in successfully:', user);
+  
+          switch (user.role) {
+            case 'admin':
+              return res.redirect('/SystemAdmin/systemadmin');
+            case 'manager':
+              return res.redirect('/Manager/dashboard');
+            case 'collector':
+              return res.redirect('/Collector/dashboardcollector');
+            default:
+              return res.redirect('/Member/dashboard');
+          }
+        });
+      })(req, res);
+  
+    } catch (error) {
+      console.error('Error logging in:', error);
+      res.status(500).send('Error logging in.');
+    }
+  };
+  
 
 const edit_user = async (req, res) => {
   try {
