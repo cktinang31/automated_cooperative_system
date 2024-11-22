@@ -65,24 +65,21 @@ const cbu_transaction = async (req, res) => {
     }
 };
 
-
 const update_cbu_request = async (req, res) => {
-    const cbutransaction_id = req.params.id;  // Use URL parameter for transaction ID
+    const cbutransaction_id = req.params.id;  
     const { status } = req.body;
 
-    // Check if required fields are present
     if (!cbutransaction_id || !status) {
         console.log('Transaction ID and status are required');
         return res.status(400).send('Transaction ID and status are required');
     }
 
     try {
-        // Find the CBU transaction by ID
+       
         const cbutransaction = await Cbutransaction.findByPk(cbutransaction_id, {
             include: [{ model: User, as: 'User' }],
         });
 
-        // If transaction not found, return 404
         if (!cbutransaction) {
             console.log(`Transaction not found for ID: ${cbutransaction_id}`);
             return res.status(404).send('Transaction not found');
@@ -90,12 +87,10 @@ const update_cbu_request = async (req, res) => {
 
         console.log('Cbutransaction found:', cbutransaction);
 
-        // Update the transaction status
         cbutransaction.status = status;
         await cbutransaction.save();
         console.log('Updated Cbutransaction status:', cbutransaction.status);
 
-        // Handle approval
         if (status === 'approved') {
             const user_id = cbutransaction.user_id;
             const amount = cbutransaction.amount;
@@ -110,12 +105,10 @@ const update_cbu_request = async (req, res) => {
 
             console.log('User CBU found:', userCbu);
 
-            // Modify the CBU balance based on transaction type
             if (transaction_type === 'deposit') {
                 userCbu.amount += amount;
             } else if (transaction_type === 'withdraw') {
                 userCbu.amount -= amount;
-                // Ensure no negative balance (optional)
                 if (userCbu.amount < 0) {
                     console.log('Cannot withdraw, insufficient balance');
                     return res.status(400).send('Insufficient balance');
@@ -148,6 +141,7 @@ const update_cbu_request = async (req, res) => {
         return res.status(500).send('Error updating request status');
     }
 };
+
 
 
 

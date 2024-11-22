@@ -70,23 +70,17 @@ const savings_transaction = async (req, res) => {
 const update_savings_request = async (req, res) => {
     try {
         const { savtransaction_id, status } = req.body;
-
-        // Validate inputs
         if (!savtransaction_id || !status) {
             return res.status(400).json({ message: 'Transaction ID and status are required' });
         }
 
-        // Define allowed statuses
         const allowedStatuses = ['pending', 'approved', 'declined'];
 
-        // Validate status
         if (!allowedStatuses.includes(status)) {
             return res.status(400).json({ message: `Invalid status value: ${status}` });
         }
 
         console.log(`Processing request for transaction ID: ${savtransaction_id} with status: ${status}`);
-
-        // Fetch the savings transaction
         const savtransaction = await Savtransaction.findByPk(savtransaction_id, {
             include: [{ model: User, as: 'User' }]
         });
@@ -98,13 +92,12 @@ const update_savings_request = async (req, res) => {
 
         console.log('Transaction found:', savtransaction);
 
-        // Update the transaction status
         savtransaction.status = status;
         await savtransaction.save();
         console.log(`Transaction status updated to: ${status}`);
 
         if (status === 'approved') {
-            // Handle approval logic
+
             const user_id = savtransaction.user_id;
             const amount = savtransaction.amount;
             const transaction_type = savtransaction.transaction_type;
@@ -118,7 +111,6 @@ const update_savings_request = async (req, res) => {
 
             console.log('User savings found:', userSavings);
 
-            // Adjust savings balance based on transaction type
             if (transaction_type === 'deposit') {
                 userSavings.amount += amount;
             } else if (transaction_type === 'withdraw') {
@@ -130,7 +122,6 @@ const update_savings_request = async (req, res) => {
             return res.json({ message: 'Savings transaction approved successfully' });
 
         } else if (status === 'declined') {
-            // If declined, perform any necessary additional logic (e.g., notify user, etc.)
             console.log('Transaction declined, status updated.');
             return res.json({ message: 'Savings transaction declined' });
         }
@@ -140,7 +131,6 @@ const update_savings_request = async (req, res) => {
         return res.status(500).json({ message: 'Error updating savings request' });
     }
 };
-
 
 
 
