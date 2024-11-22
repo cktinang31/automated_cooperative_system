@@ -108,10 +108,11 @@ header i {
 }
 
 aside {
-    width: 16rem;
-    height: 100%;
+    width: 250px;
+    height: 100vh;
     background: #fff;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
     position: fixed;    
 }
 
@@ -167,109 +168,148 @@ ul li:hover i, ul li:hover span {
 }
 
 /* DASHBOARD */
-.main-content {
+.dashboard-section {
     margin-left: 250px;
     padding: 20px;
-    width: 100%;
+    box-sizing: border-box;
     overflow-x: hidden;
 }
 
-.welcome-message {
-    background-color: #f9a602;
+.dashboard-section .welcome-message {
+    background: #f9a602;
+    color: #373F41;
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.dashboard-cards {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.card {
-    background-color: white;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    margin: 0 10px;
-    min-width: 280px;
+    text-align: center; 
+    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
 
-.card h2 {
+.dashboard-section .welcome-message p:first-child {
+    font-size: 28px; 
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dashboard-section .welcome-message p:last-child {
+    font-size: 16px; 
+    line-height: 1.5; 
+}
+
+.dashboard-section .dashboard-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.dashboard-section .card {
+    flex: 1 1 calc(50% - 20px);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+    box-sizing: border-box;
+    min-width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-section .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-section .card h2 {
     font-size: 20px;
+    font-weight: bold;
     color: #333;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 
-.card ul {
-    list-style: none;
-    padding: 0;
-}
-
-.card ul li {
-    padding: 5px 0;
+.dashboard-section .card p {
     font-size: 16px;
     color: #555;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0;
 }
 
-.card.members {
+.dashboard-section .card.members {
     background-color: #ecf0f1;
+    border-left: 5px solid #2980b9;
 }
 
-.card.funds {
+.dashboard-section .card.funds {
     background-color: #34495e;
     color: white;
+    border-left: 5px solid #f9a602; 
 }
 
-.requests {
+.dashboard-section .card.funds ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left; 
+}
+
+.dashboard-section .card.funds ul li {
+    font-size: 16px;
+    color: #f1f1f1; 
+    padding: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-section .dashboard-cards {
+        flex-direction: column; 
+    }
+
+    .dashboard-section .card {
+        flex: none; 
+        width: 100%;
+    }
+}
+
+.dashboard-section .requests {
     margin-top: 20px;
-    overflow-x: hidden; 
     max-width: 100%;
-    max-height: 400px;
+    overflow-x: auto; 
+    box-sizing: border-box;
 }
 
-.requests table {
+.dashboard-section .requests table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.requests th, .requests td {
+.dashboard-section .requests th, 
+.dashboard-section .requests td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-.requests th {
-    background-color: #f9a602;
+.dashboard-section .requests th {
+    background-color: #373F41;
+    color: #ffffff;
 }
 
-.requests tr:hover {
+.dashboard-section .requests tr:hover {
     background-color: #f1f1f1;
 }
 
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        position: static;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
-
-    .dashboard-cards {
+    .dashboard-section .dashboard-cards {
         flex-direction: column;
         gap: 20px;
     }
 
-    .card {
+    .dashboard-section .card {
         flex: none;
         width: 100%;
     }
