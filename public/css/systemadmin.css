@@ -13,78 +13,90 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.navbar {
-    background-color: #373F41;
-    color: #ffa900;
-    max-width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 70px;
-    position: fixed;
-    z-index: 9;
-    top: 0;
-    left: 0;
-}
-
-.nav ul {
-    background: #dbdbdb;
-    height: 100%;
-    width: 100%;
-    list-style: none;
-}
-
-.site-title {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    width: calc(100% - 20px);
-    padding: 0 10px; 
-}
-
-.site-title h1 {
+body {
     margin: 0;
-    margin-left: 10px;
-    font-size: 45px;
-    font-weight: 800;
+    padding: 0;
+    max-width: 100%;
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 120px;
+    overflow-x: hidden;
 }
 
-.site-title span {
-    color: #ffffff;
+header {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    left: 0px;
+    top: 0px;
+    background: #ffffff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    position: fixed; 
+    z-index: 1000; 
+    padding: 10px 0;
+}
+
+header i {
+    color: #373F41;
+}
+
+.site-title img{
+    margin-left: 60px;
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+.title p {
+    position: absolute;
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 30px;
+    color: #373F41;
+    font-weight: 600;
+}
+
+.users-info {
     display: flex;
     align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-    font-style: italic;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: 30px;
 }
 
-.site-title span i {
-    color: #ffa900;
-    margin-left: 20px; 
-    margin-right: 0;
-    font-size: 32px;
+.profile i {
+    font-size: 50px;
+    color: #333;
+    cursor: pointer;
     transition: color 0.3s ease;
 }
 
-.site-title span i:hover {
-    color: #ffffff;
+.notif-bell i:hover, .profile i:hover {
+    color: #f9a602;
 }
 
-.logout-icon {
-    cursor: pointer;
+.logout-link p {
+    margin: 0; 
+    font-size: 20px;
+    font-weight: 600;
+    color: inherit; 
 }
 
-.logout-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+.logout-link a {
+    text-decoration: none; 
+    color: #333; 
+    transition: color 0.3s ease;
+}
+
+.logout-link a:hover {
+    color: #f9a602;
 }
 
 .container {
-    margin-top: 30px; 
     padding: 20px; 
     box-sizing: border-box; 
 }
@@ -109,7 +121,7 @@
 }
 
 .announcement-table th {
-    background-color: #373f418c;
+    background-color: #373F41;
     color: #ffffff;
 }
 
@@ -167,11 +179,11 @@
 }
 
 h2 {
+    color: #373f41;
     font-size: 1.5em;
-    margin-top: 20px;
-    margin-bottom: 10px;
     text-align: center;
     text-transform: uppercase;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
  /* Modal container */
@@ -225,7 +237,7 @@ h3 {
 
 .fa-user-plus {
     font-size: 30px;
-    color: #007bff;
+    color: #373F41;
     cursor: pointer;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
