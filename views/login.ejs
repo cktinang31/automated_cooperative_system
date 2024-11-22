@@ -15,7 +15,12 @@
         <!-- Login Form -->
         <div class="form-box Login">
             <h2 class="animation" style="--D:0; --S:21">LOGIN</h2>
-            <form action="/user_login" method="POST">
+            <% if (errorMessage) { %>
+                <div class="error-message" style="color: red; padding: 10px; border: 1px solid red; margin-bottom: 15px;">
+                  <%= errorMessage %>
+                </div>
+              <% } %>
+            <form id="loginForm"  action="/user_login" method="POST">
                 <div class="input-box animation" style="--D:1; --S:22">
                     <input type="text" id="user_id" name="user_id" required>
                     <label for="user_id">User ID</label>
