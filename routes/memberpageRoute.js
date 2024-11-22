@@ -723,7 +723,7 @@ router.get('/Member/notif', async (req, res, next) => {
 
                 console.log('Notifications:', notifications);
 
-                // Sort notifications by date in descending order
+                
                 notifications.sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 // Render the notifications to the page
