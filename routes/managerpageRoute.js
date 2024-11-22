@@ -909,65 +909,67 @@ router.get('/Manager/notif', async (req, res, next) => {
             try {
                 const applications = await Application.findAll({
                     where: { application_status: 'pending' },
-                    
                 });
 
                 const savtransactions = await Savtransaction.findAll({
                     where: { status: 'pending' },
-                    include: [{ model: User, as: 'User' }]  
+                    include: [{ model: User, as: 'User' }]
                 });
 
                 const cbutransactions = await Cbutransaction.findAll({
                     where: { status: 'pending' },
-                    include: [{ model: User, as: 'User' }]  
+                    include: [{ model: User, as: 'User' }]
                 });
 
-                const loanApplications = await Loan_application.findAll({ 
+                const loanApplications = await Loan_application.findAll({
                     where: { application_status: 'pending' },
-                    include: [{ model: User, as: 'User' }]  
+                    include: [{ model: User, as: 'User' }]
                 });
 
-                const VMessage = await VMessage.findAll();
+                // Rename 'VMessage' to 'vMessages' to avoid conflict
+                const vMessages = await VMessage.findAll();
 
                 const notifications = [
-                    ...applications.map(app => ({ 
-                       id: app.application_id,
-                       fname: app.fname,
-                       mname: app.mname,
-                       lname: app.lname,
-                       application_status: app.application_status,
-                       dob: app.date_of_birth,
-                       pob: app.place_of_birth,
-                       address: app.address,
-                       email: app.email,
-                       contact: app.contact,
-                       date: app.date_sent,
-                       type: 'Application' })),
-                       
+                    ...applications.map(app => ({
+                        id: app.application_id,
+                        fname: app.fname,
+                        mname: app.mname,
+                        lname: app.lname,
+                        application_status: app.application_status,
+                        dob: app.date_of_birth,
+                        pob: app.place_of_birth,
+                        address: app.address,
+                        email: app.email,
+                        contact: app.contact,
+                        date: app.date_sent,
+                        type: 'Application'
+                    })),
 
-                    ...savtransactions.map(savtrans => ({ 
+                    ...savtransactions.map(savtrans => ({
                         id: savtrans.savtransaction_id,
-                        details: `${savtrans.User.fname} ${savtrans.User.lname}`, 
+                        details: `${savtrans.User.fname} ${savtrans.User.lname}`,
                         user_id: savtrans.User.user_id,
                         mode: savtrans.mode,
                         amount: savtrans.amount,
                         transaction_type: savtrans.transaction_type,
                         date: savtrans.date_sent,
-                        type: 'Savings Transaction' })),
+                        type: 'Savings Transaction'
+                    })),
 
-                    ...cbutransactions.map(cbutrans => ({ 
+                    ...cbutransactions.map(cbutrans => ({
                         id: cbutrans.cbutransaction_id,
-                        details: `${cbutrans.User.fname} ${cbutrans.User.lname}`, 
+                        details: `${cbutrans.User.fname} ${cbutrans.User.lname}`,
                         user_id: cbutrans.User.id,
                         mode: cbutrans.mode,
                         amount: cbutrans.amount,
                         transaction_type: cbutrans.transaction_type,
                         date: cbutrans.date_sent,
-                        type: 'CBU Transaction' })),
+                        type: 'CBU Transaction'
+                    })),
 
-                    ...loanApplications.map(loanapp => ({ 
+                    ...loanApplications.map(loanapp => ({
                         id: loanapp.application_id,
-                        details: `${loanapp.User.fname} ${loanapp.User.lname}`, 
+                        details: `${loanapp.User.fname} ${loanapp.User.lname}`,
                         user_id: loanapp.User.user_id,
                         loanterm: loanapp.loan_term,
                         monthlypayment: loanapp.monthly_payment,
@@ -976,23 +978,21 @@ router.get('/Manager/notif', async (req, res, next) => {
                         loantype: loanapp.loan_type,
                         interest: loanapp.interest,
                         date: loanapp.date_sent,
-                        type: 'Loan Application' })),
+                        type: 'Loan Application'
+                    })),
 
-                    ...vMessage.map(vMessage => ({
+                    ...vMessages.map(vMessage => ({
                         id: vMessage.vmessage_id,
                         details: [vMessage.fname, vMessage.lname],
                         email: vMessage.email,
                         contact: vMessage.contact,
                         message: vMessage.message,
                         date: vMessage.date_sent,
-
                     }))
                 ];
 
                 console.log('Requests:', notifications);
                 res.render('./Manager/notif', {
-
-
                     notifications,
                     title: 'Notifications',
                     user
@@ -1013,6 +1013,7 @@ router.get('/Manager/notif', async (req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
+
 
 
 
