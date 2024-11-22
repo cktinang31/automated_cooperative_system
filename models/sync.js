@@ -16,6 +16,7 @@ const LoanModel = require('../models/loan');
 const LoanPaymentModel = require('../models/loan_payment');
 const SavModel = require('../models/savtransaction');
 const CModel = require('../models/cbutransaction');
+const VMessageModel = require('../models/vmessage');
 
 const User = UserModel(sequelize);
 const Application = ApplicationModel(sequelize);
@@ -26,6 +27,7 @@ const Loan = LoanModel(sequelize);
 const Loan_payment = LoanPaymentModel(sequelize);
 const Savtransaction = SavModel(sequelize);
 const Cbutransaction = CModel(sequelize);
+const VMessage = VMessageModel(sequelize);
 
 Application.associate({User});
 User.associate({ Application, 
@@ -54,5 +56,6 @@ module.exports = { sequelize,
     Loan_payment,
     Savtransaction,
     Cbutransaction,
+    VMessage
 
 };

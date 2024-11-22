@@ -10,30 +10,37 @@ const {Application,
   Savtransaction,
   User,} = require('../models/sync');
 
-
-const user_reg = async (req, res) => {
-  try {
-    const { user_id, password } = req.body;
-    console.log('Request Body:', req.body);
-
-    const existingUser = await User.findOne({ where: { user_id, registered: false } });
-
-    if (existingUser) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      existingUser.password = hashedPassword;
-      existingUser.registered = true;
-      await existingUser.save();
-      console.log('Account Updated:', existingUser);
-      return res.redirect('/login');
-    } else {
-      console.log('User not found or this account is already registered. Cannot update password.');
-      return res.status(404).send('User not found. Cannot update password.');
+  
+  const user_reg = async (req, res) => {
+    try {
+      const { user_id, password } = req.body;
+      console.log('Request Body:', req.body);
+  
+      const existingUser = await User.findOne({ where: { user_id } });
+  
+      if (existingUser) {
+        if (existingUser.registered) {
+          console.log('User is already registered. Proceed to log in.');
+          return res.status(400).send('User is already registered. Please log in.');
+        } else {
+          // Proceed to update the password for unregistered users
+          const hashedPassword = await bcrypt.hash(password, 10);
+          existingUser.password = hashedPassword;
+          existingUser.registered = true;
+          await existingUser.save();
+          console.log('Account Updated:', existingUser);
+          return res.redirect('/login');
+        }
+      } else {
+        console.log('User not found. Cannot update password.');
+        return res.status(404).send('User not found. Cannot update password.');
+      }
+    } catch (error) {
+      console.error('Error updating account:', error);
+      res.status(500).send('Error updating account.');
     }
-  } catch (error) {
-    console.error('Error updating account:', error);
-    res.status(500).send('Error updating account.');
-  }
-};
+  };
+  
 
 
 const user_login = async (req, res) => {
@@ -63,7 +70,7 @@ const user_login = async (req, res) => {
           case 'manager':
             return res.redirect('/Manager/dashboard');
           case 'collector': 
-            return res.redirect('Collector/dashboardcollector');
+            return res.redirect('Collector/dashboard');
           default:
             return res.redirect('/Member/dashboard');
         }

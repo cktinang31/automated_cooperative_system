@@ -24,13 +24,13 @@
                 <div class="input-box animation" style="--D:2; --S:23">
                     <input type="password" id="password" name="password" required>
                     <label for="password">Password</label>
-                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-lock-alt' onclick="togglePasswordVisibility('password', this)"></i>
                 </div>
                 <div class="input-box animation" style="--D:3; --S:24">
                     <button class="btn" type="submit" id="login">Login</button>
                 </div>
                 <div class="regi-link animation" style="--D:5; --S:26;">
-                    <p>Don't have an account? <a href="#" class="SignUpLink">Sign Up</a></p>
+                    <p>Don't have an account? <a href="#" class="SignUpLink">Register</a></p>
                     <p><a href="/" class="back-to-home"><< Back to Home</a></p> 
                 </div>                                        
             </form>
@@ -44,7 +44,7 @@
         <!-- Register Form -->
         <div class="form-box Register">
             <h2 class="animation" style="--li:17; --S:0">REGISTER</h2>
-            <form action="/user_reg" method="POST">
+            <form action="/user_reg" method="POST" id="registrationForm">
                 <div class="input-box animation" style="--li:18; --S:1">
                     <input type="text" id="user_id" name="user_id" required>
                     <label for="user_id">User ID</label>
@@ -53,41 +53,98 @@
                 <div class="input-box animation" style="--li:19; --S:2">
                     <input type="password" id="password" name="password" required>
                     <label for="password">Password</label>
-                    <i class='bx bxs-lock-alt'></i>
+                    <i class='bx bxs-lock-alt' onclick="togglePasswordVisibility('password', this)"></i>
+                    <div class="error" id="error-message" style="display:none;">Passwords do not match!</div>
                 </div>
                 <div class="input-box animation" style="--li:19; --S:2">
-                    <input type="confirm-password" id="confirm-password" name="confirm-password" required>
-                    <label for="confirm-password">Confirm Password</label>
-                    <i class='bx bxs-lock-alt'></i>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <i class='bx bxs-lock-alt' onclick="togglePasswordVisibility('confirmPassword', this)"></i>
                 </div>
                 <div class="input-box animation" style="--li:20; --S:3">
-                    <button class="btn" type="submit" id="registered">Register</button>
+                    <button class="btn" type="submit" id="submitBtn">Register</button>
                 </div>
                 <div class="regi-link animation" style="--li:21; --S:4">
-                    <p>Already have an account? <a href="#" class="SignInLink">Sign In</a></p>
+                    <p>Already have an account? <a href="#" class="SignInLink">Log In</a></p>
                     <p><a href="/" class="back-to-home"><< Back to Home</a></p>
                 </div>
             </form>
         </div>
-
+        
         <div class="info-content Register">
             <h2 class="animation" style="--li:17; --S:0;">Welcome Aboard!</h2>
-            <p class="animation" style="--li:18; --S:1;">To begin your journey, please complete your registration to access our resources, connect with fellow members, and participate in our upcoming events. </p>
+            <p class="animation" style="--li:18; --S:1;">To begin your journey, please complete your registration to access our resources, connect with fellow members, and participate in our upcoming events.</p>
         </div>
-    </div>
-
-    <script src="/js/login.js"></script>
-    <script>
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirm-password');
-    
-        confirmPassword.addEventListener('input', function() {
-            if (password.value !== confirmPassword.value) {
-                confirmPassword.setCustomValidity('Passwords do not match');
+        
+        <script>
+            function togglePasswordVisibility(inputId, iconElement) {
+            const passwordInput = document.getElementById(inputId); // Get the input element
+            const icon = iconElement; // Get the icon that was clicked
+            
+            // Toggle the password visibility
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';  // Show password
+                icon.classList.remove('bxs-lock-alt');  // Change the icon to open lock
+                icon.classList.add('bxs-lock');  // Icon for visible password
             } else {
-                confirmPassword.setCustomValidity('');
+                passwordInput.type = 'password';  // Hide password
+                icon.classList.remove('bxs-lock');  // Change back to closed lock
+                icon.classList.add('bxs-lock-alt');  // Icon for hidden password
+            }
+        }
+
+
+            document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const passwordError = document.getElementById('password-error');
+            const confirmError = document.getElementById('confirm-error');
+
+            // Regular expression to validate password
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+            // Validate password
+            if (!passwordPattern.test(password)) {
+                passwordError.style.display = 'block';
+                confirmError.style.display = 'none';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                passwordError.style.display = 'none';
+                
+                // Validate confirm password
+                if (password !== confirmPassword) {
+                    confirmError.style.display = 'block';
+                    event.preventDefault(); // Prevent form submission
+                } else {
+                    confirmError.style.display = 'none';
+                    alert("Passwords match and are valid!");
+                }
             }
         });
-    </script>
+        </script>
+        
+
+
+    <!-- <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            // Regular expression for password validation
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?~`-])[A-Za-z\d!@#$%^&*()_+[\]{};':"\\|,.<>\/?~`-]{8,}$/;
+    
+            if (!passwordPattern.test(password)) {
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+                alert("Password is valid!");
+                // Proceed with further processing (like form submission)
+            }
+        });
+    </script> -->
+
+
+
+    <script src="/js/login.js"></script>
 </body>
 </html>
