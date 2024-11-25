@@ -40,9 +40,6 @@ const collectorRoutes = require('./routes/collectorRoute');
 const vmessageRoutes = require('./routes/vmessageRoute');
 const { messages } = require('./controller/vmessageController');
 
-
-
-
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
