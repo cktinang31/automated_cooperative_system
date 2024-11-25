@@ -602,7 +602,7 @@ router.get('/Manager/membersprofile/:userId', async (req, res, next) => {
         // Corrected the user_id access here
         const loan_payment = await Loan_payment.findAll({
             where: {
-                user_id: user[0].user_id,  // Use currentUser.user_id here
+                user_id: user[0].user_id,  
             },
             include: [{
                 model: User,

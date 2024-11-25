@@ -14,8 +14,9 @@ const {create_savings} = require ('../controller/savingsController');
 const mem_application = async (req, res) => {
     const { fname, mname, lname, date_of_birth, place_of_birth, address, email, contact } = req.body;
     const applicationDate = new Date();
-    try {
     
+    try {
+        // Attempt to create a new application
         const newApplication = await Application.create({
             fname,
             mname,
@@ -30,13 +31,19 @@ const mem_application = async (req, res) => {
         });
 
         console.log('New Application:', newApplication);
-        res.send('Application submitted successfully. Please wait for approval');
-    } catch (error) {
 
+        // If successful, send a success message on the same form page
+        res.render('application', { message: 'Application submitted successfully. Please wait for approval.' });
+
+    } catch (error) {
         console.error('Error submitting the application:', error);
-        res.status(500).send('Error submitting the application');
+
+        // If an error occurs, send an error message on the same form page
+        res.render('application', { message: 'Error submitting the application. Please try again later.' });
     }
 };
+
+
 
 const mem_application_update = async (req, res) => {
     const id = req.params.id;

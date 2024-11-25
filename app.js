@@ -239,9 +239,6 @@ app.get('/contact', (req, res) => {
   res.render('contact', { title: 'Contact Us'});
 });
 
-app.get('/application', (req, res) => {
-  res.render('application', { title: 'Membership Application'});
-});
 
 // taladro backend testing (ayaw hilabti)
 
@@ -273,9 +270,6 @@ app.post('/savings', async (req, res) => {
 app.get('/login', (req, res) => {
   const { error } = req.query;
   res.render('login',  { title: 'Login', errorMessage: error},);
-});
-app.get('/application', (req, res) => {
-    res.render('application', { title: 'Membership Application'});
 });
 
 app.get('/inquire', (req, res) => {
