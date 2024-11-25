@@ -1,5 +1,19 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
+
+// Set up multer storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads');  // Specify the upload directory
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Generate a unique filename
+  }
+});
+
+const upload = multer({ storage: storage });
 const {Application, 
   Cbu, 
   Cbutransaction, 
@@ -172,12 +186,77 @@ const add_user = async (req, res) => {
   }
  
   };
- 
- 
+  const profile_update = async (req, res) => {
+    const user_id = req.user.user_id; // Assuming user_id is stored in session or JWT
+    console.log("Received ID:", user_id);
+  
+    try {
+      const { full_name, email, current_password, new_password } = req.body;
+      const profilePicture = req.file ? req.file.path : null; // Get file path if file is uploaded
+  
+      console.log('Request Body:', req.body);
+      console.log('Uploaded File:', req.file);
+  
+      // Fetch the user from the database based on user_id
+      const user = await User.findOne({ where: { user_id } });
+  
+      if (!user) {
+        return res.status(404).send('User not found.');
+      }
+  
+      // Check if the current password provided matches the stored password (plain text comparison)
+      const isPasswordCorrect = await bcrypt.compare(current_password, user.password);
+      if (!isPasswordCorrect) {
+        return res.status(400).send('Current password is incorrect.');
+      }
+  
+      // Check if the new email already exists in the system (excluding current user's email)
+      if (email && email !== user.email) {
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+          return res.status(400).send('A user with this email is already registered in the system.');
+        }
+      }
+  
+      // Update profile data (email, full_name, profile picture)
+      if (full_name) {
+        user.full_name = full_name;
+      }
+  
+      if (email) {
+        user.email = email;
+      }
+  
+      // Update profile picture if uploaded
+      if (profilePicture) {
+        console.log("Profile picture path:", profilePicture);  // Log to check the file path
+        user.profilePicture = profilePicture;
+      }
+  
+      if (new_password) {
+        // Hash the new password if provided
+        const hashedPassword = await bcrypt.hash(new_password, 10);
+        user.password = hashedPassword;
+      }
+  
+      // Save the updated user data to the database
+      await user.save();
+  
+      console.log('User profile updated successfully.');
+  
+      // Send success response
+      res.status(200).send('Profile updated successfully.');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      res.status(500).send('Internal server error.');
+    }
+  };
+  
 module.exports = {
    user_reg,
    user_login,
    edit_user,
    delete_user,
    add_user,
+   profile_update,
 }

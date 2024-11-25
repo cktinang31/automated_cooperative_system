@@ -7,46 +7,42 @@
     <link rel="stylesheet" href="/css/profile.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<%- include('./partials/main.ejs') %>
+
 <body>    
-    <div class="profile-container">
-        <div class="profile-section">
-            <div class="profile-image">
-                <label for="upload" class="upload-icon">
-                    <input type="file" id="upload" accept="image/*">
-                    <i class="fas fa-camera"></i>
-                    <img id="profile-pic" src="defaultuser.png" alt="choose file">
-                </label>
-            </div>
-        </div>
-    </div>
     
 
 <div class="profile-section">
     <div class="edit-profile">
-        <form id="edit-profile-form">
+        <form id="edit-profile-form" method="POST" action="/profile_update" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="full-name">Full Name:</label>
-                <input type="text" id="full-name" name="full-name" required>
+                <p><%= user.fname %> <%= user.lname %></p>
             </div>
-
+        
             <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email"   value="<%= user.email %>" required>
             </div>
-
+          
             <div class="input-group">
-                <label for="current-password">Current Password:</label>
-                <input type="password" id="current-password" name="current-password" required>
+              <label for="profile-picture">Profile Picture:</label>
+              <input type="file" id="profile-picture" name="profilePicture">
             </div>
-
+          
             <div class="input-group">
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password" name="new-password" required>
+              <label for="current-password">Current Password:</label>
+              <input type="password" id="current-password" name="current-password" >
             </div>
-
+          
+            <div class="input-group">
+              <label for="new-password">New Password:</label>
+              <input type="password" id="new-password" name="new-password">
+            </div>
+          
             <button type="submit" class="update-button">Update</button>
-        </form>
+          </form>
+          
+        
     </div>
 </div>
 

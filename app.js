@@ -314,9 +314,7 @@ app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
 });
 
-app.get('/Member/profile', (req, res) => {
-  res.render('Member/profile', { title: 'Profile '});
-});
+
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
