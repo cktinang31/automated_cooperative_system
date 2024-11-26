@@ -40,9 +40,6 @@ const collectorRoutes = require('./routes/collectorRoute');
 const vmessageRoutes = require('./routes/vmessageRoute');
 const { messages } = require('./controller/vmessageController');
 
-
-
-
 const isAuthenticated = (req, res, next) => {
   console.log('Checking authentication status...');
   try {
@@ -239,9 +236,6 @@ app.get('/contact', (req, res) => {
   res.render('contact', { title: 'Contact Us'});
 });
 
-app.get('/application', (req, res) => {
-  res.render('application', { title: 'Membership Application'});
-});
 
 // taladro backend testing (ayaw hilabti)
 
@@ -273,9 +267,6 @@ app.post('/savings', async (req, res) => {
 app.get('/login', (req, res) => {
   const { error } = req.query;
   res.render('login',  { title: 'Login', errorMessage: error},);
-});
-app.get('/application', (req, res) => {
-    res.render('application', { title: 'Membership Application'});
 });
 
 app.get('/inquire', (req, res) => {
@@ -314,9 +305,7 @@ app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
 });
 
-app.get('/Member/profile', (req, res) => {
-  res.render('Member/profile', { title: 'Profile '});
-});
+
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});

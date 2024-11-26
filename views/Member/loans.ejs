@@ -47,10 +47,8 @@
                                     <input type="number" class="number" id="amount" name="amount" step="0.01"  min="0" required>
                                 </div>
                                 <div class="amount-container">
-                                    <p>
-                                        Interest Rate %
-                                    </p>
-                                    <input type="number" class="number" id="interest" name="interest" step="0.01" min="0" required>
+                                    <p>Interest Rate %</p>
+                                    <input type="text" class="number" id="interest" name="interest" step="0.01" min="0" required readonly>
                                 </div>
            
                                
@@ -58,10 +56,8 @@
                            
                             <div class="terms">
                                 <div class="term-container">
-                                    <p>
-                                        Loan Term
-                                    </p>
-                                    <select id="loan_term" name="loan_term" required>
+                                    <p>Loan Term</p>
+                                    <select id="loan_term" name="loan_term" required onchange="updateInterestRate()">
                                         <option value="6 months">6 months</option>
                                         <option value="12 months">12 months</option>
                                         <option value="18 months">18 months</option>
@@ -137,6 +133,40 @@
         
        
         <script>
+
+            function updateInterestRate() {
+            // Get the selected loan term
+            var loanTerm = document.getElementById('loan_term').value;
+            
+            // Set the base annual interest rate (6%)
+            var baseInterestRate = 6;
+            var interestRate;
+
+            // Calculate the interest rate based on the loan term
+            switch (loanTerm) {
+                case '6 months':
+                    interestRate = baseInterestRate / 2; // 6 months is half a year
+                    break;
+                case '12 months':
+                    interestRate = baseInterestRate; // 12 months is 1 year
+                    break;
+                case '18 months':
+                    interestRate = baseInterestRate * 1.5; // 18 months is 1.5 years
+                    break;
+                case '24 months':
+                    interestRate = baseInterestRate * 2; // 24 months is 2 years
+                    break;
+                default:
+                    interestRate = 0;
+                    break;
+            }
+
+            // Display the calculated interest rate in the input field with a "%" sign
+            document.getElementById('interest').value = interestRate + '%'; // Add '%' sign
+        }
+
+        // Initialize the interest rate on page load
+        window.onload = updateInterestRate;
 
             
             document.querySelectorAll('tr[data-loan-id]').forEach(row => {

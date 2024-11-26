@@ -8,32 +8,51 @@
         <%- include("../Manager/managerheader.ejs") %>
         <%- include("../Manager/managersidebar.ejs") %>
    
-        <div class="main-content">
-            <div class="welcome-message">
-                <p>Welcome, Manager  <%= user.fname %> <%= user.lname %>!</p>
+        <div class="dashboard-container">
+            <!-- Welcome Message -->
+            <div class="message-container">
+                <h1 class="message-title">Welcome, Manager <%= user.fname %> <%= user.lname %>!</h1> 
                 <p>Here, you can efficiently oversee member activities, manage loans and savings, and keep the cooperative thriving. Let’s work together to ensure the success of our community!</p>
             </div>
-    
-            <!-- Dashboard Cards -->
-            <div class="dashboard-cards">
-                <div class="card members">
-                    <h2>Members</h2>    
-                    <p><%= totalRegularUsers %> Members</p>
+        
+            <a href="/Manager/mannouncement">
+                <div class="cooperative_advisory">
+                    <% if (contents.length > 0) { %>
+                        <% contents.forEach(content => { %>
+                            <h1 class="coop_ad"><%= content.content_title %></h1>
+                            <p class="announcements"><%= content.content %></p>
+                        <% }) %>
+                    <% } else { %>
+                        <p>There are no announcements to display...</p>
+                    <% } %>
                 </div>
-                <div class="card funds">
-                    <h2>2024 Coop Funds</h2>
-                    <ul>
-                        <li>Cash and Equivalents</li>
-                        <li>Expenses</li>
-                        <li>Receivables</li>
-                        <li>Fixed Assets</li>
-                    </ul>
+            </a>
+        
+            <!-- Member Section -->
+            <a href="/Manager/member">
+                <div class="dashboard-cards">
+                    <div class="card members">
+                        <h2>Members</h2>
+                        <p><%= totalRegularUsers %> Members</p>
+                        <i class="bi bi-people"></i>
+                    </div>
                 </div>
+            </a>
+        
+            <!-- Coop Funds Section -->
+            <div class="funds-container">
+                <h1 class="funds-title">2024 Coop Funds</h1> 
+                <ul class="funds-list">
+                    <li><i class="fa-solid fa-box"></i> Cash and Equivalents</li>
+                    <li><i class="fa-solid fa-box"></i> Expenses</li>
+                    <li><i class="fa-solid fa-box"></i> Receivables</li>
+                    <li><i class="fa-solid fa-box"></i> Fixed Assets</li>
+                </ul>
             </div>
-    
-            <!-- Requests Table -->
-            <div class="requests">
-                <h3>Request</h3>
+        
+            <!-- Request Section -->
+            <div class="request-container">
+                <h1 class="request-title">Request</h1> 
                 <table>
                     <thead>
                         <tr>
@@ -79,7 +98,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>    
+        </div>          
     </body>
 </html>

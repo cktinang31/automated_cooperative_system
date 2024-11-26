@@ -12,6 +12,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
+
 const apply_loan = async (req, res) => {
 
 

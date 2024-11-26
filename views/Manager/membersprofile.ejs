@@ -48,18 +48,17 @@
                 </div>
                 <div class="loan-container">
                     <h1 class="cbu">Current Loans</h1>
-                    <% if (Array.isArray(user.Loans) && user.Loans.length > 0) { %> 
+                    <% if (Array.isArray(user.Loans) && user.Loans.length > 0) { %>
                         <% user.Loans.forEach(loan => { %>
                             <div class="loan-details">
-                                <p class="lt">Current Loan: <%= loan.loan_type || 'N/A' %></p>
-                                <p class="amount">Amount: Php <%= loan.amount ? loan.amount.toLocaleString() : '0' %>.00</p>
-                                <p class="interest">Interest: <%= loan.interest ? loan.interest + '%' : '0%' %></p>
-                                <p class="balance">Balance: Php <%= loan.balance ? loan.balance.toLocaleString() : '0' %></p>
+                                <p class="lt">Loan Type: <%= loan.loan_type || 'N/A' %></p>
+                                <p class="balance">Balance: Php <%= loan.balance ? loan.balance.toLocaleString() : '0' %>.00</p>
                             </div>
                         <% }) %>
                     <% } else { %>
                         <p>No loans available</p>
                     <% } %>
+                    
                     
                 </div>
                 

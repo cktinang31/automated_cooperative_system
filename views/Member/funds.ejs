@@ -86,58 +86,66 @@
                         <h1>PHP <%= cbu.amount %>.00</h1>
                     </div>
                 </div>
-                    <form action="/cbu_transaction" method="post" class="form-container">
-                        <div class="header">
-                            <label class="radio-label">
-                                <input type="radio" id="deposit-button" name="transaction_type" value="deposit" class="radio-input">
-                                <span class="radio-text">Deposit</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" id="withdraw-button" name="transaction_type" value="withdraw" class="radio-input">
-                                <span class="radio-text">Withdraw</span>
-                            </label>
-                        </div>
-                        <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
-                        <div class="amount-options">
-                            <label class="amount-option">
-                                <input type="radio" name="amount" value="1000">
-                                <span class="amount-btn">PHP 1000</span>
-                            </label>
-                            <label class="amount-option">
-                                <input type="radio" name="amount" value="2000">
-                                <span class="amount-btn">PHP 2000</span>
-                            </label>
-                            <label class="amount-option">
-                                <input type="radio" name="amount" value="3000">
-                                <span class="amount-btn">PHP 3000</span>
-                            </label>
-                            <label class="amount-option">
-                                <input type="radio" name="amount" value="4000">
-                                <span class="amount-btn">PHP 4000</span>
-                            </label>
-                            <label class="amount-option">
-                                <input type="radio" name="amount" value="5000">
-                                <span class="amount-btn">PHP 5000</span>
-                            </label>
-                            <label class="amount-option">
-                                <input type="radio" name="amount" value="6000">
-                                <span class="amount-btn">PHP 6000</span>
-                            </label>
-                        </div>
-                        <div class="custom-amount">
-                            <label for="amount">AMOUNT</label>
-                            <input type="number" id="amount" name="amount" min="0">
-                        </div>
-                        <div class="mode-of-payment">
-                            <select id="mode-of-payment" name="payment-mode">
-                                <option value="" disabled selected hidden>MODE OF PAYMENT</option>
-                                <option value="cash">Cash</option>
-                                <option value="card">Card</option>
-                                <option value="bank-transfer">Bank Transfer</option>
-                            </select>
-                            <button class="confirm-button" type="submit">CONFIRM</button>
-                        </div>
-                    </form>        
+                <form action="/cbu_transaction" method="post" class="form-container" id="transaction-form">
+                    <div class="header">
+                        <label class="radio-label">
+                            <input type="radio" id="deposit-button" name="transaction_type" value="deposit" class="radio-input">
+                            <span class="radio-text">Deposit</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="withdraw-button" name="transaction_type" value="withdraw" class="radio-input">
+                            <span class="radio-text">Withdraw</span>
+                        </label>
+                    </div>
+                    
+                    <div id="choose-amount-text">CHOOSE YOUR AMOUNT</div>
+                    
+                    <div class="amount-options">
+                        <label class="amount-option">
+                            <input type="radio" name="amount-radio" value="1000">
+                            <span class="amount-btn">PHP 1000</span>
+                        </label>
+                        <label class="amount-option">
+                            <input type="radio" name="amount-radio" value="2000">
+                            <span class="amount-btn">PHP 2000</span>
+                        </label>
+                        <label class="amount-option">
+                            <input type="radio" name="amount-radio" value="3000">
+                            <span class="amount-btn">PHP 3000</span>
+                        </label>
+                        <label class="amount-option">
+                            <input type="radio" name="amount-radio" value="4000">
+                            <span class="amount-btn">PHP 4000</span>
+                        </label>
+                        <label class="amount-option">
+                            <input type="radio" name="amount-radio" value="5000">
+                            <span class="amount-btn">PHP 5000</span>
+                        </label>
+                        <label class="amount-option">
+                            <input type="radio" name="amount-radio" value="6000">
+                            <span class="amount-btn">PHP 6000</span>
+                        </label>
+                    </div>
+                
+                    <div class="custom-amount">
+                        <label for="amount">AMOUNT</label>
+                        <input type="number" id="amount" name="amount" min="0" />
+                    </div>
+                
+                    <div class="mode-of-payment">
+                        <select id="mode-of-payment" name="payment-mode">
+                            <option value="" disabled selected hidden>MODE OF PAYMENT</option>
+                            <option value="cash">Cash</option>
+                            <option value="card">Card</option>
+                            <option value="bank-transfer">Bank Transfer</option>
+                        </select>
+                        <button class="confirm-button" type="submit">CONFIRM</button>
+                    </div>
+                </form>
+                
+             
+                </script>
+                       
                     <% }) %>
                     <% } else { %>
                       <p></p>
@@ -150,24 +158,47 @@
             // Function to handle radio button clicks for predefined amounts
             document.querySelectorAll('.amount-option input').forEach((radio) => {
                 radio.addEventListener('click', function () {
-                    // Find the closest form and set the custom amount input within that form
                     let form = this.closest('form');
+                    
+                    // Set the custom amount field to the selected radio value
                     form.querySelector('#amount').value = this.value;
+                    
+                    // Disable the custom input field when a radio option is selected
+                    form.querySelector('#amount').disabled = true;
                 });
             });
-        
+            
             // Handle manual input in the custom amount field
-            document.querySelectorAll('#amount').forEach((input) => {
-                input.addEventListener('input', function () {
-                    // Uncheck the radio buttons in the same form if custom amount is manually typed
-                    let form = this.closest('form');
-                    form.querySelectorAll('.amount-option input').forEach((radio) => {
-                        radio.checked = false;
-                    });
+            document.querySelector('#amount').addEventListener('input', function () {
+                let form = this.closest('form');
+                
+                // Uncheck the radio buttons when the user manually types in the custom amount field
+                form.querySelectorAll('.amount-option input').forEach((radio) => {
+                    radio.checked = false;
                 });
+            
+                // Enable the custom input field for manual value
+                form.querySelector('#amount').disabled = false;
+            });
+            
+            // Before form submission, ensure the correct 'amount' field value is sent
+            document.getElementById('transaction-form').addEventListener('submit', function (event) {
+                let amountRadio = document.querySelector('input[name="amount-radio"]:checked');
+                let customAmountInput = document.querySelector('#amount');
+                
+                // If a predefined amount is selected, use that value
+                if (amountRadio) {
+                    customAmountInput.value = amountRadio.value;
+                }
+            
+                // If the custom amount is empty or NaN, prevent form submission and alert the user
+                if (!customAmountInput.value || isNaN(customAmountInput.value)) {
+                    event.preventDefault(); // Prevent the form from submitting
+                    alert("Please provide a valid amount.");
+                    return false;
+                }
             });
         </script>
-        
     </body>        
 
             
