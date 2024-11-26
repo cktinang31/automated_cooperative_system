@@ -41,8 +41,14 @@ th {
     border-bottom: 2px solid #ccc;
     color: #ffff; 
     font-weight: 400;
-}
 
+}
+th.rq {
+    border-top-left-radius: 8px ;
+}
+th.date {
+    border-top-right-radius: 8px ;
+}
 td {
     padding: 10px; 
     border-bottom: 1px solid #ccc;

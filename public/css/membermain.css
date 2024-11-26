@@ -146,6 +146,7 @@ ul {
     margin-left: 0;
     padding-left: 0;
     text-decoration: none;
+   
 }
 
 ul li {
@@ -154,10 +155,12 @@ ul li {
     align-items: center;
     text-decoration: none;
     margin-left: 0;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     padding-left: 1rem;
     flex-wrap: wrap;
     flex-direction: row;
+    height: 3rem; 
+  
    
 }
 
@@ -185,15 +188,20 @@ ul li span {
 }
 
 ul li:hover {
-   
-    background-color: #ffA900;   
-    height: 2.5rem;
+    background-color: #ffA900;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    transform: scale(1.05);    
+    transform: scale(1.02); 
+    padding-left: 1rem;
 }
 
-
+ul li span, ul li i {
+    transition: color 0.1s ease, transform 0.1s ease;
+}
+ul li:hover i,
+ul li:hover span {
+    color: #ffffff; /* Change text color to white on hover */
+}
 /* 
 ul li:hover i {
     color: #ffA900;
