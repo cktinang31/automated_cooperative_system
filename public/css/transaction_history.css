@@ -9,7 +9,12 @@ body {
     padding-left: 45rem;
     display: flex;
     flex-wrap: nowrap;
+    max-height: 80vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling (optional) */
+    /* border: 1px solid #ccc; Optional: adds a border to define the container visually */
 }
+
 
 .filter-button {
     height: 2rem;

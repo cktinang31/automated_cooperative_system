@@ -23,8 +23,12 @@ body {
     border: 1px solid #dbdbdb;
     text-align: center;
     padding-top: 1rem;
-   
+    max-height: 80vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  
 }
+
  
 .announcement-container:hover {
     border: 2px solid #f5f5f5;

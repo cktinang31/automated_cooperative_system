@@ -8,7 +8,7 @@
         <%- include("header.ejs") %>
         <%- include("sidebar_mem.ejs") %>
 
-        <div class="container">
+        <div class="container">      
             <div class="filter-button">
                 All
             </div>
@@ -22,7 +22,7 @@
                         <th>Status</th>
                         <th>Date</th>
                     </tr>
-                </thead>
+                </thead>    
                 <tbody>
                     <% if (transactions.length > 0) { %>
                         <% transactions.forEach(trans => { %>

@@ -383,7 +383,7 @@ async function updateApplicationStatus(status) {
         }
 
         console.log(`Application ${status}:`, result);
-        document.getElementById('myModal').style.display = 'none';
+        // document.getElementById('myModal').style.display = 'none';
         window.location.reload();
     } catch (error) {
         console.error('Error updating application status:', error);
@@ -484,7 +484,7 @@ const approveCBUTransaction = async () => {
             });
 
             if (response.ok) {
-                alert('CBU transaction approved successfully!');
+                alert('CBU transaction approved successfully.');
                 location.reload(); 
             } else {
                 alert('Failed to approve CBU transaction');
@@ -515,7 +515,7 @@ const declineCBUTransaction = async () => {
         });
 
         if (response.ok) {
-            alert('CBU transaction declined successfully!');
+            alert('CBU transaction declined.');
             location.reload();
         } else {
             const errorText = await response.text();

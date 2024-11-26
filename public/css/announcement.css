@@ -17,6 +17,9 @@ body {
     padding-top: 10rem;
     padding-left: 30rem;
     text-align: center;
+    max-height: 80vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling (optional) */
 }
 
 .table { 
@@ -32,12 +35,13 @@ table {
 td {
     background-color: #ffff;
     border: 1px solid #dbdbdb;
+    border-radius: 8px;
     
 
 }
 
 h1 {
-    color: #373f41;
+    color: #FFA900;
 }
 
 p {
