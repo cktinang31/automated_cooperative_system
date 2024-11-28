@@ -1,4 +1,51 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <section>
-    <p>savings</p><% if (savings.length > 0) { %>
+    <h1>Savings Growth</h1>
+    <% if (savings.length > 0) { %>
         <% savings.forEach(saving => { %>
+            <div>
+                <h3>Saving Amount: <%= saving.amount %></h3>
+                <canvas id="saving-chart-<%= saving.savings_id %>" width="400" height="400"></canvas>
+                <script>
+                    // Inject JSON data into the script using <%- to avoid escaping
+                    const monthlyGrowth = <%- JSON.stringify(saving.monthlyGrowth) %>;
+                    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                    // Check if the monthlyGrowth data is correct
+                    console.log(monthlyGrowth); // For debugging
+
+                    new Chart(document.getElementById('saving-chart-<%= saving.savings_id %>'), {
+                        type: 'line',
+                        data: {
+                            labels: months.slice(0, monthlyGrowth.length), // Limit months to the length of monthlyGrowth
+                            datasets: [{
+                                label: 'Monthly Growth',
+                                data: monthlyGrowth, // Monthly growth data
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                fill: true,
+                                tension: 0.1,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: { beginAtZero: true },
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return '$' + value.toFixed(2); // Format y-axis as currency
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No savings found.</p>
+    <% } %>
 </section>

@@ -155,43 +155,43 @@
             </div>
         </div>
         <script>
-            // Function to handle radio button clicks for predefined amounts
+           
             document.querySelectorAll('.amount-option input').forEach((radio) => {
                 radio.addEventListener('click', function () {
                     let form = this.closest('form');
                     
-                    // Set the custom amount field to the selected radio value
+                  
                     form.querySelector('#amount').value = this.value;
                     
-                    // Disable the custom input field when a radio option is selected
+                   
                     form.querySelector('#amount').disabled = true;
                 });
             });
             
-            // Handle manual input in the custom amount field
+           
             document.querySelector('#amount').addEventListener('input', function () {
                 let form = this.closest('form');
                 
-                // Uncheck the radio buttons when the user manually types in the custom amount field
+                
                 form.querySelectorAll('.amount-option input').forEach((radio) => {
                     radio.checked = false;
                 });
             
-                // Enable the custom input field for manual value
+                
                 form.querySelector('#amount').disabled = false;
             });
             
-            // Before form submission, ensure the correct 'amount' field value is sent
+            
             document.getElementById('transaction-form').addEventListener('submit', function (event) {
                 let amountRadio = document.querySelector('input[name="amount-radio"]:checked');
                 let customAmountInput = document.querySelector('#amount');
                 
-                // If a predefined amount is selected, use that value
+                
                 if (amountRadio) {
                     customAmountInput.value = amountRadio.value;
                 }
             
-                // If the custom amount is empty or NaN, prevent form submission and alert the user
+               
                 if (!customAmountInput.value || isNaN(customAmountInput.value)) {
                     event.preventDefault(); // Prevent the form from submitting
                     alert("Please provide a valid amount.");

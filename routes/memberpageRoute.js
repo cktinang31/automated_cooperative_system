@@ -777,25 +777,36 @@ router.get('/Member/profile', async (req, res, next) => {
     }
 });
 
-
 router.get('/Member/xxx', async (req, res, next) => {
     try {
         console.log('Session ID:', req.sessionID);
         console.log('Session:', req.session);
         console.log('Authenticated:', req.isAuthenticated());
- 
+        
         if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
             console.log('User is authenticated as a regular user.');
 
             // Fetch the savings for the authenticated user
             const savings = await Savings.findAll({
                 where: { user_id: req.user.user_id },
-                include: [{
+                include: [ {
                     model: User,
                     attributes: ['user_id'],  
                 }]
             }) || [];
-            
+
+            // Calculate 2% monthly growth for each saving
+            const months = 12; // Example: For the next 12 months
+            savings.forEach(saving => {
+                saving.monthlyGrowth = []; // Initialize the monthlyGrowth array
+                let currentAmount = saving.amount;
+                for (let i = 1; i <= months; i++) {
+                    currentAmount += currentAmount * 0.02;  // 2% growth
+                    saving.monthlyGrowth.push(currentAmount.toFixed(2));  // Add to the monthly growth array
+                }
+                console.log(`Saving ID: ${saving.savings_id}, Monthly Growth:`, saving.monthlyGrowth);
+            });
+
             const cbu = await Cbu.findAll({
                 where: { user_id: req.user.user_id },
                 include: [{
@@ -803,10 +814,11 @@ router.get('/Member/xxx', async (req, res, next) => {
                     attributes: ['user_id'],  
                 }]
             }) || [];
-            
 
             const user = req.user;
-            res.render('./Member/fundxxx', { cbu, savings, title: 'Funds', user });
+            
+            // Pass the `months` variable along with others to the template
+            res.render('./Member/fundxxx', { cbu, savings, months, title: 'Funds', user });
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
             req.session.returnTo = req.originalUrl; // Store the return URL
@@ -817,5 +829,6 @@ router.get('/Member/xxx', async (req, res, next) => {
         res.status(500).send('Internal server error'); // Send a 500 error if something goes wrong
     }
 });
+
 
 module.exports = router;
