@@ -778,6 +778,44 @@ router.get('/Member/profile', async (req, res, next) => {
 });
 
 
+router.get('/Member/xxx', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+ 
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated as a regular user.');
 
+            // Fetch the savings for the authenticated user
+            const savings = await Savings.findAll({
+                where: { user_id: req.user.user_id },
+                include: [{
+                    model: User,
+                    attributes: ['user_id'],  
+                }]
+            }) || [];
+            
+            const cbu = await Cbu.findAll({
+                where: { user_id: req.user.user_id },
+                include: [{
+                    model: User,
+                    attributes: ['user_id'],  
+                }]
+            }) || [];
+            
+
+            const user = req.user;
+            res.render('./Member/fundxxx', { cbu, savings, title: 'Funds', user });
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl; // Store the return URL
+            res.redirect('/login'); // Redirect to the login page
+        }
+    } catch (error) {
+        console.error('Error in /Member/fundxxx route:', error);
+        res.status(500).send('Internal server error'); // Send a 500 error if something goes wrong
+    }
+});
 
 module.exports = router;
