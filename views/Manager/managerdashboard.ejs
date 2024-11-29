@@ -9,7 +9,6 @@
         <%- include("../Manager/managersidebar.ejs") %>
    
         <div class="dashboard-container">
-            <!-- Welcome Message -->
             <div class="message-container">
                 <h1 class="message-title">Welcome, Manager <%= user.fname %> <%= user.lname %>!</h1> 
                 <p>Here, you can efficiently oversee member activities, manage loans and savings, and keep the cooperative thriving. Let’s work together to ensure the success of our community!</p>
@@ -26,7 +25,7 @@
                         <p>There are no announcements to display...</p>
                     <% } %>
                 </div>
-            </a>
+            </a>            
         
             <!-- Member Section -->
             <a href="/Manager/member">
@@ -40,63 +39,66 @@
             </a>
         
             <!-- Coop Funds Section -->
-            <div class="funds-container">
-                <h1 class="funds-title">2024 Coop Funds</h1> 
-                <ul class="funds-list">
-                    <li><i class="fa-solid fa-box"></i> Cash and Equivalents</li>
-                    <li><i class="fa-solid fa-box"></i> Expenses</li>
-                    <li><i class="fa-solid fa-box"></i> Receivables</li>
-                    <li><i class="fa-solid fa-box"></i> Fixed Assets</li>
-                </ul>
-            </div>
+            <div class="grid-section">
+                <!-- Coop Funds Section -->
+                <div class="funds-container">
+                    <h1 class="funds-title">2024 Coop Funds</h1>
+                    <ul class="funds-list">
+                        <li><i class="fa-solid fa-box"></i> Cash and Equivalents</li>
+                        <li><i class="fa-solid fa-box"></i> Expenses</li>
+                        <li><i class="fa-solid fa-box"></i> Receivables</li>
+                        <li><i class="fa-solid fa-box"></i> Fixed Assets</li>
+                    </ul>
+                </div>
         
-            <!-- Request Section -->
-            <div class="request-container">
-                <h1 class="request-title">Request</h1> 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Request Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (requests.length > 0) { %>
-                            <% requests.forEach(req => { %>
-                                <tr onclick="openModal(
-                                    '<%= req.id %>', 
-                                    '<%= req.type %>', 
-                                    '<%= req.fname %>', 
-                                    '<%= req.lname %>', 
-                                    '<%= req.mname %>',
-                                    '<%= req.details %>', 
-                                    '<%= req.amount %>', 
-                                    '<%= req.loantype %>', 
-                                    '<%= req.interest %>', 
-                                    '<%= req.date %>', 
-                                    '<%= req.dob %>', 
-                                    '<%= req.pob %>', 
-                                    '<%= req.address %>', 
-                                    '<%= req.email %>', 
-                                    '<%= req.contact %>', 
-                                    '<%= req.user_id %>', 
-                                    '<%= req.mode %>', 
-                                    '<%= req.loanterm %>', 
-                                    '<%= req.monthlypayment %>', 
-                                    '<%= req.numberofpayments %>',
-                                    '<%= req.application_status %>'
-                                )">
-                                    <td><%= req.id %></td>
-                                    <td><%= req.type || '' %></td>
-                                </tr>
-                            <% }) %>
-                        <% } else { %>
+                <!-- Request Section -->
+                <div class="request-container">
+                    <h1 class="request-title">Request</h1>
+                    <table>
+                        <thead>
                             <tr>
-                                <td colspan="2">No pending requests</td>
+                                <th>Request ID</th>
+                                <th>Request Type</th>
                             </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% if (requests.length > 0) { %>
+                                <% requests.forEach(req => { %>
+                                    <tr onclick="openModal(
+                                        '<%= req.id %>', 
+                                        '<%= req.type %>', 
+                                        '<%= req.fname %>', 
+                                        '<%= req.lname %>', 
+                                        '<%= req.mname %>',
+                                        '<%= req.details %>', 
+                                        '<%= req.amount %>', 
+                                        '<%= req.loantype %>', 
+                                        '<%= req.interest %>', 
+                                        '<%= req.date %>', 
+                                        '<%= req.dob %>', 
+                                        '<%= req.pob %>', 
+                                        '<%= req.address %>', 
+                                        '<%= req.email %>', 
+                                        '<%= req.contact %>', 
+                                        '<%= req.user_id %>', 
+                                        '<%= req.mode %>', 
+                                        '<%= req.loanterm %>', 
+                                        '<%= req.monthlypayment %>', 
+                                        '<%= req.numberofpayments %>',
+                                        '<%= req.application_status %>'
+                                    )">
+                                        <td><%= req.id %></td>
+                                        <td><%= req.type || '' %></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="2">No pending requests</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>          
     </body>
