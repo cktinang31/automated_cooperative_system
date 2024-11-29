@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("managerhead.ejs") %>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/managermain.css">
- 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> 
     <body>
         <%- include("managerheader.ejs") %>
         <%- include("managersidebar.ejs") %>
 
-        <div class="history-container">
-            <div class="filter-button">
-                All
-            </div>
-
-            <table >
+        <div class="container">
+            <table>
                 <thead>
                     <tr>
                         <th>Requested Id</th>
@@ -58,5 +52,72 @@
                 </tbody>
             </table>
         </div>
+
+        <style>
+            .container {
+                margin-top: 50px;
+                margin-left: 15%;
+                margin-right: 30px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+
+            thead {
+                background-color: #373f41;
+                color: white;
+            }
+
+            th, td {
+                padding: 12px 15px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            tbody tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            tbody td {
+                color: #333;
+            }
+
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+            tbody tr td i {
+                font-size: 16px;
+                vertical-align: middle;
+            }
+
+            tbody tr td[colspan="4"] {
+                text-align: center;
+                font-style: italic;
+                color: #888;
+            }
+
+            .table-icon {
+                font-size: 16px;
+            }
+
+            .container h2 {
+                margin-bottom: 10px;
+                text-align: center;
+                color: #007bff;
+            }
+
+        </style>
+
     </body>
 </html>
