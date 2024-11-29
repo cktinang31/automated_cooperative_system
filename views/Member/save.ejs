@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/save.css">
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+       
+  
+            <div class="container">
+             
+                <div class="container">
+                    <!-- Savings and CBU Section -->
+                    <div class="balances">
+                      <div class="balance-card savings">
+                        <h3>Savings</h3>
+                        <p class="amount">500.00 php</p>
+                        
+                      </div>
+                      <div class="balance-card cbu">
+                        <h3>CBU</h3>
+                        <p class="amount">1000.00 php</p>
+                        
+                      </div>
+                    </div>
+          
+           
+                    <form action="/submit-transaction" method="post" class="transaction-form">
+                      <h4>Request a Transaction</h4>
+                      <div class="form-fields">
+                        <select name="fund-type" id="fund-type">
+                          <option value="savings">Fund Type</option>
+                          <option value="cbu">CBU</option>
+                        </select>
+                        <select name="transaction-type" id="transaction-type">
+                          <option value="deposit">Transaction Type</option>
+                          <option value="withdrawal">Withdrawal</option>
+                        </select>
+                        <select name="payment-mode" id="payment-mode">
+                          <option value="cash">Mode of Payment</option>
+                          <option value="bank-transfer">Bank Transfer</option>
+                        </select>
+                      </div>
+                    </form>
+                  
+                    <form class="form-container">
+                      <table class="form-table">
+                        <tr>
+                          <td>
+                            Input your Name
+                          </td>
+                          <td>
+                            <input type="number" class="form-input" name="" min="0" max="100" step="1">
+                          </td>
+                        </tr>
+                      </table>
+                    </form>
+                    
+
+                      <button type="submit" class="confirm-button">Confirm</button>
+                   
+                    
+    </body>
+ 
+ 
+</html>
