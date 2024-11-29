@@ -1,51 +1,84 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <section>
     <h1>Savings Growth</h1>
     <% if (savings.length > 0) { %>
-        <% savings.forEach(saving => { %>
+        <% savings.forEach((saving, index) => { %>
             <div>
-                <h3>Saving Amount: <%= saving.amount %></h3>
-                <canvas id="saving-chart-<%= saving.savings_id %>" width="400" height="400"></canvas>
-                <script>
-                    // Inject JSON data into the script using <%- to avoid escaping
-                    const monthlyGrowth = <%- JSON.stringify(saving.monthlyGrowth) %>;
-                    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                <h3 id="amount">Saving Amount: <%= saving.amount %></h3>
+                <p id="interest">Interest: </p>
+                <p style="display:none" id="start"><%= saving.createdAt %></p>
+            </div>
 
-                    // Check if the monthlyGrowth data is correct
-                    console.log(monthlyGrowth); // For debugging
+            <!-- Make the canvas ID unique by appending the index -->
+            <canvas id="monthlyGraph<%= index %>" width="400" height="200"></canvas>
 
-                    new Chart(document.getElementById('saving-chart-<%= saving.savings_id %>'), {
-                        type: 'line',
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+            
+            <script>
+                // Ensure the script runs after the DOM is fully loaded
+                window.onload = function() {
+                    // Get the saving amount from the element
+                    const amount = <%= saving.amount %>; // This should be the actual saving amount value
+                    
+                    // Check if the amount is a valid number
+                    if (!isNaN(amount) && amount > 0) {
+                        // Calculate the interest (0.2% of the amount)
+                        const interest = amount * 0.002; // 0.2% = 0.002
+                        
+                        // Get the interest element and update its text
+                        document.getElementById('interest').innerText = 'Interest: ' + interest.toFixed(2);
+                    } else {
+                        console.error('Invalid saving amount');
+                    }
+
+                    // Data for the graph (months)
+                    const months = [
+                        'January', 'February', 'March', 'April', 'May', 'June', 
+                        'July', 'August', 'September', 'October', 'November', 'December'
+                    ];
+
+                    // Create an array to hold the monthly amounts
+                    let monthlyAmounts = [];
+                    let currentAmount = amount;
+
+                    // Calculate the monthly total for each month, including interest
+                    for (let i = 0; i < 12; i++) {
+                        monthlyAmounts.push(currentAmount);
+                        currentAmount += interest;  // Update the amount by adding interest monthly
+                    }
+
+                    // Get the canvas element for the chart (using the unique ID)
+                    const ctx = document.getElementById('monthlyGraph<%= index %>').getContext('2d');
+
+                    // Create the graph using Chart.js
+                    const chart = new Chart(ctx, {
+                        type: 'line', // Type of chart (line, bar, etc.)
                         data: {
-                            labels: months.slice(0, monthlyGrowth.length), // Limit months to the length of monthlyGrowth
+                            labels: months,  // X-axis labels (months)
                             datasets: [{
-                                label: 'Monthly Growth',
-                                data: monthlyGrowth, // Monthly growth data
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                fill: true,
-                                tension: 0.1,
+                                label: 'Total Amount (including Interest)',
+                                data: monthlyAmounts, // Y-axis data (total amount per month)
+                                borderColor: 'rgba(75, 192, 192, 1)', // Line color
+                                fill: false, // Do not fill the area under the line
+                                tension: 0.1
                             }]
                         },
                         options: {
-                            responsive: true,
                             scales: {
-                                x: { beginAtZero: true },
                                 y: {
-                                    beginAtZero: true,
+                                    beginAtZero: true, // Start the y-axis from 0
                                     ticks: {
                                         callback: function(value) {
-                                            return '$' + value.toFixed(2); // Format y-axis as currency
+                                            return '$' + value.toFixed(2);  // Format the y-axis values as currency
                                         }
                                     }
                                 }
                             }
                         }
                     });
-                </script>
-            </div>
+                }
+            </script>
         <% }); %>
     <% } else { %>
-        <p>No savings found.</p>
+        <p>No savings data available.</p>
     <% } %>
 </section>

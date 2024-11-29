@@ -50,7 +50,7 @@ const update_savings_amount = async () => {
 
         for (const savings of savingsRecords) {
            
-            const increase = savings.amount * 0.02;
+            const increase = savings.amount * 0.002;
             const newAmount = savings.amount + increase;
 
            

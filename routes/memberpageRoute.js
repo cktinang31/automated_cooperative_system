@@ -795,17 +795,7 @@ router.get('/Member/xxx', async (req, res, next) => {
                 }]
             }) || [];
 
-            // Calculate 2% monthly growth for each saving
-            const months = 12; // Example: For the next 12 months
-            savings.forEach(saving => {
-                saving.monthlyGrowth = []; // Initialize the monthlyGrowth array
-                let currentAmount = saving.amount;
-                for (let i = 1; i <= months; i++) {
-                    currentAmount += currentAmount * 0.02;  // 2% growth
-                    saving.monthlyGrowth.push(currentAmount.toFixed(2));  // Add to the monthly growth array
-                }
-                console.log(`Saving ID: ${saving.savings_id}, Monthly Growth:`, saving.monthlyGrowth);
-            });
+           
 
             const cbu = await Cbu.findAll({
                 where: { user_id: req.user.user_id },
@@ -818,7 +808,7 @@ router.get('/Member/xxx', async (req, res, next) => {
             const user = req.user;
             
             // Pass the `months` variable along with others to the template
-            res.render('./Member/fundxxx', { cbu, savings, months, title: 'Funds', user });
+            res.render('./Member/fundxxx', { cbu, savings, title: 'Funds', user });
         } else {
             console.log('User is not authenticated. Redirecting to login page.');
             req.session.returnTo = req.originalUrl; // Store the return URL
