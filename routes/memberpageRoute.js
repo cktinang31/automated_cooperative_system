@@ -744,6 +744,39 @@ router.get('/Member/notif', async (req, res, next) => {
     }
 });
 
+router.get('/Member/profile', async (req, res, next) => {
+    try {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session:', req.session);
+        console.log('Authenticated:', req.isAuthenticated());
+
+        if (req.isAuthenticated() && req.user && req.user.role === 'regular') {
+            console.log('User is authenticated as a regular user.');
+
+           
+            const user = await User.findOne({ where: { user_id: req.user.user_id } });
+
+            if (!user) {
+                console.log('User not found.');
+                return res.status(404).send('User not found');
+            }
+
+            
+            res.render('./Member/profile', { 
+                title: 'Profile',
+                user: user 
+            });
+        } else {
+            console.log('User is not authenticated. Redirecting to login page.');
+            req.session.returnTo = req.originalUrl; 
+            res.redirect('/login'); 
+        }
+    } catch (error) {
+        console.error('Error in /Member/profile route:', error);
+        res.status(500).send('Internal server error'); 
+    }
+});
+
 
 
 

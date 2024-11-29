@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/application', (req, res) => {
     
-    res.render('application', { title: 'Membership Application' });
+    res.render('application', { title: 'Membership Application', message: '' });
   });
 
 router.post('/mem_application', applicationController.mem_application);
