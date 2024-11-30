@@ -65,6 +65,29 @@ body::before {
     transition-delay: calc(.1s * var(--S));
 }
 
+.error-message {
+    color: red;
+    font-size: 16px;
+    padding: 10px;
+    display: inline-block;
+    font-weight: 500;
+    animation: shake 0.5s ease-in-out, fadeOut 3s forwards 1s; 
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+
 .container.active .form-box.Login .animation {
     transform: translateX(-120%);
     opacity: 0;

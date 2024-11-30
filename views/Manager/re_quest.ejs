@@ -162,7 +162,6 @@
                 <form id="loanForm" action="/update_loan_request" method="POST">
                     <input type="hidden" name="_method" value="PUT">
                     <input type="hidden" name="id" id="application-id">
-
                     <table>
                         <tr>
                             <td>Name:</td>
@@ -201,19 +200,14 @@
                         <button type="button" class="approve-button" onclick="handleApproval('approved')">Approve</button>
                         <button type="button" class="decline-button" onclick="handleApproval('declined')">Decline</button>
                     </div>
-                    
                 </form>
             </div>
         </div>
-
-
         <div id="savingsModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeSavingsModal()">&times;</span>
                 <form id="savingsForm" action="/update_savings_request" method="POST">
                 <input type="hidden" name="savtransaction_id" id="application-id" value="">
-                
-
                     <table>
                         <tr>
                             <td>Name:</td>
@@ -287,7 +281,13 @@
                 margin: 20px;
                 margin-left: 15%;
                 padding: 20px;
-                border-radius: 8px;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+
+            .table-wrapper {
+                max-height: 80vh; 
+                overflow-y: auto; 
             }
 
             table {
@@ -296,16 +296,21 @@
                 margin: 20px 0;
             }
 
+            th {
+                position: sticky;
+                top: 0;
+                z-index: 1; 
+                background-color: #373f41; 
+                color: white;
+                font-weight: bold;
+                padding: 12px;
+                text-align: left;
+            }
+
             th, td {
                 padding: 12px;
                 text-align: left;
                 border-bottom: 1px solid #ddd;
-            }
-
-            th {
-                background-color: #373f41;
-                color: white;
-                font-weight: bold;
             }
 
             tr:hover {
@@ -519,7 +524,6 @@
         }
             }
         }
-
 
         function handleApproval(status) {
             const applicationId = document.getElementById('application-id').value;

@@ -14,7 +14,7 @@
 
         <div class="column2">
             <h1 class="formtitle">Cooperative's Application Form</h1>
-            <p><%= message %></p>  <!-- This will display the message sent from the server -->
+            <p id="message"><%= message %></p>
             <form action="/mem_application" method="POST">
                 <div class="form-group">
                     <input type="text" id="fname" name="fname" placeholder=" " required>
@@ -60,11 +60,13 @@
                 </div>
             
                 <div class="form-group">
-                    <input type="tel" id="contact" name="contact" placeholder=" " required>
+                    <input type="tel" id="contact" name="contact" placeholder=" " required maxlength="12" pattern="\d{12}">
                     <label for="contact">Contact Number</label>
                 </div>
-            
-                <button type="submit" class="submit">Submit</button>
+                
+                <button type="submit" class="submit">
+                    <i class="fa fa-home"></i> Submit
+                </button>                
             </form>
             
             
@@ -73,25 +75,6 @@
             Application submitted successfully. Please wait for approval.
         </div>
     </div>
-    <script src="/js/application.js"></script>
-    <script>
-        function checkAge(input) {
-            const dob = new Date(input.value); 
-            const today = new Date(); 
-            const age = today.getFullYear() - dob.getFullYear(); 
-            const monthDiff = today.getMonth() - dob.getMonth(); 
-    
-           
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-                age--;
-            }
-    
-           
-            if (age < 18) {
-                alert("You must be 18 years or older.");
-                input.value = ""; 
-            }
-        }
-    </script>
+    <script src="/js/application.js"></script>y
 </body>
 </html>
