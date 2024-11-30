@@ -13,6 +13,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey); 
 const dotenv = require('dotenv');
 dotenv.config();
+const path = require('path');
 
 
 const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
@@ -186,6 +187,8 @@ passport.use(new LocalStrategy({
 ));
 
 app.post('/logout', logout);
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(memApplicationRoutes); 
 app.use(userRoutes);

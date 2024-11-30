@@ -193,12 +193,30 @@ ul li:hover {
     transform: scale(1.05);    
 }
 
-
-/* 
-ul li:hover i {
-    color: #ffA900;
+/* funds.css */
+.fund-container {
+    padding: 5%;
+    display: flex;
 }
 
-ul li:hover span {
-    color: #ffA900;
-} */
+.funds-graph {
+    padding: 5%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2%;
+}
+
+.savings-graph {
+    padding: 2%;
+    background-color: #373F41;
+    height: 3rem;
+    width: 5rem;
+}
+
+.cbu-graph {
+    padding: 2%;
+    background-color: #373F41;
+    height: 3rem;
+    width: 5rem;
+}
+

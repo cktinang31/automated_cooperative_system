@@ -58,6 +58,10 @@ header i {
     margin-right: 30px;
 }
 
+.notif-bell i.clicked {
+    color: #f9a602;
+}
+
 .notif-bell {
     position: relative;
 }

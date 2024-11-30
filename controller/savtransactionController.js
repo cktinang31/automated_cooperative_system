@@ -45,6 +45,18 @@ const savings_transaction = async (req, res) => {
             return res.status(400).send('Invalid amount.');
         }
 
+        if (transaction_type === 'withdraw') {
+            // Check the current balance
+            const currentBalance = Savings.amount || 0;
+
+            
+            if (currentBalance - amount < 500) {
+                console.error('Withdrawal would result in balance less than 500');
+                return res.status(400).send('Withdrawal would result in a balance of less than 500.');
+            }
+        }
+
+
         // Create the new savings transaction
         const newSavtransaction = await Savtransaction.create({
             savtransaction_id: uuidv4(),

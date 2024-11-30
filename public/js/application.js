@@ -19,3 +19,21 @@ form.addEventListener('submit', async function (event) {
         alert('Error submitting the application');
     }
 });
+
+function checkAge(input) {
+    const dob = new Date(input.value); 
+    const today = new Date(); 
+    const age = today.getFullYear() - dob.getFullYear(); 
+    const monthDiff = today.getMonth() - dob.getMonth(); 
+
+   
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+
+   
+    if (age < 18) {
+        alert("You must be 18 years or older.");
+        input.value = ""; 
+    }
+}

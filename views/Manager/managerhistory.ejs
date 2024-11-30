@@ -7,65 +7,72 @@
         <%- include("managersidebar.ejs") %>
 
         <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Requested Id</th>
-                        <th>Transaction Type</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (transactions.length > 0) { %>
-                        <% transactions.forEach(trans => { %>
-                            <tr>
-                                <td><%= trans.id %></td>
-                                <td>
-                                    <% if (trans.type === 'CBU Transactions') { %>
-                                        <%= trans.type %> - <%= trans.transaction_type %>
-                                    <% } else if (trans.type === 'Savings Transaction') { %>
-                                        <%= trans.type %> - <%= trans.transaction_type %>
-                                    <% } else if (trans.type === 'Loan Application') { %>
-                                        <%= trans.type %> 
-                                    <% } else if (trans.type === 'Loan Payment') { %>
-                                        <%= trans.type %> 
-                                    <% } %>
-                                </td>
-                                <td>
-                                    <% if (trans.status === 'approved') { %>
-                                        <i class='bx bx-check' style="color:green"></i>
-                                    <% } else if (trans.status === 'pending') { %>
-                                        <i class='bx bx-loader-alt' style="color:orange"></i>
-                                    <% } else { %>
-                                        <i class='bx bx-x' style="color:red"></i>
-                                    <% } %>
-                                </td>
-                                <td><%= new Date(trans.date).toLocaleDateString() %></td>
-                            </tr>
-                        <% }) %>
-                    <% } else { %>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
                         <tr>
-                            <td colspan="4">No transactions</td>
+                            <th>Requested Id</th>
+                            <th>Transaction Type</th>
+                            <th>Status</th>
+                            <th>Date</th>
                         </tr>
-                    <% } %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% if (transactions.length > 0) { %>
+                            <% transactions.forEach(trans => { %>
+                                <tr>
+                                    <td><%= trans.id %></td>
+                                    <td>
+                                        <% if (trans.type === 'CBU Transactions') { %>
+                                            <%= trans.type %> - <%= trans.transaction_type %>
+                                        <% } else if (trans.type === 'Savings Transaction') { %>
+                                            <%= trans.type %> - <%= trans.transaction_type %>
+                                        <% } else if (trans.type === 'Loan Application') { %>
+                                            <%= trans.type %> 
+                                        <% } else if (trans.type === 'Loan Payment') { %>
+                                            <%= trans.type %> 
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (trans.status === 'approved') { %>
+                                            <i class='bx bx-check' style="color:green"></i>
+                                        <% } else if (trans.status === 'pending') { %>
+                                            <i class='bx bx-loader-alt' style="color:orange"></i>
+                                        <% } else { %>
+                                            <i class='bx bx-x' style="color:red"></i>
+                                        <% } %>
+                                    </td>
+                                    <td><%= new Date(trans.date).toLocaleDateString() %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No transactions</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <style>
             .container {
-                margin-top: 50px;
+                margin-top: 35px;
                 margin-left: 15%;
                 margin-right: 30px;
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
+                border-radius: 5px;
+                overflow: hidden; 
+            }
+
+            .table-wrapper {
+                max-height: 80vh; 
+                overflow-y: auto; 
             }
 
             table {
                 width: 100%;
                 border-collapse: collapse;
-                margin-top: 10px;
             }
 
             thead {
@@ -82,6 +89,18 @@
             th {
                 font-weight: bold;
                 text-transform: uppercase;
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background-color: #373f41;
+            }
+
+            tbody {
+                display: table-row-group;
+            }
+
+            tr {
+                display: table-row;
             }
 
             tbody tr:hover {
@@ -116,8 +135,6 @@
                 text-align: center;
                 color: #007bff;
             }
-
         </style>
-
     </body>
 </html>
