@@ -264,15 +264,14 @@
         </div>
         <style>
             .requests-container {
-                margin: 20px;
-                margin-left: 15%;
-                padding: 20px;
+                margin-left: 13.2%;
                 border-radius: 5px;
                 overflow: hidden;
-            }
+                background-color: #f9f9f9;
+                }
 
             .table-wrapper {
-                max-height: 78vh;
+                max-height: 87vh;
                 overflow-y: auto;
                 border: 1px solid #ddd;
             }
@@ -280,6 +279,23 @@
             table {
                 width: 100%;
                 border-collapse: collapse;
+            }
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            
+            table tr td {
+                padding: 8px;
+                font-size: 14px;
+                color: #373f41;
+            }
+
+            table tr td:first-child {
+                font-weight: 500;
+                color: #373f41;
             }
 
             th {
@@ -372,15 +388,6 @@
 
             .decline-button:hover {
                 background-color: #e41f1f;
-            }
-
-            table tr td {
-                padding: 8px;
-                font-size: 14px;
-            }
-
-            table tr td:first-child {
-                font-weight: bold;
             }
 
             .button-container {
