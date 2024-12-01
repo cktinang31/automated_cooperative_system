@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../Manager/managerhead.ejs") %>
-    <link rel="stylesheet" href="/css/managermain.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <body>
         <%- include("../Manager/managerheader.ejs") %>
@@ -264,43 +263,39 @@
         </div>
         <style>
             .requests-container {
-                margin-left: 13.2%;
-                border-radius: 5px;
-                overflow: hidden;
+                margin-left: 250px;
+                padding: 10px;
                 background-color: #f9f9f9;
-                }
+                overflow-x: hidden; 
+                overflow-y: hidden; 
+            }
 
             .table-wrapper {
-                max-height: 87vh;
-                overflow-y: auto;
+                width: 100%;
+                overflow-x: auto;
+                max-width: 100%;
+                max-height: 82vh;
                 border: 1px solid #ddd;
+                overflow-y: auto; 
             }
 
             table {
                 width: 100%;
                 border-collapse: collapse;
+                table-layout: fixed; 
             }
 
             th, td {
                 border: 1px solid #ddd;
-                padding: 12px;
+                padding: 10px;
                 text-align: left;
-            }
-            
-            table tr td {
-                padding: 8px;
-                font-size: 14px;
-                color: #373f41;
-            }
-
-            table tr td:first-child {
-                font-weight: 500;
-                color: #373f41;
+                word-wrap: break-word; 
+                max-width: 240px;
             }
 
             th {
-                position: sticky; 
-                top: 0; 
+                position: sticky;
+                top: 0;
                 z-index: 1;
                 background-color: #373f41;
                 color: white;
@@ -319,6 +314,25 @@
             tr:hover {
                 background-color: #f1f1f1;
                 cursor: pointer;
+            }
+
+            @media screen and (max-width: 768px) {
+                .requests-container {
+                    margin-left: 70px; 
+                }
+
+                table {
+                    font-size: 12px;
+                }
+
+                th, td {
+                    padding: 8px;
+                }
+
+                button {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
             }
 
             .modal {
@@ -418,10 +432,9 @@
                     margin-bottom: 10px;
                 }
             }
-
         </style>
 
-    <script src="/js/admin.js"></script>
+    <script src="/js/request.js"></script>
 
     </body>
 </html>

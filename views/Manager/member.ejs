@@ -52,26 +52,31 @@
     </div>
     
     <style>
-        .container-page1 {
-            margin-top: 1px;
-            margin-left: 13.2%;
+       .container-page1 {
+            margin-left: 250px;
+            padding: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             background-color: #f9f9f9;
+            overflow-x: auto;
+            width: calc(100% - 250px); 
         }
-    
+
         .table-wrapper {
-            max-height: 87vh;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch;
         }
-    
+
         table {
             width: 100%;
             border-spacing: 0;
             border-collapse: collapse;
+            table-layout: fixed;
         }
-    
+
         thead {
             position: sticky;
             top: 0;
@@ -79,70 +84,87 @@
             color: white;
             z-index: 1;
         }
-    
+
         th, td {
             padding: 1rem;
             text-align: left;
             border: 1px solid #dbdbdb;
+            word-wrap: break-word;
         }
-    
+
         th {
             font-size: 16px;
             font-weight: bold;
         }
-    
+
         td {
             background-color: #FFFFFF;
             font-size: 14px;
             color: #373F41;
         }
-    
+
         td p {
             margin: 0;
             font-size: 14px;
             font-weight: bold;
             color: #333;
         }
-    
+
         tr:hover td {
             background-color: #f0f0f0;
         }
-    
+
         td p.gold {
             color: gold;
         }
-    
+
         td p.silver {
             color: silver;
         }
-    
+
         td p.bronze {
             color: #cd7f32;
         }
-    
+
         td p.new-member {
             color: #888;
         }
-    
+
         td[colspan="5"] {
             text-align: center;
             font-size: 18px;
             font-style: italic;
             color: #999;
         }
-    
+
         tr[data-user-id] {
             cursor: pointer;
         }
-    
+
         @media (max-width: 768px) {
+            .container-page1 {
+                margin-left: 0;
+                width: 100%;
+                padding: 10px;
+            }
+
+            table {
+                width: 100%;
+                table-layout: auto;
+            }
+
             th, td {
                 padding: 0.8rem;
                 font-size: 12px;
             }
-    
+
             td p {
                 font-size: 12px;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
         }
     </style>    
