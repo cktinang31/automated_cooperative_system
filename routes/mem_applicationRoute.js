@@ -13,13 +13,4 @@ router.post('/mem_application', applicationController.mem_application);
 
 
 router.put('/mem_application_update/:id', applicationController.mem_application_update);
-
-
-
-
-
-
-
 module.exports = router;
-
-

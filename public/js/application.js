@@ -21,18 +21,40 @@ function checkAge(input) {
         input.value = "";
     }
 }
-
-
-window.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('applicationForm');
     const messageElement = document.getElementById('message');
 
-    // If the message exists, trigger the shake animation
+    // Check if there's a message to display
     if (messageElement && messageElement.innerText.trim() !== '') {
-        messageElement.classList.add('shake'); // Start the shake animation
+        messageElement.style.display = 'block'; // Show the message
+        messageElement.classList.add('shake'); // Add shake animation
 
-        // After 2 seconds (shake time), hide the message
-        setTimeout(function() {
-            messageElement.classList.add('hide'); // Hide the message after shaking
-        }, 2000); // Adjust time if necessary
+        // Hide the message after 3 seconds
+        setTimeout(function () {
+            messageElement.classList.add('hide'); // Hide with fade-out animation
+        }, 3000);
+
+        // Completely remove message after fade-out
+        setTimeout(function () {
+            messageElement.style.display = 'none';
+            messageElement.innerText = '';
+        }, 3500); // Ensure fade-out is complete
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', function () {
+        if (sessionStorage) {
+            sessionStorage.setItem('formSubmitted', 'true'); // Mark form as submitted
+        }
+    });
+
+    // Clear message on page refresh
+    if (sessionStorage && sessionStorage.getItem('formSubmitted') === 'true') {
+        if (messageElement) {
+            messageElement.style.display = 'none';
+            messageElement.innerText = '';
+        }
+        sessionStorage.removeItem('formSubmitted'); // Reset the flag
     }
 });
