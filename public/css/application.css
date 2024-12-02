@@ -54,9 +54,22 @@ body::before {
     border-radius: 15px;
     box-shadow: 0 0 25px rgba(55, 63, 65, 0.8);
     color: #ffffff;
+    margin-top: 20px;
+}
+
+#successMessage {
+    display: none;
+    color: green;
+    font-size: 1.2em;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid green;
+    background-color: #e6ffe6;
+    border-radius: 5px;
 }
 
 #message {
+    display: none;
     font-size: 16px;
     color: #4CAF50;
     background-color: #e6ffe6;
@@ -66,21 +79,9 @@ body::before {
     text-align: center;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: none;
-    opacity: 1;
-    transition: opacity 1s ease;
+    transition: opacity 1s ease, visibility 1s ease;
 }
 
-/* Shake animation */
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-/* Trigger shake and disappear */
 .shake {
     animation: shake 0.5s ease-out;
 }
@@ -88,7 +89,14 @@ body::before {
 .hide {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1s ease-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
 
 .formtitle {
@@ -156,7 +164,7 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 20px; /* Space between the home icon and button */
     margin: 20px auto;
 }
 
@@ -177,9 +185,9 @@ body::before {
 }
 
 button.submit {
-    display: flex; /* Flexbox to align the icon and text */
-    align-items: center; /* Center the icon and text vertically */
-    margin: 20px auto;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     width: auto;
     height: 45px;
     padding: 10px 20px;
@@ -196,10 +204,6 @@ button.submit {
     transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-button.submit i {
-    margin-right: 10px; /* Space between the icon and text */
-}
-
 button.submit::before {
     content: "";
     position: absolute;
@@ -209,12 +213,12 @@ button.submit::before {
     top: -100%;
     left: 0;
     z-index: -1;
-    transition: .5s;
+    transition: top 0.5s ease;
 }
 
 button.submit:hover {
     color: #373F41;
-    border-color: none;
+    border-color: transparent;
 }
 
 button.submit:hover::before {
