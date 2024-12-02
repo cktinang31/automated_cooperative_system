@@ -160,8 +160,7 @@ ul li {
     flex-wrap: wrap;
     flex-direction: row;
     height: 3rem; 
-  
-   
+ 
 }
 
 a {
@@ -191,10 +190,14 @@ ul li:hover {
     background-color: #ffA900;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    transform: scale(1.02); 
+    transform: scale(1); 
     padding-left: 1rem;
+    color: white;
 }
-
+ul li:hover i,
+ul li:hover span {
+    color: white; /
+}
 /* funds.css */
 .fund-container {
     padding: 5%;
