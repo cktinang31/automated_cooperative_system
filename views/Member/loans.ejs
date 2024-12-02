@@ -17,7 +17,7 @@
                             </div>
                    
                             <div class="loan-type">
-                                <p>
+                                <p class="loans">
                                     Loan Type
                                 </p>
                                     
@@ -54,7 +54,14 @@
                                
                             </div>
                            
-                            <div class="terms">
+                            <div class="terms">    
+                                <div class="term-container">
+                                    <p>
+                                        Payment per Collection
+                                    </p>
+                                    <div class="payment_per_month" id="monthly_payment">
+                                    </div>
+                                </div>
                                 <div class="term-container">
                                     <p>Loan Term</p>
                                     <select id="loan_term" name="loan_term" required onchange="updateInterestRate()">
@@ -63,13 +70,6 @@
                                         <option value="18 months">18 months</option>
                                         <option value="24 months">24 months</option>
                                     </select>
-                                </div>
-                                <div class="term-container">
-                                    <p>
-                                        Payment per Collection
-                                    </p>
-                                    <div class="payment_per_month" id="monthly_payment">
-                                    </div>
                                 </div>
                             </div>
                             <button class="confirm-button" type="submit">Apply Loan</button>
@@ -82,19 +82,20 @@
 
 
             <div class="current-loan">
+                <div class="table-container">
                     <table id="table">
                         <thead>
                             <tr>
-                                <th>Loan ID</th>
+                                <th class="loan">Loan ID</th>
                                 <th>Loan Type</th>
                                 <th>Amount</th>
                                 <th>Interest Rate</th>
                                 <th>Loan Term</th>
                                 <th>Start Date</th>
-                                <th>End Date</th>
+                                <th class="end">End Date</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="scrollable-body">
            
                 <% if (loans.length > 0) { %>
                 <% loans.forEach(loan => { %>
@@ -202,4 +203,3 @@
  
  
 </html>
- 

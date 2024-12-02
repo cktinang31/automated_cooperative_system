@@ -85,7 +85,6 @@ const update_loan_request = async (req, res) => {
         const user_id = updatedLoanApplication.user_id;
         updatedLoanApplication.application_status = application_status;
 
-        // Approve the loan
         if (application_status === 'approved') {
             console.log('Approving loan for application ID:', application_id);
 
@@ -97,8 +96,8 @@ const update_loan_request = async (req, res) => {
             }
 
             const total_amount = monthlyPayment * loanTerm;
-            const startDate = calculateStartDate(updatedLoanApplication); // Ensure these functions exist
-            const endDate = calculateEndDate(updatedLoanApplication, startDate); // Ensure these functions exist
+            const startDate = calculateStartDate(updatedLoanApplication); 
+            const endDate = calculateEndDate(updatedLoanApplication, startDate); 
 
             const approvedLoan = {
                 loan_id: uuidv4(),
@@ -125,22 +124,19 @@ const update_loan_request = async (req, res) => {
                 }
                 console.log('Loan approved and record created successfully.');
 
-                // Save the updated application status here
                 await updatedLoanApplication.save();
-                return res.redirect('/Manager/loanrequest'); // Ensure the client can handle redirects
+                
+                // Return success message with the redirect
+                return res.status(200).send('Loan application approved successfully.');
             } catch (err) {
                 console.error('Error creating loan record:', err);
                 return res.status(500).send('Failed to create new Loan record');
             }
-        } 
-        // Decline the loan
-        else if (application_status === 'declined') {
+        } else if (application_status === 'declined') {
             console.log('Declining loan application for ID:', application_id);
             await updatedLoanApplication.save();
-            return res.send('Loan application declined');
-        } 
-        // Handle unexpected status
-        else {
+            return res.status(200).send('Loan application declined.');
+        } else {
             console.error('Invalid application status:', application_status);
             return res.status(400).send('Invalid application status');
         }
@@ -150,6 +146,7 @@ const update_loan_request = async (req, res) => {
         return res.status(500).send('Error updating loan status');
     }
 };
+
 
 function calculateStartDate(loanApplication) {
     const currentDate = new Date();
