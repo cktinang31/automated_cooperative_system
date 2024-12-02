@@ -9,6 +9,7 @@ body {
     padding: 0;
     overflow: hidden;
 }
+
 .container {
     padding-top: 8rem;
     padding-left: 18rem;
@@ -55,7 +56,6 @@ body {
     text-align: center;
     justify-content: center;
     padding: 0;
-   
 }
  
 .welcome-container:hover {
@@ -76,10 +76,7 @@ body {
     color: #373F41;
     font-size: 16px;
     padding: 1rem;
-
-
 }
-
  
 .coopfunds-container {
     box-sizing: border-box;
