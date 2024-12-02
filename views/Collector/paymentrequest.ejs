@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("../Collector/head.ejs") %>
-    <link rel="stylesheet" href="/css/paymentrequest.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <%- include("dashhead.ejs") %>
+    
     <body>
-        <%- include("../Collector/header.ejs") %>
-        <%- include("../Collector/sidebar.ejs") %>
-
+        <%- include("dashheader.ejs") %>
+        <%- include("dashsidebar.ejs") %>  
         <div class="container">
-            <table>
+            <table class="payment-table">
                 <thead>
                     <tr>
                         <th>Payment ID</th>
@@ -19,62 +17,80 @@
                 <tbody>
                     <% if (loan_payment.length > 0) { %>
                         <% loan_payment.forEach(loan_payment => { %>
-                            <tr onclick="openModal()">
+                            <tr onclick="openModal('<%= loan_payment.payment_id %>', '<%= loan_payment.User.fname %>', '<%= loan_payment.User.lname %>', '<%= loan_payment.createdAt %>', '<%= loan_payment.amount %>', '<%= loan_payment.user_id %>')">
                                 <td><%= loan_payment.payment_id %></td>
-                                <td><%= loan_payment.User.fname %> <%= loan_payment.User.fname %> wants to pay.</td>
+                                <td><%= loan_payment.User.fname %> <%= loan_payment.User.lname %> wants to pay.</td>
                                 <td><%= loan_payment.createdAt %></td>
+                                <td style="display: none;"><%= loan_payment.status %></td>
                             </tr>
-                            <% }) %>
-                            <% } else { %>
-                                <tr>
-                                    <td colspan="4">No pending requests</td>
-                                </tr>
-                            <% } %>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4">No pending requests</td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
-
-        </div>
-        <div id="Modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <form id="updateForm" method="POST">
-                    <table>
-                        <tr>
-                            <td>Name:</td>
-                        </tr>
-                        <tr>
-                            <td>User ID:</td>
-                        </tr>
-                        <tr></tr>
-                    </table>
-                    <div class="button-container">
-                        <button type="button" class="approve-button">Approve</button>
-                        <button type="button" class="decline-button">Decline</button>
-                    </div>
-                </form>
+            
+            <!-- Modal -->
+            <div id="Modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <form id="updateForm" method="POST" action="/update_loanpayment">
+                        <input type="hidden" name="payment_id" id="paymentId">
+                        <table>
+                            <tr>
+                                <td>Name: <span id="userName"></span></td>
+                            </tr>
+                            <tr>
+                                <td>User ID: <span id="userId"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Amount: <span id="amount" name="amount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Date: <span id="paymentDate"></span></td>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <button type="submit" class="approve-button" name="status" value="approved">Approve</button>
+                            <button type="submit" class="decline-button" name="status" value="decline">Decline</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <script>
-           
-            var modal = document.getElementById("Modal");
             
-           
-            function openModal() {
-                modal.style.display = "block";
+            <script>
+            // Function to open the modal and set its content dynamically
+            function openModal(paymentId, firstName, lastName, paymentDate, amount, userId) {
+                // Set the modal content with the data passed from the table row
+                document.getElementById("userName").textContent = firstName + " " + lastName;
+                document.getElementById("userId").textContent = userId;
+                document.getElementById("amount").textContent = amount;
+                document.getElementById("paymentDate").textContent = paymentDate;
+                
+                // Set the payment ID in the hidden input field
+                document.getElementById("paymentId").value = paymentId;
+                
+                // Display the modal
+                document.getElementById("Modal").style.display = "block";
             }
             
-            
+            // Function to close the modal
             function closeModal() {
-                modal.style.display = "none";
+                document.getElementById("Modal").style.display = "none";
             }
             
-            
+            // Optional: Close the modal if clicked outside of the modal content
             window.onclick = function(event) {
-                if (event.target == modal) {
-                    closeModal();
+                var modal = document.getElementById("Modal");
+                if (event.target === modal) {
+                    modal.style.display = "none";
                 }
-            }
-        </script>
+            };
+            </script>
             
+        </div>
+        
     </body>
 </html>

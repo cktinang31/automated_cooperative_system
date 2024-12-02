@@ -56,13 +56,14 @@ const loanpayment = async (req, res) => {
 
 const update_loanpayment = async (req, res) => {
     try {
-        const { payment_id, status } = req.body;
+        const paymentId = req.body.payment_id;  // Match the form field name
+        const status = req.body.status;         
 
-        if (!payment_id || !status) {
+        if (!paymentId || !status) {
             return res.status(400).send('Payment ID and status are required');
         }
 
-        const paymentToUpdate = await Loan_payment.findByPk(payment_id, {
+        const paymentToUpdate = await Loan_payment.findByPk(paymentId, {
             include: [{ model: User }, { model: Loan }]
         });
 
@@ -96,11 +97,11 @@ const update_loanpayment = async (req, res) => {
 
             console.log('Payment updated and loan balance adjusted');
 
-            return res.redirect('/Collector/paymentnotif');
+            return res.redirect('/Collector/paymentrequest');
         }
 
         console.log('New collected payment record created');
-        return res.redirect('/Collector/paymentnotif');
+        return res.redirect('/Collector/paymentrequest');
     } catch (error) {
         console.error('Error updating payment:', error);
         return res.status(500).send('Error updating payment');
