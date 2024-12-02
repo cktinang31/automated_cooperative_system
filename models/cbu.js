@@ -9,6 +9,7 @@ const sequelize = new Sequelize(connectionString, {
 const User = require('../models/user'); 
 const Application = require('../models/application');
 
+
 const CbuModel = (sequelize) => {
     const Cbu = sequelize.define('Cbu', {
         cbu_id: {
@@ -63,7 +64,8 @@ const CbuModel = (sequelize) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });    
-    
+
+        
     };
     
   

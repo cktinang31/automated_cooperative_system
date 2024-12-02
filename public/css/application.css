@@ -39,7 +39,7 @@ body::before {
 
 .column1 {
     flex: 1;
-    font-size: 80px;
+    font-size: 96px;
     font-weight: 700;
     font-style: italic;
     text-align: left;
@@ -54,6 +54,7 @@ body::before {
     border-radius: 15px;
     box-shadow: 0 0 25px rgba(55, 63, 65, 0.8);
     color: #ffffff;
+    margin-top: 20px;
 }
 
 #successMessage {
@@ -65,6 +66,37 @@ body::before {
     border: 1px solid green;
     background-color: #e6ffe6;
     border-radius: 5px;
+}
+
+#message {
+    display: none;
+    font-size: 16px;
+    color: #4CAF50;
+    background-color: #e6ffe6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.shake {
+    animation: shake 0.5s ease-out;
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
 
 .formtitle {
@@ -128,9 +160,34 @@ body::before {
     box-shadow: 2px 2px #F9A602;
 }
 
-button.submit {
-    display: block;
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Space between the home icon and button */
     margin: 20px auto;
+}
+
+.home-icon {
+    font-size: 24px; 
+    color: #F9A602; 
+    cursor: pointer; 
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.home-icon:hover {
+    color: #ffbe3d; 
+    transform: scale(1.1);
+}
+
+.home-link {
+    text-decoration: none;
+}
+
+button.submit {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     width: auto;
     height: 45px;
     padding: 10px 20px;
@@ -156,12 +213,12 @@ button.submit::before {
     top: -100%;
     left: 0;
     z-index: -1;
-    transition: .5s;
+    transition: top 0.5s ease;
 }
 
 button.submit:hover {
     color: #373F41;
-    border-color: none;
+    border-color: transparent;
 }
 
 button.submit:hover::before {

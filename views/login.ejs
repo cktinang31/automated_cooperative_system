@@ -16,9 +16,9 @@
         <div class="form-box Login">
             <h2 class="animation" style="--D:0; --S:21">LOGIN</h2>
             <% if (errorMessage) { %>
-                <div class="error-message" style="color: red; padding: 10px; border: 1px solid red; margin-bottom: 15px;">
-                  <%= errorMessage %>
-                </div>
+                <div class="error-message">
+                    <%= errorMessage %>
+                </div>                  
               <% } %>
             <form id="loginForm"  action="/user_login" method="POST">
                 <div class="input-box animation" style="--D:1; --S:22">
@@ -81,75 +81,6 @@
             <p class="animation" style="--li:18; --S:1;">To begin your journey, please complete your registration to access our resources, connect with fellow members, and participate in our upcoming events.</p>
         </div>
         
-        <script>
-            function togglePasswordVisibility(inputId, iconElement) {
-            const passwordInput = document.getElementById(inputId); // Get the input element
-            const icon = iconElement; // Get the icon that was clicked
-            
-            // Toggle the password visibility
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';  // Show password
-                icon.classList.remove('bxs-lock-alt');  // Change the icon to open lock
-                icon.classList.add('bxs-lock');  // Icon for visible password
-            } else {
-                passwordInput.type = 'password';  // Hide password
-                icon.classList.remove('bxs-lock');  // Change back to closed lock
-                icon.classList.add('bxs-lock-alt');  // Icon for hidden password
-            }
-        }
-
-
-            document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const passwordError = document.getElementById('password-error');
-            const confirmError = document.getElementById('confirm-error');
-
-            // Regular expression to validate password
-            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-
-            // Validate password
-            if (!passwordPattern.test(password)) {
-                passwordError.style.display = 'block';
-                confirmError.style.display = 'none';
-                event.preventDefault(); // Prevent form submission
-            } else {
-                passwordError.style.display = 'none';
-                
-                // Validate confirm password
-                if (password !== confirmPassword) {
-                    confirmError.style.display = 'block';
-                    event.preventDefault(); // Prevent form submission
-                } else {
-                    confirmError.style.display = 'none';
-                    alert("Passwords match and are valid!");
-                }
-            }
-        });
-        </script>
-        
-
-
-    <!-- <script>
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-            
-            // Regular expression for password validation
-            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?~`-])[A-Za-z\d!@#$%^&*()_+[\]{};':"\\|,.<>\/?~`-]{8,}$/;
-    
-            if (!passwordPattern.test(password)) {
-                errorMessage.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'none';
-                alert("Password is valid!");
-                // Proceed with further processing (like form submission)
-            }
-        });
-    </script> -->
-
-
-
     <script src="/js/login.js"></script>
 </body>
 </html>

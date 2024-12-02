@@ -63,3 +63,18 @@ const handleScroll = () => {
 
     window.addEventListener('scroll', throttle(handleScroll, 100));
 });
+
+// Make sure to target the message element and add the shake class
+document.addEventListener('DOMContentLoaded', function() {
+    const message = document.getElementById('message');
+
+    if (message.innerHTML.trim() !== '') {
+        // Trigger the shake effect
+        message.classList.add('shake');
+
+        // Hide the message after 3 seconds (adjust if needed)
+        setTimeout(function() {
+            message.classList.add('hide');
+        }, 3000); // Hide after 3 seconds
+    }
+});

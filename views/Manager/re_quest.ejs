@@ -1,96 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../Manager/managerhead.ejs") %>
-    <link rel="stylesheet" href="/css/re_quest.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <body>
         <%- include("../Manager/managerheader.ejs") %>
         <%- include("../Manager/managersidebar.ejs") %>
 
-        <div class="container">
-
-
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Request ID</th>
-                        <th>Request Type</th>
-                        <th>Details</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    <% if (requests.length > 0) { %>
-                        <% requests.forEach(req => { %>
-                            <!-- <pre><%= JSON.stringify(req, null, 2) %> </pre> -->
-                            <tr onclick="openModal(
-                                '<%= req.id %>', 
-                                '<%= req.type %>', 
-                                '<%= req.fname %>', 
-                                '<%= req.lname %>', 
-                                '<%= req.mname %>',
-                                '<%= req.details %>', 
-                                '<%= req.amount %>', 
-                                '<%= req.loantype %>', 
-                                '<%= req.interest %>', 
-                                '<%= req.date %>', 
-                                '<%= req.dob %>', 
-                                '<%= req.pob %>', 
-                                '<%= req.address %>', 
-                                '<%= req.email %>', 
-                                '<%= req.contact %>', 
-                                '<%= req.user_id %>', 
-                                '<%= req.mode %>', 
-                                '<%= req.loanterm %>', 
-                                '<%= req.monthlypayment %>', 
-                                '<%= req.numberofpayments %>',
-                                '<%= req.application_status %>'
-                            )">
-
-                                <td><%= req.id %></td>
-                                <td><%= req.type || '' %></td>
-                                <td>
-                                    <% if (req.type === 'Application') { %>
-                                        <%= req.fname %> <%= req.lname %> has sent a membership request.
-                                    <% } else if (req.type === 'Savings Transaction') { %>
-                                        <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
-                                    <% } else if (req.type === 'CBU Transaction') { %>
-                                        <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
-                                    <% } else if (req.type === 'Loan Application') { %>
-                                        <%= req.details %> has applied for a <%= req.loantype %> loan of Php <%= req.amount %> with <%= req.interest %>% interest.
-                                    <% } %>
-                                </td>
-                                <td><%= new Date(req.date).toLocaleDateString() %></td>
-                               
-                                <td style="display:none;"><%= req.mname || '' %></td>
-                                <td style="display:none;"><%= req.dob || '' %></td>
-                                <td style="display:none;"><%= req.pob || '' %></td>
-                                <td style="display:none;"><%= req.address || '' %></td>
-                                <td style="display:none;"><%= req.email || '' %></td>
-                                <td style="display:none;"><%= req.contact || '' %></td>
-                                <td style="display:none;"><%= req.mode || '' %></td>
-                                <td style="display:none;"><%= req.user_id || '' %></td>
-                                <td style="display:none;"><%= req.loanterm || '' %></td>
-                                <td style="display:none;"><%= req.monthlypayments || '' %></td>
-                                <td style="display:none;"><%= req.numberofpayments || '' %></td>
-                                <td style="display:none;"><%= req.application_status || '' %></td>
-                            </tr>
-                        <% }) %>
-                    <% } else { %>
+        <div class="requests-container">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
                         <tr>
-                            <td colspan="4">No pending requests</td>
+                            <th>Request ID</th>
+                            <th>Request Type</th>
+                            <th>Details</th>
+                            <th>Date</th>
                         </tr>
-                    <% } %>
-                </tbody>
-                
-                
-                
-            </table>
-
-           
-        </div>
+                    </thead>
+                    <tbody>
+                        <% if (requests.length > 0) { %>
+                            <% requests.forEach(req => { %>
+                                <tr onclick="openModal(
+                                    '<%= req.id %>', 
+                                    '<%= req.type %>', 
+                                    '<%= req.fname %>', 
+                                    '<%= req.lname %>', 
+                                    '<%= req.mname %>',
+                                    '<%= req.details %>', 
+                                    '<%= req.amount %>', 
+                                    '<%= req.loantype %>', 
+                                    '<%= req.interest %>', 
+                                    '<%= req.date %>', 
+                                    '<%= req.dob %>', 
+                                    '<%= req.pob %>', 
+                                    '<%= req.address %>', 
+                                    '<%= req.email %>', 
+                                    '<%= req.contact %>', 
+                                    '<%= req.user_id %>', 
+                                    '<%= req.mode %>', 
+                                    '<%= req.loanterm %>', 
+                                    '<%= req.monthlypayment %>', 
+                                    '<%= req.numberofpayments %>',
+                                    '<%= req.application_status %>'
+                                )">
+                                    <td><%= req.id %></td>
+                                    <td><%= req.type || '' %></td>
+                                    <td>
+                                        <% if (req.type === 'Application') { %>
+                                            <%= req.fname %> <%= req.lname %> has sent a membership request.
+                                        <% } else if (req.type === 'Savings Transaction') { %>
+                                            <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
+                                        <% } else if (req.type === 'CBU Transaction') { %>
+                                            <%= req.details %> wants to <%= req.transaction_type %> of Php <%= req.amount %>.00.
+                                        <% } else if (req.type === 'Loan Application') { %>
+                                            <%= req.details %> has applied for a <%= req.loantype %> loan of Php <%= req.amount %> with <%= req.interest %>% interest.
+                                        <% } %>
+                                    </td>
+                                    <td><%= new Date(req.date).toLocaleDateString() %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">No pending requests</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>        
 
         <!-- The Modal for Membership Request -->
         <div id="myModal" class="modal">
@@ -161,403 +138,303 @@
                         <button type="button" class="decline-button">Decline</button>
                     </div>
                 </form>
-                
             </div>
         </div>
 
-<div id="loanModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeLoanModal()">&times;</span>
-        <form id="loanForm" action="/update_loan_request" method="POST">
-            <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="id" id="application-id">
-
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td id="loan-modal-name"></td>
-                </tr>
-                <tr>
-                    <td>User ID:</td>
-                    <td id="loan-modal-userid"></td>
-                </tr>
-                <tr>
-                    <td>Loan Type:</td>
-                    <td id="loan-modal-loanType"></td>
-                </tr>
-                <tr>
-                    <td>Amount:</td>
-                    <td id="loan-modal-amount"></td>
-                </tr>
-                <tr>
-                    <td>Interest:</td>
-                    <td id="loan-modal-interest"></td>
-                </tr>
-                <tr>
-                    <td>Loan Term:</td>
-                    <td id="loan-modal-term"></td>
-                </tr>
-                <tr>
-                    <td>Monthly Payment:</td>
-                    <td id="loan-modal-monthlyPayment"></td>
-                </tr>
-                <tr>
-                    <td>Number of Payments:</td>
-                    <td id="loan-modal-numPayments"></td>
-                </tr>
-            </table>
-            <div class="button-container">
-                <button type="button" class="approve-button" onclick="handleApproval('approved')">Approve</button>
-                <button type="button" class="decline-button" onclick="handleApproval('declined')">Decline</button>
+        <div id="loanModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeLoanModal()">&times;</span>
+                <form id="loanForm" action="/update_loan_request" method="POST">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="id" id="application-id">
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td id="loan-modal-name"></td>
+                        </tr>
+                        <tr>
+                            <td>User ID:</td>
+                            <td id="loan-modal-userid"></td>
+                        </tr>
+                        <tr>
+                            <td>Loan Type:</td>
+                            <td id="loan-modal-loanType"></td>
+                        </tr>
+                        <tr>
+                            <td>Amount:</td>
+                            <td id="loan-modal-amount"></td>
+                        </tr>
+                        <tr>
+                            <td>Interest:</td>
+                            <td id="loan-modal-interest"></td>
+                        </tr>
+                        <tr>
+                            <td>Loan Term:</td>
+                            <td id="loan-modal-term"></td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Payment:</td>
+                            <td id="loan-modal-monthlyPayment"></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Payments:</td>
+                            <td id="loan-modal-numPayments"></td>
+                        </tr>
+                    </table>
+                    <div class="button-container">
+                        <button type="button" class="approve-button" onclick="handleApproval('approved')">Approve</button>
+                        <button type="button" class="decline-button" onclick="handleApproval('declined')">Decline</button>
+                    </div>
+                </form>
             </div>
-            
-        </form>
-    </div>
-</div>
-
-
-<div id="savingsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeSavingsModal()">&times;</span>
-        <form id="savingsForm" action="/update_savings_request" method="POST">
-           <input type="hidden" name="savtransaction_id" id="application-id" value="">
-          
-
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td id="savings-modal-name"></td>
-                </tr>
-                <tr>
-                    <td>User ID:</td>
-                    <td id="savings-modal-userid"></td>
-                </tr>
-                <tr>
-                    <td>Request Type:</td>
-                    <td id="savings-modal-requestType"></td>
-                </tr>
-                <tr>
-                    <td>Amount:</td>
-                    <td id="savings-modal-amount"></td>
-                </tr>
-                <tr>
-                    <td>Mode of Payment:</td>
-                    <td id="savings-modal-modeOfPayment"></td>
-                </tr>
-            </table>
-            <div class="button-container">
-                <button type="submit" name="status" value="approved" class="approve-button">Approve</button>
-                <button type="submit" name="status" value="declined" class="decline-button">Decline</button>
+        </div>
+        <div id="savingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeSavingsModal()">&times;</span>
+                <form id="savingsForm" action="/update_savings_request" method="POST">
+                <input type="hidden" name="savtransaction_id" id="application-id" value="">
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td id="savings-modal-name"></td>
+                        </tr>
+                        <tr>
+                            <td>User ID:</td>
+                            <td id="savings-modal-userid"></td>
+                        </tr>
+                        <tr>
+                            <td>Request Type:</td>
+                            <td id="savings-modal-requestType"></td>
+                        </tr>
+                        <tr>
+                            <td>Amount:</td>
+                            <td id="savings-modal-amount"></td>
+                        </tr>
+                        <tr>
+                            <td>Mode of Payment:</td>
+                            <td id="savings-modal-modeOfPayment"></td>
+                        </tr>
+                    </table>
+                    <div class="button-container">
+                        <button type="submit" name="status" value="approved" class="approve-button">Approve</button>
+                        <button type="submit" name="status" value="declined" class="decline-button">Decline</button>
+                    </div>
+                    
+                </form>
             </div>
-            
-        </form>
-    </div>
-</div>
+        </div>
 
 
-<div id="cbuModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeCBUModal()">&times;</span>
-        <form id="cbuForm" action="/update_cbu_request" method="POST">
-            <input type="hidden" name="application_status" id="application-id">
-          
-
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td id="cbu-modal-name"></td>
-                </tr>
-                <tr>
-                    <td>User ID:</td>
-                    <td id="cbu-modal-userid"></td>
-                </tr>
-                <tr>
-                    <td>Request Type:</td>
-                    <td id="cbu-modal-requestType"></td>
-                </tr>
-                <tr>
-                    <td>Amount:</td>
-                    <td id="cbu-modal-amount"></td>
-                </tr>
-                <tr>
-                    <td>Mode of Payment:</td>
-                    <td id="cbu-modal-modeOfPayment"></td>
-                </tr>
-            </table>
-            <div class="button-container">
-                <button type="button" class="approve-button" onclick="approveCBUTransaction()">Approve</button>
-                <button type="button" class="decline-button" onclick="declineCBUTransaction()">Decline</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-
-<script>
-    function openModal(id, type, fname, lname, mname, details,
-     amount, loanType, interest, date, dob, pob, address, email, 
-     contact, user_id, mode, loanterm, monthlypayments, numberofpayments,application_status) {
-    console.log({
-        id, type, fname, lname, details, amount, loanType, 
-        interest, date, dob, pob, address, email, contact, user_id, 
-        mode, loanterm, monthlypayments, numberofpayments, application_status,
-    });
-
-   
-    if (type === 'Loan Application') {
-        console.log("Opening modal for request ID:", id);
-        document.getElementById('loan-modal-name').innerText = details;
-        document.getElementById('loan-modal-userid').innerText = user_id;  
-        document.getElementById('loan-modal-loanType').innerText = loanType; 
-        document.getElementById('loan-modal-amount').innerText = amount + ' PHP'; 
-        document.getElementById('loan-modal-interest').innerText = interest + '%'; 
-        document.getElementById('loan-modal-term').innerText = loanterm; 
-        document.getElementById('loan-modal-monthlyPayment').innerText = monthlypayments; 
-        document.getElementById('loan-modal-numPayments').innerText = numberofpayments; 
-        document.getElementById('application-id').value = id;
-
-        document.getElementById('loanModal').style.display = 'block'; 
-    } else if (type === 'Savings Transaction') {
-        console.log("Opening modal for request ID:", id);
-        document.getElementById('savings-modal-name').innerText = `${fname} ${lname}`;
-        document.getElementById('savings-modal-requestType').innerText = 'Savings';
-        document.getElementById('savings-modal-amount').innerText = amount + ' PHP';
-        document.getElementById('savings-modal-modeOfPayment').innerText = details;
-        document.getElementById('application-id').value = id;
-
-        document.getElementById('savingsModal').style.display = 'block';
-    } else if (type === 'CBU Transaction') {
-            console.log("Opening modal for request ID:", id);
-            document.getElementById('cbu-modal-name').innerText = `${fname} ${lname}`;
-            document.getElementById('cbu-modal-requestType').innerText = 'CBU';
-            document.getElementById('cbu-modal-amount').innerText = amount + ' PHP';
-            document.getElementById('cbu-modal-modeOfPayment').innerText = details; 
-            document.getElementById('application-id').value = id;
-            document.getElementById('cbuModal').style.display = 'block';
-
-    } else if (type === 'Application') {
-        console.log("Opening modal for request ID:", id);
-        document.getElementById('modal-fname').innerText = fname;
-        document.getElementById('modal-lname').innerText = lname;
-        document.getElementById('modal-mname').innerText = mname; 
-        document.getElementById('modal-dob').innerText = dob || 'N/A';
-        document.getElementById('modal-pob').innerText = pob || 'N/A';
-        document.getElementById('modal-address').innerText = address || 'N/A';
-        document.getElementById('modal-email').innerText = email || 'N/A';
-        document.getElementById('modal-contact').innerText = contact || 'N/A';
-        
-        document.getElementById('modal-contact').innerText = application_status || 'N/A';
-        document.getElementById('modal-contact').innerText = id || 'N/A';
-        document.getElementById('myModal').style.display = 'block';
+        <div id="cbuModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCBUModal()">&times;</span>
+                <form id="cbuForm" action="/update_cbu_request" method="POST">
+                    <input type="hidden" name="application_status" id="application-id">
                 
-        var formAction = "/mem_application_update/" + id; 
-        console.log('Form action:', formAction); 
-        document.getElementById("updateForm").action = formAction;
 
-        document.getElementById("id").value = id; 
-        
-        document.querySelector('.approve-button').addEventListener('click', () => updateApplicationStatus('approved'));
-        document.querySelector('.decline-button').addEventListener('click', () => updateApplicationStatus('decline'));
-
-async function updateApplicationStatus(status) {
-    const applicationId = document.getElementById('id').value;
-    console.log('Application ID:', applicationId); 
-    
-    const url = `/mem_application_update/${applicationId}`;
-
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ application_status: status })
-        });
-
-        console.log('Response Status:', response.status); 
-        const result = await response.text();
-        console.log('Response Body:', result); 
-        if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
-        }
-
-        console.log(`Application ${status}:`, result);
-        document.getElementById('myModal').style.display = 'none';
-        window.location.reload();
-    } catch (error) {
-        console.error('Error updating application status:', error);
-    }
-}
-    }
-}
-
-
-function handleApproval(status) {
-    const applicationId = document.getElementById('application-id').value;
-    const url = '/update_loan_request';
-
-    if (!applicationId) {
-        alert('Application ID is missing.');
-        return;
-    }
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            application_id: applicationId,
-            application_status: status
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.text();
-    })
-    .then(data => {
-        alert(`Loan application ${status}: ${data}`);
-        closeLoanModal();
-        window.location.reload();
-    })
-    .catch(error => {
-        console.error('Error updating loan status:', error);
-        alert('Error updating loan status. Please try again.');
-    });
-}
-    
-
-document.querySelector('#savingsModal').addEventListener('click', (e) => {
-
-if (e.target.classList.contains('approve-button') || e.target.classList.contains('decline-button')) {
-
-    const status = e.target.classList.contains('approve-button') ? 'approved' : 'declined';
-    const savtransactionId = document.getElementById('application-id').value;
-
-    console.log('Button clicked:', status); 
-    console.log('Transaction ID:', savtransactionId); 
-
-    e.preventDefault();
-
-    fetch(`/update_savings_request/${savtransactionId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            savtransaction_id: savtransactionId,
-            status: status
-        })
-    })
-    .then(response => {
-        console.log('Response status:', response.status); 
-        return response.json();
-    })
-    .then(data => {
-        console.log('Response data:', data);
-        alert(data.message);
-        closeSavingsModal();
-        location.reload(); 
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while processing the request.');
-    });
-}
-});
-
-
-const approveCBUTransaction = async () => {
-        const cbuTransactionId = document.getElementById('application-id').value;
-        try {
-            const response = await fetch(`/update_cbu_request/${cbuTransactionId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    status: 'approved',  
-                }),
-            });
-
-            if (response.ok) {
-                alert('CBU transaction approved successfully!');
-                location.reload(); 
-            } else {
-                alert('Failed to approve CBU transaction');
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td id="cbu-modal-name"></td>
+                        </tr>
+                        <tr>
+                            <td>User ID:</td>
+                            <td id="cbu-modal-userid"></td>
+                        </tr>
+                        <tr>
+                            <td>Request Type:</td>
+                            <td id="cbu-modal-requestType"></td>
+                        </tr>
+                        <tr>
+                            <td>Amount:</td>
+                            <td id="cbu-modal-amount"></td>
+                        </tr>
+                        <tr>
+                            <td>Mode of Payment:</td>
+                            <td id="cbu-modal-modeOfPayment"></td>
+                        </tr>
+                    </table>
+                    <div class="button-container">
+                        <button type="button" class="approve-button" onclick="approveCBUTransaction()">Approve</button>
+                        <button type="button" class="decline-button" onclick="declineCBUTransaction()">Decline</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <style>
+            .requests-container {
+                margin-left: 250px;
+                padding: 10px;
+                background-color: #f9f9f9;
+                overflow-x: hidden; 
+                overflow-y: hidden; 
             }
-        } catch (error) {
-            console.error('Error approving CBU transaction:', error);
-            alert('Error approving CBU transaction');
-        }
-    };
 
-const declineCBUTransaction = async () => {
-    const cbuTransactionId = document.getElementById('application-id').value;
-    if (!cbuTransactionId) {
-        alert('Transaction ID is missing');
-        return;
-    }
-
-    console.log('Declining CBU Transaction with ID:', cbuTransactionId);
-    try {
-        const response = await fetch(`/update_cbu_request/${cbuTransactionId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                status: 'declined',
-            }),
-        });
-
-        if (response.ok) {
-            alert('CBU transaction declined successfully!');
-            location.reload();
-        } else {
-            const errorText = await response.text();
-            console.error('Server responded with error:', errorText);
-            alert(`Failed to decline CBU transaction: ${errorText}`);
-        }
-    } catch (error) {
-        console.error('Error declining CBU transaction:', error);
-        alert('Error declining CBU transaction');
-    }
-};
-
-
-    function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
-    }
-
-    function closeLoanModal() {
-        document.getElementById('loanModal').style.display = 'none';
-    }
-
-    function closeSavingsModal() {
-        document.getElementById('savingsModal').style.display = 'none';
-    }
-
-    function closeCBUModal() {
-        document.getElementById('cbuModal').style.display = 'none';
-    }
-
-    // Close modals when clicking outside of them
-    window.onclick = function(event) {
-        const modals = ['myModal', 'loanModal', 'savingsModal', 'cbuModal'];
-        modals.forEach(modalId => {
-            const modal = document.getElementById(modalId);
-            if (event.target === modal) {
-                modal.style.display = 'none';
+            .table-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                max-width: 100%;
+                max-height: 82vh;
+                border: 1px solid #ddd;
+                overflow-y: auto; 
             }
-        });
-    };
 
-</script>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed; 
+            }
 
+            th, td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: left;
+                word-wrap: break-word; 
+                max-width: 240px;
+            }
+
+            th {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                background-color: #373f41;
+                color: white;
+                font-weight: bold;
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            tr:hover {
+                background-color: #f1f1f1;
+                cursor: pointer;
+            }
+
+            @media screen and (max-width: 768px) {
+                .requests-container {
+                    margin-left: 70px; 
+                }
+
+                table {
+                    font-size: 12px;
+                }
+
+                th, td {
+                    padding: 8px;
+                }
+
+                button {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+                padding-top: 60px;
+                transition: all 0.3s ease;
+            }
+
+            .modal-content {
+                background-color: white;
+                margin: 5% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 600px;
+                border-radius: 10px;
+            }
+
+            .close {
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                cursor: pointer;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            button {
+                padding: 10px 20px;
+                margin: 5px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .approve-button {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .approve-button:hover {
+                background-color: #45a049;
+            }
+
+            .decline-button {
+                background-color: #f44336;
+                color: white;
+            }
+
+            .decline-button:hover {
+                background-color: #e41f1f;
+            }
+
+            .button-container {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .modal-content {
+                max-width: 800px;
+                margin: 20px auto;
+            }
+
+            @media screen and (max-width: 768px) {
+                .requests-container {
+                    padding: 10px;
+                }
+
+                table {
+                    font-size: 14px;
+                }
+
+                th, td {
+                    padding: 10px;
+                }
+
+                button {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+            }
+        </style>
+
+    <script src="/js/request.js"></script>
 
     </body>
 </html>
