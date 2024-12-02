@@ -13,7 +13,12 @@
                     <tr>
                         <td class="cooperative_advisory">
                             <h1 class="coop_ad"><%= content.content_title %></h1>
-                            <p class="announcements"><%= content.content %></p>
+                            <p class="announcements"><<%= content.content.length > 200 
+                                ? content.content.slice(0, 200) + '...' 
+                                : content.content %></p>
+                                <% if (content.content.length > 200) { %>
+                                    <button type="button" class="read-more-btn" data-content-id="<%= content.content_id %>">Read More</button>
+                                <% } %>
                         </td>
                     </tr>
                     <% }) %>
@@ -25,6 +30,25 @@
             </table>
         </div>
 
+        <script>
+           
+        
+            document.querySelectorAll('.read-more-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const contentId = this.dataset.contentId;
+                    const contentElement = document.getElementById(`content-${contentId}`);
+                    const fullContent = contentElement.dataset.fullContent;
+        
+                    if (this.textContent === 'Read More') {
+                        contentElement.textContent = fullContent; // Show full content
+                        this.textContent = 'Read Less';
+                    } else {
+                        contentElement.textContent = fullContent.slice(0, 200) + '...'; // Collapse content
+                        this.textContent = 'Read More';
+                    }
+                });
+            });
+        </script>
    
 
     </body>

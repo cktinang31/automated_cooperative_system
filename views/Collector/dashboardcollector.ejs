@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("dashhead.ejs") %>
-    <link rel="stylesheet" href="/css/dashcollector.css">
-
+   
     <body>
         <%- include("dashheader.ejs") %>
         <%- include("dashsidebar.ejs") %>         
         <div class="container">
             <!-- First Row -->
-            <div class="card advisory-card">
-                <h2 class="announcement-title">Cooperative Advisory</h2>
-                <p>There are no announcements...</p>
-                <i class="fa-regular fa-comments" style="color: #ffd200;"></i>
+            <div class="dashboard-announcement-container">
+                <% if (contents.length > 0) { %>
+                    <% contents.forEach(content => { %>
+                <h2 class="dashboard-announcement-title"><%= content.content_title %></h2>
+                <p ><%= content.content %></p>
+                        <% }) %>
+                    <% } else { %>
+                        <p>There are no announcements to display...</p>
+                    <% } %>
+               
             </div>
         
-            <div class="card loans-card">
+            <div class="dashboard-loan-container">
                 <h2>Loans</h2>      
-                <h1>45K <span>coins</span></h1>
-                <i class="fa-solid fa-coins fa-2xl" style="color: #F9a602;"></i>
+                <h1><%= totalLoanAmount %> php</h1>
+                <i class="fa-solid fa-coins" ></i>
             </div>
         
-            <div class="card empty-card"></div>
+            <div class="dashboard-welcome-container">
+                <h2>Welcome to the Collector Dashboard, [Collector Name]!</h2>
+                <p>We’re thrilled to have you onboard in supporting our community’s financial wellbeing. </p>
+            </div>
         
             
-            <div class="card funds-card">~
+            <div class="dashboard-funds-container">
                 <h2>2024 COOP FUNDS</h2>
                 <div class="funds-content">
                     <ul class="legend">
-                        <li><span class="color green"></span> Cash and Equivalents</li>
-                        <li><span class="color red"></span> Expenses</li>
-                        <li><span class="color yellow"></span> Receivables</li>
-                        <li><span class="color blue"></span> Fixed Assets</li>
+                       <p>hbfhgbfjknkgmfbhgl,</p>
                     </ul>
                     <div class="graph-image">
                         <img src="/images/graph-image.jpg" alt="Graph showing funds breakdown">
@@ -38,18 +43,11 @@
                 </div>
             </div>
 
-            <div class="card inquiries-collections-card">
-                <div class="inquiries">
+            <div class="dashboard-inquiries-container">
                     <h2>Upcoming Collections</h2>
                     <div class="inquiry-item"></div>
                     <div class="inquiry-item"></div>
-                </div>
-        
-                <div class="upcoming-collections">
-                    <h2>Inquiries</h2>
-                    <div class="collection-item"></div>
-                    <div class="collection-item"></div>
-                </div>
+
             </div>
         </div>
     </body>
