@@ -17,6 +17,9 @@ body {
     padding-top: 10rem;
     padding-left: 30rem;
     text-align: center;
+    max-height: 80vh; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
 }
 
 .table { 
@@ -30,14 +33,16 @@ table {
     width: 80rem;
 }
 td {
+    padding: 1.5rem;
     background-color: #ffff;
     border: 1px solid #dbdbdb;
+    border-radius: 8px;
     
 
 }
 
 h1 {
-    color: #373f41;
+    color: #FFA900;
 }
 
 p {

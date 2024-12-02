@@ -8,7 +8,7 @@
         <%- include("header.ejs") %>
         <%- include("sidebar_mem.ejs") %>
 
-        <div class="container">
+        <div class="container">      
             <div class="filter-button">
                 All
             </div>
@@ -16,13 +16,13 @@
             <table >
                 <thead>
                     <tr>
-                        <th>Requested Id</th>
+                        <th class="rq">Requested Id</th>
                         <th>Amount</th>
                         <th>Transaction Type</th>
                         <th>Status</th>
-                        <th>Date</th>
+                        <th class="date">Date</th>
                     </tr>
-                </thead>
+                </thead>    
                 <tbody>
                     <% if (transactions.length > 0) { %>
                         <% transactions.forEach(trans => { %>

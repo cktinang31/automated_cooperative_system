@@ -9,7 +9,12 @@ body {
     padding-left: 45rem;
     display: flex;
     flex-wrap: nowrap;
+    max-height: 80vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling (optional) */
+    /* border: 1px solid #ccc; Optional: adds a border to define the container visually */
 }
+
 
 .filter-button {
     height: 2rem;
@@ -36,8 +41,14 @@ th {
     border-bottom: 2px solid #ccc;
     color: #ffff; 
     font-weight: 400;
-}
 
+}
+th.rq {
+    border-top-left-radius: 8px ;
+}
+th.date {
+    border-top-right-radius: 8px ;
+}
 td {
     padding: 10px; 
     border-bottom: 1px solid #ccc;

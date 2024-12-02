@@ -131,11 +131,11 @@ const update_savings_request = async (req, res) => {
 
             await userSavings.save();
             console.log('User savings updated:', userSavings);
-            return res.json({ message: 'Savings transaction approved successfully' });
+            return res.json({ message: 'Savings transaction approved successfully.' });
 
         } else if (status === 'declined') {
             console.log('Transaction declined, status updated.');
-            return res.json({ message: 'Savings transaction declined' });
+            return res.json({ message: 'Savings transaction declined.' });
         }
 
     } catch (error) {
