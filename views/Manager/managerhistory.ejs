@@ -6,73 +6,81 @@
         <%- include("managerheader.ejs") %>
         <%- include("managersidebar.ejs") %>
 
-        <div class="container">
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Requested Id</th>
-                            <th>Transaction Type</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (transactions.length > 0) { %>
-                            <% transactions.forEach(trans => { %>
-                                <tr>
-                                    <td><%= trans.id %></td>
-                                    <td>
-                                        <% if (trans.type === 'CBU Transactions') { %>
-                                            <%= trans.type %> - <%= trans.transaction_type %>
-                                        <% } else if (trans.type === 'Savings Transaction') { %>
-                                            <%= trans.type %> - <%= trans.transaction_type %>
-                                        <% } else if (trans.type === 'Loan Application') { %>
-                                            <%= trans.type %> 
-                                        <% } else if (trans.type === 'Loan Payment') { %>
-                                            <%= trans.type %> 
-                                        <% } %>
-                                    </td>
-                                    <td>
-                                        <% if (trans.status === 'approved') { %>
-                                            <i class='bx bx-check' style="color:green"></i>
-                                        <% } else if (trans.status === 'pending') { %>
-                                            <i class='bx bx-loader-alt' style="color:orange"></i>
-                                        <% } else { %>
-                                            <i class='bx bx-x' style="color:red"></i>
-                                        <% } %>
-                                    </td>
-                                    <td><%= new Date(trans.date).toLocaleDateString() %></td>
-                                </tr>
-                            <% }) %>
-                        <% } else { %>
+        <div class="main-container">
+            <div class="content-container">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
                             <tr>
-                                <td colspan="4">No transactions</td>
+                                <th>Requested Id</th>
+                                <th>Transaction Type</th>
+                                <th>Status</th>
+                                <th>Date</th>
                             </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% if (transactions.length > 0) { %>
+                                <% transactions.forEach(trans => { %>
+                                    <tr>
+                                        <td><%= trans.id %></td>
+                                        <td>
+                                            <% if (trans.type === 'CBU Transactions') { %>
+                                                <%= trans.type %> - <%= trans.transaction_type %>
+                                            <% } else if (trans.type === 'Savings Transaction') { %>
+                                                <%= trans.type %> - <%= trans.transaction_type %>
+                                            <% } else if (trans.type === 'Loan Application') { %>
+                                                <%= trans.type %> 
+                                            <% } else if (trans.type === 'Loan Payment') { %>
+                                                <%= trans.type %> 
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <% if (trans.status === 'approved') { %>
+                                                <i class='bx bx-check' style="color:green"></i>
+                                            <% } else if (trans.status === 'pending') { %>
+                                                <i class='bx bx-loader-alt' style="color:orange"></i>
+                                            <% } else { %>
+                                                <i class='bx bx-x' style="color:red"></i>
+                                            <% } %>
+                                        </td>
+                                        <td><%= new Date(trans.date).toLocaleDateString() %></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4">No transactions</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <style>
-            .container {
-                margin-top: 35px;
-                margin-left: 15%;
-                margin-right: 30px;
-                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-                overflow: hidden; 
+            .main-container {
+                display: flex;
+                flex-direction: row;
+                height: 85vh;
+            }
+
+           .content-container {
+                margin-left: 250px;
+                width: calc(100% - 250px);
+                padding: 20px;
+                box-sizing: border-box;
             }
 
             .table-wrapper {
-                max-height: 80vh; 
-                overflow-y: auto; 
+                max-height: 85vh;
+                overflow-y: auto;
+                width: 100%;
             }
 
             table {
                 width: 100%;
                 border-collapse: collapse;
+                min-width: 600px;
             }
 
             thead {
@@ -84,6 +92,7 @@
                 padding: 12px 15px;
                 text-align: left;
                 border-bottom: 1px solid #ddd;
+                border: 1px solid #ddd;
             }
 
             th {
@@ -134,6 +143,21 @@
                 margin-bottom: 10px;
                 text-align: center;
                 color: #007bff;
+            }
+
+            @media (max-width: 768px) {
+                .main-container {
+                    flex-direction: column;
+                }
+
+
+                .content-container {
+                    margin-left: 0;
+                }
+
+                table {
+                    min-width: 500px;
+                }
             }
         </style>
     </body>

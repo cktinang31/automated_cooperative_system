@@ -56,17 +56,6 @@ body::before {
     color: #ffffff;
 }
 
-#successMessage {
-    display: none;
-    color: green;
-    font-size: 1.2em;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid green;
-    background-color: #e6ffe6;
-    border-radius: 5px;
-}
-
 #message {
     font-size: 16px;
     color: #4CAF50;
@@ -77,6 +66,29 @@ body::before {
     text-align: center;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: none;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Trigger shake and disappear */
+.shake {
+    animation: shake 0.5s ease-out;
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-out;
 }
 
 .formtitle {

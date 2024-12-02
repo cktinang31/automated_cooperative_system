@@ -87,7 +87,6 @@ body::before {
     100% { opacity: 0; visibility: hidden; }
 }
 
-
 .container.active .form-box.Login .animation {
     transform: translateX(-120%);
     opacity: 0;
