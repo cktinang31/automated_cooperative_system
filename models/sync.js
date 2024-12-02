@@ -18,6 +18,8 @@ const SavModel = require('../models/savtransaction');
 const CModel = require('../models/cbutransaction');
 const VMessageModel = require('../models/vmessage');
 
+
+
 const User = UserModel(sequelize);
 const Application = ApplicationModel(sequelize);
 const Savings = SavingsModel(sequelize);
@@ -29,6 +31,7 @@ const Savtransaction = SavModel(sequelize);
 const Cbutransaction = CModel(sequelize);
 const VMessage = VMessageModel(sequelize);
 
+
 Application.associate({User});
 User.associate({ Application, 
     Loan_application, 
@@ -39,12 +42,13 @@ User.associate({ Application,
     Loan, 
     Loan_payment });
 Loan_application.associate({ User });
-Cbu.associate({User, Application});
+Cbu.associate({User, Application,});
 Savings.associate({User, Application});
 Loan.associate({User, Loan_application});
 Loan_payment.associate({User, Loan, Loan_application});
 Savtransaction.associate({User, Savings});
 Cbutransaction.associate({User, Cbu});
+
 
 sequelize.sync({ force: false })  
   .then(() => {
@@ -73,6 +77,7 @@ module.exports = { sequelize,
     Loan_payment,
     Savtransaction,
     Cbutransaction,
-    VMessage
+    VMessage,
+
 
 };

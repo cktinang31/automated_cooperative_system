@@ -9,10 +9,10 @@ body {
     margin: 0;
     padding: 0;
     max-width: 100%;
-    user-select: none;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     padding-top: 120px;
+    overflow: hidden;
     overflow-x: hidden;
 }
 
@@ -57,6 +57,10 @@ header i {
     border-radius: 8px;
     margin-left: auto;
     margin-right: 30px;
+}
+
+.notif-bell i.clicked {
+    color: #f9a602;
 }
 
 .notif-bell {
@@ -111,193 +115,242 @@ aside {
     width: 250px;
     height: 100vh;
     background: #fff;
+    color: #373F41;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    position: fixed;    
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
 }
 
-ul {
+aside ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     margin-top: 30px;
-}
-
-ul li {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 0 0 1rem;
-    padding: 0.5rem 1rem;
-    flex-wrap: nowrap;
-}
-
-ul li a {
-    display: flex;
-    align-items: center;
     width: 100%;
-    color: inherit;
+}
+
+aside ul li {
+    display: flex;
+    align-items: center; 
+    margin: 0 0 1rem;
+    padding: 12px 15px;
+}
+
+aside ul li a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    width: 100%;
 }
 
-ul li i {
-    margin-right: 0.5rem; 
-    color: #373F41; 
-    font-size: 24px;
-    vertical-align: middle;   
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-ul li span {   
-    color: #373F41; 
+aside ul li i {
     font-size: 20px;
-    vertical-align: middle;
-    margin-left: 10px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    margin-right: 10px;
+    color: #373F41; 
 }
 
-ul li:hover {
+aside ul li span {
+    font-size: 18px;
+    color: #373F41; 
+}
+
+
+aside ul li:hover {
     background-color: #f9a602;   
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
 
-ul li:hover i, ul li:hover span {
+aside ul li:hover i, aside ul li:hover span {
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    aside {
+        width: 200px;
+    }
 }
 
 /* DASHBOARD */
 .dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
     margin-left: 250px;
     padding: 20px;
     box-sizing: border-box;
     overflow-x: hidden;
+    height: 100vh;
+    overflow-y: auto;
 }
 
-.dashboard-container .message-container {
+.message-container {
     background: #f9a602;
     color: #373F41;
     padding: 20px;
-    width: 70%;
-    margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; 
-    font-family: 'Poppins', sans-serif;
-}
-
-.dashboard-container .message-container h1 {
-    font-size: 28px; 
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.dashboard-container .message-container p {
-    font-size: 16px; 
-    line-height: 1.5; 
-}
-
-.dashboard-container .dashboard-cards {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.dashboard-container .card {
-    flex: 1 1 calc(50% - 20px);
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     text-align: center;
-    box-sizing: border-box;
-    min-width: 280px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: fit-content;
+    width: 100%;
 }
 
-.dashboard-container .card:hover {
-    transform: scale(1.05);
+.card.members:hover {
+    transform: scale(1.05); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.dashboard-container .card h2 {
-    font-size: 20px;
+.dashboard-cards a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Individual card styling */
+.card.members {
+    background-color: #ffffff;
+    border-left: 5px solid #373F41;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 460px;
+    width: 100%;
+}
+
+.card.members:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card.members h2 {
+    font-size: 35px;
     font-weight: bold;
-    color: #333;
+    color: #373F41;
+    margin-bottom: 12px;
+}
+
+.card.members p {
+    font-size: 18px; 
+    color: #373F41;
+    margin-top: 0;
+}
+
+.card.members i {
+    font-size: 60px; 
+    color: #885c04; 
+    display: block; 
+    text-align: right;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .dashboard-cards {
+        margin: 10px 0;
+    }
+
+    .card.members {
+        max-width: 100%; 
+        padding: 15px; 
+    }
+}
+
+.cooperative_advisory {
+    grid-column: span 1;
+    max-height: 500px;
+    height: 75%;
+    width: 100%;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cooperative_advisory h1.coop_ad {
+    font-size: 35px;
+    font-weight: bold;
+    color: #373F41;
     margin-bottom: 10px;
-    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    overflow-wrap: break-word;
 }
 
-.dashboard-container .card p {
+.cooperative_advisory p.announcements {
     font-size: 16px;
-    color: #555;
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 0;
-}
-
-.dashboard-container .card.members {
-    background-color: #ecf0f1;
-    border-left: 5px solid #2980b9;
-}
-
-.dashboard-container .card.funds {
-    background-color: #34495e;
-    color: white;
-    border-left: 5px solid #f9a602; 
-}
-
-.dashboard-container .card.funds ul {
-    list-style-type: none;
-    padding: 0;
+    color: #555555;
+    line-height: 1.5;
     margin: 0;
-    text-align: left; 
+    margin-top: 41px;
+    text-align: center;
+    overflow-wrap: break-word;
 }
 
-.dashboard-container .card.funds ul li {
+.funds-container {
+    grid-column: span 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.funds-container h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #373F41;
+}
+
+.funds-list li {
     font-size: 16px;
-    color: #f1f1f1; 
-    padding: 5px 0;
+    line-height: 1.5;
 }
 
-.dashboard-container .request-container {
-    margin-top: 20px;
-    max-width: 100%;
-    overflow-x: auto; 
+.request-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-height: 462px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.dashboard-container .request-container table {
+.funds-container h1, .request-container h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #373F41;
+}
+
+.request-container table {
     width: 100%;
     border-collapse: collapse;
+    max-height: 500px;
+    overflow-y: auto;
+    display: block;
 }
 
-.dashboard-container .request-container th, 
-.dashboard-container .request-container td {
-    padding: 10px;
+.request-container table th, .request-container table td {
     text-align: left;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-.dashboard-container .request-container th {
+.request-container table th {
     background-color: #373F41;
-    color: #ffffff;
-}
-
-.dashboard-container .request-container tr:hover {
-    background-color: #f1f1f1;
-}
-
-@media (max-width: 768px) {
-    .dashboard-container .dashboard-cards {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .dashboard-container .card {
-        flex: none;
-        width: 100%;
-    }
+    color: white;
 }

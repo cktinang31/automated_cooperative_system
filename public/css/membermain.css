@@ -195,18 +195,30 @@ ul li:hover {
     padding-left: 1rem;
 }
 
-ul li span, ul li i {
-    transition: color 0.1s ease, transform 0.1s ease;
-}
-ul li:hover i,
-ul li:hover span {
-    color: #ffffff; /* Change text color to white on hover */
-}
-/* 
-ul li:hover i {
-    color: #ffA900;
+/* funds.css */
+.fund-container {
+    padding: 5%;
+    display: flex;
 }
 
-ul li:hover span {
-    color: #ffA900;
-} */
+.funds-graph {
+    padding: 5%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2%;
+}
+
+.savings-graph {
+    padding: 2%;
+    background-color: #373F41;
+    height: 3rem;
+    width: 5rem;
+}
+
+.cbu-graph {
+    padding: 2%;
+    background-color: #373F41;
+    height: 3rem;
+    width: 5rem;
+}
+

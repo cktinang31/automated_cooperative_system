@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
     <%- include("../Manager/managerhead.ejs") %>
-    <link rel="stylesheet" href="/css/member.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <%- include("../Manager/managerheader.ejs") %>
+    <%- include("../Manager/managersidebar.ejs") %>
 
-    <body>
-        <%- include("../Manager/managerheader.ejs") %>
-        <%- include("../Manager/managersidebar.ejs") %>
-
-        <div class="container">
+    <div class="container-page1">
+        <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -20,45 +21,162 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% if (users.length > 0) { %>
+                    <% if (users && users.length > 0) { %>
                         <% users.forEach(user => { %>
-                            <tr data-user-id="<%= user.user_id%>">
+                            <tr data-user-id="<%= user.user_id %>">
                                 <td><%= user.user_id %></td>
-                                <td><% if (user.category === 'gold') { %>
-                                    <p>Gold</p>
+                                <td>
+                                    <% if (user.category === 'gold') { %>
+                                        <p class="gold">Gold</p>
                                     <% } else if (user.category === 'silver') { %>
-                                        <p>Silver</p>
+                                        <p class="silver">Silver</p>
                                     <% } else if (user.category === 'bronze') { %>
-                                        <p>Bronze</p>
+                                        <p class="bronze">Bronze</p>
                                     <% } else { %>
-                                        <p>New Member</p>
+                                        <p class="new-member">New Member</p>
                                     <% } %>
                                 </td>
                                 <td><%= user.fname %> <%= user.lname %></td>
                                 <td><%= user.email %></td>
                                 <td><%= user.contact %></td>
                             </tr>
-                            <% }) %>
-                        <% } else { %>
+                        <% }) %>
+                    <% } else { %>
                         <tr>
-                            <td colspan="8">No Members to show.</td>
-                        </tr>}
+                            <td colspan="5">No Members to show.</td>
+                        </tr>
                     <% } %>
                 </tbody>
             </table>
-            <script>
-                document.querySelectorAll('tr[data-user-id]').forEach(row => {
-              row.addEventListener('click', function() {
-                  
-                  const userId = this.getAttribute('data-user-id');
-                  
-                  
-                  const destinationUrl = '/Manager/membersprofile/' + userId; 
-                  window.location.href = destinationUrl;
-              });
-            });
-            
-            </script>
         </div>
-    </body>
+    </div>
+    
+    <style>
+       .container-page1 {
+            margin-left: 250px;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            overflow-x: auto;
+            width: calc(100% - 250px); 
+        }
+
+        .table-wrapper {
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #373F41;
+            color: white;
+            z-index: 1;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #dbdbdb;
+            word-wrap: break-word;
+        }
+
+        th {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #FFFFFF;
+            font-size: 14px;
+            color: #373F41;
+        }
+
+        td p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:hover td {
+            background-color: #f0f0f0;
+        }
+
+        td p.gold {
+            color: gold;
+        }
+
+        td p.silver {
+            color: silver;
+        }
+
+        td p.bronze {
+            color: #cd7f32;
+        }
+
+        td p.new-member {
+            color: #888;
+        }
+
+        td[colspan="5"] {
+            text-align: center;
+            font-size: 18px;
+            font-style: italic;
+            color: #999;
+        }
+
+        tr[data-user-id] {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container-page1 {
+                margin-left: 0;
+                width: 100%;
+                padding: 10px;
+            }
+
+            table {
+                width: 100%;
+                table-layout: auto;
+            }
+
+            th, td {
+                padding: 0.8rem;
+                font-size: 12px;
+            }
+
+            td p {
+                font-size: 12px;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>    
+
+    <script>
+        document.querySelectorAll('tr[data-user-id]').forEach(row => {
+            row.addEventListener('click', function() {
+                const userId = this.getAttribute('data-user-id');
+                const destinationUrl = '/Manager/membersprofile/' + userId; 
+                window.location.href = destinationUrl;
+            });
+        });
+    </script>
+</body>
 </html>

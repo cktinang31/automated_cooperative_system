@@ -9,7 +9,6 @@
         <%- include("../Manager/managersidebar.ejs") %>
    
         <div class="dashboard-container">
-            <!-- Welcome Message -->
             <div class="message-container">
                 <h1 class="message-title">Welcome, Manager <%= user.fname %> <%= user.lname %>!</h1> 
                 <p>Here, you can efficiently oversee member activities, manage loans and savings, and keep the cooperative thriving. Let’s work together to ensure the success of our community!</p>
@@ -26,7 +25,7 @@
                         <p>There are no announcements to display...</p>
                     <% } %>
                 </div>
-            </a>
+            </a>            
         
             <!-- Member Section -->
             <a href="/Manager/member">
@@ -38,10 +37,9 @@
                     </div>
                 </div>
             </a>
-        
-            <!-- Coop Funds Section -->
+
             <div class="funds-container">
-                <h1 class="funds-title">2024 Coop Funds</h1> 
+                <h1 class="funds-title">2024 Coop Funds</h1>
                 <ul class="funds-list">
                     <li><i class="fa-solid fa-box"></i> Cash and Equivalents</li>
                     <li><i class="fa-solid fa-box"></i> Expenses</li>
@@ -49,10 +47,9 @@
                     <li><i class="fa-solid fa-box"></i> Fixed Assets</li>
                 </ul>
             </div>
-        
-            <!-- Request Section -->
+
             <div class="request-container">
-                <h1 class="request-title">Request</h1> 
+                <h1 class="request-title">Request</h1>
                 <table>
                     <thead>
                         <tr>

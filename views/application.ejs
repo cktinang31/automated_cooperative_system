@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application Form</title>
     <link rel="stylesheet" href="/css/application.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -14,7 +15,7 @@
 
         <div class="column2">
             <h1 class="formtitle">Cooperative's Application Form</h1>
-            <p><%= message %></p>  <!-- This will display the message sent from the server -->
+            <p id="message"><%= message %></p>
             <form action="/mem_application" method="POST">
                 <div class="form-group">
                     <input type="text" id="fname" name="fname" placeholder=" " required>
@@ -60,38 +61,19 @@
                 </div>
             
                 <div class="form-group">
-                    <input type="tel" id="contact" name="contact" placeholder=" " required>
+                    <input type="tel" id="contact" name="contact" placeholder=" " required maxlength="12" pattern="\d{12}">
                     <label for="contact">Contact Number</label>
+                </div>                
+            
+                <div class="button-container">
+                    <a href="/" class="home-link">
+                        <i class="fa fa-home-lg home-icon"></i>
+                    </a>
+                    <button type="submit" class="submit">Submit</button>
                 </div>
-            
-                <button type="submit" class="submit">Submit</button>
             </form>
-            
-            
-        </div>
-        <div id="successMessage" class="success-message">
-            Application submitted successfully. Please wait for approval.
         </div>
     </div>
     <script src="/js/application.js"></script>
-    <script>
-        function checkAge(input) {
-            const dob = new Date(input.value); 
-            const today = new Date(); 
-            const age = today.getFullYear() - dob.getFullYear(); 
-            const monthDiff = today.getMonth() - dob.getMonth(); 
-    
-           
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-                age--;
-            }
-    
-           
-            if (age < 18) {
-                alert("You must be 18 years or older.");
-                input.value = ""; 
-            }
-        }
-    </script>
 </body>
 </html>

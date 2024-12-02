@@ -13,6 +13,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey); 
 const dotenv = require('dotenv');
 dotenv.config();
+const path = require('path');
 
 
 const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
@@ -186,6 +187,8 @@ passport.use(new LocalStrategy({
 ));
 
 app.post('/logout', logout);
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(memApplicationRoutes); 
 app.use(userRoutes);
@@ -305,7 +308,9 @@ app.get('/Member/dividend_deposit', (req, res) => {
   res.render('Member/dividend_deposit', { title: 'Dividend-Deposit '});
 });
 
-
+app.get('/Member/save', (req, res) => {
+  res.render('Member/save', { title: 'Save '});
+});
 
 app.get('/Manager/create_announcement', (req, res) => {
   res.render('Manager/create_announcement', { title: 'Create Announcement'});
@@ -360,5 +365,5 @@ knex.raw('SELECT 1')
 
 
   app.listen(3000, '0.0.0.0', () => {
-    console.log('Server running on http://0.0.0.0:3000');
+    console.log('Server running on http://0.0.0.0:3001');
   });
