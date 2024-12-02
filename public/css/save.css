@@ -247,12 +247,12 @@ margin-left: 16%;
 
 .input-amount {
   text-align: center;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
 }
 
 .confirm-button {
   display: block;
-  margin: 10px auto; /* Center align with equal spacing */
+  margin: 10px auto; 
   padding: 10px;
   font-size: 14px;
 }
