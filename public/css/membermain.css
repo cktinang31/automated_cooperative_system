@@ -200,3 +200,48 @@ aside ul li:hover i, aside ul li:hover span {
     height: 3rem;
     width: 5rem;
 }
+
+
+.payment-container{
+    margin-top: 5rem;
+    margin-left: 18rem;
+}
+
+.loan-container {
+    padding: 1rem;
+    width: fit-content;
+    border: 1px solid #373f41;
+    border-radius: 5px;
+}
+
+.payment-form-container {
+    /* background-color: #373F41; */
+    margin-top: 2.5rem;
+    margin-left: 18rem;
+    width: fit-content;
+}
+
+.payment-details-container {
+    /* background-color: #373F41; */
+    margin-left: 48rem;
+    margin-top: -34.5rem;
+    width: 69rem;
+    height: auto;
+    text-align: center;
+}
+
+
+.payment-details-container table {
+    width: 100%;
+}
+.payment-details-container table thead {
+    background-color: #373F41;
+    color: #fff;
+    height: 3rem;
+    font-weight: 300;
+    
+}
+
+.payment-details-container table tbody {
+    border:#373F41;
+}

@@ -1,46 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaCoop | <%= title %></title>
-    <link rel="stylesheet" href="/css/memberinfo.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-<nav>
-    <div class="site-title">
-        <h1>CTU-AC COOPERATIVE SYSTEM</h1>
-    </div>
-    <div class="nav-content">
-        <div class="member-title">
-            <h1>Member</h1>
-        </div>
-        <div class="home-icon">
-            <a href="/">
-                <img src="/svg/icons8-home.svg" alt="Home Icon">
-            </a>
-        </div>
-    </div>
-</nav>
-
-<% if (loan) { %>
-    <h2>
-        <% if (loan.loan_type === 'medical') { %>
-            <p>Medical Loan</p>
-        <% } else if (loan.loan_type === 'emergency') { %>
-            <p>Emergency Loan</p>
-        <% } else { %>
-            <p>Regular Loan</p>
-        <% } %>
-    </h2>
-
-    <section id="service">
-        <div class="container">
-            <div class="row">
-                <div class="service">
-                    <i class="bi bi-piggy-bank"></i>
+    <%- include("head.ejs") %>
+    
+ 
+    <body>
+        <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %>
+        <div class="payment-container">
+            <div class="loan-container">
+                <% if (loan) { %>
+                    <h2>
+                        <% if (loan.loan_type === 'medical') { %>
+                            <p>Medical Loan</p>
+                        <% } else if (loan.loan_type === 'emergency') { %>
+                            <p>Emergency Loan</p>
+                        <% } else { %>
+                            <p>Regular Loan</p>
+                        <% } %>
+                    </h2>
+                
+                  
+                
                     <h4>Loan Details</h4>
                     <table>
                         <tr>
@@ -73,63 +53,65 @@
                         </tr>
                     </table>
                 </div>
-
-
-                <div class="form-container">
-                    <form action="/loanpayment" method="post">
-                        <h1>Add Payment</h1>
-
-                        <input type="hidden" id="user_id" name="user_id" value="<%= loan.User.user_id %>">
-                        <input type="hidden" id="loan_id" name="loan_id" value="<%= loan.loan_id %>">
-                        <input type="hidden" id="application_id" name="application_id" value="<%= loan.Loan_application.application_id %>">
-
-                        <div class="form-group">
-                            <label for="amount">Amount:</label>
-                            <input type="number" id="amount" name="amount" value="<%= loan.Loan_application.monthly_payment %>">
-                        </div><br>
-
-                        <div class="form-group">
-                            <button type="submit">Send</button>
-                        </div>
-                    </form>
-                </div>
+                <% } %>
             </div>
+            
+            
+            
+            <div class="payment-form-container">
+                <form action="/loanpayment" method="post">
+                    <h1>Add Payment</h1>
+
+                    <input type="hidden" id="user_id" name="user_id" value="<%= loan.User.user_id %>">
+                    <input type="hidden" id="loan_id" name="loan_id" value="<%= loan.loan_id %>">
+                    <input type="hidden" id="application_id" name="application_id" value="<%= loan.Loan_application.application_id %>">
+
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" value="<%= loan.Loan_application.monthly_payment %>">
+                    </div><br>
+
+                    <div class="form-group">
+                        <button type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+                      
+            
+       
+                <div class="payment-details-container">
+                   
+                    <% if (loan_payment && loan_payment.length > 0) { %>
+                    <table id="table">
+                        <thead>
+                            <tr>
+                                <th>Number of Payments</th>
+                                <th>Balance</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% loan_payment.forEach(loan_payment => { %>
+                            <tr>
+                                <td><%= loan_payment.number_of_payments %></td>
+                                <td><%= loan_payment.Loan.balance %></td>
+                                <td><%= loan_payment.amount %></td>
+                                <td><%= loan_payment.status %></td>
+                                <td><%= loan_payment.timestamp %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <p>No payments found.</p>
+                    <% } %>
+                </div>
+            </section>
+            
+            
         </div>
-    </section>
-<% } %>
+    </body>
 
-<section id="loan-status">
-    <div class="service">
-        <i class="bi bi-cash-coin"></i>
-        <h4>Loan Status</h4>
-        <% if (loan_payment && loan_payment.length > 0) { %>
-        <table id="table">
-            <thead>
-                <tr>
-                    <th>Number of Payments</th>
-                    <th>Balance</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% loan_payment.forEach(loan_payment => { %>
-                <tr>
-                    <td><%= loan_payment.number_of_payments %></td>
-                    <td><%= loan_payment.Loan.balance %></td>
-                    <td><%= loan_payment.amount %></td>
-                    <td><%= loan_payment.status %></td>
-                    <td><%= loan_payment.timestamp %></td>
-                </tr>
-                <% }) %>
-            </tbody>
-        </table>
-        <% } else { %>
-            <p>No payments found.</p>
-        <% } %>
-    </div>
-</section>
-
-</body>
 </html>
