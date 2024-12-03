@@ -13,12 +13,18 @@
                     <tr>
                         <td class="cooperative_advisory">
                             <h1 class="coop_ad"><%= content.content_title %></h1>
-                            <p class="announcements"><<%= content.content.length > 200 
-                                ? content.content.slice(0, 200) + '...' 
-                                : content.content %></p>
-                                <% if (content.content.length > 200) { %>
-                                    <button type="button" class="read-more-btn" data-content-id="<%= content.content_id %>">Read More</button>
-                                <% } %>
+                            <p id="content-<%= content.content_id %>" 
+                               data-full-content="<%= content.content %>">
+                                <%= content.content.length > 200 
+                                    ? content.content.slice(0, 200) + '...' 
+                                    : content.content 
+                                %>
+                            </p>
+                            <% if (content.content.length > 200) { %>
+                                <button type="button" class="read-more-btn" data-content-id="<%= content.content_id %>">
+                                    Read More
+                                </button>
+                            <% } %>
                         </td>
                     </tr>
                     <% }) %>
@@ -30,15 +36,49 @@
             </table>
         </div>
 
+        <style>
+            .container{
+                text-align: center;
+                max-height: 80vh; 
+                overflow-y: auto; 
+                overflow-x: hidden; 
+            }
+
+            .table { 
+                text-align: center;
+            }
+
+            table {
+                border-collapse: separate; 
+                border-spacing: 2rem;
+                width: 100%;
+            }
+            td {
+                padding: 1.5rem;
+                background-color: #ffff;
+                border: 1px solid #dbdbdb;
+                border-radius: 8px;
+                
+
+            }
+
+            h1 {
+                color: #FFA900;
+            }
+
+            p {
+                color: #373f41;
+            }
+        </style>
+
         <script>
-           
-        
             document.querySelectorAll('.read-more-btn').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const contentId = this.dataset.contentId;
                     const contentElement = document.getElementById(`content-${contentId}`);
                     const fullContent = contentElement.dataset.fullContent;
-        
+
+                    // Toggle between showing full content and truncated content
                     if (this.textContent === 'Read More') {
                         contentElement.textContent = fullContent; // Show full content
                         this.textContent = 'Read Less';
@@ -49,7 +89,5 @@
                 });
             });
         </script>
-   
-
     </body>
 </html>
