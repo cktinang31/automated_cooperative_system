@@ -364,11 +364,7 @@ knex.raw('SELECT 1')
   .finally(() => knex.destroy());
 
 
-<<<<<<< HEAD
+
   app.listen(3000, '192.168.1.140', () => {
     console.log('Server running on http://0.0.0.0:3000');
-=======
-  app.listen(3001, '0.0.0.0', () => {
-    console.log('Server running on http://0.0.0.0:3001');
->>>>>>> 83b817e0abd4ef8095241aee39642df40ec688df
   });
