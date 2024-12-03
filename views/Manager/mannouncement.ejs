@@ -19,38 +19,40 @@
             </form>
         </div>
 
-        <table>
-            <% if (contents && contents.length > 0) { %>
-                <% contents.forEach(content => { %>
-                <tr>
-                    <td>
-                        <div class="announcement">
-                            <form action="/delete_content" method="POST" class="delete-content-form">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="user_id" value="<%= content.content_id %>">
-                            </form>
-                            <h1><%= content.content_title %></h1>
-                            <p class="announcement-content" id="content-<%= content.content_id %>" data-full-content="<%= content.content %>">
-                                <%= content.content.length > 200 
-                                    ? content.content.slice(0, 200) + '...' 
-                                    : content.content %>
-                            </p>
-                            <% if (content.content.length > 200) { %>
-                                <button type="button" class="read-more-btn" data-content-id="<%= content.content_id %>">Read More</button>
-                            <% } %>
-                        </div>
-                        <button type="button" class="delete-btn" data-user-id="<%= content.content_id %>">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <% }) %>
-            <% } else { %>
-                <tr>
-                    <td colspan="2" class="no-announcements">There are no announcements to display...</td>
-                </tr>
-            <% } %>
-        </table>               
+        <div class="table-container">
+            <table>
+                <% if (contents && contents.length > 0) { %>
+                    <% contents.forEach(content => { %>
+                    <tr>
+                        <td>
+                            <div class="announcement">
+                                <form action="/delete_content" method="POST" class="delete-content-form">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="user_id" value="<%= content.content_id %>">
+                                </form>
+                                <h1><%= content.content_title %></h1>
+                                <p class="announcement-content" id="content-<%= content.content_id %>" data-full-content="<%= content.content %>">
+                                    <%= content.content.length > 200 
+                                        ? content.content.slice(0, 200) + '...' 
+                                        : content.content %>
+                                </p>
+                                <% if (content.content.length > 200) { %>
+                                    <button type="button" class="read-more-btn" data-content-id="<%= content.content_id %>">Read More</button>
+                                <% } %>
+                            </div>
+                            <button type="button" class="delete-btn" data-user-id="<%= content.content_id %>">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="2" class="no-announcements">There are no announcements to display...</td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>                     
     </div>
 
     <style>
@@ -143,7 +145,15 @@
             }
         }
 
-        /* Table Styles */
+        .table-container {
+            max-height: 500px; 
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
