@@ -1,81 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("head.ejs") %>
-    <link rel="stylesheet" href="/css/save.css">
- 
-    <body>
-        <%- include("header.ejs") %>
-        <%- include("sidebar_mem.ejs") %>
-       
-  
-            <div class="container">
-             
-                <div class="container">
-                    <!-- Savings and CBU Section -->
-                    <div class="balances">
-                      <div class="balance-card savings">
-                        <h3>Savings</h3>
-                        <% savings.forEach(savings => { %>
-                            <p class="amount">Php <%= savings.amount %>.00</p>
-                            <% }) %>
-                        
-                      </div>
-                      <div class="balance-card cbu">
-                        <h3>CBU</h3>
-                        <% cbu.forEach(cbu => { %>
-                            <p class="amount">Php<%= cbu.amount %>.00</p>
-                            <% }) %>
-                        
-                      </div>
-                    </div>
-          
-           
-                    <form action="/submit-transaction" method="post" class="transaction-form">
-                      <h4>Request a Transaction</h4>
-                      <div class="form-fields">
-                        <select name="fund-type" id="fund-type">
-                            <option value="" disabled selected hidden>Fund Type</option>
-                            <option value="savings">Savings</option>
-                            <option value="cbu">CBU</option>
-                         
-                        </select>
-                        <select name="transaction-type" id="transaction-type">
-                            <option value="" disabled selected hidden>Transaction Type</option>
-                            <option value="deposit">Deposit</option>
-                            <option value="withdrawal">Withdrawal</option>
-                        </select>
-                        <select name="payment-mode" id="payment-mode">
-                            <option value="" disabled selected hidden>Mode of Payment</option>
-                          <option value="cash">Cash</option>
-                          <option value="cash">Credit Card</option>
-                          <option value="cash">Debit Card</option>
-                          <option value="cash">Gcash</option>
-                          <option value="cash">Maya</option>
-                          <option value="cash">Paypal</option>
-                        </select>
-                      </div>
-                      <div></div>
-                      
-                    </form>
-                  
-                    <form class="form-container">
-                      <table class="form-table">
-                        <tr>
-                          <td>
-                            Enter Amount
-                          </td>
-                          <td>
-                            <input type="number" class="form-input" name="" min="0" max="100" step="1">
-                          </td>
-                        </tr>
-                      </table>
-                    </form>
-                    
+    <%- include("head.ejs") %> 
+  <body>
+    <%- include("header.ejs") %>
+    <%- include("sidebar_mem.ejs") %>
+    <div class="container">
+      <div class="balances">
+        <!-- Savings Section -->
+        <div class="balance-card savings">
+          <h3>Savings</h3>
+          <% savings.forEach(saving => { %>
+          <p class="amount">Php <%= saving.amount %>.00</p>
+          <% }) %>
+        </div>
+        
+        <!-- CBU Section -->
+        <div class="balance-card cbu">
+          <h3>CBU</h3>
+          <% cbu.forEach(item => { %>
+          <p class="amount">Php <%= item.amount %>.00</p>
+          <% }) %>
+        </div>
+      </div>
 
-                      <button type="submit" class="confirm-button">Confirm</button>
-                   
-                    
-    </body>
- 
- 
+      <!-- Transaction Form -->
+      <form action="/submit-transaction" method="post" class="transaction-form">
+        <h4>Request a Transaction</h4>
+        <div class="form-fields">
+          <select name="fund-type" id="fund-type" required>
+            <option value="" disabled selected hidden>Fund Type</option>
+            <option value="savings">Savings</option>
+            <option value="cbu">CBU</option>
+          </select>
+          <select name="transaction-type" id="transaction-type" required>
+            <option value="" disabled selected hidden>Transaction Type</option>
+            <option value="deposit">Deposit</option>
+            <option value="withdrawal">Withdrawal</option>
+          </select>
+          <select name="payment-mode" id="payment-mode" required>
+            <option value="" disabled selected hidden>Mode of Payment</option>
+            <option value="cash">Cash</option>
+            <option value="credit-card">Credit Card</option>
+            <option value="debit-card">Debit Card</option>
+            <option value="gcash">Gcash</option>
+            <option value="maya">Maya</option>
+            <option value="paypal">Paypal</option>
+          </select>
+        </div>
+      </form>
+
+      <!-- Amount Entry Form -->
+      <form action="#" method="post" class="form-container">
+        <table class="form-table">
+          <tr>
+            <td>Enter Amount</td>
+            <td>
+              <input type="number" class="form-input" name="amount" min="0" max="100" step="1" required>
+            </td>
+          </tr>
+        </table>
+        <button type="submit" class="confirm-button">Confirm</button>
+      </form>
+    </div>
+  </body>
+
+  <style>
+    .container {
+      margin-top: 5%;
+    }
+
+    h3 {
+      color: #F9A602;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .balances {
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 30px;
+    }
+
+    .balance-card {
+      background-color: #373F41;
+      color: #ffd200;
+      padding: 20px;
+      border-radius: 8px;
+      width: 45%;
+      text-align: center;
+    }
+
+    .balance-card h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .balance-card .amount {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    .transaction-form {
+      margin-bottom: 20px;
+    }
+
+    .transaction-form h4 {
+      margin-bottom: 15px;
+      font-weight: normal;
+    }
+
+    .form-fields {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-fields select {
+      width: 30%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #000;
+    }
+
+    .confirm-button {
+      background-color: #333;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 20%;
+      cursor: pointer;
+    }
+
+    .confirm-button:hover {
+      background-color: #555;
+    }
+  </style>
 </html>

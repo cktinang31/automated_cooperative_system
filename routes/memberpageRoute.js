@@ -195,7 +195,7 @@ router.get(['/Member/transaction_history', '/Member/transaction', '/Member/histo
                 // Render the transaction history page
                 res.render('./Member/transaction_history', {
                     transactions,
-                    title: 'Request',
+                    title: 'History',
                     user
                 });
 

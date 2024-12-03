@@ -128,7 +128,7 @@ aside ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    margin-top: 140px;
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -174,74 +174,150 @@ aside ul li:hover i, aside ul li:hover span {
     }
 }
 
-/* funds.css */
-.fund-container {
-    padding: 5%;
-    display: flex;
+/* dashboard */
+.container {
+    /* padding-top: 8rem; */
+    padding-left: 18rem;
+
 }
-
-.funds-graph {
-    padding: 5%;
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 2%;
-}
-
-.savings-graph {
-    padding: 2%;
-    background-color: #373F41;
-    height: 3rem;
-    width: 5rem;
-}
-
-.cbu-graph {
-    padding: 2%;
-    background-color: #373F41;
-    height: 3rem;
-    width: 5rem;
-}
-
-
-.payment-container{
-    margin-top: 5rem;
-    margin-left: 18rem;
-}
-
-.loan-container {
-    padding: 1rem;
-    width: fit-content;
-    border: 1px solid #373f41;
-    border-radius: 5px;
-}
-
-.payment-form-container {
-    /* background-color: #373F41; */
-    margin-top: 2.5rem;
-    margin-left: 18rem;
-    width: fit-content;
-}
-
-.payment-details-container {
-    /* background-color: #373F41; */
-    margin-left: 48rem;
-    margin-top: -34.5rem;
-    width: 69rem;
-    height: auto;
+.announcement-container {
+    box-sizing: border-box;
+    position: absolute;
+    margin-top: 20px;
+    width: 900px;
+    height: 330px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
     text-align: center;
+    padding-top: 1rem;
+    max-height: 80vh; 
+    overflow-y: auto; 
+    overflow-x: hidden;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+ 
+.announcement-container:hover {
+    border: 2px solid #f5f5f5;
+    box-shadow: 10px 10px 4px #373F41;
+ 
+}
+ 
+.announcement-title {
+    color: #f9a602;
+    font-size: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
 
-.payment-details-container table {
+.coopfunds-container h3 {
+    color: #f9a602;
+    font-size: 38px;
+}
+ 
+.welcome-container {
+    position: absolute;
+    width: 30rem;
+    height: 19rem;
+    left: 1300px;
+    top: 127px;
+    background: #FFFFFF;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+.welcome-container:hover {
+    border: 2px solid #FFFFFF;
+    box-shadow: 10px 10px 4px #373F41;
+}
+ 
+.welcome-title {
+    margin-top: 0;
+    color:#373F41;
+    background-color: #F9A602;
+    font-size: 24px;
+    padding: 1rem;
+}
+
+.welcome-container p {
+    color: #373F41;
+    font-size: 16px;
+    padding: 1rem;
+}
+ 
+.coopfunds-container {
+    box-sizing: border-box;
+    position: absolute;
+    width: 900px;
+    height: 400px;
+    top: 512px;
+    background: #373F41;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+.coopfunds-container:hover {
+    border: 2px solid #FFFFFF;
+    box-shadow: 10px 10px 4px #373F41;
+}
+ 
+.funds-container {
+    box-sizing: border-box;
+    position: absolute;
+    width: 397px;
+    height: 466px;
+    left: 1300px;
+    top: 512px;
+    text-align:center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.funds-container li {
+    border-top: 0.5px solid #748589;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 40px;
+    list-style-type: none;
     width: 100%;
+    height: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.payment-details-container table thead {
-    background-color: #373F41;
-    color: #fff;
-    height: 3rem;
-    font-weight: 300;
-    
+ 
+.funds-container li:hover {
+    border: 2px solid #FFFFFF;
+    box-shadow: 10px 10px 4px #373F41;        
+}
+ 
+.funds-container li a{
+    text-decoration: none;
 }
 
-.payment-details-container table tbody {
-    border:#373F41;
+.funds-container li p {
+    background-color: #f0ecec;
+    color: #373F41;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    height: 50px;
 }
+ 
+.funds-container li h3 {
+    background-color: #373F41;
+    color: #f9a602;
+    margin: 0;
+    padding: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 50px;
+    font-size: 24px;
+}
+
