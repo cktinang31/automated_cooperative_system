@@ -10,14 +10,11 @@ const {Application,
 
 const { v4: uuidv4 } = require('uuid');
 
-const savings_transaction = async (req, res) => {
-    try { 
-        let { amount, transaction_type, mode } = req.body;
-
-        console.log('Request Body:', req.body);
+const savings_transaction = async (req, res, amount, transaction_type, mode) => {
+    try {
+        const user_id = req.session.passport.user;
 
         // Ensure user_id is valid
-        const user_id = req.session.passport.user;
         if (!user_id) {
             console.error('User ID is null or undefined');
             return res.status(401).send('User ID is null or undefined');
@@ -30,52 +27,32 @@ const savings_transaction = async (req, res) => {
             return res.status(401).send('Savings ID is null or undefined');
         }
 
-        // Handle the case where amount is an array
-        if (Array.isArray(amount)) {
-            // Sum up the array of amounts, ensuring they're parsed as floats
-            amount = amount.reduce((total, num) => total + parseFloat(num), 0);
-        } else {
-            // Ensure the amount is a valid number
-            amount = parseFloat(amount);
+        // Handle the withdrawal scenario
+        if (transaction_type === 'withdraw' && (userSavings.amount - amount < 500)) {
+            console.error('Withdrawal would result in balance less than 500');
+            return res.status(400).send('Withdrawal would result in balance less than 500.');
         }
 
-        // Check if the amount is a valid number
-        if (isNaN(amount)) {
-            console.error('Invalid amount value:', amount);
-            return res.status(400).send('Invalid amount.');
-        }
-
-        if (transaction_type === 'withdraw') {
-            // Check the current balance
-            const currentBalance = Savings.amount || 0;
-
-            
-            if (currentBalance - amount < 500) {
-                console.error('Withdrawal would result in balance less than 500');
-                return res.status(400).send('Withdrawal would result in a balance of less than 500.');
-            }
-        }
-
-
-        // Create the new savings transaction
+        // Create the savings transaction
         const newSavtransaction = await Savtransaction.create({
             savtransaction_id: uuidv4(),
             user_id,
-            savings_id: userSavings.savings_id, 
+            savings_id: userSavings.savings_id,
             amount,
             transaction_type,
             mode,
             status: 'pending',
-            date_sent: new Date(),  // Using date_sent as per your table definition
+            date_sent: new Date(),
         });
 
-        console.log('Request Submitted:', newSavtransaction);
-        res.send('Request Submitted.');
+        console.log('Savings Transaction Submitted:', newSavtransaction);
+        res.send('Savings transaction request submitted.');
     } catch (error) {
-        console.error('Error submitting request: ', error);
-        return res.status(500).send('Error submitting the request');
+        console.error('Error submitting savings transaction: ', error);
+        return res.status(500).send('Error submitting savings transaction');
     }
 };
+
 
 
 
@@ -144,9 +121,46 @@ const update_savings_request = async (req, res) => {
     }
 };
 
+const handle_transaction_submission = async (req, res) => {
+    try {
+        let { amount, transaction_type, 'payment-mode': mode, 'fund-type': fundType } = req.body;
+
+        // Validate and ensure amount is a valid number
+        if (Array.isArray(amount)) {
+            amount = amount.reduce((total, num) => total + parseFloat(num), 0);
+        } else {
+            amount = parseFloat(amount);
+        }
+
+        if (isNaN(amount)) {
+            console.error('Invalid amount value:', amount);
+            return res.status(400).send('Invalid amount.');
+        }
+
+        // Decide which transaction function to call based on the fund type
+        if (fundType === 'savings') {
+            // Call the savings transaction handler
+            await savings_transaction(req, res, amount, transaction_type, mode);
+        } else if (fundType === 'cbu') {
+            // Call the CBU transaction handler
+            await cbu_transaction(req, res, amount, transaction_type, mode);
+        } else {
+            console.error('Invalid fund type');
+            return res.status(400).send('Invalid fund type.');
+        }
+
+    } catch (error) {
+        console.error('Error processing transaction:', error);
+        return res.status(500).send('Error processing the transaction.');
+    }
+};
+
+
+
 
 
 module.exports = {
     savings_transaction,
     update_savings_request,
+    handle_transaction_submission
 }

@@ -10,46 +10,28 @@ const {Application,
 
 const { v4: uuidv4 } = require('uuid');
 
-const cbu_transaction = async (req, res) => {
-    try { 
-        let { amount, transaction_type, 'payment-mode': mode } = req.body;
-
-
-        console.log('Request Body:', req.body);
-
+const cbu_transaction = async (req, res, amount, transaction_type, mode) => {
+    try {
         const user_id = req.session.passport.user;
 
+        // Ensure user_id is valid
         if (!user_id) {
             console.error('User ID is null or undefined');
             return res.status(401).send('User ID is null or undefined');
         }
 
-        // Handle if 'amount' is an array and sum it
-        if (Array.isArray(amount)) {
-            amount = amount.reduce((total, num) => total + parseFloat(num), 0);
-        } else {
-            amount = parseFloat(amount);  // Ensure the amount is a number if it's a single value
-        }
-
-        // Check if amount is a valid number
-        if (isNaN(amount)) {
-            console.error('Invalid amount value:', amount);
-            return res.status(400).send('Invalid amount.');
-        }
-
-        // Retrieve the CBU of the user
+        // Find the user's CBU record
         const userCbu = await Cbu.findOne({ where: { user_id } });
-
         if (!userCbu || !userCbu.cbu_id) {
             console.error('CBU ID is null or undefined');
             return res.status(401).send('CBU ID is null or undefined');
         }
 
-        // Create the new CBU transaction
+        // Create the CBU transaction
         const newCbutransaction = await Cbutransaction.create({
             cbutransaction_id: uuidv4(),
             user_id,
-            cbu_id: userCbu.cbu_id, 
+            cbu_id: userCbu.cbu_id,
             amount,
             transaction_type,
             mode,
@@ -57,13 +39,14 @@ const cbu_transaction = async (req, res) => {
             timestamp: new Date(),
         });
 
-        console.log('Request Submitted:', newCbutransaction);
-        res.send('Request Submitted.');
+        console.log('CBU Transaction Submitted:', newCbutransaction);
+        res.send('CBU transaction request submitted.');
     } catch (error) {
-        console.error('Error submitting request: ', error);
-        return res.status(500).send('Error submitting the request');
+        console.error('Error submitting CBU transaction: ', error);
+        return res.status(500).send('Error submitting CBU transaction');
     }
 };
+
 
 const update_cbu_request = async (req, res) => {
     const cbutransaction_id = req.params.id;  

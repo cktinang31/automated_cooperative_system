@@ -10,7 +10,9 @@
         <div class="balance-card savings">
           <h3>Savings</h3>
           <% savings.forEach(saving => { %>
-          <p class="amount">Php <%= saving.amount %>.00</p>
+            <p class="amount" id="savings-amount">Php <%= saving.amount %>.00</p>
+            <p class="interest" id="interest-amount">Interest: Php <%= (saving.amount * 0.0002).toFixed(2) %></p>
+            <p class="total-revenue" id="total-revenue-amount">Total Revenue: Php <%= (saving.amount + (saving.amount * 0.0002)).toFixed(2) %></p>
           <% }) %>
         </div>
         
@@ -18,49 +20,49 @@
         <div class="balance-card cbu">
           <h3>CBU</h3>
           <% cbu.forEach(item => { %>
-          <p class="amount">Php <%= item.amount %>.00</p>
+            <p class="amount" id="amount">Php <%= item.amount %>.00</p>
+            <p class="interest" id="interest-amount">Interest: Php <%= (item.amount * 0.02).toFixed(2) %></p>
+            <p class="total-revenue" id="total-revenue-amount">Total Revenue: Php <%= (item.amount + (item.amount * 0.02)).toFixed(2) %></p>
           <% }) %>
         </div>
       </div>
 
       <!-- Transaction Form -->
-      <form action="/submit-transaction" method="post" class="transaction-form">
+      <form action="/handle_transaction_submission" method="post" class="transaction-form">
         <h4>Request a Transaction</h4>
         <div class="form-fields">
-          <select name="fund-type" id="fund-type" required>
-            <option value="" disabled selected hidden>Fund Type</option>
-            <option value="savings">Savings</option>
-            <option value="cbu">CBU</option>
-          </select>
-          <select name="transaction-type" id="transaction-type" required>
-            <option value="" disabled selected hidden>Transaction Type</option>
-            <option value="deposit">Deposit</option>
-            <option value="withdrawal">Withdrawal</option>
-          </select>
-          <select name="payment-mode" id="payment-mode" required>
-            <option value="" disabled selected hidden>Mode of Payment</option>
-            <option value="cash">Cash</option>
-            <option value="credit-card">Credit Card</option>
-            <option value="debit-card">Debit Card</option>
-            <option value="gcash">Gcash</option>
-            <option value="maya">Maya</option>
-            <option value="paypal">Paypal</option>
-          </select>
+            <select name="fund-type" id="fund-type" required>
+                <option value="" disabled selected hidden>Fund Type</option>
+                <option value="savings">Savings</option>
+                <option value="cbu">CBU</option>
+            </select>
+            <select name="transaction_type" id="transaction-type" required>
+                <option value="" disabled selected hidden>Transaction Type</option>
+                <option value="deposit">Deposit</option>
+                <option value="withdrawal">Withdrawal</option>
+            </select>
+            <select name="payment-mode" id="payment-mode" required>
+                <option value="" disabled selected hidden>Mode of Payment</option>
+                <option value="cash">Cash</option>
+                <option value="credit-card">Credit Card</option>
+                <option value="debit-card">Debit Card</option>
+                <option value="gcash">Gcash</option>
+                <option value="maya">Maya</option>
+                <option value="paypal">Paypal</option>
+            </select>
         </div>
-      </form>
-
-      <!-- Amount Entry Form -->
-      <form action="#" method="post" class="form-container">
+    
+        <!-- Amount Entry Form -->
         <table class="form-table">
-          <tr>
-            <td>Enter Amount</td>
-            <td>
-              <input type="number" class="form-input" name="amount" min="0" max="100" step="1" required>
-            </td>
-          </tr>
+            <tr>
+                <td>Enter Amount</td>
+                <td>
+                    <input type="number" class="form-input" name="amount" min="0" step="1" required>
+                </td>
+            </tr>
         </table>
         <button type="submit" class="confirm-button">Confirm</button>
-      </form>
+    </form>
     </div>
   </body>
 
