@@ -351,7 +351,7 @@ app.get('/Collector/paymentnotif', (req, res) => {
 //   res.render('your-template', { user: user });
 // });
 
-// 404 page
+// 404 page 
 app.use((req, res) => {
   res.status(404).render('404', { title: '404'})
 });
