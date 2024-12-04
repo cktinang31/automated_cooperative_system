@@ -11,8 +11,8 @@
           <h3>Savings</h3>
           <% savings.forEach(saving => { %>
             <p class="amount" id="savings-amount">Php <%= saving.amount %>.00</p>
-            <p class="interest" id="interest-amount">Interest: Php <%= (saving.amount * 0.0002).toFixed(2) %></p>
-            <p class="total-revenue" id="total-revenue-amount">Total Revenue: Php <%= (saving.amount + (saving.amount * 0.0002)).toFixed(2) %></p>
+            <p class="interest" id="interest-amount">Interest: Php <%= (saving.amount * 0.002).toFixed(2) %></p>
+            <p class="total-revenue" id="total-revenue-amount">Total Revenue: Php <%= (saving.amount + (saving.amount * 0.002)).toFixed(2) %></p>
           <% }) %>
         </div>
         
