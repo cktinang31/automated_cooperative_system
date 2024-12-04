@@ -14,12 +14,10 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const apply_loan = async (req, res) => {
-
-
     try {
         const { loan_type, amount, loan_term, interest } = req.body;
-        console.log('Request Body:', req.body);
-     
+        console.log('Request Body:', req.body);  // Debugging
+
         const user_id = req.session.passport.user;
      
         if (!user_id) {
@@ -35,7 +33,7 @@ const apply_loan = async (req, res) => {
             (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
      
         const newLoan_application = await Loan_application.create({
-          application_id: uuidv4(),  
+          application_id: uuidv4(),
           user_id,
           loan_type,
           amount,
@@ -48,12 +46,12 @@ const apply_loan = async (req, res) => {
         });
         console.log('Loan Application Submitted:', newLoan_application);
         res.send('Loan Application Submitted');
-      } catch (error) {
+    } catch (error) {
         console.error('Error submitting the application:', error);
         return res.status(500).send('Error submitting the application.');
-      }
-    
+    }
 };
+
 
 const update_loan_request = async (req, res) => {
     const id = req.params.id;
