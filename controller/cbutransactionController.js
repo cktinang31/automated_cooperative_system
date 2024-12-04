@@ -9,6 +9,7 @@ const {Application,
     User,} = require('../models/sync');
 
 const { v4: uuidv4 } = require('uuid');
+const cbutransactionController = require ('../controller/cbutransactionController');
 
 const cbu_transaction = async (req, res, amount, transaction_type, mode) => {
     try {
