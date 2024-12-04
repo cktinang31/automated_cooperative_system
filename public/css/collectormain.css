@@ -177,10 +177,11 @@ aside ul li:hover i, aside ul li:hover span {
 }
 
 .container {
-    margin-top: 4rem;
-    margin-left: 18rem;
+    margin-left: 10px;
     position: fixed;
+    width: 100%;
 }
+
 /* dashboard */
 .dashboard-announcement-container {
     height: 16rem;
@@ -395,9 +396,7 @@ td {
 
 
 .payment-table {
-    width: 134%;
     border-collapse: collapse;
-    /* margin-left: 145px; */
     cursor: pointer;
 }
 
