@@ -369,40 +369,40 @@
         </style>
 
         <script>
-        //     function updateInterestRate() {
-        //     var loanTerm = document.getElementById('loan_term').value;
+            function updateInterestRate() {
+            var loanTerm = document.getElementById('loan_term').value;
             
-        //     var baseInterestRate = 6;
-        //     var interestRate;
+            var baseInterestRate = 6;
+            var interestRate;
 
-        //     switch (loanTerm) {
-        //         case '6 months':
-        //             interestRate = baseInterestRate / 2; 
-        //             break;
-        //         case '12 months':
-        //             interestRate = baseInterestRate; 
-        //             break;
-        //         case '18 months':
-        //             interestRate = baseInterestRate * 1.5; 
-        //             break;
-        //         case '24 months':
-        //             interestRate = baseInterestRate * 2;
-        //             break;
-        //         default:
-        //             interestRate = 0;
-        //             break;
-        //     }
-        //     document.getElementById('interest').value = interestRate + '%'; 
-        // }
+            switch (loanTerm) {
+                case '6 months':
+                    interestRate = baseInterestRate / 2; 
+                    break;
+                case '12 months':
+                    interestRate = baseInterestRate; 
+                    break;
+                case '18 months':
+                    interestRate = baseInterestRate * 1.5; 
+                    break;
+                case '24 months':
+                    interestRate = baseInterestRate * 2;
+                    break;
+                default:
+                    interestRate = 0;
+                    break;
+            }
+            document.getElementById('interest').value = interestRate + '%'; 
+        }
 
-        // window.onload = updateInterestRate;
-        //     document.querySelectorAll('tr[data-loan-id]').forEach(row => {
-        // row.addEventListener('click', function() {
-        //     const loanId = this.getAttribute('data-loan-id')
-        //     const destinationUrl = '/Member/regular_loan/' + loanId;
-        //     window.location.href = destinationUrl;
-        // });
-        // });
+        window.onload = updateInterestRate;
+            document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+        row.addEventListener('click', function() {
+            const loanId = this.getAttribute('data-loan-id')
+            const destinationUrl = '/Member/regular_loan/' + loanId;
+            window.location.href = destinationUrl;
+        });
+        });
 
     function calculateMonthlyPayment() {
     const amount = parseFloat(document.getElementById('amount').value);
