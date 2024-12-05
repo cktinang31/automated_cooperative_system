@@ -86,15 +86,47 @@ header i {
     color: inherit; 
 }
 
-.logout-link a {
-    text-decoration: none; 
-    color: #333; 
-    transition: color 0.3s ease;
+.logout-link {
+    position: relative; /* For positioning the hover text */
 }
 
-.logout-link a:hover {
-    color: #f9a602;
+.logout-link a {
+    text-decoration: none;
+    color: #373F41; 
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 4px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
+
+.logout-link a i:hover {
+    color: #f9a602;
+    transform: scale(1.1);
+}
+
+.logout-link a::after {
+    content: "Logout";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #000000;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.logout-link a:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px); 
+}
+
 
 .container {
     padding: 20px; 
