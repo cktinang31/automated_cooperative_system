@@ -79,15 +79,15 @@ header i {
     color: #f9a602;
 }
 
+.logout-link {
+    position: relative;
+}
+
 .logout-link p {
     margin: 0; 
     font-size: 20px;
     font-weight: 600;
     color: inherit; 
-}
-
-.logout-link {
-    position: relative; /* For positioning the hover text */
 }
 
 .logout-link a {
@@ -126,7 +126,6 @@ header i {
     opacity: 1;
     transform: translateX(-50%) translateY(-5px); 
 }
-
 
 .container {
     padding: 20px; 
