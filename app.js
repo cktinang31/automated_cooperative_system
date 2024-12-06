@@ -342,6 +342,9 @@ app.get('/Collector/paymentnotif', (req, res) => {
   res.render('Collector/paymentnotif', { title: 'Payment Notification'});
 });
 
+app.get('/send_gmail', (req, res) => {
+  res.render('send_gmail', { title: 'GMail'});
+});
 
 // app.get('/your-route', (req, res) => {
 //   const user = {

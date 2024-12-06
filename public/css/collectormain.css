@@ -177,8 +177,9 @@ aside ul li:hover i, aside ul li:hover span {
 }
 
 .container {
-    margin-left: 10px;
+    margin-left: 14%;
     position: fixed;
+    margin-top: 25px;
     width: 100%;
 }
 
@@ -276,7 +277,7 @@ aside ul li:hover i, aside ul li:hover span {
     margin-top: -27.3rem;
     background-color: #373f41;
     margin-left: 64rem;
-    width: 34rem;
+    width: 35rem;
     border-radius: 5px;
     padding: 1rem;
 }

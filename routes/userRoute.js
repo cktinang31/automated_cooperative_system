@@ -23,6 +23,7 @@ router.post('/edit_user/:userId', userController.edit_user);
 router.delete('/delete_user/:userId', userController.delete_user);
 router.post('/add_user', userController.add_user);
 router.post('/update_profile', upload.single('profilePicture'), userController.profile_update); 
+router.post('/verify', userController.verify);
 
 
 

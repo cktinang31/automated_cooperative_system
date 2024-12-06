@@ -2,6 +2,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
+const nodemailer = require("nodemailer");
 
 // Set up multer storage configuration
 const storage = multer.diskStorage({
@@ -70,7 +71,7 @@ const {Application,
   
         if (!user) {
           let errorMessage = '';
-          if (info && info.message === 'Incorrect password') {
+          if (info && info.message === 'Incorrect credentials') {
             console.log('Incorrect password for user:', user_id);
             errorMessage = 'Incorrect password.';
           } else {
@@ -251,6 +252,86 @@ const add_user = async (req, res) => {
       res.status(500).send('Internal server error.');
     }
   };
+
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      type: 'OAuth2',
+      user: process.env.MAIL_USERNAME,
+      pass: process.env.MAIL_PASSWORD,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN
+    }
+  });
+
+  let mailOptions = {
+    from: 'automatedcooperativesystem@gmail.com',
+    to:'automatedcooperativesystem@gmail.com',
+    subject: 'Nodemailer Project',
+    text: 'Hi from your nodemailer project'
+  };
+
+  transporter.sendMail(mailOptions, function(err, data) {
+    if (err) {
+      console.log("Error " + err);
+    } else {
+      console.log("Email sent successfully");
+    }
+  });
+  
+ 
+  const verify = async (req, res) => {
+    try {
+      const { user_id, email } = req.body;
+      console.log('Verification Credentials:', req.body);
+  
+      if (!user_id || !email) {
+        let errorMessage = 'Please provide both user_id and email.';
+        console.log(errorMessage);
+        return res.status(400).json({ error: errorMessage });
+      }
+  
+     
+      const user = await User.findOne({
+        where: {
+          user_id: user_id,
+          email: email
+        }
+      });
+  
+
+      if (!user) {
+        let errorMessage = 'No user found with the provided user_id and email.';
+        console.log(errorMessage);
+        return res.status(404).json({ error: errorMessage });
+      }
+  
+    
+      const recoveryLink = `https://yourapp.com/reset-password?token=${user.user_id}`; 
+      
+      const recoveryMailOptions = {
+        from: 'automatedcooperativesystem@gmail.com',
+        to: email, 
+        subject: 'Account Recovery',
+        text: `Click here to reset your password: ${recoveryLink}`, 
+      };
+  
+     
+      await transporter.sendMail(recoveryMailOptions);
+  
+    
+      return res.status(200).json({
+        message: 'Verification successful. A recovery link has been sent to your email.'
+      });
+  
+    } catch (error) {
+      console.error('Error during verification:', error);
+      return res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
+    }
+  };
+
   
 module.exports = {
    user_reg,
@@ -259,4 +340,5 @@ module.exports = {
    delete_user,
    add_user,
    profile_update,
+   verify,
 }
