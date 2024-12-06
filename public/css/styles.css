@@ -527,7 +527,7 @@ h3 {
     cursor: pointer;
     letter-spacing: 0;
     border-radius: 50px;
-    transition: background-color 0.5s, transform 80ms ease-in-out, letter-spacing 0.3s ease; /* Smooth transition */
+    transition: background-color 0.5s, transform 80ms ease-in-out, letter-spacing 0.3s ease;
 }
 
 .inputBox .submit:hover {
