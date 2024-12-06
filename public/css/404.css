@@ -1,22 +1,42 @@
 @import url('https://fonts.google.com/specimen/Poppins?query=poppins');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
-.broken {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40vh;
-    height: 40vh;
-    margin-left: 73vh;
-    margin-top: 15vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.message {
-    text-align: center;
+body {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 0vh;
-    font-size: medium;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+}
+h1 {
+    font-size: 90px;
+}
+img {
+    width: 500px;
+}
+.text {
+    font-family: "Poppins", sans-serif;
+}
+.text h2 {
+    font-weight: 600;
+    font-size: 30px;
+}
+.text p {
+    font-size: 15px;
+    font-weight: 300;
+}
+button {
+    background: #ffa900;
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+    border-radius: 8px;
+    color: #fff;
+    border: none;
+    font-weight: 600;
 }
