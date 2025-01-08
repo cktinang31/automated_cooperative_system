@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid'); 
 
 const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
 const sequelize = new Sequelize(connectionString, {

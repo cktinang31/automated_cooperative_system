@@ -1,5 +1,4 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt'); // Note: bcrypt is not used in this model
 const connectionString = 'postgresql://postgres.wktdygngpenuvshfxnam:@CoopM0B1L3--@aws-0-ap-southeast-1.pooler.supabase.com/postgres';
 
 const sequelize = new Sequelize(connectionString, {

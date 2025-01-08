@@ -39,6 +39,7 @@ const savtransactionRoutes = require('./routes/savtransactionRoute');
 const cbutransactionRoutes = require('./routes/cbutransactionRoute');
 const collectorRoutes = require('./routes/collectorRoute');
 const vmessageRoutes = require('./routes/vmessageRoute');
+const convoRoutes = require('./routes/convoRoute');
 const { messages } = require('./controller/vmessageController');
 
 const isAuthenticated = (req, res, next) => {
@@ -205,6 +206,8 @@ app.use(cbutransactionRoutes);
 app.use(collectorRoutes);
 app.use(loan_paymentRoutes);
 app.use(vmessageRoutes);
+app.use(convoRoutes);
+
 
 
 app.get('/tables', async (req, res) => {

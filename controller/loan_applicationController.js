@@ -33,6 +33,7 @@ const apply_loan = async (req, res) => {
             (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
      
         const newLoan_application = await Loan_application.create({
+            
           application_id: uuidv4(),
           user_id,
           loan_type,

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/membermain.css"> -->
+
+    <!-- <style>
+        .chat-box {
+      width: 350px;
+      height: 500px; 
+      margin-left: 800px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background: #007bff;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px 10px 0 0;
+      font-size: 18px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin: 5px 0;
+      max-width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: #007bff;
+      color: #fff;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+      background: #e4e6eb;
+      color: #000;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 0 0 0 10px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .chat-input button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 0 0 10px 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .chat-input button:hover {
+      background: #0056b3;
+    }
+    </style> -->
+ 
+    <body>
+        <!-- <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %> -->
+
+        
+
+        <div class="chat-options">
+          <% chat.forEach(user => { %>
+          <button onclick="openModal('Manager')">Message Manager</button>
+          <button onclick="openModal('Collector')">Message Collector</button>
+        </div>
+        
+        <div id="chatModal" class="modal" style="display: none;">
+          <div class="modal-content">
+            <div class="modal-header" id="modalHeader"></div>
+            <div class="chatbox" id="chatBox">
+              <div class="chat-box">
+                <div class="chat-header">Chat Box</div>
+                <div class="chat-messages" id="chatMessages">
+                  <div class="message bot">Hello! How can I help you?</div>
+                </div>
+                <div class="chat-input">
+                  <input type="text" id="userInput" placeholder="Type a message..." />
+                  <button onclick="sendMessage()">Send</button>
+                  <button class="close-btn" onclick="closeModal()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+          function openModal(role) {
+            // Show the modal and set the chat header and first message
+            document.getElementById('chatModal').style.display = 'flex';
+            document.getElementById('modalHeader').textContent = `Chat with ${role}`;
+            document.getElementById('chatMessages').innerHTML = `<div class="message bot">You are now chatting with the ${role}.</div>`;
+          }
+        
+          function closeModal() {
+            document.getElementById('chatModal').style.display = 'none';
+          }
+        
+          function sendMessage() {
+            const userMessage = document.getElementById('userInput').value;
+            if (userMessage.trim() !== '') {
+              // Display user message
+              const chatMessages = document.getElementById('chatMessages');
+              const userMessageElement = document.createElement('div');
+              userMessageElement.classList.add('message', 'user');
+              userMessageElement.textContent = userMessage;
+              chatMessages.appendChild(userMessageElement);
+              
+              // Clear input field
+              document.getElementById('userInput').value = '';
+        
+              // Scroll to the latest message
+              chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+              // Simulate bot response (you can replace this with actual logic)
+              setTimeout(() => {
+                const botResponse = document.createElement('div');
+                botResponse.classList.add('message', 'bot');
+                botResponse.textContent = 'Thank you for your message!';
+                chatMessages.appendChild(botResponse);
+                
+                // Scroll to the latest message
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+              }, 1000);
+            }
+          }
+        </script>
+        
+             
+    </body>
+ 
+ 
+</html>
