@@ -369,6 +369,16 @@
         </style>
 
         <script>
+           document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+                row.addEventListener('click', function () {
+                    // Get the loan ID from the row's data attribute
+                    const loanId = this.getAttribute('data-loan-id');
+                    // Redirect to the destination URL with the loan ID
+                    const destinationUrl = '/Member/regular_loan/' + loanId;
+                    window.location.href = destinationUrl;
+                });
+            });
+
             function calculateMonthlyPayment() {
             const amount = parseFloat(document.getElementById('amount').value);
             const loanTerm = document.getElementById('loan_term').value;
@@ -392,6 +402,7 @@
                 default:
                     interestRate = 0.05; // Default 5% annual interest
             }
+
 
             // Calculate interest rate per month
             const monthlyInterestRate = interestRate / 12;

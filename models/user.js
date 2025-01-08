@@ -134,7 +134,7 @@ const UserModel = (sequelize) => {
         });
 
         User.hasMany(models.Message, {
-            foreignKey: 'message_id',
+            foreignKey: 'user_id',
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });

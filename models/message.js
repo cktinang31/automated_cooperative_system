@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
         },
         convo_id: {
             type: DataTypes.UUID,
-            allowNull: false,
+            allowNull: true,
         },
         receiver_id: {
             type: DataTypes.INTEGER,

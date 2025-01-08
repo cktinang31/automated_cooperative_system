@@ -10,6 +10,7 @@ const sequelize = new Sequelize(connectionString, {
 const User = require('./user')(sequelize);
 const Message = require('./message')(sequelize);
 
+
 module.exports = (sequelize) => {
     const Convo = sequelize.define('Convo', {
         convo_id: {
@@ -17,7 +18,6 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
         },
-              
         date_sent: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -33,8 +33,6 @@ module.exports = (sequelize) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
         });
-
-        
     };
 
     return Convo;
