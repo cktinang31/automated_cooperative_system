@@ -87,10 +87,31 @@
         
 
         <div class="chat-options">
-          <% chat.forEach(user => { %>
-          <button onclick="openModal('Manager')">Message Manager</button>
-          <button onclick="openModal('Collector')">Message Collector</button>
+          <table id="table">
+                  
+                <% if (chat && chat.length > 0) { %> 
+                  <% chat.forEach(chat => { %>
+                      <tr data-chat-id="<%= chat.user_id %>">
+                          <td><%= chat.user_id %></td>
+                          <td>
+                              <% if (chat.role === 'manager') { %>
+                                  <p>Manager</p>
+                              <% } else { %>
+                                  <p>Collector</p>
+                              <% } %>
+                          </td>
+                      </tr>
+                  <% }) %>
+              <% } else { %>
+                  <tr>
+                      <td colspan="8">No Loan at the moment. Fill up the form above if you want to apply.</td>
+                  </tr>
+              <% } %>
+          
+            </table>    
         </div>
+          
+      
         
         <div id="chatModal" class="modal" style="display: none;">
           <div class="modal-content">
@@ -111,47 +132,7 @@
           </div>
         </div>
         
-        <script>
-          function openModal(role) {
-            // Show the modal and set the chat header and first message
-            document.getElementById('chatModal').style.display = 'flex';
-            document.getElementById('modalHeader').textContent = `Chat with ${role}`;
-            document.getElementById('chatMessages').innerHTML = `<div class="message bot">You are now chatting with the ${role}.</div>`;
-          }
-        
-          function closeModal() {
-            document.getElementById('chatModal').style.display = 'none';
-          }
-        
-          function sendMessage() {
-            const userMessage = document.getElementById('userInput').value;
-            if (userMessage.trim() !== '') {
-              // Display user message
-              const chatMessages = document.getElementById('chatMessages');
-              const userMessageElement = document.createElement('div');
-              userMessageElement.classList.add('message', 'user');
-              userMessageElement.textContent = userMessage;
-              chatMessages.appendChild(userMessageElement);
-              
-              // Clear input field
-              document.getElementById('userInput').value = '';
-        
-              // Scroll to the latest message
-              chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-              // Simulate bot response (you can replace this with actual logic)
-              setTimeout(() => {
-                const botResponse = document.createElement('div');
-                botResponse.classList.add('message', 'bot');
-                botResponse.textContent = 'Thank you for your message!';
-                chatMessages.appendChild(botResponse);
-                
-                // Scroll to the latest message
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-              }, 1000);
-            }
-          }
-        </script>
+       
         
              
     </body>

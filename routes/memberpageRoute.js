@@ -517,9 +517,9 @@ router.get('/Manager/membersinfo', (req, res) => {
             const user = req.user;
 
             const chat = await User.findAll({
-                attributes: ['user_id'], 
+                attributes: ['user_id', 'role'], 
                 where: {
-                    role: ['manager', 'collector'], 
+                    role: ['manager', 'collector'],
                 },
             });
             
