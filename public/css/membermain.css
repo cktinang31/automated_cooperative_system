@@ -88,28 +88,28 @@ header i {
     text-align: center;
 }
 
-.profile i {
+/* .profile i {
     font-size: 50px;
     color: #333;
     cursor: pointer;
     transition: color 0.3s ease;
-}
+} */
 
 .notif-bell i:hover, .profile i:hover {
     color: #f9a602;
 }
 
 .user p {
-    font-size: 18px;
+    font-size: 24px;
     color: #333;
     margin: 0;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.user p:hover {
+/* .user p:hover {
     color: #f9a602;
-}
+} */
 
 aside {
     width: 250px;
@@ -320,4 +320,3 @@ aside ul li:hover i, aside ul li:hover span {
     height: 50px;
     font-size: 24px;
 }
-
