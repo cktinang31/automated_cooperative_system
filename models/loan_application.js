@@ -10,8 +10,7 @@ const sequelize = new Sequelize('postgres', 'postgres', '@CoopM0B1L3--', {
 });
 
 
-const User = require('./user'); 
-
+const User = require('./user'); // Ensure User model is being imported properly
 
 const LoanApplicationModel = (sequelize) => {
     const Loan_application = sequelize.define('Loan_application', {
@@ -19,7 +18,7 @@ const LoanApplicationModel = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Users', // Note: This should match the table name in the database
+                model: 'Users', // Make sure this matches the actual table name in the DB
                 key: 'user_id'
             },
             onDelete: 'CASCADE',
@@ -65,8 +64,7 @@ const LoanApplicationModel = (sequelize) => {
             defaultValue: DataTypes.NOW 
         }
     },
-    {timestamps: false,});
-
+    { timestamps: false });
 
     Loan_application.associate = (models) => {
         Loan_application.belongsTo(models.User, {

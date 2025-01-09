@@ -368,75 +368,56 @@
         </style>
 
         <script>
-            function updateInterestRate() {
-            var loanTerm = document.getElementById('loan_term').value;
-            
-            var baseInterestRate = 6;
-            var interestRate;
+           document.querySelectorAll('tr[data-loan-id]').forEach(row => {
+                row.addEventListener('click', function () {
+                    // Get the loan ID from the row's data attribute
+                    const loanId = this.getAttribute('data-loan-id');
+                    // Redirect to the destination URL with the loan ID
+                    const destinationUrl = '/Member/regular_loan/' + loanId;
+                    window.location.href = destinationUrl;
+                });
+            });
 
+            function calculateMonthlyPayment() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const loanTerm = document.getElementById('loan_term').value;
+
+            let interestRate;
+
+            // Set interest rate based on loan term
             switch (loanTerm) {
                 case '6 months':
-                    interestRate = baseInterestRate / 2; 
+                    interestRate = 0.03; // 3% annual interest
                     break;
                 case '12 months':
-                    interestRate = baseInterestRate; 
+                    interestRate = 0.06; // 6% annual interest
                     break;
                 case '18 months':
-                    interestRate = baseInterestRate * 1.5; 
+                    interestRate = 0.09; // 9% annual interest
                     break;
                 case '24 months':
-                    interestRate = baseInterestRate * 2;
+                    interestRate = 0.12; // 12% annual interest
                     break;
                 default:
-                    interestRate = 0;
-                    break;
+                    interestRate = 0.05; // Default 5% annual interest
             }
-            document.getElementById('interest').value = interestRate + '%'; 
+
+
+            // Calculate interest rate per month
+            const monthlyInterestRate = interestRate / 12;
+
+            // Calculate number of payments
+            const number_of_payments = parseInt(loanTerm.split(' ')[0]);
+
+            // Calculate monthly payment (using the annuity formula)
+            const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, number_of_payments)) /
+                (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
+
+            // Update the interest and monthly payment fields
+            document.getElementById('interest').value = (interestRate * 100) + '%'; // Show in percentage
+            document.getElementById('monthly_payment').innerText = monthlyPayment.toFixed(2); // Show as currency
         }
 
-        window.onload = updateInterestRate;
-            document.querySelectorAll('tr[data-loan-id]').forEach(row => {
-        row.addEventListener('click', function() {
-            const loanId = this.getAttribute('data-loan-id')
-            const destinationUrl = '/Member/regular_loan/' + loanId;
-            window.location.href = destinationUrl;
-        });
-        });
-
-    function calculateMonthlyPayment() {
-    const amount = parseFloat(document.getElementById('amount').value);
-    const loanTerm = document.getElementById('loan_term').value;
-    const loanType = document.querySelector('input[name="loan_type"]:checked').value;
-    
-    let interestRate;
-    
-    // Example logic for setting interest rate based on loan type
-    switch (loanType) {
-        case 'regular':
-            interestRate = 0.05; // 5%
-            break;
-        case 'medical':
-            interestRate = 0.03; // 3%
-            break;
-        case 'emergency':
-            interestRate = 0.07; // 7%
-            break;
-        default:
-            interestRate = 0.05;
-    }
-
-    // Calculate interest rate per month
-    const monthlyInterestRate = interestRate / 12;
-
-    // Calculate monthly payment (using simple formula for fixed payments)
-    const number_of_payments = parseInt(loanTerm.split(' ')[0]);
-    const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, number_of_payments)) /
-        (Math.pow(1 + monthlyInterestRate, number_of_payments) - 1);
-
-    // Update the interest and monthly payment fields
-    document.getElementById('interest').value = interestRate * 100; // Show in percentage
-    document.getElementById('monthly_payment').innerText = monthlyPayment.toFixed(2);
-}
 
         </script>
     </body>

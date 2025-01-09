@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- <%- include("head.ejs") %>
+    <link rel="stylesheet" href="/css/membermain.css"> -->
+
+    <!-- <style>
+        .chat-box {
+      width: 350px;
+      height: 500px; 
+      margin-left: 800px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background: #007bff;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px 10px 0 0;
+      font-size: 18px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin: 5px 0;
+      max-width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: #007bff;
+      color: #fff;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+      background: #e4e6eb;
+      color: #000;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 0 0 0 10px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .chat-input button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 0 0 10px 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .chat-input button:hover {
+      background: #0056b3;
+    }
+    </style> -->
+ 
+    <body>
+        <!-- <%- include("header.ejs") %>
+        <%- include("sidebar_mem.ejs") %> -->
+
+        
+
+        <div class="chat-options">
+          <table id="table">
+            <% if (chat && chat.length > 0) { %> 
+              <% chat.forEach(chat => { %>
+                <tr data-chat-id="<%= chat.user_id %>" onclick="openChatModal(<%= chat.user_id %>)">
+                  <td><%= chat.user_id %></td>
+                  <td>
+                    <% if (chat.role === 'manager') { %>
+                      <p>Manager</p>
+                    <% } else { %>
+                      <p>Collector</p>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="8">No Loan at the moment. Fill up the form above if you want to apply.</td>
+              </tr>
+            <% } %>
+          </table>    
+        </div>
+        
+        <!-- Chat Modal -->
+        <div id="chatModal" class="modal" style="display: none;">
+          <div class="modal-content">
+            <div class="modal-header" id="modalHeader"></div>
+            <!-- Form to handle message sending -->
+            <form id="chatForm" action="/send_message" method="POST">
+              <div class="chat-header">Chat Box</div>
+              <div class="chat-messages" id="chatMessages"></div>
+              <div class="chat-input">
+                <input type="hidden" id="receiver_id" name="receiver_id">
+                <input type="text" id="content" name="content" placeholder="Type a message..." required />
+                <button type="submit">Send</button>
+              </div>
+            </form>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+          </div>
+        </div>
+        
+        <script>
+          // Open the chat modal
+          function openChatModal(user_id) {
+            // Set receiver_id to the user clicked
+            document.getElementById('receiver_id').value = user_id;
+            
+            // Change modal visibility and header
+            document.getElementById('chatModal').style.display = 'block';
+            document.getElementById('modalHeader').innerHTML = `Chat with User ${user_id}`;
+        
+            // Load previous messages or empty chat box
+            loadChatMessages(user_id);
+          }
+        
+          // Load chat messages for a specific user
+          function loadChatMessages(user_id) {
+            const chatMessagesContainer = document.getElementById('chatMessages');
+            
+            // Example chat data for demonstration
+            const messages = [
+              { sender: 'Manager', message: 'Hello, how can I assist you?' },
+              { sender: 'You', message: 'I need help with my loan application.' }
+            ];
+        
+            // Clear previous messages
+            chatMessagesContainer.innerHTML = '';
+        
+            // Render new messages
+            messages.forEach(msg => {
+              const messageDiv = document.createElement('div');
+              messageDiv.classList.add(msg.sender === 'You' ? 'your-message' : 'other-message');
+              messageDiv.innerText = `${msg.sender}: ${msg.message}`;
+              chatMessagesContainer.appendChild(messageDiv);
+            });
+          }
+        
+          // Close the modal
+          function closeModal() {
+            document.getElementById('chatModal').style.display = 'none';
+          }
+        </script>
+        
+        
+       
+        
+             
+    </body>
+ 
+ 
+</html>

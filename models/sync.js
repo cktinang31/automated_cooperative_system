@@ -5,6 +5,8 @@ const sequelize = new Sequelize(connectionString, {
     logging: console.log,
 });
 
+const { v4: uuidv4 } = require('uuid'); 
+
 
 
 const UserModel = require('../models/user');
@@ -17,6 +19,9 @@ const LoanPaymentModel = require('../models/loan_payment');
 const SavModel = require('../models/savtransaction');
 const CModel = require('../models/cbutransaction');
 const VMessageModel = require('../models/vmessage');
+const ConvoModel = require('../models/convo');
+const MessageModel = require('../models/message');
+
 
 
 
@@ -30,7 +35,8 @@ const Loan_payment = LoanPaymentModel(sequelize);
 const Savtransaction = SavModel(sequelize);
 const Cbutransaction = CModel(sequelize);
 const VMessage = VMessageModel(sequelize);
-
+const Convo = ConvoModel(sequelize);
+const Message = MessageModel(sequelize);
 
 Application.associate({User});
 User.associate({ Application, 
@@ -40,7 +46,8 @@ User.associate({ Application,
     Savtransaction, 
     Cbutransaction, 
     Loan, 
-    Loan_payment });
+    Loan_payment, 
+    Message });
 Loan_application.associate({ User });
 Cbu.associate({User, Application,});
 Savings.associate({User, Application});
@@ -48,6 +55,9 @@ Loan.associate({User, Loan_application});
 Loan_payment.associate({User, Loan, Loan_application});
 Savtransaction.associate({User, Savings});
 Cbutransaction.associate({User, Cbu});
+Convo.associate({Message});
+Message.associate({Convo, User})
+
 
 
 sequelize.sync({ force: false })  
@@ -78,6 +88,7 @@ module.exports = { sequelize,
     Savtransaction,
     Cbutransaction,
     VMessage,
+    Convo,
 
 
 };

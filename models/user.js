@@ -132,6 +132,12 @@ const UserModel = (sequelize) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });
+
+        User.hasMany(models.Message, {
+            foreignKey: 'user_id',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
     };
 
     User.beforeCreate(async (user) => {
@@ -140,6 +146,8 @@ const UserModel = (sequelize) => {
     });
     return User;
 };
+
+
 
 
 module.exports = UserModel;
